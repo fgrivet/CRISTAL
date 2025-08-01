@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools >= 77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "CRISTAL"
+authors = [
+    {name = "Florian Grivet", email = "floriangrivet.pro@gmail.com"},
+]
+description = "Anomaly detection framework based on the Christoffel Function"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy",
+    "matplotlib",
+    "scipy",
+    "scikit-learn",
+    "pandas",
+    "tqdm"
+]
+dynamic = ["version"]
+
+[tool.setuptools.dynamic]
+version = {attr = "cristal.__version__.__version__"}
+
+[project.urls]
+homepage = "https://github.com/fgrivet/cristal"
+repository = "https://github.com/fgrivet/cristal"
+documentation = "https://fgrivet.github.io/cristal"
+
+[project.optional-dependencies]
+testing = [
+    "pylint",
+    "pytest",
+    "pytest-cov",
+]
+docs = [
+    "sphinx",
+    "pydata-sphinx-theme",
+    "sphinx-design",
+    "numpydoc",
+    "sphinx-copybutton",
+    "myst-nb",
+    "sphinx-autodoc-typehints",
+    "sphinx-collections",
+]
+dev = [
+    "cristal[testing]",
+    "cristal[docs]",
+]

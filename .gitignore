@@ -1,0 +1,5 @@
+.vscode
+__pycache__
+cristal.egg-info
+doc/build
+doc/jupyter_execute
