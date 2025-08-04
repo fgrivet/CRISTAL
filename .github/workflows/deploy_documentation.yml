@@ -3,11 +3,11 @@ name: Deploy Documentation
 on:
   push:
     branches: [ main ]
-    
+
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
