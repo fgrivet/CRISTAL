@@ -101,7 +101,7 @@
   </button>
   
   
-  <div class="col-lg-3 navbar-header-items__start">
+  <div class=" navbar-header-items__start">
     
       <div class="navbar-item">
 
@@ -122,7 +122,7 @@
     
   </div>
   
-  <div class="col-lg-9 navbar-header-items">
+  <div class=" navbar-header-items">
     
     <div class="me-auto navbar-header-items__center">
       
@@ -168,10 +168,8 @@
         <div class="navbar-item navbar-persistent--container">
           
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
         </div>
       
@@ -184,6 +182,22 @@
   <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button></div>
       
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
     </div>
     
   </div>
@@ -191,10 +205,8 @@
   
     <div class="navbar-persistent--mobile">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
     </div>
   
@@ -275,6 +287,22 @@
   <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button></div>
         
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
       </div>
     
   </div>
@@ -284,7 +312,11 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cristal.christoffel.html">cristal.christoffel module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cristal.plotter.html">cristal.plotter module</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="cristal.helper_classes.html">cristal.helper_classes package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">cristal.helper_classes.base module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cristal.helper_classes.incrementers.html">cristal.helper_classes.incrementers module</a></li>
@@ -300,23 +332,12 @@
 </ul>
 </details></li>
 </ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="cristal.christoffel.html">cristal.christoffel module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cristal.plotter.html">cristal.plotter module</a></li>
-</ul>
 </div>
 </nav></div>
     </div>
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
 
 
@@ -368,83 +389,28 @@
                   
   <section id="module-cristal.helper_classes.base">
 <span id="cristal-helper-classes-base-module"></span><h1>cristal.helper_classes.base module<a class="headerlink" href="#module-cristal.helper_classes.base" title="Link to this heading">#</a></h1>
-<p>Base classes for outlier detection methods, plotters, inverters, incrementers, and polynomial basis functions.
-ALso contains the NotFittedError exception and a decorator for deprecation warnings.</p>
+<p>Base classes for <a class="reference internal" href="#cristal.helper_classes.base.BaseDetector" title="cristal.helper_classes.base.BaseDetector"><code class="xref py py-class docutils literal notranslate"><span class="pre">outlier</span> <span class="pre">detection</span> <span class="pre">methods</span></code></a>, <a class="reference internal" href="#cristal.helper_classes.base.BasePlotter" title="cristal.helper_classes.base.BasePlotter"><code class="xref py py-class docutils literal notranslate"><span class="pre">plotters</span></code></a>,
+<a class="reference internal" href="#cristal.helper_classes.base.BaseInverter" title="cristal.helper_classes.base.BaseInverter"><code class="xref py py-class docutils literal notranslate"><span class="pre">inverters</span></code></a>, <a class="reference internal" href="#cristal.helper_classes.base.BaseIncrementer" title="cristal.helper_classes.base.BaseIncrementer"><code class="xref py py-class docutils literal notranslate"><span class="pre">incrementers</span></code></a>, and <a class="reference internal" href="#cristal.helper_classes.base.BasePolynomialBasis" title="cristal.helper_classes.base.BasePolynomialBasis"><code class="xref py py-class docutils literal notranslate"><span class="pre">polynomial</span> <span class="pre">basis</span> <span class="pre">functions</span></code></a>.</p>
+<p>Also contains the <a class="reference internal" href="#cristal.helper_classes.base.NotFittedError" title="cristal.helper_classes.base.NotFittedError"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotFittedError</span></code></a> exception.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cristal.helper_classes.base.BaseDetector">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.helper_classes.base.</span></span><span class="sig-name descname"><span class="pre">BaseDetector</span></span><a class="headerlink" href="#cristal.helper_classes.base.BaseDetector" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
 <p>Base class for outlier detection methods</p>
-<p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<tbody>
-<tr class="row-odd"><td><p><strong>fit(x)</strong></p></td>
-<td><p>Generates a model that fit dataset x.</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>update(x)</strong></p></td>
-<td><p>Updates the current model with instances in x.</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>score_samples(x)</strong></p></td>
-<td><p>Makes the model compute the outlier score of samples in x (the higher the value, the more outlying the sample).</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>decision_function(x)</strong></p></td>
-<td><p>This is similar to score_samples(x) except outliers have negative score and inliers positive ones.</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>predict(x)</strong></p></td>
-<td><p>Returns the sign (-1 or 1) of decision_function(x).</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>fit_predict(x)</strong></p></td>
-<td><p>Fits the model with x and predicts the outlier labels for the samples in x.</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>eval_update(x)</strong></p></td>
-<td><p>Computes decision_function of each sample and then update the model with this sample if its an inlier.</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>predict_update(x)</strong></p></td>
-<td><p>Same as eval_update(x) but returns the prediction instead of the decision function.</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>save_model()</strong></p></td>
-<td><p>Saves the model as a dictionary.</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>load_model(model_dict)</strong></p></td>
-<td><p>Loads the model from a dictionary.</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>copy()</strong></p></td>
-<td><p>Returns a copy of the model.</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>method_name()</strong></p></td>
-<td><p>Returns the name of the method.</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>is_fitted()</strong></p></td>
-<td><p>Checks if the model is fitted.</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>assert_shape_unfitted(x)</strong></p></td>
-<td><p>Asserts that the input array x has the correct shape to fit the model.</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>assert_shape_fitted(x)</strong></p></td>
-<td><p>Asserts that the input array x has the correct shape to use the model after it has been fitted.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="cristal.helper_classes.base.BaseDetector.assert_shape_fitted">
 <span class="sig-name descname"><span class="pre">assert_shape_fitted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.base.BaseDetector.assert_shape_fitted" title="Link to this definition">#</a></dt>
 <dd><p>Asserts that the input array x has the correct shape to use the model after it has been fitted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input data to check. Should be a 2D array with shape (N, d)
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – The input data to check. Should be a 2D array with shape (N, d)
 where N is the number of samples and d is the number of features (the same as during fitting).</p>
 </dd>
-</dl>
-</dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>NotFittedError</dt><dd><p>If the model has not been fitted yet.</p>
-</dd>
-<dt>ValueError</dt><dd><p>If the input array does not have the expected shape.</p>
-</dd>
-</dl>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#cristal.helper_classes.base.NotFittedError" title="cristal.helper_classes.base.NotFittedError"><strong>NotFittedError</strong></a> – If the model has not been fitted yet.</p></li>
+<li><p><strong>ValueError</strong> – If the input array does not have the expected shape.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -455,17 +421,11 @@ where N is the number of samples and d is the number of features (the same as du
 <dd><p>Asserts that the input array x has the correct shape to fit the model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input data to check. Should be a 2D array with shape (N, d)
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – The input data to check. Should be a 2D array with shape (N, d)
 where N is the number of samples and d is the number of features.</p>
 </dd>
-</dl>
-</dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>ValueError</dt><dd><p>If the input array does not have the expected shape.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input array does not have the expected shape.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -479,10 +439,10 @@ where N is the number of samples and d is the number of features.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Self</span></code></span></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>Self</dt><dd><p>A copy of the current model.</p>
+<dd class="field-even"><p>A copy of the current model.</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Self</p>
 </dd>
 </dl>
 </dd></dl>
@@ -496,16 +456,13 @@ where N is the number of samples and d is the number of features.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input data to compute the decision function.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to compute the decision function.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>np.ndarray</dt><dd><p>The decision function values for each sample.</p>
+<dd class="field-odd"><p>The decision function values for each sample.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray (L,)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -520,16 +477,13 @@ This method iterates over each sample in x.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input data to evaluate and update the model.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to evaluate and update the model.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>np.ndarray</dt><dd><p>The decision function values for each sample.</p>
+<dd class="field-odd"><p>The decision function values for each sample.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray (L,)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -543,16 +497,13 @@ This method iterates over each sample in x.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Self</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input data to fit the model.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>, </em><em>d</em><em>)</em>) – The input data to fit the model.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>Self</dt><dd><p>The fitted model.</p>
+<dd class="field-odd"><p>The fitted model.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self</p>
 </dd>
 </dl>
 </dd></dl>
@@ -566,16 +517,13 @@ This method iterates over each sample in x.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input data to fit and predict.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>, </em><em>d</em><em>)</em>) – The input data to fit and predict.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>np.ndarray</dt><dd><p>The predicted labels for each sample.</p>
+<dd class="field-odd"><p>The predicted labels for each sample.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray (N,)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -589,10 +537,10 @@ This method iterates over each sample in x.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>bool</dt><dd><p>True if the model is fitted, False otherwise.</p>
+<dd class="field-even"><p>True if the model is fitted, False otherwise.</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
@@ -606,16 +554,13 @@ This method iterates over each sample in x.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Self</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>model_dict</strong><span class="classifier">dict</span></dt><dd><p>The dictionary containing the model parameters returned by save_model().</p>
-</dd>
-</dl>
+<dd class="field-even"><p><strong>model_dict</strong> (<em>dict</em>) – The dictionary containing the model parameters returned by save_model().</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>Self</dt><dd><p>The loaded model.</p>
+<dd class="field-odd"><p>The loaded model.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self</p>
 </dd>
 </dl>
 </dd></dl>
@@ -629,10 +574,10 @@ This method iterates over each sample in x.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>str</dt><dd><p>The name of the method.</p>
+<dd class="field-even"><p>The name of the method.</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -646,16 +591,13 @@ This method iterates over each sample in x.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input data to predict the labels.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to predict the labels.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>np.ndarray</dt><dd><p>The predicted labels for each sample.</p>
+<dd class="field-odd"><p>The predicted labels for each sample.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray (L,)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -669,16 +611,13 @@ This method iterates over each sample in x.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input data to evaluate and update the model.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to evaluate and update the model.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>np.ndarray</dt><dd><p>The predicted labels for each sample.</p>
+<dd class="field-odd"><p>The predicted labels for each sample.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray (L,)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -692,10 +631,10 @@ This method iterates over each sample in x.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></span></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd><p>The model represented as a dictionary.</p>
+<dd class="field-even"><p>The model represented as a dictionary.</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -709,16 +648,13 @@ This method iterates over each sample in x.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input data to compute the scores.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to compute the scores.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>np.ndarray</dt><dd><p>The outlier scores for each sample.</p>
+<dd class="field-odd"><p>The outlier scores for each sample.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray (L,)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -732,16 +668,13 @@ This method iterates over each sample in x.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Self</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input data to update the model.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>N'</em><em>, </em><em>d</em><em>)</em>) – The input data to update the model.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>Self</dt><dd><p>The updated model.</p>
+<dd class="field-odd"><p>The updated model.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self</p>
 </dd>
 </dl>
 </dd></dl>
@@ -753,35 +686,27 @@ This method iterates over each sample in x.</p>
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.helper_classes.base.</span></span><span class="sig-name descname"><span class="pre">BaseIncrementer</span></span><a class="headerlink" href="#cristal.helper_classes.base.BaseIncrementer" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
 <p>Base class for moments matrix incrementers.</p>
-<p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<tbody>
-<tr class="row-odd"><td><p><strong>increment(mm, x, n, inv_opt, sym=True)</strong></p></td>
-<td><p>Increment the inverse moments matrix (and possibly the moments matrix).</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="cristal.helper_classes.base.BaseIncrementer.increment">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">increment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inv_opt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.base.BaseIncrementer.increment" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">increment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inv_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.base.BaseIncrementer.increment" title="Link to this definition">#</a></dt>
 <dd><p>Increment the inverse moments matrix (and possibly the moments matrix).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>mm</strong><span class="classifier">MomentsMatrix</span></dt><dd><p>The moments matrix to increment.</p>
-</dd>
-<dt><strong>x</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input data.</p>
-</dd>
-<dt><strong>n</strong><span class="classifier">int</span></dt><dd><p>The number of points integrated in the moments matrix.</p>
-</dd>
-<dt><strong>inv_opt</strong><span class="classifier">Callable[[np.ndarray], np.ndarray]</span></dt><dd><p>The inversion method to use.</p>
-</dd>
-<dt><strong>sym</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to consider the matrix as symmetric, by default True</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mm</strong> (<a class="reference internal" href="cristal.helper_classes.moment_matrix.html#cristal.helper_classes.moment_matrix.MomentsMatrix" title="cristal.helper_classes.moment_matrix.MomentsMatrix"><em>MomentsMatrix</em></a>) – The moments matrix to increment.</p></li>
+<li><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>N'</em><em>, </em><em>d</em><em>)</em>) – The input data.</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – The number of points integrated in the moments matrix.</p></li>
+<li><p><strong>inv_class</strong> (<em>type</em><em>[</em><a class="reference internal" href="#cristal.helper_classes.base.BaseInverter" title="cristal.helper_classes.base.BaseInverter"><em>BaseInverter</em></a><em>]</em>) – The inversion class to use.</p></li>
+<li><p><strong>sym</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to consider the matrix as symmetric, by default True</p></li>
+</ul>
 </dd>
 </dl>
-</dd>
-</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.helper_classes.base.BaseIncrementer.update_moments_matrix">
+<span class="sig-name descname"><span class="pre">update_moments_matrix</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cristal.helper_classes.base.BaseIncrementer.update_moments_matrix" title="Link to this definition">#</a></dt>
+<dd><p>Whether the method updates the moments matrix during incrementing</p>
 </dd></dl>
 
 </dd></dl>
@@ -791,15 +716,6 @@ This method iterates over each sample in x.</p>
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.helper_classes.base.</span></span><span class="sig-name descname"><span class="pre">BaseInverter</span></span><a class="headerlink" href="#cristal.helper_classes.base.BaseInverter" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
 <p>Base class for matrix inversion methods.</p>
-<p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<tbody>
-<tr class="row-odd"><td><p><strong>invert(matrix)</strong></p></td>
-<td><p>Invert the given matrix.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="cristal.helper_classes.base.BaseInverter.invert">
 <em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">invert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.base.BaseInverter.invert" title="Link to this definition">#</a></dt>
@@ -809,16 +725,13 @@ This method iterates over each sample in x.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>matrix</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input matrix to invert.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><strong>matrix</strong> (<em>np.ndarray</em><em> (</em><em>n</em><em>, </em><em>n</em><em>)</em>) – The input matrix to invert.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>np.ndarray</dt><dd><p>The inverse of the input matrix.</p>
+<dd class="field-odd"><p>The inverse of the input matrix.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray (n, n)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -830,18 +743,6 @@ This method iterates over each sample in x.</p>
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.helper_classes.base.</span></span><span class="sig-name descname"><span class="pre">BasePlotter</span></span><a class="headerlink" href="#cristal.helper_classes.base.BasePlotter" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
 <p>Base class for outlier detection results plotters. This requires that data is 2-dimensional.</p>
-<p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<tbody>
-<tr class="row-odd"><td><p><strong>levelset(x)</strong></p></td>
-<td><p>Generates the levelset plot and optionally show, save and close.</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>boundary(x)</strong></p></td>
-<td><p>Generates the boundary plot and optionally show, save and close.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="cristal.helper_classes.base.BasePlotter.boundary">
 <em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">boundary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_x1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_x2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">close</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.base.BasePlotter.boundary" title="Link to this definition">#</a></dt>
@@ -851,28 +752,21 @@ This method iterates over each sample in x.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code>]</span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input data to plot, shape (n_samples, n_features=2).</p>
-</dd>
-<dt><strong>n_x1</strong><span class="classifier">int</span></dt><dd><p>Number of points along the first dimension for the grid.</p>
-</dd>
-<dt><strong>n_x2</strong><span class="classifier">int</span></dt><dd><p>Number of points along the second dimension for the grid.</p>
-</dd>
-<dt><strong>show</strong><span class="classifier">bool</span></dt><dd><p>Whether to show the plot.</p>
-</dd>
-<dt><strong>save</strong><span class="classifier">bool</span></dt><dd><p>Whether to save the plot to a file.</p>
-</dd>
-<dt><strong>save_title</strong><span class="classifier">str</span></dt><dd><p>Title for the saved plot file.</p>
-</dd>
-<dt><strong>close</strong><span class="classifier">bool</span></dt><dd><p>Whether to close the plot or return it after saving or showing.</p>
-</dd>
-</dl>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>x</strong> (<em>np.ndarray</em>) – The input data to plot, shape (n_samples, n_features=2).</p></li>
+<li><p><strong>n_x1</strong> (<em>int</em>) – Number of points along the first dimension for the grid.</p></li>
+<li><p><strong>n_x2</strong> (<em>int</em>) – Number of points along the second dimension for the grid.</p></li>
+<li><p><strong>show</strong> (<em>bool</em>) – Whether to show the plot.</p></li>
+<li><p><strong>save</strong> (<em>bool</em>) – Whether to save the plot to a file.</p></li>
+<li><p><strong>save_title</strong> (<em>str</em>) – Title for the saved plot file.</p></li>
+<li><p><strong>close</strong> (<em>bool</em>) – Whether to close the plot or return it after saving or showing.</p></li>
+</ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>None | tuple[Figure, Axes]</dt><dd><p>The figure and axes objects if not closing the plot, otherwise None.</p>
+<dd class="field-odd"><p>The figure and axes objects if not closing the plot, otherwise None.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None | tuple[Figure, Axes]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -886,32 +780,23 @@ This method iterates over each sample in x.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code>]</span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input data to plot, shape (n_samples, n_features=2).</p>
-</dd>
-<dt><strong>n_x1</strong><span class="classifier">int</span></dt><dd><p>Number of points along the first dimension for the grid.</p>
-</dd>
-<dt><strong>n_x2</strong><span class="classifier">int</span></dt><dd><p>Number of points along the second dimension for the grid.</p>
-</dd>
-<dt><strong>levels</strong><span class="classifier">list[int | float] | None</span></dt><dd><p>The levels to plot.</p>
-</dd>
-<dt><strong>percentiles</strong><span class="classifier">list[int | float] | None</span></dt><dd><p>The percentiles to compute and plot as levels.</p>
-</dd>
-<dt><strong>show</strong><span class="classifier">bool</span></dt><dd><p>Whether to show the plot.</p>
-</dd>
-<dt><strong>save</strong><span class="classifier">bool</span></dt><dd><p>Whether to save the plot to a file.</p>
-</dd>
-<dt><strong>save_title</strong><span class="classifier">str</span></dt><dd><p>Title for the saved plot file.</p>
-</dd>
-<dt><strong>close</strong><span class="classifier">bool</span></dt><dd><p>Whether to close the plot or return it after saving or showing.</p>
-</dd>
-</dl>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>x</strong> (<em>np.ndarray</em>) – The input data to plot, shape (n_samples, n_features=2).</p></li>
+<li><p><strong>n_x1</strong> (<em>int</em>) – Number of points along the first dimension for the grid.</p></li>
+<li><p><strong>n_x2</strong> (<em>int</em>) – Number of points along the second dimension for the grid.</p></li>
+<li><p><strong>levels</strong> (<em>list</em><em>[</em><em>int</em><em> | </em><em>float</em><em>] </em><em>| </em><em>None</em>) – The levels to plot.</p></li>
+<li><p><strong>percentiles</strong> (<em>list</em><em>[</em><em>int</em><em> | </em><em>float</em><em>] </em><em>| </em><em>None</em>) – The percentiles to compute and plot as levels.</p></li>
+<li><p><strong>show</strong> (<em>bool</em>) – Whether to show the plot.</p></li>
+<li><p><strong>save</strong> (<em>bool</em>) – Whether to save the plot to a file.</p></li>
+<li><p><strong>save_title</strong> (<em>str</em>) – Title for the saved plot file.</p></li>
+<li><p><strong>close</strong> (<em>bool</em>) – Whether to close the plot or return it after saving or showing.</p></li>
+</ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>None | tuple[Figure, Axes]</dt><dd><p>The figure and axes objects if not closing the plot, otherwise None.</p>
+<dd class="field-odd"><p>The figure and axes objects if not closing the plot, otherwise None.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None | tuple[Figure, Axes]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -923,15 +808,6 @@ This method iterates over each sample in x.</p>
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.helper_classes.base.</span></span><span class="sig-name descname"><span class="pre">BasePolynomialBasis</span></span><a class="headerlink" href="#cristal.helper_classes.base.BasePolynomialBasis" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
 <p>Base class for polynomial basis functions.</p>
-<p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.helper_classes.base.BasePolynomialBasis.func" title="cristal.helper_classes.base.BasePolynomialBasis.func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">func</span></code></a>(x, monomials_matrix)</p></td>
-<td><p>Apply the polynomial basis function to the input data.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="cristal.helper_classes.base.BasePolynomialBasis.func">
 <em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monomials_matrix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.base.BasePolynomialBasis.func" title="Link to this definition">#</a></dt>
@@ -941,18 +817,16 @@ This method iterates over each sample in x.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input data.</p>
-</dd>
-<dt><strong>monomials_matrix</strong><span class="classifier">np.ndarray</span></dt><dd><p>The monomials matrix. Should be of shape (s(n), d) where s(n) is the number of monomials and d is the dimension of the input data.</p>
-</dd>
-</dl>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>1</em><em>, </em><em>d</em><em>) or </em><em>(</em><em>d</em><em>,</em><em>)</em>) – The input data.</p></li>
+<li><p><strong>monomials_matrix</strong> (<em>np.ndarray</em><em> (</em><em>s</em><em>(</em><em>n</em><em>)</em><em>, </em><em>d</em><em>)</em>) – The monomials matrix. Should be of shape (s(n), d) where s(n) is the number of monomials and d is the dimension of the input data.</p></li>
+</ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>np.ndarray</dt><dd><p>The transformed input data.</p>
+<dd class="field-odd"><p>The transformed input data.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray (s(n), d)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -964,15 +838,6 @@ This method iterates over each sample in x.</p>
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.helper_classes.base.</span></span><span class="sig-name descname"><span class="pre">BaseRegularizer</span></span><a class="headerlink" href="#cristal.helper_classes.base.BaseRegularizer" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
 <p>Base class for regularization methods.</p>
-<p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.helper_classes.base.BaseRegularizer.regularizer" title="cristal.helper_classes.base.BaseRegularizer.regularizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">regularizer</span></code></a>(n, d, C)</p></td>
-<td><p>Compute the regularization value.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="cristal.helper_classes.base.BaseRegularizer.regularizer">
 <em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">regularizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.base.BaseRegularizer.regularizer" title="Link to this definition">#</a></dt>
@@ -982,20 +847,17 @@ This method iterates over each sample in x.</p>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>n</strong><span class="classifier">int</span></dt><dd><p>The number of samples.</p>
-</dd>
-<dt><strong>d</strong><span class="classifier">int</span></dt><dd><p>The dimension of the input data.</p>
-</dd>
-<dt><strong>C</strong><span class="classifier">float | int</span></dt><dd><p>A constant used in the regularization computation.</p>
-</dd>
-</dl>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – The number of samples.</p></li>
+<li><p><strong>d</strong> (<em>int</em>) – The dimension of the input data.</p></li>
+<li><p><strong>C</strong> (<em>float</em><em> | </em><em>int</em>) – A constant used in the regularization computation.</p></li>
+</ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>float</dt><dd><p>The computed regularization value.</p>
+<dd class="field-odd"><p>The computed regularization value.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1007,6 +869,11 @@ This method iterates over each sample in x.</p>
 <em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.helper_classes.base.</span></span><span class="sig-name descname"><span class="pre">NotFittedError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.base.NotFittedError" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 <p>This exception is raised when a BaseDetector is used before it has been fitted.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.helper_classes.base.NotFittedError.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.base.NotFittedError.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </section>
@@ -1016,10 +883,10 @@ This method iterates over each sample in x.</p>
               
               
               
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
 <div class="prev-next-area">
     <a class="left-prev"
        href="cristal.helper_classes.html"
@@ -1039,8 +906,12 @@ This method iterates over each sample in x.</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
+</div></div>
+  
 </div>
                 </footer>
+              
+              
               
             </div>
             
@@ -1058,7 +929,7 @@ This method iterates over each sample in x.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BaseDetector"><code class="docutils literal notranslate"><span class="pre">BaseDetector</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BaseDetector"><code class="docutils literal notranslate"><span class="pre">BaseDetector</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BaseDetector.assert_shape_fitted"><code class="docutils literal notranslate"><span class="pre">BaseDetector.assert_shape_fitted()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BaseDetector.assert_shape_unfitted"><code class="docutils literal notranslate"><span class="pre">BaseDetector.assert_shape_unfitted()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BaseDetector.copy"><code class="docutils literal notranslate"><span class="pre">BaseDetector.copy()</span></code></a></li>
@@ -1076,28 +947,32 @@ This method iterates over each sample in x.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BaseDetector.update"><code class="docutils literal notranslate"><span class="pre">BaseDetector.update()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BaseIncrementer"><code class="docutils literal notranslate"><span class="pre">BaseIncrementer</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BaseIncrementer"><code class="docutils literal notranslate"><span class="pre">BaseIncrementer</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BaseIncrementer.increment"><code class="docutils literal notranslate"><span class="pre">BaseIncrementer.increment()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BaseIncrementer.update_moments_matrix"><code class="docutils literal notranslate"><span class="pre">BaseIncrementer.update_moments_matrix</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BaseInverter"><code class="docutils literal notranslate"><span class="pre">BaseInverter</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BaseInverter"><code class="docutils literal notranslate"><span class="pre">BaseInverter</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BaseInverter.invert"><code class="docutils literal notranslate"><span class="pre">BaseInverter.invert()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BasePlotter"><code class="docutils literal notranslate"><span class="pre">BasePlotter</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BasePlotter"><code class="docutils literal notranslate"><span class="pre">BasePlotter</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BasePlotter.boundary"><code class="docutils literal notranslate"><span class="pre">BasePlotter.boundary()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BasePlotter.levelset"><code class="docutils literal notranslate"><span class="pre">BasePlotter.levelset()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BasePolynomialBasis"><code class="docutils literal notranslate"><span class="pre">BasePolynomialBasis</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BasePolynomialBasis"><code class="docutils literal notranslate"><span class="pre">BasePolynomialBasis</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BasePolynomialBasis.func"><code class="docutils literal notranslate"><span class="pre">BasePolynomialBasis.func()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BaseRegularizer"><code class="docutils literal notranslate"><span class="pre">BaseRegularizer</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BaseRegularizer"><code class="docutils literal notranslate"><span class="pre">BaseRegularizer</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.BaseRegularizer.regularizer"><code class="docutils literal notranslate"><span class="pre">BaseRegularizer.regularizer()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.NotFittedError"><code class="docutils literal notranslate"><span class="pre">NotFittedError</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.NotFittedError"><code class="docutils literal notranslate"><span class="pre">NotFittedError</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.base.NotFittedError.__init__"><code class="docutils literal notranslate"><span class="pre">NotFittedError.__init__()</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
@@ -1141,27 +1016,9 @@ This method iterates over each sample in x.</p>
   </p>
 </div>
       
-        <div class="footer-item">
-
-  <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
-    <br/>
-  </p>
-</div>
-      
     </div>
   
   
-  
-    <div class="footer-items__end">
-      
-        <div class="footer-item">
-<p class="theme-version">
-  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
-</p></div>
-      
-    </div>
   
 </div>
 

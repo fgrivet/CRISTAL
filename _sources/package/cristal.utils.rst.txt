@@ -1,19 +1,13 @@
 cristal.utils package
 =====================
 
-Submodules
-----------
+.. automodule:: cristal.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 .. toctree::
    :maxdepth: 4
 
    cristal.utils.type_checking
    cristal.utils.utils
-
-Module contents
----------------
-
-.. automodule:: cristal.utils
-   :members:
-   :undoc-members:
-   :show-inheritance:

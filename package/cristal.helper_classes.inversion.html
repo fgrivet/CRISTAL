@@ -101,7 +101,7 @@
   </button>
   
   
-  <div class="col-lg-3 navbar-header-items__start">
+  <div class=" navbar-header-items__start">
     
       <div class="navbar-item">
 
@@ -122,7 +122,7 @@
     
   </div>
   
-  <div class="col-lg-9 navbar-header-items">
+  <div class=" navbar-header-items">
     
     <div class="me-auto navbar-header-items__center">
       
@@ -168,10 +168,8 @@
         <div class="navbar-item navbar-persistent--container">
           
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
         </div>
       
@@ -184,6 +182,22 @@
   <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button></div>
       
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
     </div>
     
   </div>
@@ -191,10 +205,8 @@
   
     <div class="navbar-persistent--mobile">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
     </div>
   
@@ -275,6 +287,22 @@
   <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button></div>
         
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
       </div>
     
   </div>
@@ -284,7 +312,11 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cristal.christoffel.html">cristal.christoffel module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cristal.plotter.html">cristal.plotter module</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="cristal.helper_classes.html">cristal.helper_classes package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cristal.helper_classes.base.html">cristal.helper_classes.base module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cristal.helper_classes.incrementers.html">cristal.helper_classes.incrementers module</a></li>
@@ -300,23 +332,12 @@
 </ul>
 </details></li>
 </ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="cristal.christoffel.html">cristal.christoffel module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cristal.plotter.html">cristal.plotter module</a></li>
-</ul>
 </div>
 </nav></div>
     </div>
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
 
 
@@ -375,18 +396,6 @@
 <dd><p>Bases: <a class="reference internal" href="cristal.helper_classes.base.html#cristal.helper_classes.base.BaseInverter" title="cristal.helper_classes.base.BaseInverter"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseInverter</span></code></a></p>
 <p>Inverter for positive definite matrices using Cholesky decomposition in LAPACK.
 See <a class="reference external" href="https://stackoverflow.com/a/58719188">https://stackoverflow.com/a/58719188</a> for more details.</p>
-<p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.helper_classes.inversion.FPDInverter.invert" title="cristal.helper_classes.inversion.FPDInverter.invert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">invert</span></code></a>(matrix)</p></td>
-<td><p>Compute the inverse of a positive definite matrix.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cristal.helper_classes.inversion.FPDInverter.upper_triangular_to_symmetric" title="cristal.helper_classes.inversion.FPDInverter.upper_triangular_to_symmetric"><code class="xref py py-obj docutils literal notranslate"><span class="pre">upper_triangular_to_symmetric</span></code></a>(ut)</p></td>
-<td><p>Convert an upper triangular matrix to a symmetric matrix.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cristal.helper_classes.inversion.FPDInverter.inds_cache">
 <span class="sig-name descname"><span class="pre">inds_cache</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#cristal.helper_classes.inversion.FPDInverter.inds_cache" title="Link to this definition">#</a></dt>
@@ -401,22 +410,16 @@ See <a class="reference external" href="https://stackoverflow.com/a/58719188">ht
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>matrix</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input matrix to invert.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><strong>matrix</strong> (<em>np.ndarray</em><em> (</em><em>n</em><em>, </em><em>n</em><em>)</em>) – The input matrix to invert.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>np.ndarray</dt><dd><p>The inverse of the input matrix.</p>
+<dd class="field-odd"><p>The inverse of the input matrix.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray (n, n)</p>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>ValueError</dt><dd><p>If the input matrix is not positive definite / if the Cholesky decomposition fails.</p>
-</dd>
-</dl>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the input matrix is not positive definite / if the Cholesky decomposition fails.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -430,14 +433,17 @@ See <a class="reference external" href="https://stackoverflow.com/a/58719188">ht
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>ut</strong><span class="classifier">np.ndarray</span></dt><dd><p>The upper triangular matrix to convert.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><strong>ut</strong> (<em>np.ndarray</em><em> (</em><em>n</em><em>, </em><em>n</em><em>)</em>) – The upper triangular matrix to convert.</p>
 </dd>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="cristal.helper_classes.inversion.IMPLEMENTED_INVERSION_OPTIONS">
+<span class="sig-prename descclassname"><span class="pre">cristal.helper_classes.inversion.</span></span><span class="sig-name descname"><span class="pre">IMPLEMENTED_INVERSION_OPTIONS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="cristal.helper_classes.base.html#cristal.helper_classes.base.BaseInverter" title="cristal.helper_classes.base.BaseInverter"><span class="pre">BaseInverter</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'fpd_inv':</span> <span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.inversion.FPDInverter'&gt;,</span> <span class="pre">'inv':</span> <span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.inversion.InvInverter'&gt;,</span> <span class="pre">'pd_inv':</span> <span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.inversion.PDInverter'&gt;,</span> <span class="pre">'pinv':</span> <span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.inversion.PseudoInverter'&gt;}</span></em><a class="headerlink" href="#cristal.helper_classes.inversion.IMPLEMENTED_INVERSION_OPTIONS" title="Link to this definition">#</a></dt>
+<dd><p>The implemented inversion classes.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -445,15 +451,6 @@ See <a class="reference external" href="https://stackoverflow.com/a/58719188">ht
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.helper_classes.inversion.</span></span><span class="sig-name descname"><span class="pre">InvInverter</span></span><a class="headerlink" href="#cristal.helper_classes.inversion.InvInverter" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="cristal.helper_classes.base.html#cristal.helper_classes.base.BaseInverter" title="cristal.helper_classes.base.BaseInverter"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseInverter</span></code></a></p>
 <p>Inverter for matrices using the standard inverse method from SciPy.</p>
-<p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.helper_classes.inversion.InvInverter.invert" title="cristal.helper_classes.inversion.InvInverter.invert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">invert</span></code></a>(matrix)</p></td>
-<td><p>Compute the inverse of a matrix.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="cristal.helper_classes.inversion.InvInverter.invert">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">invert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.inversion.InvInverter.invert" title="Link to this definition">#</a></dt>
@@ -463,16 +460,13 @@ See <a class="reference external" href="https://stackoverflow.com/a/58719188">ht
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>matrix</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input matrix to invert.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><strong>matrix</strong> (<em>np.ndarray</em><em> (</em><em>n</em><em>, </em><em>n</em><em>)</em>) – The input matrix to invert.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>np.ndarray</dt><dd><p>The inverse of the input matrix.</p>
+<dd class="field-odd"><p>The inverse of the input matrix.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray (n, n)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -485,15 +479,6 @@ See <a class="reference external" href="https://stackoverflow.com/a/58719188">ht
 <dd><p>Bases: <a class="reference internal" href="cristal.helper_classes.base.html#cristal.helper_classes.base.BaseInverter" title="cristal.helper_classes.base.BaseInverter"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseInverter</span></code></a></p>
 <p>Inverter for positive definite matrices.
 See <a class="reference external" href="https://stackoverflow.com/a/40709871">https://stackoverflow.com/a/40709871</a> for more details.</p>
-<p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.helper_classes.inversion.PDInverter.invert" title="cristal.helper_classes.inversion.PDInverter.invert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">invert</span></code></a>(matrix)</p></td>
-<td><p>Compute the inverse of a positive definite matrix.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="cristal.helper_classes.inversion.PDInverter.invert">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">invert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.inversion.PDInverter.invert" title="Link to this definition">#</a></dt>
@@ -503,16 +488,13 @@ See <a class="reference external" href="https://stackoverflow.com/a/40709871">ht
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>matrix</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input matrix to invert.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><strong>matrix</strong> (<em>np.ndarray</em><em> (</em><em>n</em><em>, </em><em>n</em><em>)</em>) – The input matrix to invert.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>np.ndarray</dt><dd><p>The inverse of the input matrix.</p>
+<dd class="field-odd"><p>The inverse of the input matrix.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray (n, n)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -524,15 +506,6 @@ See <a class="reference external" href="https://stackoverflow.com/a/40709871">ht
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.helper_classes.inversion.</span></span><span class="sig-name descname"><span class="pre">PseudoInverter</span></span><a class="headerlink" href="#cristal.helper_classes.inversion.PseudoInverter" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="cristal.helper_classes.base.html#cristal.helper_classes.base.BaseInverter" title="cristal.helper_classes.base.BaseInverter"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseInverter</span></code></a></p>
 <p>Inverter for matrices using the Moore-Penrose pseudo-inverse method from SciPy.</p>
-<p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.helper_classes.inversion.PseudoInverter.invert" title="cristal.helper_classes.inversion.PseudoInverter.invert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">invert</span></code></a>(matrix)</p></td>
-<td><p>Compute the pseudo-inverse of a matrix.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="cristal.helper_classes.inversion.PseudoInverter.invert">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">invert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.inversion.PseudoInverter.invert" title="Link to this definition">#</a></dt>
@@ -542,16 +515,13 @@ See <a class="reference external" href="https://stackoverflow.com/a/40709871">ht
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>matrix</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input matrix to invert.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><strong>matrix</strong> (<em>np.ndarray</em><em> (</em><em>n</em><em>, </em><em>n</em><em>)</em>) – The input matrix to invert.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>np.ndarray</dt><dd><p>The pseudo-inverse of the input matrix.</p>
+<dd class="field-odd"><p>The pseudo-inverse of the input matrix.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray (n, n)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -565,10 +535,10 @@ See <a class="reference external" href="https://stackoverflow.com/a/40709871">ht
               
               
               
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
 <div class="prev-next-area">
     <a class="left-prev"
        href="cristal.helper_classes.incrementers.html"
@@ -588,8 +558,12 @@ See <a class="reference external" href="https://stackoverflow.com/a/40709871">ht
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
+</div></div>
+  
 </div>
                 </footer>
+              
+              
               
             </div>
             
@@ -607,21 +581,22 @@ See <a class="reference external" href="https://stackoverflow.com/a/40709871">ht
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.inversion.FPDInverter"><code class="docutils literal notranslate"><span class="pre">FPDInverter</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.inversion.FPDInverter"><code class="docutils literal notranslate"><span class="pre">FPDInverter</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.inversion.FPDInverter.inds_cache"><code class="docutils literal notranslate"><span class="pre">FPDInverter.inds_cache</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.inversion.FPDInverter.invert"><code class="docutils literal notranslate"><span class="pre">FPDInverter.invert()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.inversion.FPDInverter.upper_triangular_to_symmetric"><code class="docutils literal notranslate"><span class="pre">FPDInverter.upper_triangular_to_symmetric()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.inversion.InvInverter"><code class="docutils literal notranslate"><span class="pre">InvInverter</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.inversion.IMPLEMENTED_INVERSION_OPTIONS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERSION_OPTIONS</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.inversion.InvInverter"><code class="docutils literal notranslate"><span class="pre">InvInverter</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.inversion.InvInverter.invert"><code class="docutils literal notranslate"><span class="pre">InvInverter.invert()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.inversion.PDInverter"><code class="docutils literal notranslate"><span class="pre">PDInverter</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.inversion.PDInverter"><code class="docutils literal notranslate"><span class="pre">PDInverter</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.inversion.PDInverter.invert"><code class="docutils literal notranslate"><span class="pre">PDInverter.invert()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.inversion.PseudoInverter"><code class="docutils literal notranslate"><span class="pre">PseudoInverter</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.inversion.PseudoInverter"><code class="docutils literal notranslate"><span class="pre">PseudoInverter</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.inversion.PseudoInverter.invert"><code class="docutils literal notranslate"><span class="pre">PseudoInverter.invert()</span></code></a></li>
 </ul>
 </li>
@@ -668,27 +643,9 @@ See <a class="reference external" href="https://stackoverflow.com/a/40709871">ht
   </p>
 </div>
       
-        <div class="footer-item">
-
-  <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
-    <br/>
-  </p>
-</div>
-      
     </div>
   
   
-  
-    <div class="footer-items__end">
-      
-        <div class="footer-item">
-<p class="theme-version">
-  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
-</p></div>
-      
-    </div>
   
 </div>
 

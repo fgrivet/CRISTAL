@@ -1,11 +1,13 @@
 cristal.helper\_classes package
 ===============================
 
-Submodules
-----------
+.. automodule:: cristal.helper_classes
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
 
    cristal.helper_classes.base
    cristal.helper_classes.incrementers
@@ -13,11 +15,3 @@ Submodules
    cristal.helper_classes.moment_matrix
    cristal.helper_classes.polynomial_basis
    cristal.helper_classes.regularizer
-
-Module contents
----------------
-
-.. automodule:: cristal.helper_classes
-   :members:
-   :undoc-members:
-   :show-inheritance:
