@@ -25,9 +25,6 @@ jobs:
     - name: Build Documentation
       run: |
         cd doc
-        python -m pip list
-        ls
-        pwd
         sphinx-build -b html source build
 
     - name: Deploy to GitHub Pages

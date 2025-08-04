@@ -43,6 +43,7 @@ docs = [
     "myst-nb",
     "sphinx-autodoc-typehints",
     "sphinx-collections",
+    "setuptools >= 77.0.3",
 ]
 dev = [
     "cristal[testing]",
