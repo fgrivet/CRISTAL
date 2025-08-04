@@ -2,7 +2,14 @@ name: Deploy Documentation
 
 on:
   push:
-    branches: [ main ]  # Change this to your main branch name if different
+    branches: [ main ]
+    
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build-and-deploy:
