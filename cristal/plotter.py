@@ -22,11 +22,6 @@ class DyCFPlotter(BasePlotter):
     model: DyCF
         The model to study, which should have a dimension d of 2.
         This model should be fitted before plotting.
-
-    Methods
-    -------
-    See BasePlotter methods.
-
     """
 
     @check_types()
@@ -35,7 +30,7 @@ class DyCFPlotter(BasePlotter):
 
         Parameters
         ----------
-        model : DyCF | DyCG
+        model : DyCF
             The model to study, which should have a dimension d of 2.
         """
         assert model.is_fitted(), "Model must be fitted before plotting."
@@ -98,8 +93,8 @@ class DyCFPlotter(BasePlotter):
         # Make a grid and compute the function values
         x1_margin = (np.max(x[:, 0]) - np.min(x[:, 0])) / 5
         x2_margin = (np.max(x[:, 1]) - np.min(x[:, 1])) / 5
-        ax.set_xlim([np.min(x[:, 0]) - x1_margin, np.max(x[:, 0]) + x1_margin])
-        ax.set_ylim([np.min(x[:, 1]) - x2_margin, np.max(x[:, 1]) + x2_margin])
+        ax.set_xlim((np.min(x[:, 0]) - x1_margin, np.max(x[:, 0]) + x1_margin))
+        ax.set_ylim((np.min(x[:, 1]) - x2_margin, np.max(x[:, 1]) + x2_margin))
         x1_values = np.linspace(np.min(x[:, 0] - x1_margin), np.max(x[:, 0] + x1_margin), n_x1)
         x2_values = np.linspace(np.min(x[:, 1]) - x2_margin, np.max(x[:, 1] + x2_margin), n_x2)
         x1_grid, x2_grid = np.meshgrid(x1_values, x2_values)
@@ -177,8 +172,8 @@ class DyCFPlotter(BasePlotter):
         # Make a grid and predict the values
         x1_margin = (np.max(x[:, 0]) - np.min(x[:, 0])) / 5
         x2_margin = (np.max(x[:, 1]) - np.min(x[:, 1])) / 5
-        ax.set_xlim([np.min(x[:, 0]) - x1_margin, np.max(x[:, 0]) + x1_margin])
-        ax.set_ylim([np.min(x[:, 1]) - x2_margin, np.max(x[:, 1]) + x2_margin])
+        ax.set_xlim((np.min(x[:, 0]) - x1_margin, np.max(x[:, 0]) + x1_margin))
+        ax.set_ylim((np.min(x[:, 1]) - x2_margin, np.max(x[:, 1]) + x2_margin))
         x1_values = np.linspace(np.min(x[:, 0] - x1_margin), np.max(x[:, 0] + x1_margin), n_x1)
         x2_values = np.linspace(np.min(x[:, 1]) - x2_margin, np.max(x[:, 1] + x2_margin), n_x2)
         x1_grid, x2_grid = np.meshgrid(x1_values, x2_values)

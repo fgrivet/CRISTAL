@@ -1,11 +1,12 @@
 """
-Base classes for outlier detection methods, plotters, inverters, incrementers, and polynomial basis functions.
-ALso contains the NotFittedError exception and a decorator for deprecation warnings.
+Base classes for :class:`outlier detection methods <BaseDetector>`, :class:`plotters <BasePlotter>`,
+:class:`inverters <BaseInverter>`, :class:`incrementers <BaseIncrementer>`, and :class:`polynomial basis functions <BasePolynomialBasis>`.
+
+Also contains the :class:`NotFittedError` exception.
 """
 
 import copy
 from abc import ABC, abstractmethod
-from collections.abc import Callable
 from typing import TYPE_CHECKING, Self
 
 import numpy as np
@@ -30,39 +31,6 @@ __all__ = [
 class BaseDetector(ABC):
     """
     Base class for outlier detection methods
-
-    Methods
-    -------
-    fit(x)
-        Generates a model that fit dataset x.
-    update(x)
-        Updates the current model with instances in x.
-    score_samples(x)
-        Makes the model compute the outlier score of samples in x (the higher the value, the more outlying the sample).
-    decision_function(x)
-        This is similar to score_samples(x) except outliers have negative score and inliers positive ones.
-    predict(x)
-        Returns the sign (-1 or 1) of decision_function(x).
-    fit_predict(x)
-        Fits the model with x and predicts the outlier labels for the samples in x.
-    eval_update(x)
-        Computes decision_function of each sample and then update the model with this sample if its an inlier.
-    predict_update(x)
-        Same as eval_update(x) but returns the prediction instead of the decision function.
-    save_model()
-        Saves the model as a dictionary.
-    load_model(model_dict)
-        Loads the model from a dictionary.
-    copy()
-        Returns a copy of the model.
-    method_name()
-        Returns the name of the method.
-    is_fitted()
-        Checks if the model is fitted.
-    assert_shape_unfitted(x)
-        Asserts that the input array x has the correct shape to fit the model.
-    assert_shape_fitted(x)
-        Asserts that the input array x has the correct shape to use the model after it has been fitted.
     """
 
     @abstractmethod
@@ -71,7 +39,7 @@ class BaseDetector(ABC):
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (N, d)
             The input data to fit the model.
 
         Returns
@@ -86,7 +54,7 @@ class BaseDetector(ABC):
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (N', d)
             The input data to update the model.
 
         Returns
@@ -101,12 +69,12 @@ class BaseDetector(ABC):
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (L, d)
             The input data to compute the scores.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (L,)
             The outlier scores for each sample.
         """
 
@@ -116,12 +84,12 @@ class BaseDetector(ABC):
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (L, d)
             The input data to compute the decision function.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (L,)
             The decision function values for each sample.
         """
 
@@ -131,12 +99,12 @@ class BaseDetector(ABC):
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (L, d)
             The input data to predict the labels.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (L,)
             The predicted labels for each sample.
         """
 
@@ -145,12 +113,12 @@ class BaseDetector(ABC):
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (N, d)
             The input data to fit and predict.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (N,)
             The predicted labels for each sample.
         """
         return self.fit(x).predict(x)
@@ -162,12 +130,12 @@ class BaseDetector(ABC):
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (L, d)
             The input data to evaluate and update the model.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (L,)
             The decision function values for each sample.
         """
 
@@ -177,12 +145,12 @@ class BaseDetector(ABC):
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (L, d)
             The input data to evaluate and update the model.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (L,)
             The predicted labels for each sample.
         """
 
@@ -274,7 +242,7 @@ class BaseDetector(ABC):
         ValueError
             If the input array does not have the expected shape.
         """
-        if self.__dict__.get("d") is None:
+        if not self.is_fitted():
             raise NotFittedError(
                 f"This {self.method_name()} instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator."
             )
@@ -285,13 +253,6 @@ class BaseDetector(ABC):
 class BasePlotter(ABC):
     """
     Base class for outlier detection results plotters. This requires that data is 2-dimensional.
-
-    Methods
-    -------
-    levelset(x)
-        Generates the levelset plot and optionally show, save and close.
-    boundary(x)
-        Generates the boundary plot and optionally show, save and close.
     """
 
     @abstractmethod
@@ -365,44 +326,9 @@ class BasePlotter(ABC):
         """
 
 
-class BaseIncrementer(ABC):
-    """
-    Base class for moments matrix incrementers.
-
-    Methods
-    -------
-    increment(mm, x, n, inv_opt, sym=True)
-        Increment the inverse moments matrix (and possibly the moments matrix).
-    """
-
-    @staticmethod
-    @abstractmethod
-    def increment(mm: "MomentsMatrix", x: np.ndarray, n: int, inv_opt: Callable[[np.ndarray], np.ndarray], sym: bool = True):
-        """Increment the inverse moments matrix (and possibly the moments matrix).
-
-        Parameters
-        ----------
-        mm : MomentsMatrix
-            The moments matrix to increment.
-        x : np.ndarray
-            The input data.
-        n : int
-            The number of points integrated in the moments matrix.
-        inv_opt : Callable[[np.ndarray], np.ndarray]
-            The inversion method to use.
-        sym : bool, optional
-            Whether to consider the matrix as symmetric, by default True
-        """
-
-
 class BaseInverter(ABC):
     """
     Base class for matrix inversion methods.
-
-    Methods
-    -------
-    invert(matrix)
-        Invert the given matrix.
     """
 
     @staticmethod
@@ -412,13 +338,40 @@ class BaseInverter(ABC):
 
         Parameters
         ----------
-        matrix : np.ndarray
+        matrix : np.ndarray (n, n)
             The input matrix to invert.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (n, n)
             The inverse of the input matrix.
+        """
+
+
+class BaseIncrementer(ABC):
+    """
+    Base class for moments matrix incrementers.
+    """
+
+    update_moments_matrix: bool = False  #: Whether the method updates the moments matrix during incrementing
+
+    @staticmethod
+    @abstractmethod
+    def increment(mm: "MomentsMatrix", x: np.ndarray, n: int, inv_class: type[BaseInverter], sym: bool = True):
+        """Increment the inverse moments matrix (and possibly the moments matrix).
+
+        Parameters
+        ----------
+        mm : MomentsMatrix
+            The moments matrix to increment.
+        x : np.ndarray (N', d)
+            The input data.
+        n : int
+            The number of points integrated in the moments matrix.
+        inv_class : type[BaseInverter]
+            The inversion class to use.
+        sym : bool, optional
+            Whether to consider the matrix as symmetric, by default True
         """
 
 
@@ -434,14 +387,14 @@ class BasePolynomialBasis(ABC):
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (1, d) or (d,)
             The input data.
-        monomials_matrix : np.ndarray
+        monomials_matrix : np.ndarray (s(n), d)
             The monomials matrix. Should be of shape (s(n), d) where s(n) is the number of monomials and d is the dimension of the input data.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (s(n), d)
             The transformed input data.
         """
 

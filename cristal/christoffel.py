@@ -5,7 +5,7 @@ Christoffel Function and Growth Detector classes
 import numpy as np
 
 from cristal.helper_classes import (
-    IMPLEMENTED_INCREMENTATERS_OPTIONS,
+    IMPLEMENTED_INCREMENTERS_OPTIONS,
     IMPLEMENTED_INVERSION_OPTIONS,
     IMPLEMENTED_POLYNOMIAL_BASIS,
     IMPLEMENTED_REGULARIZATION_OPTIONS,
@@ -33,16 +33,12 @@ class DyCF(BaseDetector):
         The dimension of the input data. 0 if not fitted.
     regularizer: float | int | None
         The regularization factor computed based on the degree and dimension. None if not fitted.
-
-    Methods
-    -------
-    See BaseDetector methods
     """
 
     @check_types(
         {
             "n": positive_integer,
-            "incr_opt": lambda x: check_in_list(x, IMPLEMENTED_INCREMENTATERS_OPTIONS),
+            "incr_opt": lambda x: check_in_list(x, IMPLEMENTED_INCREMENTERS_OPTIONS),
             "polynomial_basis": lambda x: check_in_list(x, IMPLEMENTED_POLYNOMIAL_BASIS),
             "regularization": lambda x: check_in_list(x, IMPLEMENTED_REGULARIZATION_OPTIONS),
             "inv": lambda x: check_in_list(x, IMPLEMENTED_INVERSION_OPTIONS),
@@ -64,31 +60,19 @@ class DyCF(BaseDetector):
         n: int
             The degree of polynomials, usually set between 2 and 8.
         regularization: str, optional, by default "vu_C"
-            The regularization method to use for the score. Options include:
-            - "vu" (score divided by d^{3p/2}),
-            - "vu_C" (score divided by d^{3p/2}/C),
-            - "comb" (score divided by comb(p+d, d)),
-            - "constant" (score divided by C).
+            The regularization method to use to divide the scores.
+            See :attr:`~cristal.helper_classes.regularizer.IMPLEMENTED_REGULARIZATION_OPTIONS` for more details.
         C: float | int, optional, by default 1
-            The constant factor used in the "vu_C" or "constant" regularization.
+            The constant factor used in the :const:`"vu_C"` or :const:`"constant"` regularization.
         incr_opt: str, optional, by default "inverse"
-            The incrementation option to use for updating the moments matrix. Options include:
-            - "inverse" (use the inverse of the moments matrix),
-            - "sherman" (use the Sherman-Morrison formula iteratively),
-            - "woodbury" (use the Woodbury matrix identity).
+            The incrementation option to use for updating the moments matrix.
+            See :attr:`~cristal.helper_classes.incrementers.IMPLEMENTED_INCREMENTERS_OPTIONS` for more details.
         polynomial_basis: str, optional, by default "monomials"
-            The polynomial basis to use for the moments matrix. Options include:
-            - "monomials" (standard monomials),
-            - "chebyshev_t1" (Chebyshev polynomials of the first kind),
-            - "chebyshev_t2" (Chebyshev polynomials of the second kind),
-            - "chebyshev_u" (Chebyshev polynomials of the u kind),
-            - "legendre" (Legendre polynomials).
+            The polynomial basis to use for the moments matrix.
+            See :attr:`~cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS` for more details.
         inv_opt: str, optional, by default "fpd_inv"
-            The inversion option to use for the moments matrix. Options include:
-            - "inv" (use the standard inverse),
-            - "pinv" (use the pseudo-inverse),
-            - "pd_inv" (use the positive definite inverse),
-            - "fpd_inv" (use the cholesky decomposition inverse).
+            The inversion option to use for the moments matrix.
+            See :attr:`~cristal.helper_classes.inversion.IMPLEMENTED_INVERSION_OPTIONS` for more details.
         """
         # Initialize the parameters
         self.n = n
@@ -143,6 +127,19 @@ class DyCF(BaseDetector):
         return preds
 
     def save_model(self):
+        """Saves the DyCF model as a dictionary.
+
+        Returns
+        -------
+        dict
+            The DyCF model represented as a dictionary, with keys:
+                - "n": int, the degree of the polynomial basis.
+                - "regularization": str, the regularization method used.
+                - "C": float | int, the constant factor used in the regularization.
+                - "moments_matrix": dict, the saved moments matrix.
+                - "d": int, the dimension of the input data.
+                - "regularizer": float | int | None, the regularization factor.
+        """
         return {
             "n": self.n,
             "regularization": self.regularization,
@@ -153,6 +150,24 @@ class DyCF(BaseDetector):
         }
 
     def load_model(self, model_dict: dict):
+        """Loads the DyCF model from a dictionary.
+
+        Parameters
+        ----------
+        model_dict : dict
+            The dictionary containing the DyCF parameters returned by :func:`save_model()`:
+                - "n": int, the degree of the polynomial basis.
+                - "regularization": str, the regularization method used.
+                - "C": float | int, the constant factor used in the regularization.
+                - "moments_matrix": dict, the saved moments matrix.
+                - "d": int, the dimension of the input data.
+                - "regularizer": float | int | None, the regularization factor.
+
+        Returns
+        -------
+        DyCF
+            The loaded DyCF instance with updated parameters.
+        """
         self.n = model_dict["n"]
         self.regularization = model_dict["regularization"]
         self.C = model_dict["C"]
@@ -180,10 +195,6 @@ class DyCG(BaseDetector):
         The list of DyCF models with different degrees n.
     d: int
         The dimension of the input data. 0 if not fitted.
-
-    Methods
-    -------
-    See BaseDetector methods
     """
 
     @check_types({"degrees": lambda x: len(x) > 1})
@@ -253,11 +264,36 @@ class DyCG(BaseDetector):
         return preds
 
     def save_model(self):
-        return {"degrees": self.degrees.tolist(), "p": self.d, "models": [dycf_model.save_model() for dycf_model in self.models]}
+        """Saves the DyCG model as a dictionary.
+
+        Returns
+        -------
+        dict
+            The DyCG model represented as a dictionary, with keys:
+                - "degrees": list[int], the degrees of the polynomial basis.
+                - "d": int, the dimension of the input data.
+                - "models": list[dict], the saved DyCF models.
+        """
+        return {"degrees": self.degrees.tolist(), "d": self.d, "models": [dycf_model.save_model() for dycf_model in self.models]}
 
     def load_model(self, model_dict: dict):
+        """Loads the DyCG model from a dictionary.
+
+        Parameters
+        ----------
+        model_dict : dict
+            The dictionary containing the DyCG model parameters returned by :func:`save_model()`:
+                - "degrees": list[int], the degrees of the polynomial basis.
+                - "d": int, the dimension of the input data.
+                - "models": list[dict], the saved DyCF models.
+
+        Returns
+        -------
+        DyCG
+            The loaded DyCG model with updated parameters.
+        """
         self.degrees = np.array(model_dict["degrees"])
-        self.d = model_dict["p"]
+        self.d = model_dict["d"]
         for i, dycf_model_dict in enumerate(model_dict["models"]):
             self.models[i].load_model(dycf_model_dict)
         return self

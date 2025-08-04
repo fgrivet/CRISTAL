@@ -17,7 +17,8 @@ __all__ = [
 
 class VuRegularizer(BaseRegularizer):
     """
-    Regularizer for the Vu regularization method : n^(3d/2).
+    Regularizer for the Vu regularization method : :math:`reg = n^{3d/2}`.
+
     See https://arxiv.org/abs/1910.14458 for more details.
     """
 
@@ -29,7 +30,8 @@ class VuRegularizer(BaseRegularizer):
 
 class VuCRegularizer(BaseRegularizer):
     """
-    Regularizer for the Vu_C regularization method : (n^(3d/2)) / C.
+    Regularizer for the Vu_C regularization method : :math:`reg = \\frac{n^{3d/2}}{C}`.
+
     See https://arxiv.org/abs/1910.14458 for more details.
     """
 
@@ -41,7 +43,7 @@ class VuCRegularizer(BaseRegularizer):
 
 class CombRegularizer(BaseRegularizer):
     """
-    Regularizer for the combinatorial regularization method : comb(d + n, d).
+    Regularizer for the combinatorial regularization method : :math:`reg = \\begin{pmatrix} d + n \\\\ d \\end{pmatrix}`.
     """
 
     @staticmethod
@@ -52,7 +54,7 @@ class CombRegularizer(BaseRegularizer):
 
 class ConstantRegularizer(BaseRegularizer):
     """
-    Regularizer that applies a constant factor C.
+    Regularizer that applies a constant factor C : : :math:`reg = C`.
     """
 
     @staticmethod
@@ -61,4 +63,9 @@ class ConstantRegularizer(BaseRegularizer):
         return C
 
 
-IMPLEMENTED_REGULARIZATION_OPTIONS = {"vu": VuRegularizer, "vu_C": VuCRegularizer, "comb": CombRegularizer, "constant": ConstantRegularizer}
+IMPLEMENTED_REGULARIZATION_OPTIONS = {
+    "vu": VuRegularizer,
+    "vu_C": VuCRegularizer,
+    "comb": CombRegularizer,
+    "constant": ConstantRegularizer,
+}  #: The implemented regularization classes.

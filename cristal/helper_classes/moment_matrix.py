@@ -7,7 +7,7 @@ from typing import Any, Self
 
 import numpy as np
 
-from cristal.helper_classes.incrementers import IMPLEMENTED_INCREMENTATERS_OPTIONS
+from cristal.helper_classes.incrementers import IMPLEMENTED_INCREMENTERS_OPTIONS
 from cristal.helper_classes.inversion import IMPLEMENTED_INVERSION_OPTIONS
 from cristal.helper_classes.polynomial_basis import IMPLEMENTED_POLYNOMIAL_BASIS, PolynomialsBasisGenerator
 from cristal.utils.type_checking import check_in_list, check_types, positive_integer
@@ -44,26 +44,6 @@ class MomentsMatrix:
         The inverse moments matrix. None if not fitted.
     N : int
         The number of points integrated in the moments matrix.
-
-    Methods
-    -------
-    __init__(n, polynomial_basis="monomials", inv_opt="inv", incr_opt="inverse")
-        Initialize the MomentsMatrix with the degree of the polynomials,
-        the polynomial basis type, the inversion option, and the incrementation option.
-    fit(x)
-        Fit the MomentsMatrix to the input data.
-    score_samples(x)
-        Compute the score for each sample in the input data.
-    update(x, sym=True)
-        Update the inverse of the moments matrix with new data.
-    save_model()
-        Save the model parameters.
-    load_model(model_dict)
-        Load the model parameters from a dictionary.
-    is_fitted()
-        Check if the MomentsMatrix is fitted.
-    copy()
-        Create a copy of the MomentsMatrix instance.
     """
 
     @check_types(
@@ -71,7 +51,7 @@ class MomentsMatrix:
             "n": positive_integer,
             "polynomial_basis": lambda x: check_in_list(x, IMPLEMENTED_POLYNOMIAL_BASIS),
             "inv_opt": lambda x: check_in_list(x, IMPLEMENTED_INVERSION_OPTIONS),
-            "incr_opt": lambda x: check_in_list(x, IMPLEMENTED_INCREMENTATERS_OPTIONS),
+            "incr_opt": lambda x: check_in_list(x, IMPLEMENTED_INCREMENTERS_OPTIONS),
         }
     )
     def __init__(self, n: int, polynomial_basis: str = "monomials", inv_opt: str = "inv", incr_opt: str = "inverse"):
@@ -96,7 +76,7 @@ class MomentsMatrix:
         # Initialize the functions
         self.polynomial_class = IMPLEMENTED_POLYNOMIAL_BASIS[polynomial_basis]
         self.inv_class = IMPLEMENTED_INVERSION_OPTIONS[inv_opt]
-        self.incr_class = IMPLEMENTED_INCREMENTATERS_OPTIONS[incr_opt]
+        self.incr_class = IMPLEMENTED_INCREMENTERS_OPTIONS[incr_opt]
         # Initialize the moments matrix and its inverse (these variables will be set during the fit method)
         self.monomials_matrix = None
         self.moments_matrix = None
@@ -108,7 +88,7 @@ class MomentsMatrix:
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (N, d)
             The input data.
 
         Returns
@@ -133,12 +113,12 @@ class MomentsMatrix:
 
         Parameters
         ----------
-        x : np.ndarray
-            The input data. Shape should be (n_samples, n_features).
+        x : np.ndarray (L, d)
+            The input data.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (L,)
             The scores for each sample.
         """
         if not self.is_fitted():
@@ -156,7 +136,7 @@ class MomentsMatrix:
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (N', d)
             The new input data.
         sym : bool, optional
             Whether the inverse of the moments matrix should be considered as symmetric, by default True
@@ -166,21 +146,30 @@ class MomentsMatrix:
         Self
             The updated MomentsMatrix instance.
         """
-        self.incr_class.increment(self, x, self.N, self.inv_class.invert, sym=sym)
+        self.incr_class.increment(self, x, self.N, self.inv_class, sym=sym)
         self.N += x.shape[0]
-        if self.incr_opt != "inverse":
+        if not self.incr_class.update_moments_matrix:
             print(
-                "Warning: Incrementation option is not 'inverse', the moment matrix has not been updated, only the inverse matrix has been updated."
+                "Warning: The moment matrix has not been updated, only the inverse matrix has been updated. "
+                "This means that moments_matrix x inverse_moments_matrix is not equal to the identity matrix."
             )
         return self
 
     def save_model(self) -> dict[str, Any]:
-        """Save the model parameters.
+        """Save the MomentsMatrix model as a dictionary.
 
         Returns
         -------
         dict
-            A dictionary containing the model parameters.
+            The MomentsMatrix model represented as a dictionary, with keys:
+            - "n": int, the degree of the polynomial basis
+            - "polynomial_basis": str, the polynomial basis used
+            - "inv_opt": str, the inversion option used
+            - "incr_opt": str, the incrementation option used
+            - "monomials_matrix": list[list[float]] | None, the monomials matrix
+            - "moments_matrix": list[list[float]] | None, the moments matrix
+            - "inverse_moments_matrix": list[list[float]] | None, the inverse moments matrix
+            - "N": int, the number of points integrated in the moments matrix
         """
         return {
             "n": self.n,
@@ -193,14 +182,21 @@ class MomentsMatrix:
             "N": self.N,
         }
 
-    def load_model(self, model_dict: dict[str, Any]) -> Self:
+    def load_model(self, model_dict: dict) -> Self:
         """Load the model parameters from a dictionary.
 
         Parameters
         ----------
-        model_dict : dict[str, Any]
-            A dictionary containing the model parameters.
-            Should contain keys: "n", "polynomial_basis", "inv_opt", "incr_opt", "monomials_matrix", "moments_matrix", "inverse_moments_matrix", "N".
+        model_dict : dict
+            The dictionary containing the model parameters, with keys:
+            - "n": int, the degree of the polynomial basis
+            - "polynomial_basis": str, the polynomial basis used
+            - "inv_opt": str, the inversion option used
+            - "incr_opt": str, the incrementation option used
+            - "monomials_matrix": list[list[float]] | None, the monomials matrix
+            - "moments_matrix": list[list[float]] | None, the moments matrix
+            - "inverse_moments_matrix": list[list[float]] | None, the inverse moments matrix
+            - "N": int, the number of points integrated in the moments matrix
 
         Returns
         -------
@@ -215,7 +211,7 @@ class MomentsMatrix:
         # Initialize the functions
         self.polynomial_class = IMPLEMENTED_POLYNOMIAL_BASIS[self.polynomial_basis]
         self.inv_class = IMPLEMENTED_INVERSION_OPTIONS[self.inv_opt]
-        self.incr_class = IMPLEMENTED_INCREMENTATERS_OPTIONS[self.incr_opt]
+        self.incr_class = IMPLEMENTED_INCREMENTERS_OPTIONS[self.incr_opt]
         # Load the moments matrix and its inverse
         self.monomials_matrix = np.array(model_dict["monomials_matrix"], dtype=np.int8) if model_dict["monomials_matrix"] is not None else None
         self.moments_matrix = np.array(model_dict["moments_matrix"], dtype=np.float64) if model_dict["moments_matrix"] is not None else None

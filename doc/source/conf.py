@@ -19,7 +19,7 @@ release = __version__
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx_autodoc_typehints",
-    "numpydoc",
+    "sphinx.ext.napoleon",
     "sphinx.ext.doctest",
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
@@ -30,6 +30,9 @@ extensions = [
 
 templates_path = ["_templates"]
 exclude_patterns = []
+
+
+autodoc_default_options = {"special-members": "__init__"}
 
 # Collection of Sphinx extensions
 collections = {
@@ -46,3 +49,39 @@ collections = {
 
 html_theme = "pydata_sphinx_theme"
 html_static_path = ["_static"]
+html_theme_options = {
+    "external_links": [],
+    "icon_links_label": "Icon Links",
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://https://github.com/fgrivet/CRISTAL",
+            "icon": "fa-brands fa-square-github",
+            "type": "fontawesome",
+        },
+    ],
+    "show_prev_next": False,
+    "search_bar_text": "Search the docs ...",
+    "navigation_with_keys": False,
+    "collapse_navigation": False,
+    "navigation_depth": 2,
+    "show_nav_level": 1,
+    "show_toc_level": 3,
+    "navbar_align": "left",
+    # -- Template placement in theme layouts ----------------------------------
+    "navbar_start": ["navbar-logo"],
+    # Note that the alignment of navbar_center is controlled by navbar_align
+    "navbar_center": ["navbar-nav"],
+    "navbar_end": ["theme-switcher", "navbar-icon-links"],
+    # navbar_persistent is persistent right (even when on mobiles)
+    "navbar_persistent": ["search-button"],
+    "article_header_start": ["breadcrumbs"],
+    "article_header_end": [],
+    "article_footer_items": ["prev-next"],
+    "content_footer_items": [],
+    # Use html_sidebars that map page patterns to list of sidebar templates
+    "primary_sidebar_end": [],
+    "footer_start": ["copyright"],
+    "footer_center": [],
+    "footer_end": [],
+}

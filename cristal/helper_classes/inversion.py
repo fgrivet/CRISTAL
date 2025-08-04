@@ -27,12 +27,12 @@ class InvInverter(BaseInverter):
 
         Parameters
         ----------
-        matrix : np.ndarray
+        matrix : np.ndarray (n, n)
             The input matrix to invert.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (n, n)
             The inverse of the input matrix.
         """
         return inv(matrix)
@@ -49,12 +49,12 @@ class PseudoInverter(BaseInverter):
 
         Parameters
         ----------
-        matrix : np.ndarray
+        matrix : np.ndarray (n, n)
             The input matrix to invert.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (n, n)
             The pseudo-inverse of the input matrix.
         """
         return pinv(matrix)  # type: ignore
@@ -72,12 +72,12 @@ class PDInverter(BaseInverter):
 
         Parameters
         ----------
-        matrix : np.ndarray
+        matrix : np.ndarray (n, n)
             The input matrix to invert.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (n, n)
             The inverse of the input matrix.
         """
         n = matrix.shape[0]
@@ -99,7 +99,7 @@ class FPDInverter(BaseInverter):
 
         Parameters
         ----------
-        ut : np.ndarray
+        ut : np.ndarray (n, n)
             The upper triangular matrix to convert.
         """
         n = ut.shape[0]
@@ -116,12 +116,12 @@ class FPDInverter(BaseInverter):
 
         Parameters
         ----------
-        matrix : np.ndarray
+        matrix : np.ndarray (n, n)
             The input matrix to invert.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (n, n)
             The inverse of the input matrix.
 
         Raises
@@ -156,4 +156,4 @@ IMPLEMENTED_INVERSION_OPTIONS: dict[str, type[BaseInverter]] = {
     "pinv": PseudoInverter,
     "pd_inv": PDInverter,
     "fpd_inv": FPDInverter,
-}
+}  #: The implemented inversion classes.

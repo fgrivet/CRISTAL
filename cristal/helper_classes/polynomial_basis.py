@@ -33,14 +33,14 @@ class MonomialsBasis(BasePolynomialBasis):
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (1, d) or (d,)
             The input data.
-        monomials_matrix : np.ndarray
+        monomials_matrix : np.ndarray (s(n), d)
             The monomials matrix. Should be of shape (s(n), d) where s(n) is the number of monomials and d is the dimension of the input data.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (s(n), d)
             The computed monomials.
         """
         x_repeated = np.tile(x, (monomials_matrix.shape[0], 1))
@@ -61,14 +61,14 @@ class ChebyshevT1Basis(BasePolynomialBasis):
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (1, d) or (d,)
             The input data.
-        monomials_matrix : np.ndarray
+        monomials_matrix : np.ndarray (s(n), d)
             The matrix of monomials. Should be of shape (s(n), d) where s(n) is the number of monomials and d is the dimension of the input data.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (s(n), d)
             The computed Chebyshev T_1 polynomials.
         """
         x_repeated = np.tile(x, (monomials_matrix.shape[0], 1))
@@ -118,14 +118,14 @@ class ChebyshevT2Basis(BasePolynomialBasis):
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (1, d) or (d,)
             The input data.
-        monomials_matrix : np.ndarray
+        monomials_matrix : np.ndarray (s(n), d)
             The matrix of monomials. Should be of shape (s(n), d) where s(n) is the number of monomials and d is the dimension of the input data.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (s(n), d)
             The computed Chebyshev T_2 polynomials.
         """
         f = np.vectorize(ChebyshevT2Basis.chebyshev_t_2)
@@ -138,7 +138,7 @@ class ChebyshevT2Basis(BasePolynomialBasis):
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (1, d) or (d,)
             The input data.
         n : int
             The degree of the polynomial.
@@ -172,14 +172,14 @@ class ChebyshevUBasis(BasePolynomialBasis):
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (1, d) or (d,)
             The input data.
-        monomials_matrix : np.ndarray
+        monomials_matrix : np.ndarray (s(n), d)
             The matrix of monomials. Should be of shape (s(n), d) where s(n) is the number of monomials and d is the dimension of the input data.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (s(n), d)
             The computed Chebyshev U polynomials.
         """
         f = np.vectorize(ChebyshevUBasis.chebyshev_u)
@@ -193,7 +193,7 @@ class ChebyshevUBasis(BasePolynomialBasis):
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (1, d) or (d,)
             The input data.
         n : int
             The degree of the polynomial.
@@ -226,14 +226,14 @@ class LegendreBasis(BasePolynomialBasis):
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (1, d) or (d,)
             The input data.
-        monomials_matrix : np.ndarray
+        monomials_matrix : np.ndarray (s(n), d)
             The matrix of monomials. Should be of shape (s(n), d) where s(n) is the number of monomials and d is the dimension of the input data.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (s(n), d)
             The computed Legendre polynomials.
         """
         f = np.vectorize(LegendreBasis.legendre)
@@ -246,7 +246,7 @@ class LegendreBasis(BasePolynomialBasis):
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (1, d) or (d,)
             The input data.
         n : int
             The degree of the polynomial.
@@ -265,21 +265,11 @@ IMPLEMENTED_POLYNOMIAL_BASIS: dict[str, type[BasePolynomialBasis]] = {
     "chebyshev_t_2": ChebyshevT2Basis,
     "chebyshev_u": ChebyshevUBasis,
     "legendre": LegendreBasis,
-}
+}  #: The implemented polynomial basis classes.
 
 
 class PolynomialsBasisGenerator:
-    """Class for generating polynomial combinations and applying polynomial basis functions.
-
-    Methods
-    -------
-    generate_combinations(max_degree, dimensions)
-        Generate all combinations of monomials of a given degree and dimensions.
-    apply_combinations(x, m, basis_func)
-        Applies the polynomial basis to the input data.
-    make_design_matrix(x, monomials_matrix, basis_func, allow_parallelization=False)
-        Compute the design matrix for the given data points and monomials.
-    """
+    """Class for generating polynomial combinations and applying polynomial basis functions."""
 
     @staticmethod
     def generate_combinations(max_degree: int, dimensions: int) -> np.ndarray:
@@ -294,7 +284,7 @@ class PolynomialsBasisGenerator:
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (s(n), d)
             An array of shape (s(n), d) containing the combinations of monomials,
             where s(n) is the number of monomials and d is the number of dimensions.
         """
@@ -311,24 +301,24 @@ class PolynomialsBasisGenerator:
         return np.asarray(sorted(combinations, key=lambda e: (np.sum(list(e)), list(-1 * np.array(list(e))))), dtype=np.int8)
 
     @staticmethod
-    def apply_combinations(x: np.ndarray, m: np.ndarray, basis_class: type[BasePolynomialBasis]) -> np.ndarray:
+    def apply_combinations(x: np.ndarray, monomials_matrix: np.ndarray, basis_class: type[BasePolynomialBasis]) -> np.ndarray:
         """Applies the polynomial basis to the input data.
 
         Parameters
         ----------
-        x : np.ndarray
+        x : np.ndarray (1, d) or (d,)
             The input data to transform.
-        m : np.ndarray
-            The monomials to use for the transformation.
+        monomials_matrix : np.ndarray (s(n), d)
+            The monomials matrix generated by :func:`generate_combinations`.
         basis_class : type[BasePolynomialBasis]
             The basis class to apply.
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (s(n), 1)
             The transformed data.
         """
-        result = basis_class.func(x, m)
+        result = basis_class.func(x, monomials_matrix)
         return np.prod(result, axis=1).reshape(-1, 1)
 
     @staticmethod
@@ -340,10 +330,10 @@ class PolynomialsBasisGenerator:
 
         Parameters
         ----------
-        x : np.ndarray
-            The input data. Should be of shape (n_samples, n_features).
-        monomials_matrix : np.ndarray
-            The monomials matrix. Should be of shape (s(n), d).
+        x : np.ndarray (N, d)
+            The input data to transform.
+        monomials_matrix : np.ndarray (s(n), d)
+            The monomials matrix generated by :func:`generate_combinations`.
         basis_class : type[BasePolynomialBasis]
             The basis class to use for the transformation.
         allow_parallelization : bool, optional
@@ -351,7 +341,7 @@ class PolynomialsBasisGenerator:
 
         Returns
         -------
-        np.ndarray
+        np.ndarray (N, s(n))
             The design matrix for the given data points and monomials.
         """
 

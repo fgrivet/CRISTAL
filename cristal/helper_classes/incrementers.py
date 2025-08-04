@@ -2,19 +2,18 @@
 Incrementers for moments matrix using various methods.
 """
 
-from collections.abc import Callable
 from typing import TYPE_CHECKING
 
 import numpy as np
 
-from cristal.helper_classes.base import BaseIncrementer
+from cristal.helper_classes.base import BaseIncrementer, BaseInverter
 from cristal.helper_classes.polynomial_basis import PolynomialsBasisGenerator
 
 if TYPE_CHECKING:
     from .moment_matrix import MomentsMatrix
 
 __all__ = [
-    "IMPLEMENTED_INCREMENTATERS_OPTIONS",
+    "IMPLEMENTED_INCREMENTERS_OPTIONS",
     "InverseIncrementer",
     "ShermanIncrementer",
     "WoodburyIncrementer",
@@ -27,20 +26,22 @@ class InverseIncrementer(BaseIncrementer):
     This method updates the moments matrix and then computes the inverse of the updated moments matrix directly.
     """
 
+    update_moments_matrix = True
+
     @staticmethod
-    def increment(mm: "MomentsMatrix", x: np.ndarray, n: int, inv_opt: Callable[[np.ndarray], np.ndarray], sym: bool = True):
+    def increment(mm: "MomentsMatrix", x: np.ndarray, n: int, inv_class: type[BaseInverter], sym: bool = True):
         """Increment the moments matrix using the inverse method.
 
         Parameters
         ----------
         mm : MomentsMatrix
             The moments matrix to increment.
-        x : np.ndarray
+        x : np.ndarray (N', d)
             The input data.
         n : int
             The number of points integrated in the moments matrix.
-        inv_opt : Callable[[np.ndarray], np.ndarray]
-            The inversion method to use.
+        inv_class : type[BaseInverter]
+            The inversion class to use.
         sym : bool, optional
             Not used in this implementation, by default True
         """
@@ -58,7 +59,7 @@ class InverseIncrementer(BaseIncrementer):
         mm.moments_matrix = moments_matrix
 
         # Compute the inverse of the updated moments matrix
-        mm.inverse_moments_matrix = inv_opt(moments_matrix)
+        mm.inverse_moments_matrix = inv_class.invert(moments_matrix)
 
 
 class ShermanIncrementer(BaseIncrementer):
@@ -68,22 +69,26 @@ class ShermanIncrementer(BaseIncrementer):
     """
 
     @staticmethod
-    def increment(mm: "MomentsMatrix", x: np.ndarray, n: int, inv_opt: Callable[[np.ndarray], np.ndarray] | None = None, sym: bool = True):
+    def increment(mm: "MomentsMatrix", x: np.ndarray, n: int, inv_class: type[BaseInverter] | None = None, sym: bool = True):
         """Increment the moments matrix using the Sherman-Morrison formula iteratively.
 
-        Sherman-Morrison formula: \\
-        (A + uv^T)^-1 = A^-1 - (A^-1 u v^T A^-1) / (1 + v^T A^-1 u) \\
-        Here u = v^T
+        Sherman-Morrison formula:
+
+        .. math::
+            (A + uv^T)^{-1} = A^{-1} - \\frac{(A^{-1} u v^T A^{-1})}{(1 + v^T A^{-1} u)}
+
+        .. math::
+            \\text{Here } u = v^T
 
         Parameters
         ----------
         mm : MomentsMatrix
             The moments matrix to increment.
-        x : np.ndarray
+        x : np.ndarray (N', d)
             The input data.
         n : int
             The number of points integrated in the moments matrix.
-        inv_opt : Callable[[np.ndarray], np.ndarray] | None, optional
+        inv_class : type[BaseInverter] | None, optional
             Not used in this implementation, by default None
         sym : bool, optional
             Whether to consider the matrix as symmetric, by default True
@@ -94,7 +99,7 @@ class ShermanIncrementer(BaseIncrementer):
         # Apply the Sherman-Morrison formula iteratively
         for xx in x:
             # Compute the vector v for the current point
-            v = mm.polynomial_class(xx, mm.monomials_matrix)
+            v = mm.polynomial_class.func(xx, mm.monomials_matrix)  # type: ignore
             # Compute the left-hand side of the Sherman-Morrison formula
             left = inv_moments_matrix @ v
             # Compute the denominator
@@ -121,23 +126,27 @@ class WoodburyIncrementer(BaseIncrementer):
     """
 
     @staticmethod
-    def increment(mm: "MomentsMatrix", x: np.ndarray, n: int, inv_opt: Callable[[np.ndarray], np.ndarray], sym: bool = True):
+    def increment(mm: "MomentsMatrix", x: np.ndarray, n: int, inv_class: type[BaseInverter], sym: bool = True):
         """Increment the moments matrix using the Woodbury matrix identity.
-        
-        Woodbury matrix identity: \\
-        (A + UCV)^-1 = A^-1 - A^-1 U (C^-1 + V A^-1 U)^-1 V A^-1 \\
-        Here C = I and U = V^T = [v_1, v_2, ..., v_N] \\
-        
+
+        Woodbury matrix identity:
+
+        .. math::
+            (A + UCV)^{-1} = A^{-1} - A^{-1} U (C^{-1} + V A^{-1} U)^{-1} V A^{-1}
+
+        .. math::
+            \\text{Here } C = I \\text{ and } U = V^T = \\begin{bmatrix} v_1, v_2, \\cdots, v_{N'} \\end{bmatrix}
+
         Parameters
         ----------
         mm : MomentsMatrix
             The moments matrix to increment.
-        x : np.ndarray
+        x : np.ndarray (N', d)
             The input data.
         n : int
             The number of points integrated in the moments matrix.
-        inv_opt : Callable[[np.ndarray], np.ndarray]
-            The inversion method to use.
+        inv_class : type[BaseInverter]
+            The inversion class to use.
         sym : bool, optional
             Whether to consider the matrix as symmetric, by default True
         """
@@ -160,7 +169,7 @@ class WoodburyIncrementer(BaseIncrementer):
         if N == 1:
             sum_inv = 1 / sum_
         else:
-            sum_inv = inv_opt(sum_)
+            sum_inv = inv_class.invert(sum_)
         # Compute A^-1 @ U @ (C^-1 + V @ A^-1 @ U)^-1
         if sym:
             # A is symmetric and U = V^T so A^-1 @ U = (V @ A^-1)^T
@@ -177,8 +186,8 @@ class WoodburyIncrementer(BaseIncrementer):
         mm.inverse_moments_matrix = (n + N) * inv_moments_matrix
 
 
-IMPLEMENTED_INCREMENTATERS_OPTIONS: dict[str, type[BaseIncrementer]] = {
+IMPLEMENTED_INCREMENTERS_OPTIONS: dict[str, type[BaseIncrementer]] = {
     "inverse": InverseIncrementer,
     "sherman": ShermanIncrementer,
     "woodbury": WoodburyIncrementer,
-}
+}  #: The implemented incrementers classes.
