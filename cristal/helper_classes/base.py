@@ -209,7 +209,8 @@ class BaseDetector(ABC):
             The name of the method.
         """
 
-    def assert_shape_unfitted(self, x: np.ndarray):
+    @staticmethod
+    def assert_shape_unfitted(x: np.ndarray):
         """Asserts that the input array x has the correct shape to fit the model.
 
         Parameters
@@ -406,13 +407,13 @@ class BaseRegularizer(ABC):
 
     @staticmethod
     @abstractmethod
-    def regularizer(n: int, d: int, C: float | int) -> float:
+    def regularizer(n: int | float, d: int, C: float | int) -> float:
         """Compute the regularization value.
 
         Parameters
         ----------
         n : int
-            The number of samples.
+            The polynomial basis maximum degree.
         d : int
             The dimension of the input data.
         C : float | int

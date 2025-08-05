@@ -2,7 +2,7 @@
 Polynomials basis classes and generator for polynomial combinations.
 """
 
-from collections.abc import Callable
+from enum import Enum
 from math import comb, factorial
 from multiprocessing import Pool
 
@@ -149,11 +149,12 @@ class ChebyshevT2Basis(BasePolynomialBasis):
             The computed Chebyshev T_2 polynomial.
         """
         if n == 0:
-            return 1 / np.sqrt(np.pi)
+            to_return = 1 / np.sqrt(np.pi)
         else:
-            return (n / np.sqrt(np.pi / 2)) * np.sum(
+            to_return = (n / np.sqrt(np.pi / 2)) * np.sum(
                 [(-2) ** i * (factorial(n + i - 1) / (factorial(n - i) * factorial(2 * i))) * (1 - x) ** i for i in range(n + 1)]
             )
+        return to_return
 
 
 # TODO Make it work with vectorized input
@@ -204,11 +205,12 @@ class ChebyshevUBasis(BasePolynomialBasis):
             The computed Chebyshev U_n polynomial.
         """
         if n == 0:
-            return np.sqrt(2 / np.pi)
+            to_return = np.sqrt(2 / np.pi)
         else:
-            return np.sqrt(2 / np.pi) * np.sum(
+            to_return = np.sqrt(2 / np.pi) * np.sum(
                 [(-2) ** i * (factorial(n + i - 1) / (factorial(n - i) * factorial(2 * i + 1))) * (1 - x) ** i for i in range(n + 1)]
             )
+        return to_return
 
 
 # TODO Make it work with vectorized input
@@ -259,13 +261,16 @@ class LegendreBasis(BasePolynomialBasis):
         return np.sqrt((2 * n + 1) / 2) * np.sum([comb(n, i) * comb(n + i, i) * ((x - 1) / 2) ** i for i in range(n + 1)])
 
 
-IMPLEMENTED_POLYNOMIAL_BASIS: dict[str, type[BasePolynomialBasis]] = {
-    "monomials": MonomialsBasis,
-    "chebyshev_t_1": ChebyshevT1Basis,
-    "chebyshev_t_2": ChebyshevT2Basis,
-    "chebyshev_u": ChebyshevUBasis,
-    "legendre": LegendreBasis,
-}  #: The implemented polynomial basis classes.
+class IMPLEMENTED_POLYNOMIAL_BASIS(Enum):
+    """
+    The implemented polynomial basis classes.
+    """
+
+    MONOMIALS = MonomialsBasis
+    CHEBYSHEV_T_1 = ChebyshevT1Basis
+    CHEBYSHEV_T_2 = ChebyshevT2Basis
+    CHEBYSHEV_U = ChebyshevUBasis
+    LEGENDRE = LegendreBasis
 
 
 class PolynomialsBasisGenerator:

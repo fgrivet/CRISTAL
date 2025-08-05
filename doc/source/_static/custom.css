@@ -1,0 +1,19 @@
+/* Adjust page width */
+.bd-page-width {
+    max-width: 90% !important;
+}
+
+/* Adjust content width */
+.bd-article-container {
+    max-width: 100% !important;
+}
+
+/* Adjust the left navigation width */
+.bd-sidebar {
+    width: 15% !important;
+}
+
+/* Adjust the right TOC width */
+.bd-toc {
+    width: 25% !important;
+}

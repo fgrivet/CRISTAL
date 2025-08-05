@@ -2,10 +2,15 @@
 Inversion methods for matrices.
 """
 
+import logging
+from enum import Enum
+
 import numpy as np
 from scipy.linalg import inv, lapack, pinv, solve
 
 from cristal.helper_classes.base import BaseInverter
+
+logger = logging.getLogger("CRISTAL")
 
 __all__ = [
     "IMPLEMENTED_INVERSION_OPTIONS",
@@ -131,7 +136,7 @@ class FPDInverter(BaseInverter):
         """
         cholesky, info = lapack.dpotrf(matrix)  # pylint: disable=no-member # type: ignore
         if info != 0:
-            print("Error in dpotrf: ", info)
+            logger.error("Error in dpotrf: %s", info)
             # Matrix is probably not positive definite, we try to make it positive definite
             # by adding a small regularization term from 10^-10 to 10^-4
             for eps in range(10, 3, -1):
@@ -139,8 +144,7 @@ class FPDInverter(BaseInverter):
                 # We stop if the factorization succeeds
                 if info == 0:
                     break
-                else:
-                    print(f"Error in dpotrf: {info} for eps = {eps}")
+                logger.error("Error in dpotrf: %s for eps = %d", info, eps)
             # If none worked, we raise an error
             if info != 0:
                 raise ValueError(f"dpotrf failed on input {matrix}")
@@ -151,9 +155,10 @@ class FPDInverter(BaseInverter):
         return inv_matrix
 
 
-IMPLEMENTED_INVERSION_OPTIONS: dict[str, type[BaseInverter]] = {
-    "inv": InvInverter,
-    "pinv": PseudoInverter,
-    "pd_inv": PDInverter,
-    "fpd_inv": FPDInverter,
-}  #: The implemented inversion classes.
+class IMPLEMENTED_INVERSION_OPTIONS(Enum):
+    """The implemented inversion classes."""
+
+    INV = InvInverter
+    PINV = PseudoInverter
+    PD_INV = PDInverter
+    FPD_INV = FPDInverter

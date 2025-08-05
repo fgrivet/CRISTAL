@@ -60,7 +60,7 @@ def check_types(conditions: dict[str, Callable[[Any], bool]] | None = None) -> C
                     expected_type = type_hints[param_name]
                     # Type check
                     if not isinstance(param_value, expected_type):
-                        raise TypeError(f"Argument '{param_name}' must be of type {expected_type}")
+                        raise TypeError(f"Argument '{param_name}' must be of type {expected_type}. Got {type(param_value)} instead.")
 
                 # Check custom conditions
                 if param_name in conditions:
@@ -100,6 +100,11 @@ def check_all_of_type(value: Any, expected_type: type | tuple[type, ...]) -> boo
 def check_none(value: Any) -> bool:
     """Check if the value is None."""
     return value is None
+
+
+def check_all_int(value: Any) -> bool:
+    """Check if all elements in the value are integers."""
+    return check_all_of_type(value, int)
 
 
 def check_all_int_or_float(value: Any) -> bool:

@@ -6,7 +6,10 @@ API Reference
    :members:
    :undoc-members:
    :show-inheritance:
-   :exclude-members: DyCF, DyCG, DyCFPlotter
+   :exclude-members: BaggingDyCF, DyCF, DyCG, DyCFPlotter,
+                     IMPLEMENTED_INCREMENTERS_OPTIONS, IMPLEMENTED_INVERSION_OPTIONS,
+                     IMPLEMENTED_POLYNOMIAL_BASIS, IMPLEMENTED_REGULARIZATION_OPTIONS,
+                     PolynomialsBasisGenerator
 
 
 Submodules

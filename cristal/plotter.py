@@ -2,15 +2,19 @@
 Implementation of the CFPlotter class for plotting level sets and boundaries of DyCF models.
 """
 
+import logging
+
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.axes import Axes
 from matplotlib.colors import LinearSegmentedColormap, Normalize
 from matplotlib.figure import Figure
 
-from cristal.helper_classes import BasePlotter
 from cristal.christoffel import DyCF
+from cristal.helper_classes.base import BasePlotter
 from cristal.utils.type_checking import check_all_int_or_float, check_none, check_types, positive_integer
+
+logger = logging.getLogger("CRISTAL")
 
 
 class DyCFPlotter(BasePlotter):
@@ -57,6 +61,8 @@ class DyCFPlotter(BasePlotter):
         save: bool = False,
         save_title: str = "CF_levelset.png",
         close: bool = True,
+        fig: Figure | None = None,
+        ax: Axes | None = None,
     ) -> None | tuple[Figure, Axes]:
         """
         Plot the level sets of the model's decision function.
@@ -82,10 +88,18 @@ class DyCFPlotter(BasePlotter):
             Title for the saved plot file. Defaults to "CF_levelset.png".
         close: bool
             Whether to close the plot or return it after saving or showing. Defaults to True.
+        fig: Figure | None
+            The figure to plot on. If None, a new figure is created.
+        ax: Axes | None
+            The axes to plot on. If None, a new axes is created.
         """
         assert x.shape[1] == self.model.d
-        # Make figure
-        fig, ax = plt.subplots()
+        if fig is None and ax is not None:
+            logger.warning("ax is provided but fig is None, creating a new figure.")
+        elif fig is not None and ax is None:
+            logger.warning("fig is provided but ax is None, creating a new axes.")
+        if ax is None or fig is None:
+            fig, ax = plt.subplots()
 
         # Scatter the data points
         ax.scatter(x[:, 0], x[:, 1], marker="x", s=20)
@@ -110,15 +124,15 @@ class DyCFPlotter(BasePlotter):
         levels = sorted(set(levels))
         # Plot level sets
         cs = ax.contour(x1_values, x2_values, scores, levels=levels)
-        ax.clabel(cs, inline=1)
+        ax.clabel(cs, inline=1, fmt="%.2f", fontsize=8)
 
         # Plot the reference level set (1 thanks to the regularization)
         cs_ref = ax.contour(x1_values, x2_values, scores, levels=[1], colors=["r"])
         ax.clabel(cs_ref, inline=1)
 
         ax.set_title(
-            f"Level sets of {self.model.__class__.__name__} with degree={self.model.d} "
-            f"and regularization={self.model.regularization} ({self.model.regularizer})"
+            f"Level sets of {self.model.__class__.__name__} with degree={self.model.n} "
+            f"and regularization={self.model.regularization.name} ({self.model.regularizer})"
         )
 
         if save:
@@ -127,9 +141,10 @@ class DyCFPlotter(BasePlotter):
             plt.show()
         if close:
             plt.close()
-            return None
+            to_return = None
         else:
-            return fig, ax
+            to_return = (fig, ax)
+        return to_return
 
     @check_types({"n_x1": positive_integer, "n_x2": positive_integer})
     def boundary(
@@ -142,6 +157,8 @@ class DyCFPlotter(BasePlotter):
         save: bool = False,
         save_title: str = "CF_boundary.png",
         close: bool = True,
+        fig: Figure | None = None,
+        ax: Axes | None = None,
     ) -> None | tuple[Figure, Axes]:
         """
         Plot the boundary decision of the model.
@@ -164,10 +181,18 @@ class DyCFPlotter(BasePlotter):
             Title for the saved plot file. Defaults to "CF_boundary.png".
         close: bool
             Whether to close the plot or return it after saving or showing. Defaults to True.
+        fig: Figure | None
+            The figure to plot on. If None, a new figure is created.
+        ax: Axes | None
+            The axes to plot on. If None, a new axes is created.
         """
-        assert x.shape[1] == self.model.d
-        # Make figure
-        fig, ax = plt.subplots()
+        assert x.shape[1] == self.model.d, "Input data must have the same dimension as the model."
+        if fig is None and ax is not None:
+            logger.warning("ax is provided but fig is None, creating a new figure.")
+        elif fig is not None and ax is None:
+            logger.warning("fig is provided but ax is None, creating a new axes.")
+        if ax is None or fig is None:
+            fig, ax = plt.subplots()
 
         # Make a grid and predict the values
         x1_margin = (np.max(x[:, 0]) - np.min(x[:, 0])) / 5
@@ -199,5 +224,7 @@ class DyCFPlotter(BasePlotter):
             plt.show()
         if close:
             plt.close()
+            to_return = None
         else:
-            return fig, ax
+            to_return = (fig, ax)
+        return to_return

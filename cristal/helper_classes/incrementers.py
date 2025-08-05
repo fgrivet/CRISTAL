@@ -2,6 +2,7 @@
 Incrementers for moments matrix using various methods.
 """
 
+from enum import Enum
 from typing import TYPE_CHECKING
 
 import numpy as np
@@ -186,8 +187,11 @@ class WoodburyIncrementer(BaseIncrementer):
         mm.inverse_moments_matrix = (n + N) * inv_moments_matrix
 
 
-IMPLEMENTED_INCREMENTERS_OPTIONS: dict[str, type[BaseIncrementer]] = {
-    "inverse": InverseIncrementer,
-    "sherman": ShermanIncrementer,
-    "woodbury": WoodburyIncrementer,
-}  #: The implemented incrementers classes.
+class IMPLEMENTED_INCREMENTERS_OPTIONS(Enum):
+    """
+    The implemented incrementers classes.
+    """
+
+    INVERSE = InverseIncrementer
+    WOODBURY = WoodburyIncrementer
+    SHERMAN = ShermanIncrementer

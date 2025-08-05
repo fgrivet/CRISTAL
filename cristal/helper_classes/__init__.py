@@ -1,3 +1,9 @@
+"""
+This module contains helper classes for various functionalities in the CRISTAL framework.
+It includes base classes, incrementers classes, inversion classes, moment matrix calculations,
+polynomial basis classes, and regularization classes.
+"""
+
 # pylint: disable=unused-variable
 
 from cristal.helper_classes.base import *

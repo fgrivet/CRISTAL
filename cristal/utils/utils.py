@@ -14,11 +14,9 @@ def average_precision_score(y_true, y_score):
 
 
 def roc_auc_score(y_true, y_score):
-    res = roc_curve(y_true, y_score)
-    if res is None:
+    if (res := roc_curve(y_true, y_score)) is None:
         return np.nan
-    else:
-        tpr, fpr, thresholds = res
+    tpr, fpr, _ = res
     return auc(x=fpr, y=tpr)
 
 
@@ -34,7 +32,8 @@ def roc_curve(y_true: np.ndarray, y_score: np.ndarray):
 
 
 def precision(y_score, score_outliers, threshold):
-    # len(y_score[y_score < threshold]) = 0 => there is no positives detected, which mean that the precision (how many positives are true positives) is max
+    # len(y_score[y_score < threshold]) = 0
+    # => there is no positives detected, which mean that the precision (how many positives are true positives) is max
     return len(score_outliers[score_outliers < threshold]) / len(y_score[y_score < threshold]) if len(y_score[y_score < threshold]) != 0 else 1
 
 
@@ -55,10 +54,10 @@ def supervised_metrics(y_true, y_pred):
     pred_inliers = y_pred[y_true == 1]
     recall = len(pred_outliers[pred_outliers == -1]) / len(pred_outliers)  # TPR
     specificity = len(pred_inliers[pred_inliers == 1]) / len(pred_inliers)  # 1 - FPR
-    precision = len(pred_outliers[pred_outliers == -1]) / len(y_pred[y_pred == -1]) if len(y_pred[y_pred == -1]) != 0 else np.nan
+    precision_score = len(pred_outliers[pred_outliers == -1]) / len(y_pred[y_pred == -1]) if len(y_pred[y_pred == -1]) != 0 else np.nan
     accuracy = (recall + specificity) / 2
-    f_score = 2 * recall * precision / (recall + precision) if recall + precision != 0 else 0
-    return recall, specificity, precision, accuracy, f_score
+    f_score = 2 * recall * precision_score / (recall + precision_score) if recall + precision_score != 0 else 0
+    return recall, specificity, precision_score, accuracy, f_score
 
 
 def em_auc_score(scoring_func, samples, random_generator, n_generated: int = 100000):
@@ -74,9 +73,8 @@ def em_auc_score(scoring_func, samples, random_generator, n_generated: int = 100
     return res[2]
 
 
-def em_goix(
-    t, t_max, volume_support: float, s_unif: np.ndarray, s_X: np.ndarray, n_generated: int
-):  # copied from https://github.com/ngoix/EMMV_benchmarks
+def em_goix(t, t_max, volume_support: float, s_unif: np.ndarray, s_X: np.ndarray, n_generated: int):
+    # copied from https://github.com/ngoix/EMMV_benchmarks
     EM_t = np.zeros(t.shape[0])
     n_samples = s_X.shape[0]
     s_X_unique = np.unique(s_X)
@@ -84,8 +82,7 @@ def em_goix(
     for u in s_X_unique:
         # if (s_unif >= u).sum() > n_generated / 1000:
         EM_t = np.maximum(EM_t, 1.0 / n_samples * (s_X > u).sum() - t * (s_unif > u).sum() / n_generated * volume_support)
-    amax = np.argmax(EM_t <= t_max) + 1
-    if amax == 1:
+    if (amax := np.argmax(EM_t <= t_max) + 1) == 1:
         print("Failed to achieve t_max, values all greater than 0.9")
         amax = -1
     return t, EM_t, auc(x=t[:amax], y=EM_t[:amax]), amax
@@ -105,9 +102,8 @@ def mv_auc_score(scoring_func, samples, random_generator, n_generated: int = 100
     return res[2]
 
 
-def mv_goix(
-    axis_alpha, volume_support: float, s_unif: np.ndarray, s_X: np.ndarray, n_generated: int
-):  # copied from https://github.com/ngoix/EMMV_benchmarks
+def mv_goix(axis_alpha, volume_support: float, s_unif: np.ndarray, s_X: np.ndarray, n_generated: int):
+    # copied from https://github.com/ngoix/EMMV_benchmarks
     n_samples = s_X.shape[0]
     s_X_argsort = s_X.argsort()
     mass = 0

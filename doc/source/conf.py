@@ -48,14 +48,16 @@ collections = {
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = "pydata_sphinx_theme"
+html_title = "CRISTAL Documentation"
 html_static_path = ["_static"]
+html_css_files = ["custom.css"]
 html_theme_options = {
     "external_links": [],
     "icon_links_label": "Icon Links",
     "icon_links": [
         {
             "name": "GitHub",
-            "url": "https://https://github.com/fgrivet/CRISTAL",
+            "url": "https://github.com/fgrivet/CRISTAL",
             "icon": "fa-brands fa-square-github",
             "type": "fontawesome",
         },

@@ -3,14 +3,18 @@ MomentsMatrix class for computing and storing moments matrix and its inverse.
 """
 
 import copy
+import logging
 from typing import Any, Self
 
 import numpy as np
 
+from cristal.helper_classes.base import BaseIncrementer, BaseInverter, BasePolynomialBasis
 from cristal.helper_classes.incrementers import IMPLEMENTED_INCREMENTERS_OPTIONS
 from cristal.helper_classes.inversion import IMPLEMENTED_INVERSION_OPTIONS
 from cristal.helper_classes.polynomial_basis import IMPLEMENTED_POLYNOMIAL_BASIS, PolynomialsBasisGenerator
-from cristal.utils.type_checking import check_in_list, check_types, positive_integer
+from cristal.utils.type_checking import check_types, positive_integer
+
+logger = logging.getLogger("CRISTAL")
 
 __all__ = [
     "MomentsMatrix",
@@ -49,24 +53,27 @@ class MomentsMatrix:
     @check_types(
         {
             "n": positive_integer,
-            "polynomial_basis": lambda x: check_in_list(x, IMPLEMENTED_POLYNOMIAL_BASIS),
-            "inv_opt": lambda x: check_in_list(x, IMPLEMENTED_INVERSION_OPTIONS),
-            "incr_opt": lambda x: check_in_list(x, IMPLEMENTED_INCREMENTERS_OPTIONS),
         }
     )
-    def __init__(self, n: int, polynomial_basis: str = "monomials", inv_opt: str = "inv", incr_opt: str = "inverse"):
+    def __init__(
+        self,
+        n: int,
+        polynomial_basis: IMPLEMENTED_POLYNOMIAL_BASIS = IMPLEMENTED_POLYNOMIAL_BASIS.MONOMIALS,
+        inv_opt: IMPLEMENTED_INVERSION_OPTIONS = IMPLEMENTED_INVERSION_OPTIONS.INV,
+        incr_opt: IMPLEMENTED_INCREMENTERS_OPTIONS = IMPLEMENTED_INCREMENTERS_OPTIONS.INVERSE,
+    ):
         """Initialize the MomentsMatrix.
 
         Parameters
         ----------
         n : int
             The degree of the polynomial basis.
-        polynomial_basis : str, optional
-            The polynomial basis to use, by default "monomials"
-        inv_opt : str, optional
-            The inversion option to use, by default "inv"
-        incr_opt : str, optional
-            The incrementation option to use, by default "inverse"
+        polynomial_basis : IMPLEMENTED_POLYNOMIAL_BASIS, optional
+            The polynomial basis to use, by default IMPLEMENTED_POLYNOMIAL_BASIS.MONOMIALS
+        inv_opt : IMPLEMENTED_INVERSION_OPTIONS, optional
+            The inversion option to use, by default IMPLEMENTED_INVERSION_OPTIONS.INV
+        incr_opt : IMPLEMENTED_INCREMENTERS_OPTIONS, optional
+            The incrementation option to use, by default IMPLEMENTED_INCREMENTERS_OPTIONS.INVERSE
         """
         # Initialize the parameters
         self.n = n
@@ -74,9 +81,9 @@ class MomentsMatrix:
         self.inv_opt = inv_opt
         self.incr_opt = incr_opt
         # Initialize the functions
-        self.polynomial_class = IMPLEMENTED_POLYNOMIAL_BASIS[polynomial_basis]
-        self.inv_class = IMPLEMENTED_INVERSION_OPTIONS[inv_opt]
-        self.incr_class = IMPLEMENTED_INCREMENTERS_OPTIONS[incr_opt]
+        self.polynomial_class: type[BasePolynomialBasis] = self.polynomial_basis.value
+        self.inv_class: type[BaseInverter] = self.inv_opt.value
+        self.incr_class: type[BaseIncrementer] = self.incr_opt.value
         # Initialize the moments matrix and its inverse (these variables will be set during the fit method)
         self.monomials_matrix = None
         self.moments_matrix = None
@@ -131,7 +138,7 @@ class MomentsMatrix:
         scores = np.sum(temp * v_matrix, axis=1)
         return scores
 
-    def update(self, x: np.ndarray, sym: bool = True) -> Self:
+    def update(self, x: np.ndarray, sym: bool = True) -> "MomentsMatrix":
         """Update the inverse of the moments matrix with new data.
 
         Parameters
@@ -143,14 +150,14 @@ class MomentsMatrix:
 
         Returns
         -------
-        Self
+        MomentsMatrix
             The updated MomentsMatrix instance.
         """
         self.incr_class.increment(self, x, self.N, self.inv_class, sym=sym)
         self.N += x.shape[0]
         if not self.incr_class.update_moments_matrix:
-            print(
-                "Warning: The moment matrix has not been updated, only the inverse matrix has been updated. "
+            logger.warning(
+                "The moment matrix has not been updated, only the inverse matrix has been updated. "
                 "This means that moments_matrix x inverse_moments_matrix is not equal to the identity matrix."
             )
         return self
@@ -173,9 +180,9 @@ class MomentsMatrix:
         """
         return {
             "n": self.n,
-            "polynomial_basis": self.polynomial_basis,
-            "inv_opt": self.inv_opt,
-            "incr_opt": self.incr_opt,
+            "polynomial_basis": self.polynomial_basis.name,
+            "inv_opt": self.inv_opt.name,
+            "incr_opt": self.incr_opt.name,
             "monomials_matrix": self.monomials_matrix.tolist() if self.monomials_matrix is not None else None,
             "moments_matrix": self.moments_matrix.tolist() if self.moments_matrix is not None else None,
             "inverse_moments_matrix": self.inverse_moments_matrix.tolist() if self.inverse_moments_matrix is not None else None,
@@ -205,13 +212,13 @@ class MomentsMatrix:
         """
         # Load the parameters
         self.n = model_dict["n"]
-        self.polynomial_basis = model_dict["polynomial_basis"]
-        self.inv_opt = model_dict["inv_opt"]
-        self.incr_opt = model_dict["incr_opt"]
+        self.polynomial_basis = IMPLEMENTED_POLYNOMIAL_BASIS[model_dict["polynomial_basis"]]
+        self.inv_opt = IMPLEMENTED_INVERSION_OPTIONS[model_dict["inv_opt"]]
+        self.incr_opt = IMPLEMENTED_INCREMENTERS_OPTIONS[model_dict["incr_opt"]]
         # Initialize the functions
-        self.polynomial_class = IMPLEMENTED_POLYNOMIAL_BASIS[self.polynomial_basis]
-        self.inv_class = IMPLEMENTED_INVERSION_OPTIONS[self.inv_opt]
-        self.incr_class = IMPLEMENTED_INCREMENTERS_OPTIONS[self.incr_opt]
+        self.polynomial_class: type[BasePolynomialBasis] = self.polynomial_basis.value
+        self.inv_class: type[BaseInverter] = self.inv_opt.value
+        self.incr_class: type[BaseIncrementer] = self.incr_opt.value
         # Load the moments matrix and its inverse
         self.monomials_matrix = np.array(model_dict["monomials_matrix"], dtype=np.int8) if model_dict["monomials_matrix"] is not None else None
         self.moments_matrix = np.array(model_dict["moments_matrix"], dtype=np.float64) if model_dict["moments_matrix"] is not None else None
