@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Moment Matrix Example &#8212; CRISTAL Documentation</title>
+    <title>Bagging Example &#8212; CRISTAL Documentation</title>
   
   
   
@@ -48,11 +48,10 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_collections/notebooks/moment_matrix';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_collections/notebooks/bagging';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Plot Levelset Example" href="plot_levelset.html" />
-    <link rel="prev" title="Examples" href="../../examples.html" />
+    <link rel="prev" title="Plot Levelset Example" href="plot_levelset.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -314,9 +313,9 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Moment Matrix Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="moment_matrix.html">Moment Matrix Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plot_levelset.html">Plot Levelset Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bagging.html">Bagging Example</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Bagging Example</a></li>
 </ul>
 </div>
 </nav></div>
@@ -353,7 +352,7 @@
     
     <li class="breadcrumb-item"><a href="../../examples.html" class="nav-link">Examples</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Moment Matrix Example</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Bagging Example</span></li>
   </ul>
 </nav>
 </div>
@@ -370,128 +369,112 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="moment-matrix-example">
-<h1>Moment Matrix Example<a class="headerlink" href="#moment-matrix-example" title="Link to this heading">#</a></h1>
+  <section id="bagging-example">
+<h1>Bagging Example<a class="headerlink" href="#bagging-example" title="Link to this heading">#</a></h1>
 <section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">cristal</span><span class="w"> </span><span class="kn">import</span> <span class="n">IMPLEMENTED_INVERSION_OPTIONS</span><span class="p">,</span> <span class="n">IMPLEMENTED_POLYNOMIAL_BASIS</span><span class="p">,</span> <span class="n">DyCF</span><span class="p">,</span> <span class="n">PolynomialsBasisGenerator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cristal</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaggingDyCF</span><span class="p">,</span> <span class="n">DyCF</span><span class="p">,</span> <span class="n">DyCFPlotter</span><span class="p">,</span> <span class="n">IMPLEMENTED_REGULARIZATION_OPTIONS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cristal.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_T_rotated</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="parameters">
-<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h2>
+<section id="generate-data">
+<h2>Generate data<a class="headerlink" href="#generate-data" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># Data dimension</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># Degree of the polynomial basis</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># Number of samples</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="data">
-<h2>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="method-1-using-dycf">
-<h2>Method 1: Using DyCF<a class="headerlink" href="#method-1-using-dycf" title="Link to this heading">#</a></h2>
-<section id="create-a-dycf-instance">
-<h3>Create a DyCF instance<a class="headerlink" href="#create-a-dycf-instance" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dycf</span> <span class="o">=</span> <span class="n">DyCF</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">inv_opt</span><span class="o">=</span><span class="n">IMPLEMENTED_INVERSION_OPTIONS</span><span class="o">.</span><span class="n">PINV</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="fit-the-dycf-model-to-the-data-to-compute-the-moments-matrix">
-<h3>Fit the DyCF model to the data to compute the moments matrix<a class="headerlink" href="#fit-the-dycf-model-to-the-data-to-compute-the-moments-matrix" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dycf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">5_001</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">make_T_rotated</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.christoffel.DyCF at 0x7f85ff117cb0&gt;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-08-05 13:58:51,098 	 WARNING 	 CRISTAL.data.make_T_rotated 	 n_samples must be even to create two normal distributions. Adjusting n_samples = 5001 to 5000.
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="access-the-moments-matrix-and-its-inverse">
-<h3>Access the moments matrix and its inverse<a class="headerlink" href="#access-the-moments-matrix-and-its-inverse" title="Link to this heading">#</a></h3>
+<section id="bagging-parameters">
+<h2>Bagging parameters<a class="headerlink" href="#bagging-parameters" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">moments_matrix</span> <span class="o">=</span> <span class="n">dycf</span><span class="o">.</span><span class="n">moments_matrix</span><span class="o">.</span><span class="n">moments_matrix</span>
-<span class="n">inversed_moments_matrix</span> <span class="o">=</span> <span class="n">dycf</span><span class="o">.</span><span class="n">moments_matrix</span><span class="o">.</span><span class="n">inverse_moments_matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">n_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">training_samples</span> <span class="o">=</span> <span class="mi">1000</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-</section>
-<section id="method-2-by-computing-the-design-matrix-x">
-<h2>Method 2: By computing the design matrix X<a class="headerlink" href="#method-2-by-computing-the-design-matrix-x" title="Link to this heading">#</a></h2>
-<section id="generate-the-monomials-combinations">
-<h3>Generate the monomials combinations<a class="headerlink" href="#generate-the-monomials-combinations" title="Link to this heading">#</a></h3>
+<section id="create-baggingdycf-and-dycf-instances">
+<h2>Create BaggingDyCF and DyCF instances<a class="headerlink" href="#create-baggingdycf-and-dycf-instances" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">monomials</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">PolynomialsBasisGenerator</span><span class="o">.</span><span class="n">generate_combinations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bagging_model</span> <span class="o">=</span> <span class="n">BaggingDyCF</span><span class="p">(</span><span class="n">n_values</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="n">n_estimators</span><span class="p">,</span> <span class="n">regularization</span><span class="o">=</span><span class="n">IMPLEMENTED_REGULARIZATION_OPTIONS</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">DyCF</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n_values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">regularization</span><span class="o">=</span><span class="n">IMPLEMENTED_REGULARIZATION_OPTIONS</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="compute-the-vectors-design-matrix-x">
-<h3>Compute the vectors design matrix X<a class="headerlink" href="#compute-the-vectors-design-matrix-x" title="Link to this heading">#</a></h3>
+<section id="fit-the-models">
+<h2>Fit the models<a class="headerlink" href="#fit-the-models" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">PolynomialsBasisGenerator</span><span class="o">.</span><span class="n">make_design_matrix</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">monomials</span><span class="p">,</span> <span class="n">IMPLEMENTED_POLYNOMIAL_BASIS</span><span class="o">.</span><span class="n">MONOMIALS</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="construct-the-moments-matrix-m-and-its-inverse-m-inv">
-<h3>Construct the moments matrix M and its inverse M_inv<a class="headerlink" href="#construct-the-moments-matrix-m-and-its-inverse-m-inv" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
-<span class="n">M_inv</span> <span class="o">=</span> <span class="n">IMPLEMENTED_INVERSION_OPTIONS</span><span class="o">.</span><span class="n">PINV</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="equality-check">
-<h2>Equality check<a class="headerlink" href="#equality-check" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">moments_matrix</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-16</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">inversed_moments_matrix</span><span class="p">,</span> <span class="n">M_inv</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-16</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bagging_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="n">training_samples</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(True, True)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.christoffel.BaggingDyCF at 0x7ff0301d1e80&gt;
 </pre></div>
 </div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.christoffel.DyCF at 0x7ff03039a3f0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-the-results">
+<h2>Plot the results<a class="headerlink" href="#plot-the-results" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">levels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">20000</span><span class="p">,</span> <span class="mi">30000</span><span class="p">]</span>
+<span class="n">bagging_plotter</span> <span class="o">=</span> <span class="n">DyCFPlotter</span><span class="p">(</span><span class="n">bagging_model</span><span class="p">)</span>
+<span class="n">model_plotter</span> <span class="o">=</span> <span class="n">DyCFPlotter</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">bagging_plotter</span><span class="o">.</span><span class="n">levelset</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">close</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">model_plotter</span><span class="o">.</span><span class="n">levelset</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">close</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e06c36f6b4c77a2d4760cd68e345b3e486fab2faa7916eb0c704bd8c01c268a6.png" src="../../_images/e06c36f6b4c77a2d4760cd68e345b3e486fab2faa7916eb0c704bd8c01c268a6.png" />
 </div>
 </div>
 </section>
@@ -508,22 +491,13 @@
     <div class="footer-article-item">
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../../examples.html"
+       href="plot_levelset.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Examples</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="plot_levelset.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Plot Levelset Example</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   
@@ -549,21 +523,11 @@
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-using-dycf">Method 1: Using DyCF</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-dycf-instance">Create a DyCF instance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-the-dycf-model-to-the-data-to-compute-the-moments-matrix">Fit the DyCF model to the data to compute the moments matrix</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-the-moments-matrix-and-its-inverse">Access the moments matrix and its inverse</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-by-computing-the-design-matrix-x">Method 2: By computing the design matrix X</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-the-monomials-combinations">Generate the monomials combinations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-the-vectors-design-matrix-x">Compute the vectors design matrix X</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construct-the-moments-matrix-m-and-its-inverse-m-inv">Construct the moments matrix M and its inverse M_inv</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equality-check">Equality check</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-data">Generate data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-parameters">Bagging parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-baggingdycf-and-dycf-instances">Create BaggingDyCF and DyCF instances</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-the-models">Fit the models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-results">Plot the results</a></li>
 </ul>
   </nav></div>
 
@@ -571,7 +535,7 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/_collections/notebooks/moment_matrix.ipynb.txt"
+      <li><a href="../../_sources/_collections/notebooks/bagging.ipynb.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>

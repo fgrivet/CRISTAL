@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cristal.helper_classes.moment_matrix module &#8212; CRISTAL 0.0.1 documentation</title>
+    <title>cristal.helper_classes.moment_matrix module &#8212; CRISTAL Documentation</title>
   
   
   
@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2d458d10" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -116,7 +117,7 @@
   
   
   
-    <p class="title logo__title">CRISTAL 0.0.1 documentation</p>
+    <p class="title logo__title">CRISTAL Documentation</p>
   
 </a></div>
     
@@ -193,7 +194,7 @@
           
           
           
-          <a href="https://https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -298,7 +299,7 @@
           
           
           
-          <a href="https://https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -392,7 +393,7 @@
 <p>MomentsMatrix class for computing and storing moments matrix and its inverse.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cristal.helper_classes.moment_matrix.MomentsMatrix">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.helper_classes.moment_matrix.</span></span><span class="sig-name descname"><span class="pre">MomentsMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polynomial_basis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'monomials'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inv_opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'inv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incr_opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'inverse'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.moment_matrix.MomentsMatrix" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.helper_classes.moment_matrix.</span></span><span class="sig-name descname"><span class="pre">MomentsMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polynomial_basis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">IMPLEMENTED_POLYNOMIAL_BASIS.MONOMIALS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inv_opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">IMPLEMENTED_INVERSION_OPTIONS.INV</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incr_opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">IMPLEMENTED_INCREMENTERS_OPTIONS.INVERSE</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.moment_matrix.MomentsMatrix" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class for computing and storing moments matrix and its inverse.</p>
 <dl class="py attribute">
@@ -518,15 +519,15 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cristal.helper_classes.moment_matrix.MomentsMatrix.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polynomial_basis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'monomials'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inv_opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'inv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incr_opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'inverse'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.moment_matrix.MomentsMatrix.__init__" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polynomial_basis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">IMPLEMENTED_POLYNOMIAL_BASIS.MONOMIALS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inv_opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">IMPLEMENTED_INVERSION_OPTIONS.INV</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incr_opt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">IMPLEMENTED_INCREMENTERS_OPTIONS.INVERSE</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.moment_matrix.MomentsMatrix.__init__" title="Link to this definition">#</a></dt>
 <dd><p>Initialize the MomentsMatrix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>n</strong> (<em>int</em>) – The degree of the polynomial basis.</p></li>
-<li><p><strong>polynomial_basis</strong> (<em>str</em><em>, </em><em>optional</em>) – The polynomial basis to use, by default “monomials”</p></li>
-<li><p><strong>inv_opt</strong> (<em>str</em><em>, </em><em>optional</em>) – The inversion option to use, by default “inv”</p></li>
-<li><p><strong>incr_opt</strong> (<em>str</em><em>, </em><em>optional</em>) – The incrementation option to use, by default “inverse”</p></li>
+<li><p><strong>polynomial_basis</strong> (<a class="reference internal" href="cristal.helper_classes.polynomial_basis.html#cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS" title="cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS"><em>IMPLEMENTED_POLYNOMIAL_BASIS</em></a><em>, </em><em>optional</em>) – The polynomial basis to use, by default IMPLEMENTED_POLYNOMIAL_BASIS.MONOMIALS</p></li>
+<li><p><strong>inv_opt</strong> (<a class="reference internal" href="cristal.helper_classes.inversion.html#cristal.helper_classes.inversion.IMPLEMENTED_INVERSION_OPTIONS" title="cristal.helper_classes.inversion.IMPLEMENTED_INVERSION_OPTIONS"><em>IMPLEMENTED_INVERSION_OPTIONS</em></a><em>, </em><em>optional</em>) – The inversion option to use, by default IMPLEMENTED_INVERSION_OPTIONS.INV</p></li>
+<li><p><strong>incr_opt</strong> (<a class="reference internal" href="cristal.helper_classes.incrementers.html#cristal.helper_classes.incrementers.IMPLEMENTED_INCREMENTERS_OPTIONS" title="cristal.helper_classes.incrementers.IMPLEMENTED_INCREMENTERS_OPTIONS"><em>IMPLEMENTED_INCREMENTERS_OPTIONS</em></a><em>, </em><em>optional</em>) – The incrementation option to use, by default IMPLEMENTED_INCREMENTERS_OPTIONS.INVERSE</p></li>
 </ul>
 </dd>
 </dl>
@@ -665,7 +666,7 @@
 <dd><p>Update the inverse of the moments matrix with new data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Self</span></code></span></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#cristal.helper_classes.moment_matrix.MomentsMatrix" title="cristal.helper_classes.moment_matrix.MomentsMatrix"><code class="xref py py-class docutils literal notranslate"><span class="pre">MomentsMatrix</span></code></a></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
@@ -677,7 +678,7 @@
 <dd class="field-odd"><p>The updated MomentsMatrix instance.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Self</p>
+<dd class="field-even"><p><a class="reference internal" href="#cristal.helper_classes.moment_matrix.MomentsMatrix" title="cristal.helper_classes.moment_matrix.MomentsMatrix">MomentsMatrix</a></p>
 </dd>
 </dl>
 </dd></dl>

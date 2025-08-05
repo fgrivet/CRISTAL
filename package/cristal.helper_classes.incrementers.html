@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cristal.helper_classes.incrementers module &#8212; CRISTAL 0.0.1 documentation</title>
+    <title>cristal.helper_classes.incrementers module &#8212; CRISTAL Documentation</title>
   
   
   
@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2d458d10" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -117,7 +118,7 @@
   
   
   
-    <p class="title logo__title">CRISTAL 0.0.1 documentation</p>
+    <p class="title logo__title">CRISTAL Documentation</p>
   
 </a></div>
     
@@ -194,7 +195,7 @@
           
           
           
-          <a href="https://https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -299,7 +300,7 @@
           
           
           
-          <a href="https://https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -391,10 +392,26 @@
   <section id="module-cristal.helper_classes.incrementers">
 <span id="cristal-helper-classes-incrementers-module"></span><h1>cristal.helper_classes.incrementers module<a class="headerlink" href="#module-cristal.helper_classes.incrementers" title="Link to this heading">#</a></h1>
 <p>Incrementers for moments matrix using various methods.</p>
-<dl class="py data">
+<dl class="py class">
 <dt class="sig sig-object py" id="cristal.helper_classes.incrementers.IMPLEMENTED_INCREMENTERS_OPTIONS">
-<span class="sig-prename descclassname"><span class="pre">cristal.helper_classes.incrementers.</span></span><span class="sig-name descname"><span class="pre">IMPLEMENTED_INCREMENTERS_OPTIONS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="cristal.helper_classes.base.html#cristal.helper_classes.base.BaseIncrementer" title="cristal.helper_classes.base.BaseIncrementer"><span class="pre">BaseIncrementer</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'inverse':</span> <span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.incrementers.InverseIncrementer'&gt;,</span> <span class="pre">'sherman':</span> <span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.incrementers.ShermanIncrementer'&gt;,</span> <span class="pre">'woodbury':</span> <span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.incrementers.WoodburyIncrementer'&gt;}</span></em><a class="headerlink" href="#cristal.helper_classes.incrementers.IMPLEMENTED_INCREMENTERS_OPTIONS" title="Link to this definition">#</a></dt>
-<dd><p>The implemented incrementers classes.</p>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.helper_classes.incrementers.</span></span><span class="sig-name descname"><span class="pre">IMPLEMENTED_INCREMENTERS_OPTIONS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.incrementers.IMPLEMENTED_INCREMENTERS_OPTIONS" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>The implemented incrementers classes.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.helper_classes.incrementers.IMPLEMENTED_INCREMENTERS_OPTIONS.INVERSE">
+<span class="sig-name descname"><span class="pre">INVERSE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.incrementers.InverseIncrementer'&gt;</span></em><a class="headerlink" href="#cristal.helper_classes.incrementers.IMPLEMENTED_INCREMENTERS_OPTIONS.INVERSE" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.helper_classes.incrementers.IMPLEMENTED_INCREMENTERS_OPTIONS.SHERMAN">
+<span class="sig-name descname"><span class="pre">SHERMAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.incrementers.ShermanIncrementer'&gt;</span></em><a class="headerlink" href="#cristal.helper_classes.incrementers.IMPLEMENTED_INCREMENTERS_OPTIONS.SHERMAN" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.helper_classes.incrementers.IMPLEMENTED_INCREMENTERS_OPTIONS.WOODBURY">
+<span class="sig-name descname"><span class="pre">WOODBURY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.incrementers.WoodburyIncrementer'&gt;</span></em><a class="headerlink" href="#cristal.helper_classes.incrementers.IMPLEMENTED_INCREMENTERS_OPTIONS.WOODBURY" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -541,7 +558,12 @@ This method updates the inverse moments matrix and not modifies the moments matr
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.incrementers.IMPLEMENTED_INCREMENTERS_OPTIONS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS_OPTIONS</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.incrementers.IMPLEMENTED_INCREMENTERS_OPTIONS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS_OPTIONS</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.incrementers.IMPLEMENTED_INCREMENTERS_OPTIONS.INVERSE"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS_OPTIONS.INVERSE</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.incrementers.IMPLEMENTED_INCREMENTERS_OPTIONS.SHERMAN"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS_OPTIONS.SHERMAN</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.incrementers.IMPLEMENTED_INCREMENTERS_OPTIONS.WOODBURY"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS_OPTIONS.WOODBURY</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.incrementers.InverseIncrementer"><code class="docutils literal notranslate"><span class="pre">InverseIncrementer</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.incrementers.InverseIncrementer.increment"><code class="docutils literal notranslate"><span class="pre">InverseIncrementer.increment()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.incrementers.InverseIncrementer.update_moments_matrix"><code class="docutils literal notranslate"><span class="pre">InverseIncrementer.update_moments_matrix</span></code></a></li>

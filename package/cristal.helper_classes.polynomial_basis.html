@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cristal.helper_classes.polynomial_basis module &#8212; CRISTAL 0.0.1 documentation</title>
+    <title>cristal.helper_classes.polynomial_basis module &#8212; CRISTAL Documentation</title>
   
   
   
@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2d458d10" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -116,7 +117,7 @@
   
   
   
-    <p class="title logo__title">CRISTAL 0.0.1 documentation</p>
+    <p class="title logo__title">CRISTAL Documentation</p>
   
 </a></div>
     
@@ -193,7 +194,7 @@
           
           
           
-          <a href="https://https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -298,7 +299,7 @@
           
           
           
-          <a href="https://https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -539,10 +540,36 @@ Orthonormal on [-1, 1] with respect to the Lebesgue measure with 1 / sqrt(1 - x*
 
 </dd></dl>
 
-<dl class="py data">
+<dl class="py class">
 <dt class="sig sig-object py" id="cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS">
-<span class="sig-prename descclassname"><span class="pre">cristal.helper_classes.polynomial_basis.</span></span><span class="sig-name descname"><span class="pre">IMPLEMENTED_POLYNOMIAL_BASIS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="cristal.helper_classes.base.html#cristal.helper_classes.base.BasePolynomialBasis" title="cristal.helper_classes.base.BasePolynomialBasis"><span class="pre">BasePolynomialBasis</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'chebyshev_t_1':</span> <span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.polynomial_basis.ChebyshevT1Basis'&gt;,</span> <span class="pre">'chebyshev_t_2':</span> <span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.polynomial_basis.ChebyshevT2Basis'&gt;,</span> <span class="pre">'chebyshev_u':</span> <span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.polynomial_basis.ChebyshevUBasis'&gt;,</span> <span class="pre">'legendre':</span> <span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.polynomial_basis.LegendreBasis'&gt;,</span> <span class="pre">'monomials':</span> <span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.polynomial_basis.MonomialsBasis'&gt;}</span></em><a class="headerlink" href="#cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS" title="Link to this definition">#</a></dt>
-<dd><p>The implemented polynomial basis classes.</p>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.helper_classes.polynomial_basis.</span></span><span class="sig-name descname"><span class="pre">IMPLEMENTED_POLYNOMIAL_BASIS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>The implemented polynomial basis classes.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS.CHEBYSHEV_T_1">
+<span class="sig-name descname"><span class="pre">CHEBYSHEV_T_1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.polynomial_basis.ChebyshevT1Basis'&gt;</span></em><a class="headerlink" href="#cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS.CHEBYSHEV_T_1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS.CHEBYSHEV_T_2">
+<span class="sig-name descname"><span class="pre">CHEBYSHEV_T_2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.polynomial_basis.ChebyshevT2Basis'&gt;</span></em><a class="headerlink" href="#cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS.CHEBYSHEV_T_2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS.CHEBYSHEV_U">
+<span class="sig-name descname"><span class="pre">CHEBYSHEV_U</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.polynomial_basis.ChebyshevUBasis'&gt;</span></em><a class="headerlink" href="#cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS.CHEBYSHEV_U" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS.LEGENDRE">
+<span class="sig-name descname"><span class="pre">LEGENDRE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.polynomial_basis.LegendreBasis'&gt;</span></em><a class="headerlink" href="#cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS.LEGENDRE" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS.MONOMIALS">
+<span class="sig-name descname"><span class="pre">MONOMIALS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;class</span> <span class="pre">'cristal.helper_classes.polynomial_basis.MonomialsBasis'&gt;</span></em><a class="headerlink" href="#cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS.MONOMIALS" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -781,7 +808,14 @@ If s(n) &gt; 500 and N &gt; 1000, it will use a parallelized approach to compute
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.polynomial_basis.ChebyshevUBasis.func"><code class="docutils literal notranslate"><span class="pre">ChebyshevUBasis.func()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIAL_BASIS</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIAL_BASIS</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS.CHEBYSHEV_T_1"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIAL_BASIS.CHEBYSHEV_T_1</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS.CHEBYSHEV_T_2"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIAL_BASIS.CHEBYSHEV_T_2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS.CHEBYSHEV_U"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIAL_BASIS.CHEBYSHEV_U</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS.LEGENDRE"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIAL_BASIS.LEGENDRE</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.polynomial_basis.IMPLEMENTED_POLYNOMIAL_BASIS.MONOMIALS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIAL_BASIS.MONOMIALS</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.polynomial_basis.LegendreBasis"><code class="docutils literal notranslate"><span class="pre">LegendreBasis</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.polynomial_basis.LegendreBasis.func"><code class="docutils literal notranslate"><span class="pre">LegendreBasis.func()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.helper_classes.polynomial_basis.LegendreBasis.legendre"><code class="docutils literal notranslate"><span class="pre">LegendreBasis.legendre()</span></code></a></li>

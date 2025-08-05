@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Plot Levelset Example &#8212; CRISTAL 0.0.1 documentation</title>
+    <title>Plot Levelset Example &#8212; CRISTAL Documentation</title>
   
   
   
@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=2d458d10" />
   
   <!-- So that users can add custom icons -->
   <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -50,6 +51,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = '_collections/notebooks/plot_levelset';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bagging Example" href="bagging.html" />
     <link rel="prev" title="Moment Matrix Example" href="moment_matrix.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -115,7 +117,7 @@
   
   
   
-    <p class="title logo__title">CRISTAL 0.0.1 documentation</p>
+    <p class="title logo__title">CRISTAL Documentation</p>
   
 </a></div>
     
@@ -192,7 +194,7 @@
           
           
           
-          <a href="https://https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -297,7 +299,7 @@
           
           
           
-          <a href="https://https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -314,6 +316,7 @@
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="moment_matrix.html">Moment Matrix Example</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Plot Levelset Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bagging.html">Bagging Example</a></li>
 </ul>
 </div>
 </nav></div>
@@ -374,14 +377,9 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">MinMaxScaler</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">cristal</span><span class="w"> </span><span class="kn">import</span> <span class="n">DyCF</span><span class="p">,</span> <span class="n">DyCFPlotter</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CRISTAL version 0.0.1 (date: 2025-08-01) loaded successfully.
+<span class="kn">from</span><span class="w"> </span><span class="nn">cristal</span><span class="w"> </span><span class="kn">import</span> <span class="n">DyCF</span><span class="p">,</span> <span class="n">DyCFPlotter</span><span class="p">,</span> <span class="n">IMPLEMENTED_REGULARIZATION_OPTIONS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cristal.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_T_rotated</span>
 </pre></div>
 </div>
 </div>
@@ -403,20 +401,7 @@
 <h2>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
-
-<span class="n">N</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Ensure N is even for two normal distributions</span>
-
-<span class="c1"># Generate the &quot;T&quot; rotated data</span>
-<span class="n">norm_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">cov</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">]],</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">norm_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">norm_1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)]]))</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">]])</span>
-<span class="n">norm_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">cov</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">]],</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">norm_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">norm_2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)]]))</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">norm_1</span><span class="p">,</span> <span class="n">norm_2</span><span class="p">])</span>
-
-<span class="c1"># Scale the data for better performance of DyCF</span>
-<span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">make_T_rotated</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -429,13 +414,13 @@
 <h3>Fit the Christoffel function<a class="headerlink" href="#fit-the-christoffel-function" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dycf</span> <span class="o">=</span> <span class="n">DyCF</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">regularization</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dycf</span> <span class="o">=</span> <span class="n">DyCF</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">IMPLEMENTED_REGULARIZATION_OPTIONS</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">)</span>
 <span class="n">dycf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.christoffel.DyCF at 0x7f2698745940&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.christoffel.DyCF at 0x7ffaf8405be0&gt;
 </pre></div>
 </div>
 </div>
@@ -460,7 +445,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/06ca65791b698890fa016bdc4c9dc267c12fde9b8912c0f7fe90b2e8b64e7b55.png" src="../../_images/06ca65791b698890fa016bdc4c9dc267c12fde9b8912c0f7fe90b2e8b64e7b55.png" />
+<img alt="../../_images/ad99ed831e3d64a4f47ed7ad56ad04a626ab5f4100cd003319f5eabd0b9988d8.png" src="../../_images/ad99ed831e3d64a4f47ed7ad56ad04a626ab5f4100cd003319f5eabd0b9988d8.png" />
 </div>
 </div>
 </section>
@@ -474,7 +459,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/677414eb68f36eadce2a7ef45bf326b7985f9fbec58451185e32d4cd85998870.png" src="../../_images/677414eb68f36eadce2a7ef45bf326b7985f9fbec58451185e32d4cd85998870.png" />
+<img alt="../../_images/0b0a2ae677001188743408c81d17f5beb8a4d442560a14af6377338c4728d28d.png" src="../../_images/0b0a2ae677001188743408c81d17f5beb8a4d442560a14af6377338c4728d28d.png" />
 </div>
 </div>
 </section>
@@ -486,13 +471,13 @@
 <h3>Fit the Christoffel function<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dycf_comb</span> <span class="o">=</span> <span class="n">DyCF</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">regularization</span><span class="o">=</span><span class="s2">&quot;comb&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dycf_comb</span> <span class="o">=</span> <span class="n">DyCF</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">IMPLEMENTED_REGULARIZATION_OPTIONS</span><span class="o">.</span><span class="n">COMB</span><span class="p">)</span>
 <span class="n">dycf_comb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.christoffel.DyCF at 0x7f264c702d50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.christoffel.DyCF at 0x7ffaa426b250&gt;
 </pre></div>
 </div>
 </div>
@@ -517,7 +502,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8ada60377d3f6e82a972125bc5a57b8656830b70e66c02249c58a5169c19392c.png" src="../../_images/8ada60377d3f6e82a972125bc5a57b8656830b70e66c02249c58a5169c19392c.png" />
+<img alt="../../_images/c0d1d3ef25518bba0132e61d890ba7c0d5e7f64ec0f197627ca512bcb376b8d5.png" src="../../_images/c0d1d3ef25518bba0132e61d890ba7c0d5e7f64ec0f197627ca512bcb376b8d5.png" />
 </div>
 </div>
 </section>
@@ -530,7 +515,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/33ec1fdeb67601a201887a7e667938b499657ab81e96214aa3d31f3795669e66.png" src="../../_images/33ec1fdeb67601a201887a7e667938b499657ab81e96214aa3d31f3795669e66.png" />
+<img alt="../../_images/a9c817178cb8218cddeb57a2d860ea78e22deefae257a0c52ec1c3f6e59f6360.png" src="../../_images/a9c817178cb8218cddeb57a2d860ea78e22deefae257a0c52ec1c3f6e59f6360.png" />
 </div>
 </div>
 </section>
@@ -542,13 +527,13 @@
 <h3>Fit the Christoffel function<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dycf_vu_C</span> <span class="o">=</span> <span class="n">DyCF</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">regularization</span><span class="o">=</span><span class="s2">&quot;vu_C&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dycf_vu_C</span> <span class="o">=</span> <span class="n">DyCF</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">regularization</span><span class="o">=</span><span class="n">IMPLEMENTED_REGULARIZATION_OPTIONS</span><span class="o">.</span><span class="n">VU_C</span><span class="p">)</span>
 <span class="n">dycf_vu_C</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.christoffel.DyCF at 0x7f264d1a4550&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.christoffel.DyCF at 0x7ffaa9fb47d0&gt;
 </pre></div>
 </div>
 </div>
@@ -573,7 +558,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/28376dc69033e14541298484b3f9dd1025dddf200b1f088e2cbbadc3c3383358.png" src="../../_images/28376dc69033e14541298484b3f9dd1025dddf200b1f088e2cbbadc3c3383358.png" />
+<img alt="../../_images/06378f391779b43dbe8baa66d78ff6807ca85c87adf795dd5bfd9362985c3d70.png" src="../../_images/06378f391779b43dbe8baa66d78ff6807ca85c87adf795dd5bfd9362985c3d70.png" />
 </div>
 </div>
 </section>
@@ -586,7 +571,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7acf986ac47d1ff02fe379fa329fae4d14589ce439e3ffd12d5e9bf2ba025f8e.png" src="../../_images/7acf986ac47d1ff02fe379fa329fae4d14589ce439e3ffd12d5e9bf2ba025f8e.png" />
+<img alt="../../_images/172e130d2d083ee8088ae6c3e82330dfbebac0ff68399141cb8f88fae1730a33.png" src="../../_images/172e130d2d083ee8088ae6c3e82330dfbebac0ff68399141cb8f88fae1730a33.png" />
 </div>
 </div>
 </section>
@@ -611,6 +596,15 @@
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Moment Matrix Example</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="bagging.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bagging Example</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   

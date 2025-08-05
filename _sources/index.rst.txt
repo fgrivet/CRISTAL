@@ -11,3 +11,9 @@ Welcome to the CRISTAL package documentation!
    User Guide <user_guide>
    API <package/cristal>
    Examples <examples>
+
+
+.. image:: _static/logo.png
+   :alt: CRISTAL logo
+   :align: center
+   :width: 50%
