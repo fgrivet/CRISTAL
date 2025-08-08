@@ -16,7 +16,8 @@ dependencies = [
     "scipy",
     "scikit-learn",
     "pandas",
-    "tqdm"
+    "tqdm",
+    "PyWavelets",
 ]
 dynamic = ["version"]
 
@@ -26,7 +27,7 @@ version = {attr = "cristal.__version__.__version__"}
 [project.urls]
 homepage = "https://github.com/fgrivet/cristal"
 repository = "https://github.com/fgrivet/cristal"
-documentation = "https://fgrivet.github.io/cristal"
+documentation = "https://fgrivet.github.io/CRISTAL/"
 
 [project.optional-dependencies]
 testing = [

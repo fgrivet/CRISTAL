@@ -9,8 +9,9 @@ Welcome to the CRISTAL package documentation!
 
    Install <install>
    User Guide <user_guide>
-   API <package/cristal>
+   API <API/cristal>
    Examples <examples>
+   Release Notes <release_notes>
 
 
 .. image:: _static/logo.png

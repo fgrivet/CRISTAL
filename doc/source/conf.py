@@ -18,7 +18,6 @@ release = __version__
 
 extensions = [
     "sphinx.ext.autodoc",
-    "sphinx_autodoc_typehints",
     "sphinx.ext.napoleon",
     "sphinx.ext.doctest",
     "sphinx.ext.intersphinx",
@@ -30,9 +29,10 @@ extensions = [
 
 templates_path = ["_templates"]
 exclude_patterns = []
+modindex_common_prefix = ["cristal."]
 
 
-autodoc_default_options = {"special-members": "__init__"}
+autodoc_default_options = {"member": True, "undoc-members": True, "special-members": "__init__", "show-inheritance": True, "inherited-members": True}
 
 # Collection of Sphinx extensions
 collections = {
@@ -66,9 +66,9 @@ html_theme_options = {
     "search_bar_text": "Search the docs ...",
     "navigation_with_keys": False,
     "collapse_navigation": False,
-    "navigation_depth": 2,
+    "navigation_depth": 3,
     "show_nav_level": 1,
-    "show_toc_level": 3,
+    "show_toc_level": 4,
     "navbar_align": "left",
     # -- Template placement in theme layouts ----------------------------------
     "navbar_start": ["navbar-logo"],

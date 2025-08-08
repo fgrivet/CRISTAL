@@ -7,30 +7,42 @@ A Python package for anomaly detection using the Christoffel function.
 import logging
 import os
 
-from cristal.__version__ import __author__, __date__, __version__
-from cristal.christoffel import BaggingDyCF, DyCF, DyCG
-from cristal.helper_classes import (
-    IMPLEMENTED_INCREMENTERS_OPTIONS,
-    IMPLEMENTED_INVERSION_OPTIONS,
-    IMPLEMENTED_POLYNOMIAL_BASIS,
-    IMPLEMENTED_REGULARIZATION_OPTIONS,
-    PolynomialsBasisGenerator,
-)
-from cristal.plotter import DyCFPlotter
+from . import decomposers, detectors, evaluation, incrementers, inverters, moments_matrix, plotters, polynomials, regularizers, type_checking
+from .__version__ import __author__, __date__, __version__
+from .decomposers import IMPLEMENTED_DECOMPOSERS
+from .detectors import BaggingDyCF, DyCF, DyCG
+from .incrementers import IMPLEMENTED_INCREMENTERS
+from .inverters import IMPLEMENTED_INVERTERS
+from .moments_matrix import MomentsMatrix
+from .plotters import DyCFPlotter
+from .polynomials import IMPLEMENTED_POLYNOMIALS, MultivariatePolynomialBasis
+from .regularizers import IMPLEMENTED_REGULARIZERS
 
 __all__ = [
     "BaggingDyCF",
     "DyCF",
-    "DyCG",
     "DyCFPlotter",
-    "IMPLEMENTED_INCREMENTERS_OPTIONS",
-    "IMPLEMENTED_INVERSION_OPTIONS",
-    "IMPLEMENTED_POLYNOMIAL_BASIS",
-    "IMPLEMENTED_REGULARIZATION_OPTIONS",
-    "PolynomialsBasisGenerator",
+    "DyCG",
+    "IMPLEMENTED_DECOMPOSERS",
+    "IMPLEMENTED_INCREMENTERS",
+    "IMPLEMENTED_INVERTERS",
+    "IMPLEMENTED_POLYNOMIALS",
+    "IMPLEMENTED_REGULARIZERS",
+    "MomentsMatrix",
+    "MultivariatePolynomialBasis",
+    "decomposers",
+    "detectors",
+    "evaluation",
+    "incrementers",
+    "inverters",
+    "moments_matrix",
+    "plotters",
+    "polynomials",
+    "regularizers",
+    "type_checking",
 ]
 
-logger = logging.getLogger("CRISTAL")
+logger = logging.getLogger("cristal")
 
 try:
     login = os.getlogin()
@@ -47,7 +59,7 @@ else:
 
 console = logging.StreamHandler()
 console.setLevel(level)
-formatter = logging.Formatter("%(asctime)s \t %(levelname)s \t %(name)s.%(module)s.%(funcName)s \t %(message)s")
+formatter = logging.Formatter("%(asctime)s \t %(levelname)s \t %(name)s \t %(message)s")
 console.setFormatter(formatter)
 logger.addHandler(console)
 logger.setLevel(level)
