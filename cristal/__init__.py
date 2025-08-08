@@ -1,5 +1,5 @@
-"""
-**CRISTAL**: ChRISToffel Anomaly Locator
+r"""
+**CRISTAL**: **C**\ h\ **RIST**\ offel **A**\ nomaly **L**\ ocator
 
 A Python package for anomaly detection using the Christoffel function.
 """

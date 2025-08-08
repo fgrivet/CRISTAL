@@ -11,6 +11,6 @@ class ConstantRegularizer(BaseRegularizer):
     """
 
     @staticmethod
-    def regularizer(n: int | float, d: int, C: float | int) -> float:
+    def compute_value(n: int | float, d: int, C: float | int) -> float:
         """Compute the constant regularization factor."""
         return C

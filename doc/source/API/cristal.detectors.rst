@@ -1,16 +1,16 @@
-cristal.detectors
+﻿cristal.detectors
 =================
 
 .. automodule:: cristal.detectors
-   :members:
-   :undoc-members:
-   :show-inheritance:
    :exclude-members: BaseDetector, BaggingDyCF, DyCF, DyCG
 
 
-.. toctree::
-   :maxdepth: 2
+Modules
+-------
 
-   cristal.detectors.base
-   cristal.detectors.datasteams
+.. autosummary::
+   :toctree:
+   :recursive:
 
+   base
+   datastreams

@@ -2,6 +2,11 @@ cristal.inverters.lapack
 ========================
 
 .. automodule:: cristal.inverters.lapack
-   :members:
-   :undoc-members:
-   :show-inheritance:
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      FPDInverter
+   

@@ -2,6 +2,12 @@ cristal.regularizers.vu
 =======================
 
 .. automodule:: cristal.regularizers.vu
-   :members:
-   :undoc-members:
-   :show-inheritance:
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      VuCRegularizer
+      VuRegularizer
+   

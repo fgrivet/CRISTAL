@@ -89,7 +89,7 @@ class DyCF(BaseDetector):
         self.assert_shape_unfitted(x)
         self.d = x.shape[1]
         self.moments_matrix.fit(x)
-        self.regularizer_value = self.regularizer_opt.value.regularizer(self.n, self.d, self.C)
+        self.regularizer_value = self.regularizer_opt.value.compute_value(self.n, self.d, self.C)
         return self
 
     def update(self, x: np.ndarray, sym: bool = True):
@@ -396,7 +396,7 @@ class BaggingDyCF(DyCF):
                 np.random.shuffle(all_train_data)
                 train_data = all_train_data[:n_samples]
             model.fit(train_data)
-        self.regularizer_value = self.regularizer_opt.value.regularizer(self.n, self.d, self.C)
+        self.regularizer_value = self.regularizer_opt.value.compute_value(self.n, self.d, self.C)
         return self
 
     def update(self, x: np.ndarray, sym: bool = True):

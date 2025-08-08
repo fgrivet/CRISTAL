@@ -1,5 +1,5 @@
 """
-Class for Vu regularization method. with (:class:`VuCRegularizer`) and without (:class:`VuRegularizer`) constant factor C. \
+Classes for Vu regularization method. with (:class:`VuCRegularizer`) and without (:class:`VuRegularizer`) constant factor C. \
 See https://arxiv.org/abs/1910.14458 for more details.
 """
 
@@ -13,7 +13,7 @@ class VuRegularizer(BaseRegularizer):
     """
 
     @staticmethod
-    def regularizer(n: int | float, d: int, C: float | int) -> float:
+    def compute_value(n: int | float, d: int, C: float | int) -> float:
         """Compute the Vu regularization factor."""
         return n ** (3 * d / 2)
 
@@ -25,6 +25,6 @@ class VuCRegularizer(BaseRegularizer):
     """
 
     @staticmethod
-    def regularizer(n: int | float, d: int, C: float | int) -> float:
+    def compute_value(n: int | float, d: int, C: float | int) -> float:
         """Compute the Vu_C regularization factor."""
         return (n ** (3 * d / 2)) / C

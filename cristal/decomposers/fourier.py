@@ -1,5 +1,5 @@
 """
-Class for signal decomposition using Fourier Transform. \
+Classes for signal decomposition using Fourier Transform. \
 :class:`FourierDecomposer` decomposes a signal using the Fourier Transform, \
 :class:`WindowFourierDecomposer` extends this functionality to handle signals with a sliding window approach.
 """

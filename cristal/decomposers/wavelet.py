@@ -1,5 +1,5 @@
 """
-Class for signal decomposition using Wavelet Transform. \
+Classes for signal decomposition using Wavelet Transform. \
 :class:`WaveletDecomposer` decomposes a signal using the Wavelet Transform, \
 :class:`WindowWaveletDecomposer` extends this functionality to handle signals with a sliding window approach.
 """

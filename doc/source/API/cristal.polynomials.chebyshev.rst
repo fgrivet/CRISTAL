@@ -2,6 +2,13 @@ cristal.polynomials.chebyshev
 =============================
 
 .. automodule:: cristal.polynomials.chebyshev
-   :members:
-   :undoc-members:
-   :show-inheritance:
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ChebyshevT1Family
+      ChebyshevT2Family
+      ChebyshevUFamily
+   

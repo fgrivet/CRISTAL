@@ -1,19 +1,25 @@
-cristal.polynomials
+﻿cristal.polynomials
 ===================
 
-
 .. automodule:: cristal.polynomials
-   :members:
-   :undoc-members:
-   :show-inheritance:
    :exclude-members: BasePolynomialFamily, ChebyshevT1Family, ChebyshevT2Family, ChebyshevUFamily, LegendreFamily, MonomialsFamily, MultivariatePolynomialBasis
 
 
-.. toctree::
-   :maxdepth: 2
+   Classes
+   -------
 
-   cristal.polynomials.base
-   cristal.polynomials.chebyshev
-   cristal.polynomials.legendre
-   cristal.polynomials.monomials
+   .. autosummary::
+   
+      IMPLEMENTED_POLYNOMIALS
+   
+Modules
+-------
 
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   base
+   chebyshev
+   legendre
+   monomials

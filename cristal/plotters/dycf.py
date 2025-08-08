@@ -10,7 +10,7 @@ from matplotlib.axes import Axes
 from matplotlib.colors import LinearSegmentedColormap, Normalize
 from matplotlib.figure import Figure
 
-from ..detectors.datasteams import DyCF
+from ..detectors.datastreams import DyCF
 from ..type_checking import check_all_int_or_float, check_none, check_types, positive_integer
 from .base import BasePlotter
 

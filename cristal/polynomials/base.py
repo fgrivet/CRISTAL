@@ -1,6 +1,6 @@
 """
-Base classes for polynomial representations :class:`BasePolynomialFamily`
-and for multivariate polynomial basis generation :class:`MultivariatePolynomialBasis`.
+Base classes for polynomial representations (:class:`BasePolynomialFamily`)
+and for multivariate polynomial basis generation (:class:`MultivariatePolynomialBasis`).
 """
 
 from abc import ABC, abstractmethod

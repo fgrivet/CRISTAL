@@ -18,6 +18,7 @@ release = __version__
 
 extensions = [
     "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
     "sphinx.ext.napoleon",
     "sphinx.ext.doctest",
     "sphinx.ext.intersphinx",
@@ -33,6 +34,7 @@ modindex_common_prefix = ["cristal."]
 
 
 autodoc_default_options = {"member": True, "undoc-members": True, "special-members": "__init__", "show-inheritance": True, "inherited-members": True}
+autosummary_generate = False
 
 # Collection of Sphinx extensions
 collections = {

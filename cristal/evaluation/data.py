@@ -1,5 +1,5 @@
 """
-Generate distributions for testing CRISTAL methods.
+Functions to generate distributions for testing CRISTAL methods.
 """
 
 import logging
