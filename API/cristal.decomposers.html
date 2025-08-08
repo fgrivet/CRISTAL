@@ -52,7 +52,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="cristal.decomposers.base" href="cristal.decomposers.base.html" />
-    <link rel="prev" title="cristal.type_checking" href="cristal.type_checking.html" />
+    <link rel="prev" title="CRISTAL" href="cristal.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -327,10 +327,7 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="cristal.type_checking.html">cristal.type_checking</a></li>
-</ul>
-<ul class="current nav bd-sidenav">
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">cristal.decomposers</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.base.html">cristal.decomposers.base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.fourier.html">cristal.decomposers.fourier</a></li>
@@ -340,7 +337,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datasteams.html">cristal.detectors.datasteams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datastreams.html">cristal.detectors.datastreams</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -384,6 +381,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.vu.html">cristal.regularizers.vu</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="cristal.type_checking.html">cristal.type_checking</a></li>
 </ul>
 </div>
 </nav></div>
@@ -418,7 +416,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="cristal.html" class="nav-link">API Reference</a></li>
+    <li class="breadcrumb-item"><a href="cristal.html" class="nav-link">CRISTAL</a></li>
     
     <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">cristal.decomposers</span></li>
   </ul>
@@ -440,6 +438,16 @@
   <section id="module-cristal.decomposers">
 <span id="cristal-decomposers"></span><h1>cristal.decomposers<a class="headerlink" href="#module-cristal.decomposers" title="Link to this heading">#</a></h1>
 <p>CRISTAL Decomposers Subpackage Contains various decomposer classes for time series analysis, including Fourier and Wavelet decompositions.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS" title="cristal.decomposers.IMPLEMENTED_DECOMPOSERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS</span></code></a>(*values)</p></td>
+<td><p>The implemented decomposers classes.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="cristal.decomposers.IMPLEMENTED_DECOMPOSERS">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.decomposers.</span></span><span class="sig-name descname"><span class="pre">IMPLEMENTED_DECOMPOSERS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS" title="Link to this definition">#</a></dt>
@@ -467,28 +475,27 @@
 
 </dd></dl>
 
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="cristal.decomposers.base.html">cristal.decomposers.base</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.base.html#cristal.decomposers.base.BaseDecomposer"><code class="docutils literal notranslate"><span class="pre">BaseDecomposer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cristal.decomposers.fourier.html">cristal.decomposers.fourier</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.fourier.html#cristal.decomposers.fourier.FourierDecomposer"><code class="docutils literal notranslate"><span class="pre">FourierDecomposer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.fourier.html#cristal.decomposers.fourier.WindowFourierDecomposer"><code class="docutils literal notranslate"><span class="pre">WindowFourierDecomposer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cristal.decomposers.wavelet.html">cristal.decomposers.wavelet</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.wavelet.html#cristal.decomposers.wavelet.WaveletDecomposer"><code class="docutils literal notranslate"><span class="pre">WaveletDecomposer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.wavelet.html#cristal.decomposers.wavelet.WindowWaveletDecomposer"><code class="docutils literal notranslate"><span class="pre">WindowWaveletDecomposer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cristal.decomposers.window.html">cristal.decomposers.window</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.window.html#cristal.decomposers.window.BaseWindowDecomposer"><code class="docutils literal notranslate"><span class="pre">BaseWindowDecomposer</span></code></a></li>
-</ul>
-</li>
-</ul>
+</section>
+<section id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.decomposers.base.html#module-cristal.decomposers.base" title="cristal.decomposers.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base</span></code></a></p></td>
+<td><p>Base class for signal decomposition methods.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.decomposers.fourier.html#module-cristal.decomposers.fourier" title="cristal.decomposers.fourier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fourier</span></code></a></p></td>
+<td><p>Classes for signal decomposition using Fourier Transform.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.decomposers.wavelet.html#module-cristal.decomposers.wavelet" title="cristal.decomposers.wavelet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wavelet</span></code></a></p></td>
+<td><p>Classes for signal decomposition using Wavelet Transform.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.decomposers.window.html#module-cristal.decomposers.window" title="cristal.decomposers.window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">window</span></code></a></p></td>
+<td><p>Base class for signal decomposition methods using a sliding window approach.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
+</section>
 </section>
 
 
@@ -502,12 +509,12 @@
     <div class="footer-article-item">
 <div class="prev-next-area">
     <a class="left-prev"
-       href="cristal.type_checking.html"
+       href="cristal.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">cristal.type_checking</p>
+        <p class="prev-next-title">CRISTAL</p>
       </div>
     </a>
     <a class="right-next"
@@ -542,13 +549,17 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.FOURIER"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.FOURIER</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.WAVELET"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.WAVELET</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.WINDOW_FOURIER"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.WINDOW_FOURIER</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.WINDOW_WAVELET"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.WINDOW_WAVELET</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.FOURIER"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.FOURIER</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.WAVELET"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.WAVELET</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.WINDOW_FOURIER"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.WINDOW_FOURIER</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.WINDOW_WAVELET"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.WINDOW_WAVELET</span></code></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
 </ul>
   </nav></div>
 

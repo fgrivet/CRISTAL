@@ -1,19 +1,25 @@
-cristal.decomposers
+﻿cristal.decomposers
 ===================
 
-
 .. automodule:: cristal.decomposers
-   :members:
-   :undoc-members:
-   :show-inheritance:
    :exclude-members: BaseDecomposer, BaseWindowDecomposer, FourierDecomposer, WaveletDecomposer, WindowFourierDecomposer, WindowWaveletDecomposer
 
 
+   Classes
+   -------
 
-.. toctree::
-   :maxdepth: 2
+   .. autosummary::
+   
+      IMPLEMENTED_DECOMPOSERS
+   
+Modules
+-------
 
-   cristal.decomposers.base
-   cristal.decomposers.fourier
-   cristal.decomposers.wavelet
-   cristal.decomposers.window
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   base
+   fourier
+   wavelet
+   window

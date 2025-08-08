@@ -2,6 +2,11 @@ cristal.regularizers.constant
 =============================
 
 .. automodule:: cristal.regularizers.constant
-   :members:
-   :undoc-members:
-   :show-inheritance:
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ConstantRegularizer
+   

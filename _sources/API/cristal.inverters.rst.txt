@@ -1,18 +1,24 @@
-cristal.inverters
+﻿cristal.inverters
 =================
 
-
 .. automodule:: cristal.inverters
-   :members:
-   :undoc-members:
-   :show-inheritance:
    :exclude-members: BaseInverter, FPDInverter, InvInverter, PDInverter, PseudoInverter
 
 
-.. toctree::
-   :maxdepth: 2
+   Classes
+   -------
 
-   cristal.inverters.base
-   cristal.inverters.lapack
-   cristal.inverters.scipy
+   .. autosummary::
+   
+      IMPLEMENTED_INVERTERS
+   
+Modules
+-------
 
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   base
+   lapack
+   scipy

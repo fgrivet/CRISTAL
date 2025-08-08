@@ -51,8 +51,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'API/cristal.type_checking';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cristal.decomposers" href="cristal.decomposers.html" />
-    <link rel="prev" title="API Reference" href="cristal.html" />
+    <link rel="next" title="Examples" href="../examples.html" />
+    <link rel="prev" title="cristal.regularizers.vu" href="cristal.regularizers.vu.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -328,9 +328,6 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">cristal.type_checking</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.decomposers.html">cristal.decomposers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.base.html">cristal.decomposers.base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.fourier.html">cristal.decomposers.fourier</a></li>
@@ -340,7 +337,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datasteams.html">cristal.detectors.datasteams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datastreams.html">cristal.detectors.datastreams</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -384,6 +381,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.vu.html">cristal.regularizers.vu</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">cristal.type_checking</a></li>
 </ul>
 </div>
 </nav></div>
@@ -418,7 +416,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="cristal.html" class="nav-link">API Reference</a></li>
+    <li class="breadcrumb-item"><a href="cristal.html" class="nav-link">CRISTAL</a></li>
     
     <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">cristal.type_checking</span></li>
   </ul>
@@ -440,6 +438,40 @@
   <section id="module-cristal.type_checking">
 <span id="cristal-type-checking"></span><h1>cristal.type_checking<a class="headerlink" href="#module-cristal.type_checking" title="Link to this heading">#</a></h1>
 <p>This module provides a decorator for type checking function arguments.</p>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.type_checking.check_all_int" title="cristal.type_checking.check_all_int"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_all_int</span></code></a>(value)</p></td>
+<td><p>Check if all elements in the value are integers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cristal.type_checking.check_all_int_or_float" title="cristal.type_checking.check_all_int_or_float"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_all_int_or_float</span></code></a>(value)</p></td>
+<td><p>Check if all elements in the value are either int or float.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.type_checking.check_all_of_type" title="cristal.type_checking.check_all_of_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_all_of_type</span></code></a>(value, expected_type)</p></td>
+<td><p>Check if all elements in the value are of the expected type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cristal.type_checking.check_any_condition" title="cristal.type_checking.check_any_condition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_any_condition</span></code></a>(value, conditions)</p></td>
+<td><p>Check if the value satisfies any condition in the list.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.type_checking.check_in_list" title="cristal.type_checking.check_in_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_in_list</span></code></a>(value, valid_values)</p></td>
+<td><p>Check if the value is in the list of valid values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cristal.type_checking.check_multiple_conditions" title="cristal.type_checking.check_multiple_conditions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_multiple_conditions</span></code></a>(value, conditions)</p></td>
+<td><p>Check if the value satisfies all conditions in the list.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.type_checking.check_none" title="cristal.type_checking.check_none"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_none</span></code></a>(value)</p></td>
+<td><p>Check if the value is None.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cristal.type_checking.check_types" title="cristal.type_checking.check_types"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_types</span></code></a>([conditions])</p></td>
+<td><p>Decorator to check types of function arguments.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.type_checking.positive_integer" title="cristal.type_checking.positive_integer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">positive_integer</span></code></a>(value)</p></td>
+<td><p>Check if the value is a positive integer.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <dl class="py function">
 <dt class="sig sig-object py" id="cristal.type_checking.check_all_int">
 <span class="sig-prename descclassname"><span class="pre">cristal.type_checking.</span></span><span class="sig-name descname"><span class="pre">check_all_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#cristal.type_checking.check_all_int" title="Link to this definition">#</a></dt>
@@ -542,6 +574,7 @@
 </dd></dl>
 
 </section>
+</section>
 
 
                 </article>
@@ -554,20 +587,20 @@
     <div class="footer-article-item">
 <div class="prev-next-area">
     <a class="left-prev"
-       href="cristal.html"
+       href="cristal.regularizers.vu.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">API Reference</p>
+        <p class="prev-next-title">cristal.regularizers.vu</p>
       </div>
     </a>
     <a class="right-next"
-       href="cristal.decomposers.html"
+       href="../examples.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">cristal.decomposers</p>
+        <p class="prev-next-title">Examples</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -594,15 +627,18 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.check_all_int"><code class="docutils literal notranslate"><span class="pre">check_all_int()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.check_all_int_or_float"><code class="docutils literal notranslate"><span class="pre">check_all_int_or_float()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.check_all_of_type"><code class="docutils literal notranslate"><span class="pre">check_all_of_type()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.check_any_condition"><code class="docutils literal notranslate"><span class="pre">check_any_condition()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.check_in_list"><code class="docutils literal notranslate"><span class="pre">check_in_list()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.check_multiple_conditions"><code class="docutils literal notranslate"><span class="pre">check_multiple_conditions()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.check_none"><code class="docutils literal notranslate"><span class="pre">check_none()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.check_types"><code class="docutils literal notranslate"><span class="pre">check_types()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.positive_integer"><code class="docutils literal notranslate"><span class="pre">positive_integer()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.check_all_int"><code class="docutils literal notranslate"><span class="pre">check_all_int()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.check_all_int_or_float"><code class="docutils literal notranslate"><span class="pre">check_all_int_or_float()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.check_all_of_type"><code class="docutils literal notranslate"><span class="pre">check_all_of_type()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.check_any_condition"><code class="docutils literal notranslate"><span class="pre">check_any_condition()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.check_in_list"><code class="docutils literal notranslate"><span class="pre">check_in_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.check_multiple_conditions"><code class="docutils literal notranslate"><span class="pre">check_multiple_conditions()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.check_none"><code class="docutils literal notranslate"><span class="pre">check_none()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.check_types"><code class="docutils literal notranslate"><span class="pre">check_types()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.type_checking.positive_integer"><code class="docutils literal notranslate"><span class="pre">positive_integer()</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

@@ -327,10 +327,7 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="cristal.type_checking.html">cristal.type_checking</a></li>
-</ul>
-<ul class="current nav bd-sidenav">
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.decomposers.html">cristal.decomposers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.base.html">cristal.decomposers.base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.fourier.html">cristal.decomposers.fourier</a></li>
@@ -340,7 +337,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datasteams.html">cristal.detectors.datasteams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datastreams.html">cristal.detectors.datastreams</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -384,6 +381,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.vu.html">cristal.regularizers.vu</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="cristal.type_checking.html">cristal.type_checking</a></li>
 </ul>
 </div>
 </nav></div>
@@ -418,7 +416,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="cristal.html" class="nav-link">API Reference</a></li>
+    <li class="breadcrumb-item"><a href="cristal.html" class="nav-link">CRISTAL</a></li>
     
     <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">cristal.inverters</span></li>
   </ul>
@@ -440,6 +438,16 @@
   <section id="module-cristal.inverters">
 <span id="cristal-inverters"></span><h1>cristal.inverters<a class="headerlink" href="#module-cristal.inverters" title="Link to this heading">#</a></h1>
 <p>CRISTAL Inverters Subpackage Contains various inverter classes for matrix inversion, including standard, pseudo, and Cholesky-based methods.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.inverters.IMPLEMENTED_INVERTERS" title="cristal.inverters.IMPLEMENTED_INVERTERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS</span></code></a>(*values)</p></td>
+<td><p>The implemented inverter classes.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="cristal.inverters.IMPLEMENTED_INVERTERS">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.inverters.</span></span><span class="sig-name descname"><span class="pre">IMPLEMENTED_INVERTERS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.inverters.IMPLEMENTED_INVERTERS" title="Link to this definition">#</a></dt>
@@ -467,24 +475,24 @@
 
 </dd></dl>
 
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="cristal.inverters.base.html">cristal.inverters.base</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.base.html#cristal.inverters.base.BaseInverter"><code class="docutils literal notranslate"><span class="pre">BaseInverter</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cristal.inverters.lapack.html">cristal.inverters.lapack</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.lapack.html#cristal.inverters.lapack.FPDInverter"><code class="docutils literal notranslate"><span class="pre">FPDInverter</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cristal.inverters.scipy.html">cristal.inverters.scipy</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.scipy.html#cristal.inverters.scipy.InvInverter"><code class="docutils literal notranslate"><span class="pre">InvInverter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.scipy.html#cristal.inverters.scipy.PDInverter"><code class="docutils literal notranslate"><span class="pre">PDInverter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.scipy.html#cristal.inverters.scipy.PseudoInverter"><code class="docutils literal notranslate"><span class="pre">PseudoInverter</span></code></a></li>
-</ul>
-</li>
-</ul>
+</section>
+<section id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.inverters.base.html#module-cristal.inverters.base" title="cristal.inverters.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base</span></code></a></p></td>
+<td><p>Base class for matrix inversion methods.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.inverters.lapack.html#module-cristal.inverters.lapack" title="cristal.inverters.lapack"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lapack</span></code></a></p></td>
+<td><p>Inverters for SPD matrices using LAPACK.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.inverters.scipy.html#module-cristal.inverters.scipy" title="cristal.inverters.scipy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy</span></code></a></p></td>
+<td><p>Inverters for matrices using SciPy's linear algebra module.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
+</section>
 </section>
 
 
@@ -538,13 +546,17 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.inverters.IMPLEMENTED_INVERTERS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.inverters.IMPLEMENTED_INVERTERS.FPD"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS.FPD</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.inverters.IMPLEMENTED_INVERTERS.INV"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS.INV</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.inverters.IMPLEMENTED_INVERTERS.PD"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS.PD</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.inverters.IMPLEMENTED_INVERTERS.PSEUDO"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS.PSEUDO</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.inverters.IMPLEMENTED_INVERTERS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.inverters.IMPLEMENTED_INVERTERS.FPD"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS.FPD</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.inverters.IMPLEMENTED_INVERTERS.INV"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS.INV</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.inverters.IMPLEMENTED_INVERTERS.PD"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS.PD</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.inverters.IMPLEMENTED_INVERTERS.PSEUDO"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS.PSEUDO</span></code></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
 </ul>
   </nav></div>
 

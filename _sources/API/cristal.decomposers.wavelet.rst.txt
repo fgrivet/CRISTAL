@@ -2,6 +2,12 @@ cristal.decomposers.wavelet
 ===========================
 
 .. automodule:: cristal.decomposers.wavelet
-   :members:
-   :undoc-members:
-   :show-inheritance:
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      WaveletDecomposer
+      WindowWaveletDecomposer
+   

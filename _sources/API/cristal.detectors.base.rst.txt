@@ -2,6 +2,17 @@ cristal.detectors.base
 ======================
 
 .. automodule:: cristal.detectors.base
-   :members:
-   :undoc-members:
-   :show-inheritance:
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      BaseDetector
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+   
+      NotFittedError
+   

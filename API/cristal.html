@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>API Reference &#8212; CRISTAL Documentation</title>
+    <title>CRISTAL &#8212; CRISTAL Documentation</title>
   
   
   
@@ -51,7 +51,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'API/cristal';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cristal.type_checking" href="cristal.type_checking.html" />
+    <link rel="next" title="cristal.decomposers" href="cristal.decomposers.html" />
     <link rel="prev" title="User Guide" href="../user_guide.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -328,9 +328,6 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="cristal.type_checking.html">cristal.type_checking</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.decomposers.html">cristal.decomposers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.base.html">cristal.decomposers.base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.fourier.html">cristal.decomposers.fourier</a></li>
@@ -340,7 +337,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datasteams.html">cristal.detectors.datasteams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datastreams.html">cristal.detectors.datastreams</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -384,6 +381,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.vu.html">cristal.regularizers.vu</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="cristal.type_checking.html">cristal.type_checking</a></li>
 </ul>
 </div>
 </nav></div>
@@ -417,7 +415,7 @@
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">API Reference</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">CRISTAL</span></li>
   </ul>
 </nav>
 </div>
@@ -435,204 +433,99 @@
                 <article class="bd-article">
                   
   <section id="module-cristal">
-<span id="api-reference"></span><h1>API Reference<a class="headerlink" href="#module-cristal" title="Link to this heading">#</a></h1>
-<p><strong>CRISTAL</strong>: ChRISToffel Anomaly Locator</p>
+<span id="cristal"></span><h1>CRISTAL<a class="headerlink" href="#module-cristal" title="Link to this heading">#</a></h1>
+<p><strong>CRISTAL</strong>: <strong>C</strong>h<strong>RIST</strong>offel <strong>A</strong>nomaly <strong>L</strong>ocator</p>
 <p>A Python package for anomaly detection using the Christoffel function.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="cristal.type_checking.html">cristal.type_checking</a></li>
-</ul>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.decomposers.html#module-cristal.decomposers" title="cristal.decomposers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decomposers</span></code></a></p></td>
+<td><p>CRISTAL Decomposers Subpackage Contains various decomposer classes for time series analysis, including Fourier and Wavelet decompositions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.html#module-cristal.detectors" title="cristal.detectors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detectors</span></code></a></p></td>
+<td><p>CRISTAL Detectors Subpackage Contains various detector classes, including BaggingDyCF, DyCF, and DyCG.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.evaluation.html#module-cristal.evaluation" title="cristal.evaluation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluation</span></code></a></p></td>
+<td><p>CRISTAL Evaluation Subpackage Contains various evaluation metrics and data utilities.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.incrementers.html#module-cristal.incrementers" title="cristal.incrementers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">incrementers</span></code></a></p></td>
+<td><p>CRISTAL Incrementers Subpackage Contains various incrementer classes for updating moments matrices, including Woodbury, Sherman-Morrison, and inverse methods.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.inverters.html#module-cristal.inverters" title="cristal.inverters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverters</span></code></a></p></td>
+<td><p>CRISTAL Inverters Subpackage Contains various inverter classes for matrix inversion, including standard, pseudo, and Cholesky-based methods.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.moments_matrix.html#module-cristal.moments_matrix" title="cristal.moments_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moments_matrix</span></code></a></p></td>
+<td><p>CRISTAL MomentsMatrix Subpackage Contains the MomentsMatrix class for handling moments matrices operations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.plotters.html#module-cristal.plotters" title="cristal.plotters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotters</span></code></a></p></td>
+<td><p>CRISTAL Plotters Subpackage Contains various plotter classes, including DyCFPlotter.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.polynomials.html#module-cristal.polynomials" title="cristal.polynomials"><code class="xref py py-obj docutils literal notranslate"><span class="pre">polynomials</span></code></a></p></td>
+<td><p>CRISTAL Polynomials Subpackage Contains various polynomial classes, including Monomials, Chebyshev and Legendre polynomials.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.regularizers.html#module-cristal.regularizers" title="cristal.regularizers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">regularizers</span></code></a></p></td>
+<td><p>CRISTAL Regularizers Subpackage Contains various regularization classes, including Vu, Vu_C, Constant and Comb regularizers.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.type_checking.html#module-cristal.type_checking" title="cristal.type_checking"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type_checking</span></code></a></p></td>
+<td><p>This module provides a decorator for type checking function arguments.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
+<p>The following classes are available using directly <code class="docutils literal notranslate"><span class="pre">cristal.ClassName</span></code> instead of <code class="docutils literal notranslate"><span class="pre">cristal.package.module.ClassName</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.decomposers.html#cristal.decomposers.IMPLEMENTED_DECOMPOSERS" title="cristal.decomposers.IMPLEMENTED_DECOMPOSERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decomposers.IMPLEMENTED_DECOMPOSERS</span></code></a>(*values)</p></td>
+<td><p>The implemented decomposers classes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.incrementers.html#cristal.incrementers.IMPLEMENTED_INCREMENTERS" title="cristal.incrementers.IMPLEMENTED_INCREMENTERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">incrementers.IMPLEMENTED_INCREMENTERS</span></code></a>(*values)</p></td>
+<td><p>The implemented incrementer classes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.inverters.html#cristal.inverters.IMPLEMENTED_INVERTERS" title="cristal.inverters.IMPLEMENTED_INVERTERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverters.IMPLEMENTED_INVERTERS</span></code></a>(*values)</p></td>
+<td><p>The implemented inverter classes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.polynomials.html#cristal.polynomials.IMPLEMENTED_POLYNOMIALS" title="cristal.polynomials.IMPLEMENTED_POLYNOMIALS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">polynomials.IMPLEMENTED_POLYNOMIALS</span></code></a>(*values)</p></td>
+<td><p>The implemented polynomial classes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.regularizers.html#cristal.regularizers.IMPLEMENTED_REGULARIZERS" title="cristal.regularizers.IMPLEMENTED_REGULARIZERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">regularizers.IMPLEMENTED_REGULARIZERS</span></code></a>(*values)</p></td>
+<td><p>The implemented regularization classes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.datastreams.html#cristal.detectors.datastreams.BaggingDyCF" title="cristal.detectors.datastreams.BaggingDyCF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detectors.datastreams.BaggingDyCF</span></code></a>(n_values)</p></td>
+<td><p>Bagging DyCF model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.detectors.datastreams.html#cristal.detectors.datastreams.DyCF" title="cristal.detectors.datastreams.DyCF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detectors.datastreams.DyCF</span></code></a>(n[, ...])</p></td>
+<td><p>Dynamical Christoffel Function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.datastreams.html#cristal.detectors.datastreams.DyCG" title="cristal.detectors.datastreams.DyCG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detectors.datastreams.DyCG</span></code></a>([degrees])</p></td>
+<td><p>Dynamical Christoffel Growth</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.plotters.dycf.html#cristal.plotters.dycf.DyCFPlotter" title="cristal.plotters.dycf.DyCFPlotter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotters.dycf.DyCFPlotter</span></code></a>(model)</p></td>
+<td><p>Plotter for levelsets and boundaries associated with a DyCF model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.polynomials.base.html#cristal.polynomials.base.MultivariatePolynomialBasis" title="cristal.polynomials.base.MultivariatePolynomialBasis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">polynomials.base.MultivariatePolynomialBasis</span></code></a>()</p></td>
+<td><p>Class for generating polynomial combinations and applying polynomial basis functions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html#cristal.moments_matrix.moments_matrix.MomentsMatrix" title="cristal.moments_matrix.moments_matrix.MomentsMatrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moments_matrix.moments_matrix.MomentsMatrix</span></code></a>(n)</p></td>
+<td><p>Class for computing and storing moments matrix and its inverse.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="cristal.decomposers.html">cristal.decomposers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.html#cristal.decomposers.IMPLEMENTED_DECOMPOSERS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.decomposers.html#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.FOURIER"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.FOURIER</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.decomposers.html#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.WAVELET"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.WAVELET</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.decomposers.html#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.WINDOW_FOURIER"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.WINDOW_FOURIER</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.decomposers.html#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.WINDOW_WAVELET"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.WINDOW_WAVELET</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.base.html">cristal.decomposers.base</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.decomposers.base.html#cristal.decomposers.base.BaseDecomposer"><code class="docutils literal notranslate"><span class="pre">BaseDecomposer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.fourier.html">cristal.decomposers.fourier</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.decomposers.fourier.html#cristal.decomposers.fourier.FourierDecomposer"><code class="docutils literal notranslate"><span class="pre">FourierDecomposer</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.decomposers.fourier.html#cristal.decomposers.fourier.WindowFourierDecomposer"><code class="docutils literal notranslate"><span class="pre">WindowFourierDecomposer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.wavelet.html">cristal.decomposers.wavelet</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.decomposers.wavelet.html#cristal.decomposers.wavelet.WaveletDecomposer"><code class="docutils literal notranslate"><span class="pre">WaveletDecomposer</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.decomposers.wavelet.html#cristal.decomposers.wavelet.WindowWaveletDecomposer"><code class="docutils literal notranslate"><span class="pre">WindowWaveletDecomposer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.window.html">cristal.decomposers.window</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.decomposers.window.html#cristal.decomposers.window.BaseWindowDecomposer"><code class="docutils literal notranslate"><span class="pre">BaseWindowDecomposer</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector"><code class="docutils literal notranslate"><span class="pre">BaseDetector</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.NotFittedError"><code class="docutils literal notranslate"><span class="pre">NotFittedError</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datasteams.html">cristal.detectors.datasteams</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.detectors.datasteams.html#cristal.detectors.datasteams.BaggingDyCF"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.detectors.datasteams.html#cristal.detectors.datasteams.DyCF"><code class="docutils literal notranslate"><span class="pre">DyCF</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.detectors.datasteams.html#cristal.detectors.datasteams.DyCG"><code class="docutils literal notranslate"><span class="pre">DyCG</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cristal.evaluation.data.html">cristal.evaluation.data</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.evaluation.data.html#cristal.evaluation.data.make_T_rotated"><code class="docutils literal notranslate"><span class="pre">make_T_rotated()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.evaluation.metrics.html">cristal.evaluation.metrics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.evaluation.metrics.html#cristal.evaluation.metrics.average_precision_score"><code class="docutils literal notranslate"><span class="pre">average_precision_score()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.evaluation.metrics.html#cristal.evaluation.metrics.em_auc_score"><code class="docutils literal notranslate"><span class="pre">em_auc_score()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.evaluation.metrics.html#cristal.evaluation.metrics.em_goix"><code class="docutils literal notranslate"><span class="pre">em_goix()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.evaluation.metrics.html#cristal.evaluation.metrics.mv_auc_score"><code class="docutils literal notranslate"><span class="pre">mv_auc_score()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.evaluation.metrics.html#cristal.evaluation.metrics.mv_goix"><code class="docutils literal notranslate"><span class="pre">mv_goix()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.evaluation.metrics.html#cristal.evaluation.metrics.precision"><code class="docutils literal notranslate"><span class="pre">precision()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.evaluation.metrics.html#cristal.evaluation.metrics.roc_and_pr_curves"><code class="docutils literal notranslate"><span class="pre">roc_and_pr_curves()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.evaluation.metrics.html#cristal.evaluation.metrics.roc_auc_score"><code class="docutils literal notranslate"><span class="pre">roc_auc_score()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.evaluation.metrics.html#cristal.evaluation.metrics.roc_curve"><code class="docutils literal notranslate"><span class="pre">roc_curve()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.evaluation.metrics.html#cristal.evaluation.metrics.supervised_metrics"><code class="docutils literal notranslate"><span class="pre">supervised_metrics()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cristal.incrementers.html">cristal.incrementers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cristal.incrementers.html#cristal.incrementers.IMPLEMENTED_INCREMENTERS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.incrementers.html#cristal.incrementers.IMPLEMENTED_INCREMENTERS.INVERSE"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS.INVERSE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.incrementers.html#cristal.incrementers.IMPLEMENTED_INCREMENTERS.SHERMAN"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS.SHERMAN</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.incrementers.html#cristal.incrementers.IMPLEMENTED_INCREMENTERS.WOODBURY"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS.WOODBURY</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.incrementers.base.html">cristal.incrementers.base</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.incrementers.base.html#cristal.incrementers.base.BaseIncrementer"><code class="docutils literal notranslate"><span class="pre">BaseIncrementer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.incrementers.inverse.html">cristal.incrementers.inverse</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.incrementers.inverse.html#cristal.incrementers.inverse.InverseIncrementer"><code class="docutils literal notranslate"><span class="pre">InverseIncrementer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.incrementers.sherman.html">cristal.incrementers.sherman</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.incrementers.sherman.html#cristal.incrementers.sherman.ShermanIncrementer"><code class="docutils literal notranslate"><span class="pre">ShermanIncrementer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.incrementers.woodbury.html">cristal.incrementers.woodbury</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.incrementers.woodbury.html#cristal.incrementers.woodbury.WoodburyIncrementer"><code class="docutils literal notranslate"><span class="pre">WoodburyIncrementer</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cristal.inverters.html">cristal.inverters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.html#cristal.inverters.IMPLEMENTED_INVERTERS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.inverters.html#cristal.inverters.IMPLEMENTED_INVERTERS.FPD"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS.FPD</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.inverters.html#cristal.inverters.IMPLEMENTED_INVERTERS.INV"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS.INV</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.inverters.html#cristal.inverters.IMPLEMENTED_INVERTERS.PD"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS.PD</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.inverters.html#cristal.inverters.IMPLEMENTED_INVERTERS.PSEUDO"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS.PSEUDO</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.base.html">cristal.inverters.base</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.inverters.base.html#cristal.inverters.base.BaseInverter"><code class="docutils literal notranslate"><span class="pre">BaseInverter</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.lapack.html">cristal.inverters.lapack</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.inverters.lapack.html#cristal.inverters.lapack.FPDInverter"><code class="docutils literal notranslate"><span class="pre">FPDInverter</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.scipy.html">cristal.inverters.scipy</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.inverters.scipy.html#cristal.inverters.scipy.InvInverter"><code class="docutils literal notranslate"><span class="pre">InvInverter</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.inverters.scipy.html#cristal.inverters.scipy.PDInverter"><code class="docutils literal notranslate"><span class="pre">PDInverter</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.inverters.scipy.html#cristal.inverters.scipy.PseudoInverter"><code class="docutils literal notranslate"><span class="pre">PseudoInverter</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cristal.moments_matrix.html">cristal.moments_matrix</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html">cristal.moments_matrix.moments_matrix</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html#cristal.moments_matrix.moments_matrix.MomentsMatrix"><code class="docutils literal notranslate"><span class="pre">MomentsMatrix</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cristal.plotters.html">cristal.plotters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cristal.plotters.base.html">cristal.plotters.base</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.plotters.base.html#cristal.plotters.base.BasePlotter"><code class="docutils literal notranslate"><span class="pre">BasePlotter</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.plotters.dycf.html">cristal.plotters.dycf</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.plotters.dycf.html#cristal.plotters.dycf.DyCFPlotter"><code class="docutils literal notranslate"><span class="pre">DyCFPlotter</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cristal.polynomials.html">cristal.polynomials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cristal.polynomials.html#cristal.polynomials.IMPLEMENTED_POLYNOMIALS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.polynomials.html#cristal.polynomials.IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_T1"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_T1</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.polynomials.html#cristal.polynomials.IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_T2"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_T2</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.polynomials.html#cristal.polynomials.IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_U"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_U</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.polynomials.html#cristal.polynomials.IMPLEMENTED_POLYNOMIALS.LEGENDRE"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS.LEGENDRE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.polynomials.html#cristal.polynomials.IMPLEMENTED_POLYNOMIALS.MONOMIALS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS.MONOMIALS</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.polynomials.base.html">cristal.polynomials.base</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.polynomials.base.html#cristal.polynomials.base.BasePolynomialFamily"><code class="docutils literal notranslate"><span class="pre">BasePolynomialFamily</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.polynomials.base.html#cristal.polynomials.base.MultivariatePolynomialBasis"><code class="docutils literal notranslate"><span class="pre">MultivariatePolynomialBasis</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.polynomials.chebyshev.html">cristal.polynomials.chebyshev</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.polynomials.chebyshev.html#cristal.polynomials.chebyshev.ChebyshevT1Family"><code class="docutils literal notranslate"><span class="pre">ChebyshevT1Family</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.polynomials.chebyshev.html#cristal.polynomials.chebyshev.ChebyshevT2Family"><code class="docutils literal notranslate"><span class="pre">ChebyshevT2Family</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.polynomials.chebyshev.html#cristal.polynomials.chebyshev.ChebyshevUFamily"><code class="docutils literal notranslate"><span class="pre">ChebyshevUFamily</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.polynomials.legendre.html">cristal.polynomials.legendre</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.polynomials.legendre.html#cristal.polynomials.legendre.LegendreFamily"><code class="docutils literal notranslate"><span class="pre">LegendreFamily</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.polynomials.monomials.html">cristal.polynomials.monomials</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.polynomials.monomials.html#cristal.polynomials.monomials.MonomialsFamily"><code class="docutils literal notranslate"><span class="pre">MonomialsFamily</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cristal.regularizers.html">cristal.regularizers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.html#cristal.regularizers.IMPLEMENTED_REGULARIZERS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.regularizers.html#cristal.regularizers.IMPLEMENTED_REGULARIZERS.COMB"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS.COMB</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.regularizers.html#cristal.regularizers.IMPLEMENTED_REGULARIZERS.CONSTANT"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS.CONSTANT</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.regularizers.html#cristal.regularizers.IMPLEMENTED_REGULARIZERS.VU"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS.VU</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.regularizers.html#cristal.regularizers.IMPLEMENTED_REGULARIZERS.VU_C"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS.VU_C</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.base.html">cristal.regularizers.base</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.regularizers.base.html#cristal.regularizers.base.BaseRegularizer"><code class="docutils literal notranslate"><span class="pre">BaseRegularizer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.comb.html">cristal.regularizers.comb</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.regularizers.comb.html#cristal.regularizers.comb.CombRegularizer"><code class="docutils literal notranslate"><span class="pre">CombRegularizer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.constant.html">cristal.regularizers.constant</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.regularizers.constant.html#cristal.regularizers.constant.ConstantRegularizer"><code class="docutils literal notranslate"><span class="pre">ConstantRegularizer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.vu.html">cristal.regularizers.vu</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cristal.regularizers.vu.html#cristal.regularizers.vu.VuCRegularizer"><code class="docutils literal notranslate"><span class="pre">VuCRegularizer</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cristal.regularizers.vu.html#cristal.regularizers.vu.VuRegularizer"><code class="docutils literal notranslate"><span class="pre">VuRegularizer</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 </div>
+</section>
 </section>
 
 
@@ -655,11 +548,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="cristal.type_checking.html"
+       href="cristal.decomposers.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">cristal.type_checking</p>
+        <p class="prev-next-title">cristal.decomposers</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -677,6 +570,20 @@
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
   <div role="note" aria-label="source link">

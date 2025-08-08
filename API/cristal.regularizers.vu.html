@@ -52,7 +52,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'API/cristal.regularizers.vu';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Examples" href="../examples.html" />
+    <link rel="next" title="cristal.type_checking" href="cristal.type_checking.html" />
     <link rel="prev" title="cristal.regularizers.constant" href="cristal.regularizers.constant.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -328,10 +328,7 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="cristal.type_checking.html">cristal.type_checking</a></li>
-</ul>
-<ul class="current nav bd-sidenav">
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.decomposers.html">cristal.decomposers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.base.html">cristal.decomposers.base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.fourier.html">cristal.decomposers.fourier</a></li>
@@ -341,7 +338,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datasteams.html">cristal.detectors.datasteams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datastreams.html">cristal.detectors.datastreams</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -385,6 +382,7 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">cristal.regularizers.vu</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="cristal.type_checking.html">cristal.type_checking</a></li>
 </ul>
 </div>
 </nav></div>
@@ -419,7 +417,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="cristal.html" class="nav-link">API Reference</a></li>
+    <li class="breadcrumb-item"><a href="cristal.html" class="nav-link">CRISTAL</a></li>
     
     
     <li class="breadcrumb-item"><a href="cristal.regularizers.html" class="nav-link">cristal.regularizers</a></li>
@@ -443,15 +441,27 @@
                   
   <section id="module-cristal.regularizers.vu">
 <span id="cristal-regularizers-vu"></span><h1>cristal.regularizers.vu<a class="headerlink" href="#module-cristal.regularizers.vu" title="Link to this heading">#</a></h1>
-<p>Class for Vu regularization method. with (<a class="reference internal" href="#cristal.regularizers.vu.VuCRegularizer" title="cristal.regularizers.vu.VuCRegularizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">VuCRegularizer</span></code></a>) and without (<a class="reference internal" href="#cristal.regularizers.vu.VuRegularizer" title="cristal.regularizers.vu.VuRegularizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">VuRegularizer</span></code></a>) constant factor C. See <a class="reference external" href="https://arxiv.org/abs/1910.14458">https://arxiv.org/abs/1910.14458</a> for more details.</p>
+<p>Classes for Vu regularization method. with (<a class="reference internal" href="#cristal.regularizers.vu.VuCRegularizer" title="cristal.regularizers.vu.VuCRegularizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">VuCRegularizer</span></code></a>) and without (<a class="reference internal" href="#cristal.regularizers.vu.VuRegularizer" title="cristal.regularizers.vu.VuRegularizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">VuRegularizer</span></code></a>) constant factor C. See <a class="reference external" href="https://arxiv.org/abs/1910.14458">https://arxiv.org/abs/1910.14458</a> for more details.</p>
+<p class="rubric">Classes</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.regularizers.vu.VuCRegularizer" title="cristal.regularizers.vu.VuCRegularizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VuCRegularizer</span></code></a>()</p></td>
+<td><p>Regularizer for the Vu_C regularization method : <span class="math notranslate nohighlight">\(reg = \frac{n^{3d/2}}{C}\)</span>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cristal.regularizers.vu.VuRegularizer" title="cristal.regularizers.vu.VuRegularizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VuRegularizer</span></code></a>()</p></td>
+<td><p>Regularizer for the Vu regularization method : <span class="math notranslate nohighlight">\(reg = n^{3d/2}\)</span>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="cristal.regularizers.vu.VuCRegularizer">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.regularizers.vu.</span></span><span class="sig-name descname"><span class="pre">VuCRegularizer</span></span><a class="headerlink" href="#cristal.regularizers.vu.VuCRegularizer" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="cristal.regularizers.base.html#cristal.regularizers.base.BaseRegularizer" title="cristal.regularizers.base.BaseRegularizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRegularizer</span></code></a></p>
 <p>Regularizer for the Vu_C regularization method : <span class="math notranslate nohighlight">\(reg = \frac{n^{3d/2}}{C}\)</span>.     See <a class="reference external" href="https://arxiv.org/abs/1910.14458">https://arxiv.org/abs/1910.14458</a> for more details.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="cristal.regularizers.vu.VuCRegularizer.regularizer">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">regularizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cristal.regularizers.vu.VuCRegularizer.regularizer" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="cristal.regularizers.vu.VuCRegularizer.compute_value">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">compute_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cristal.regularizers.vu.VuCRegularizer.compute_value" title="Link to this definition">#</a></dt>
 <dd><p>Compute the Vu_C regularization factor.</p>
 </dd></dl>
 
@@ -463,8 +473,8 @@
 <dd><p>Bases: <a class="reference internal" href="cristal.regularizers.base.html#cristal.regularizers.base.BaseRegularizer" title="cristal.regularizers.base.BaseRegularizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRegularizer</span></code></a></p>
 <p>Regularizer for the Vu regularization method : <span class="math notranslate nohighlight">\(reg = n^{3d/2}\)</span>.     See <a class="reference external" href="https://arxiv.org/abs/1910.14458">https://arxiv.org/abs/1910.14458</a> for more details.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="cristal.regularizers.vu.VuRegularizer.regularizer">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">regularizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cristal.regularizers.vu.VuRegularizer.regularizer" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="cristal.regularizers.vu.VuRegularizer.compute_value">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">compute_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cristal.regularizers.vu.VuRegularizer.compute_value" title="Link to this definition">#</a></dt>
 <dd><p>Compute the Vu regularization factor.</p>
 </dd></dl>
 
@@ -492,11 +502,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="../examples.html"
+       href="cristal.type_checking.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Examples</p>
+        <p class="prev-next-title">cristal.type_checking</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -524,11 +534,11 @@
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.regularizers.vu.VuCRegularizer"><code class="docutils literal notranslate"><span class="pre">VuCRegularizer</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.regularizers.vu.VuCRegularizer.regularizer"><code class="docutils literal notranslate"><span class="pre">VuCRegularizer.regularizer()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.regularizers.vu.VuCRegularizer.compute_value"><code class="docutils literal notranslate"><span class="pre">VuCRegularizer.compute_value()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.regularizers.vu.VuRegularizer"><code class="docutils literal notranslate"><span class="pre">VuRegularizer</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.regularizers.vu.VuRegularizer.regularizer"><code class="docutils literal notranslate"><span class="pre">VuRegularizer.regularizer()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.regularizers.vu.VuRegularizer.compute_value"><code class="docutils literal notranslate"><span class="pre">VuRegularizer.compute_value()</span></code></a></li>
 </ul>
 </li>
 </ul>

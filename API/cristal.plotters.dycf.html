@@ -327,10 +327,7 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="cristal.type_checking.html">cristal.type_checking</a></li>
-</ul>
-<ul class="current nav bd-sidenav">
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.decomposers.html">cristal.decomposers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.base.html">cristal.decomposers.base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.fourier.html">cristal.decomposers.fourier</a></li>
@@ -340,7 +337,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datasteams.html">cristal.detectors.datasteams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datastreams.html">cristal.detectors.datastreams</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -384,6 +381,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.vu.html">cristal.regularizers.vu</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="cristal.type_checking.html">cristal.type_checking</a></li>
 </ul>
 </div>
 </nav></div>
@@ -418,7 +416,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="cristal.html" class="nav-link">API Reference</a></li>
+    <li class="breadcrumb-item"><a href="cristal.html" class="nav-link">CRISTAL</a></li>
     
     
     <li class="breadcrumb-item"><a href="cristal.plotters.html" class="nav-link">cristal.plotters</a></li>
@@ -443,9 +441,18 @@
   <section id="module-cristal.plotters.dycf">
 <span id="cristal-plotters-dycf"></span><h1>cristal.plotters.dycf<a class="headerlink" href="#module-cristal.plotters.dycf" title="Link to this heading">#</a></h1>
 <p>Class for plotting DyCF model results.</p>
+<p class="rubric">Classes</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.plotters.dycf.DyCFPlotter" title="cristal.plotters.dycf.DyCFPlotter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DyCFPlotter</span></code></a>(model)</p></td>
+<td><p>Plotter for levelsets and boundaries associated with a DyCF model.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="cristal.plotters.dycf.DyCFPlotter">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.plotters.dycf.</span></span><span class="sig-name descname"><span class="pre">DyCFPlotter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.detectors.datasteams.html#cristal.detectors.datasteams.DyCF" title="cristal.detectors.datasteams.DyCF"><span class="pre">DyCF</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.plotters.dycf.DyCFPlotter" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.plotters.dycf.</span></span><span class="sig-name descname"><span class="pre">DyCFPlotter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.detectors.datastreams.html#cristal.detectors.datastreams.DyCF" title="cristal.detectors.datastreams.DyCF"><span class="pre">DyCF</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.plotters.dycf.DyCFPlotter" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="cristal.plotters.base.html#cristal.plotters.base.BasePlotter" title="cristal.plotters.base.BasePlotter"><code class="xref py py-class docutils literal notranslate"><span class="pre">BasePlotter</span></code></a></p>
 <p>Plotter for levelsets and boundaries associated with a DyCF model.</p>
 <dl class="py attribute">
@@ -455,18 +462,18 @@
 This model should be fitted before plotting.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="cristal.detectors.datasteams.html#cristal.detectors.datasteams.DyCF" title="cristal.detectors.datasteams.DyCF">DyCF</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="cristal.detectors.datastreams.html#cristal.detectors.datastreams.DyCF" title="cristal.detectors.datastreams.DyCF">DyCF</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cristal.plotters.dycf.DyCFPlotter.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.detectors.datasteams.html#cristal.detectors.datasteams.DyCF" title="cristal.detectors.datasteams.DyCF"><span class="pre">DyCF</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.plotters.dycf.DyCFPlotter.__init__" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.detectors.datastreams.html#cristal.detectors.datastreams.DyCF" title="cristal.detectors.datastreams.DyCF"><span class="pre">DyCF</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.plotters.dycf.DyCFPlotter.__init__" title="Link to this definition">#</a></dt>
 <dd><p>Initialize the CFPlotter.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>model</strong> (<a class="reference internal" href="cristal.detectors.datasteams.html#cristal.detectors.datasteams.DyCF" title="cristal.detectors.datasteams.DyCF"><em>DyCF</em></a>) – The model to study, which should have a dimension d of 2.</p>
+<dd class="field-odd"><p><strong>model</strong> (<a class="reference internal" href="cristal.detectors.datastreams.html#cristal.detectors.datastreams.DyCF" title="cristal.detectors.datastreams.DyCF"><em>DyCF</em></a>) – The model to study, which should have a dimension d of 2.</p>
 </dd>
 </dl>
 </dd></dl>

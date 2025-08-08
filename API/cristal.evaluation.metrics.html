@@ -327,10 +327,7 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="cristal.type_checking.html">cristal.type_checking</a></li>
-</ul>
-<ul class="current nav bd-sidenav">
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.decomposers.html">cristal.decomposers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.base.html">cristal.decomposers.base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.fourier.html">cristal.decomposers.fourier</a></li>
@@ -340,7 +337,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datasteams.html">cristal.detectors.datasteams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datastreams.html">cristal.detectors.datastreams</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -384,6 +381,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.vu.html">cristal.regularizers.vu</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="cristal.type_checking.html">cristal.type_checking</a></li>
 </ul>
 </div>
 </nav></div>
@@ -418,7 +416,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="cristal.html" class="nav-link">API Reference</a></li>
+    <li class="breadcrumb-item"><a href="cristal.html" class="nav-link">CRISTAL</a></li>
     
     
     <li class="breadcrumb-item"><a href="cristal.evaluation.html" class="nav-link">cristal.evaluation</a></li>
@@ -443,6 +441,42 @@
   <section id="module-cristal.evaluation.metrics">
 <span id="cristal-evaluation-metrics"></span><h1>cristal.evaluation.metrics<a class="headerlink" href="#module-cristal.evaluation.metrics" title="Link to this heading">#</a></h1>
 <p>This module contains functions to compute various evaluation metrics for anomaly detection tasks.</p>
+<p class="rubric">Functions</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.evaluation.metrics.average_precision_score" title="cristal.evaluation.metrics.average_precision_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">average_precision_score</span></code></a>(y_true, y_score)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cristal.evaluation.metrics.em_auc_score" title="cristal.evaluation.metrics.em_auc_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">em_auc_score</span></code></a>(scoring_func, samples, ...[, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.evaluation.metrics.em_goix" title="cristal.evaluation.metrics.em_goix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">em_goix</span></code></a>(t, t_max, volume_support, s_unif, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cristal.evaluation.metrics.mv_auc_score" title="cristal.evaluation.metrics.mv_auc_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mv_auc_score</span></code></a>(scoring_func, samples, ...[, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.evaluation.metrics.mv_goix" title="cristal.evaluation.metrics.mv_goix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mv_goix</span></code></a>(axis_alpha, volume_support, s_unif, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cristal.evaluation.metrics.precision" title="cristal.evaluation.metrics.precision"><code class="xref py py-obj docutils literal notranslate"><span class="pre">precision</span></code></a>(y_score, score_outliers, threshold)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.evaluation.metrics.roc_and_pr_curves" title="cristal.evaluation.metrics.roc_and_pr_curves"><code class="xref py py-obj docutils literal notranslate"><span class="pre">roc_and_pr_curves</span></code></a>(y_true, y_score)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cristal.evaluation.metrics.roc_auc_score" title="cristal.evaluation.metrics.roc_auc_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">roc_auc_score</span></code></a>(y_true, y_score)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.evaluation.metrics.roc_curve" title="cristal.evaluation.metrics.roc_curve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">roc_curve</span></code></a>(y_true, y_score)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cristal.evaluation.metrics.supervised_metrics" title="cristal.evaluation.metrics.supervised_metrics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">supervised_metrics</span></code></a>(y_true, y_pred)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <dl class="py function">
 <dt class="sig sig-object py" id="cristal.evaluation.metrics.average_precision_score">
 <span class="sig-prename descclassname"><span class="pre">cristal.evaluation.metrics.</span></span><span class="sig-name descname"><span class="pre">average_precision_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_score</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.evaluation.metrics.average_precision_score" title="Link to this definition">#</a></dt>

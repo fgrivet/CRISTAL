@@ -2,6 +2,12 @@ cristal.decomposers.fourier
 ===========================
 
 .. automodule:: cristal.decomposers.fourier
-   :members:
-   :undoc-members:
-   :show-inheritance:
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      FourierDecomposer
+      WindowFourierDecomposer
+   

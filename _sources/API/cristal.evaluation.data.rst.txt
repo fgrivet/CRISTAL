@@ -2,6 +2,11 @@ cristal.evaluation.data
 =======================
 
 .. automodule:: cristal.evaluation.data
-   :members:
-   :undoc-members:
-   :show-inheritance:
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      make_T_rotated
+   
