@@ -51,6 +51,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = '_collections/notebooks/bagging';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Release Notes" href="../../release_notes.html" />
     <link rel="prev" title="Plot Levelset Example" href="plot_levelset.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -145,7 +146,7 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../package/cristal.html">
+  <a class="nav-link nav-internal" href="../../API/cristal.html">
     API
   </a>
 </li>
@@ -154,6 +155,13 @@
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="../../examples.html">
     Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../release_notes.html">
+    Release Notes
   </a>
 </li>
 
@@ -257,7 +265,7 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../package/cristal.html">
+  <a class="nav-link nav-internal" href="../../API/cristal.html">
     API
   </a>
 </li>
@@ -266,6 +274,13 @@
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="../../examples.html">
     Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../release_notes.html">
+    Release Notes
   </a>
 </li>
 
@@ -376,10 +391,8 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">cristal</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaggingDyCF</span><span class="p">,</span> <span class="n">DyCF</span><span class="p">,</span> <span class="n">DyCFPlotter</span><span class="p">,</span> <span class="n">IMPLEMENTED_REGULARIZATION_OPTIONS</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">cristal.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_T_rotated</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cristal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cst</span>
 </pre></div>
 </div>
 </div>
@@ -390,12 +403,12 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">5_001</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">make_T_rotated</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">evaluation</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">make_T_rotated</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-08-05 13:58:51,098 	 WARNING 	 CRISTAL.data.make_T_rotated 	 n_samples must be even to create two normal distributions. Adjusting n_samples = 5001 to 5000.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-08-08 09:52:59,754 	 WARNING 	 cristal.evaluation.data 	 n_samples must be even to create two normal distributions. Adjusting n_samples = 5001 to 5000.
 </pre></div>
 </div>
 </div>
@@ -417,8 +430,8 @@
 <h2>Create BaggingDyCF and DyCF instances<a class="headerlink" href="#create-baggingdycf-and-dycf-instances" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bagging_model</span> <span class="o">=</span> <span class="n">BaggingDyCF</span><span class="p">(</span><span class="n">n_values</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="n">n_estimators</span><span class="p">,</span> <span class="n">regularization</span><span class="o">=</span><span class="n">IMPLEMENTED_REGULARIZATION_OPTIONS</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">DyCF</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n_values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">regularization</span><span class="o">=</span><span class="n">IMPLEMENTED_REGULARIZATION_OPTIONS</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bagging_model</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">BaggingDyCF</span><span class="p">(</span><span class="n">n_values</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="n">n_estimators</span><span class="p">,</span> <span class="n">regularizer_opt</span><span class="o">=</span><span class="n">cst</span><span class="o">.</span><span class="n">IMPLEMENTED_REGULARIZERS</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">DyCF</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n_values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">regularizer_opt</span><span class="o">=</span><span class="n">cst</span><span class="o">.</span><span class="n">IMPLEMENTED_REGULARIZERS</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -433,7 +446,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.christoffel.BaggingDyCF at 0x7ff0301d1e80&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.detectors.datasteams.BaggingDyCF at 0x7f8368141e80&gt;
 </pre></div>
 </div>
 </div>
@@ -445,7 +458,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.christoffel.DyCF at 0x7ff03039a3f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.detectors.datasteams.DyCF at 0x7f836830e3f0&gt;
 </pre></div>
 </div>
 </div>
@@ -456,8 +469,8 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">levels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">20000</span><span class="p">,</span> <span class="mi">30000</span><span class="p">]</span>
-<span class="n">bagging_plotter</span> <span class="o">=</span> <span class="n">DyCFPlotter</span><span class="p">(</span><span class="n">bagging_model</span><span class="p">)</span>
-<span class="n">model_plotter</span> <span class="o">=</span> <span class="n">DyCFPlotter</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">bagging_plotter</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">DyCFPlotter</span><span class="p">(</span><span class="n">bagging_model</span><span class="p">)</span>
+<span class="n">model_plotter</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">DyCFPlotter</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -498,6 +511,15 @@
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Plot Levelset Example</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../../release_notes.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Release Notes</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   

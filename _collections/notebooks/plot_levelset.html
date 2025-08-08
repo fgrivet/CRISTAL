@@ -146,7 +146,7 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../package/cristal.html">
+  <a class="nav-link nav-internal" href="../../API/cristal.html">
     API
   </a>
 </li>
@@ -155,6 +155,13 @@
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="../../examples.html">
     Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../release_notes.html">
+    Release Notes
   </a>
 </li>
 
@@ -258,7 +265,7 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../package/cristal.html">
+  <a class="nav-link nav-internal" href="../../API/cristal.html">
     API
   </a>
 </li>
@@ -267,6 +274,13 @@
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="../../examples.html">
     Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../release_notes.html">
+    Release Notes
   </a>
 </li>
 
@@ -376,10 +390,7 @@
 <h2>Imports<a class="headerlink" href="#imports" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">cristal</span><span class="w"> </span><span class="kn">import</span> <span class="n">DyCF</span><span class="p">,</span> <span class="n">DyCFPlotter</span><span class="p">,</span> <span class="n">IMPLEMENTED_REGULARIZATION_OPTIONS</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">cristal.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_T_rotated</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">cristal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cst</span>
 </pre></div>
 </div>
 </div>
@@ -389,8 +400,7 @@
 <h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># Data dimension</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># Degree of the polynomial basis</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># Degree of the polynomial basis</span>
 <span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># Number of samples</span>
 </pre></div>
 </div>
@@ -401,7 +411,7 @@
 <h2>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">make_T_rotated</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">evaluation</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">make_T_rotated</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -414,13 +424,13 @@
 <h3>Fit the Christoffel function<a class="headerlink" href="#fit-the-christoffel-function" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dycf</span> <span class="o">=</span> <span class="n">DyCF</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">IMPLEMENTED_REGULARIZATION_OPTIONS</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dycf</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">DyCF</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">regularizer_opt</span><span class="o">=</span><span class="n">cst</span><span class="o">.</span><span class="n">IMPLEMENTED_REGULARIZERS</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">)</span>
 <span class="n">dycf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.christoffel.DyCF at 0x7ffaf8405be0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.detectors.datasteams.DyCF at 0x7fb41882dbe0&gt;
 </pre></div>
 </div>
 </div>
@@ -430,7 +440,7 @@
 <h3>Plot the level set<a class="headerlink" href="#plot-the-level-set" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotter</span> <span class="o">=</span> <span class="n">DyCFPlotter</span><span class="p">(</span><span class="n">dycf</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotter</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">DyCFPlotter</span><span class="p">(</span><span class="n">dycf</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -438,9 +448,6 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotter</span><span class="o">.</span><span class="n">levelset</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n_x1</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">n_x2</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">2000</span><span class="p">],</span> <span class="n">percentiles</span><span class="o">=</span><span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">])</span>
-<span class="c1"># n_x1 and n_x2 control the resolution of the grid for plotting</span>
-<span class="c1"># You can adjust the levels and percentiles as needed</span>
-<span class="c1"># More information can be found in the odds_optimized.plotter.LevelsetPlotter.plot documentation</span>
 </pre></div>
 </div>
 </div>
@@ -451,7 +458,7 @@
 </section>
 <section id="plot-the-boundary-decision">
 <h3>Plot the boundary decision<a class="headerlink" href="#plot-the-boundary-decision" title="Link to this heading">#</a></h3>
-<p>Only outliers because the regularization is not set.</p>
+<p>Only outliers because the regularization is not set and the levelset 1 does not capture the density of the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotter</span><span class="o">.</span><span class="n">boundary</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n_x1</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">n_x2</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
@@ -459,7 +466,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0b0a2ae677001188743408c81d17f5beb8a4d442560a14af6377338c4728d28d.png" src="../../_images/0b0a2ae677001188743408c81d17f5beb8a4d442560a14af6377338c4728d28d.png" />
+<img alt="../../_images/c71a645d6be9f872e848f42c6114114353b45d434dff6ae18bcfb6db4fcc2391.png" src="../../_images/c71a645d6be9f872e848f42c6114114353b45d434dff6ae18bcfb6db4fcc2391.png" />
 </div>
 </div>
 </section>
@@ -471,13 +478,13 @@
 <h3>Fit the Christoffel function<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dycf_comb</span> <span class="o">=</span> <span class="n">DyCF</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">IMPLEMENTED_REGULARIZATION_OPTIONS</span><span class="o">.</span><span class="n">COMB</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dycf_comb</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">DyCF</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">regularizer_opt</span><span class="o">=</span><span class="n">cst</span><span class="o">.</span><span class="n">IMPLEMENTED_REGULARIZERS</span><span class="o">.</span><span class="n">COMB</span><span class="p">)</span>
 <span class="n">dycf_comb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.christoffel.DyCF at 0x7ffaa426b250&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.detectors.datasteams.DyCF at 0x7fb3c6fc3610&gt;
 </pre></div>
 </div>
 </div>
@@ -487,7 +494,7 @@
 <h3>Plot the level set<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotter_comb</span> <span class="o">=</span> <span class="n">DyCFPlotter</span><span class="p">(</span><span class="n">dycf_comb</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotter_comb</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">DyCFPlotter</span><span class="p">(</span><span class="n">dycf_comb</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -495,9 +502,6 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotter_comb</span><span class="o">.</span><span class="n">levelset</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n_x1</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">n_x2</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">],</span> <span class="n">percentiles</span><span class="o">=</span><span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">])</span>
-<span class="c1"># n_x1 and n_x2 control the resolution of the grid for plotting</span>
-<span class="c1"># You can adjust the levels and percentiles as needed</span>
-<span class="c1"># More information can be found in the odds_optimized.plotter.LevelsetPlotter.plot documentation</span>
 </pre></div>
 </div>
 </div>
@@ -515,7 +519,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a9c817178cb8218cddeb57a2d860ea78e22deefae257a0c52ec1c3f6e59f6360.png" src="../../_images/a9c817178cb8218cddeb57a2d860ea78e22deefae257a0c52ec1c3f6e59f6360.png" />
+<img alt="../../_images/9d6534f4632ec563e8a8b07a7d768abb104d52e36f87cc10ff6657c537680e9e.png" src="../../_images/9d6534f4632ec563e8a8b07a7d768abb104d52e36f87cc10ff6657c537680e9e.png" />
 </div>
 </div>
 </section>
@@ -527,13 +531,13 @@
 <h3>Fit the Christoffel function<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dycf_vu_C</span> <span class="o">=</span> <span class="n">DyCF</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">regularization</span><span class="o">=</span><span class="n">IMPLEMENTED_REGULARIZATION_OPTIONS</span><span class="o">.</span><span class="n">VU_C</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dycf_vu_C</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">DyCF</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">regularizer_opt</span><span class="o">=</span><span class="n">cst</span><span class="o">.</span><span class="n">IMPLEMENTED_REGULARIZERS</span><span class="o">.</span><span class="n">VU_C</span><span class="p">)</span>
 <span class="n">dycf_vu_C</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.christoffel.DyCF at 0x7ffaa9fb47d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cristal.detectors.datasteams.DyCF at 0x7fb3ccd19450&gt;
 </pre></div>
 </div>
 </div>
@@ -543,7 +547,7 @@
 <h3>Plot the level set<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotter_vu_C</span> <span class="o">=</span> <span class="n">DyCFPlotter</span><span class="p">(</span><span class="n">dycf_vu_C</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotter_vu_C</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">DyCFPlotter</span><span class="p">(</span><span class="n">dycf_vu_C</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -551,9 +555,6 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotter_vu_C</span><span class="o">.</span><span class="n">levelset</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n_x1</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">n_x2</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">],</span> <span class="n">percentiles</span><span class="o">=</span><span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">])</span>
-<span class="c1"># n_x1 and n_x2 control the resolution of the grid for plotting</span>
-<span class="c1"># You can adjust the levels and percentiles as needed</span>
-<span class="c1"># More information can be found in the odds_optimized.plotter.LevelsetPlotter.plot documentation</span>
 </pre></div>
 </div>
 </div>
@@ -571,7 +572,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/172e130d2d083ee8088ae6c3e82330dfbebac0ff68399141cb8f88fae1730a33.png" src="../../_images/172e130d2d083ee8088ae6c3e82330dfbebac0ff68399141cb8f88fae1730a33.png" />
+<img alt="../../_images/84e46cea32aad644beed781f51b23cf460993651e7c69af7e0c1b33a7130cc80.png" src="../../_images/84e46cea32aad644beed781f51b23cf460993651e7c69af7e0c1b33a7130cc80.png" />
 </div>
 </div>
 </section>

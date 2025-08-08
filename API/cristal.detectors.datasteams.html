@@ -1,0 +1,1626 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cristal.detectors.datasteams &#8212; CRISTAL Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2d458d10" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'API/cristal.detectors.datasteams';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cristal.evaluation" href="cristal.evaluation.html" />
+    <link rel="prev" title="cristal.detectors.base" href="cristal.detectors.base.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CRISTAL Documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="cristal.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="cristal.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cristal.type_checking.html">cristal.type_checking</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.decomposers.html">cristal.decomposers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.base.html">cristal.decomposers.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.fourier.html">cristal.decomposers.fourier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.wavelet.html">cristal.decomposers.wavelet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.window.html">cristal.decomposers.window</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">cristal.detectors.datasteams</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.evaluation.data.html">cristal.evaluation.data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.evaluation.metrics.html">cristal.evaluation.metrics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.incrementers.html">cristal.incrementers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.incrementers.base.html">cristal.incrementers.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.incrementers.inverse.html">cristal.incrementers.inverse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.incrementers.sherman.html">cristal.incrementers.sherman</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.incrementers.woodbury.html">cristal.incrementers.woodbury</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.inverters.html">cristal.inverters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.base.html">cristal.inverters.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.lapack.html">cristal.inverters.lapack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.scipy.html">cristal.inverters.scipy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.moments_matrix.html">cristal.moments_matrix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html">cristal.moments_matrix.moments_matrix</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.plotters.html">cristal.plotters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.plotters.base.html">cristal.plotters.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.plotters.dycf.html">cristal.plotters.dycf</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.polynomials.html">cristal.polynomials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.polynomials.base.html">cristal.polynomials.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.polynomials.chebyshev.html">cristal.polynomials.chebyshev</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.polynomials.legendre.html">cristal.polynomials.legendre</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.polynomials.monomials.html">cristal.polynomials.monomials</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.regularizers.html">cristal.regularizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.base.html">cristal.regularizers.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.comb.html">cristal.regularizers.comb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.constant.html">cristal.regularizers.constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.vu.html">cristal.regularizers.vu</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="cristal.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="cristal.detectors.html" class="nav-link">cristal.detectors</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">cristal.detectors.datasteams</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-cristal.detectors.datasteams">
+<span id="cristal-detectors-datasteams"></span><h1>cristal.detectors.datasteams<a class="headerlink" href="#module-cristal.detectors.datasteams" title="Link to this heading">#</a></h1>
+<p>This module implements the <a class="reference internal" href="#cristal.detectors.datasteams.DyCF" title="cristal.detectors.datasteams.DyCF"><code class="xref py py-class docutils literal notranslate"><span class="pre">DyCF</span></code></a> (Dynamical Christoffel Function) and <a class="reference internal" href="#cristal.detectors.datasteams.DyCG" title="cristal.detectors.datasteams.DyCG"><code class="xref py py-class docutils literal notranslate"><span class="pre">DyCG</span></code></a> (Dynamical Christoffel Growth)
+anomaly detection algorithms. It also includes a <a class="reference internal" href="#cristal.detectors.datasteams.BaggingDyCF" title="cristal.detectors.datasteams.BaggingDyCF"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaggingDyCF</span></code></a> class for ensemble learning with DyCF models.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.detectors.datasteams.</span></span><span class="sig-name descname"><span class="pre">BaggingDyCF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_estimators</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">dycf_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cristal.detectors.datasteams.DyCF" title="cristal.detectors.datasteams.DyCF"><code class="xref py py-class docutils literal notranslate"><span class="pre">DyCF</span></code></a></p>
+<p>Bagging DyCF model.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.n_estimators">
+<span class="sig-name descname"><span class="pre">n_estimators</span></span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.n_estimators" title="Link to this definition">#</a></dt>
+<dd><p>The number of DyCF models in the ensemble.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.models">
+<span class="sig-name descname"><span class="pre">models</span></span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.models" title="Link to this definition">#</a></dt>
+<dd><p>The list of DyCF models in the ensemble.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#cristal.detectors.datasteams.DyCF" title="cristal.detectors.datasteams.DyCF">DyCF</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.d">
+<span class="sig-name descname"><span class="pre">d</span></span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.d" title="Link to this definition">#</a></dt>
+<dd><p>The dimension of the input data. 0 if not fitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_estimators</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">dycf_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize the BaggingDyCF model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_values</strong> (<em>int</em><em> | </em><em>list</em><em>[</em><em>int</em><em>]</em>) – The degree of the polynomial basis or a list of degrees for the DyCF models.
+If a single integer is provided, it will be used for all models.
+If a list is provided, its length should match n_estimators, and each model will have a different degree.</p></li>
+<li><p><strong>n_estimators</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of DyCF models in the ensemble (default is 10).</p></li>
+<li><p><strong>dycf_kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – Additional keyword arguments to pass to the DyCF constructor.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.assert_shape_fitted">
+<span class="sig-name descname"><span class="pre">assert_shape_fitted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.assert_shape_fitted" title="Link to this definition">#</a></dt>
+<dd><p>Asserts that the input array x has the correct shape to use the model after it has been fitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – The input data to check. Should be a 2D array with shape (N, d)
+where N is the number of samples and d is the number of features (the same as during fitting).</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.NotFittedError" title="cristal.detectors.base.NotFittedError"><strong>NotFittedError</strong></a> – If the model has not been fitted yet.</p></li>
+<li><p><strong>ValueError</strong> – If the input array does not have the expected shape.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.assert_shape_unfitted">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">assert_shape_unfitted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.assert_shape_unfitted" title="Link to this definition">#</a></dt>
+<dd><p>Asserts that the input array x has the correct shape to fit the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – The input data to check. Should be a 2D array with shape (N, d)
+where N is the number of samples and d is the number of features.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input array does not have the expected shape.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.copy" title="Link to this definition">#</a></dt>
+<dd><p>Returns a copy of the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A copy of the current model.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.decision_function">
+<span class="sig-name descname"><span class="pre">decision_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.decision_function" title="Link to this definition">#</a></dt>
+<dd><p>Computes the decision function for the samples in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to compute the decision function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decision function values for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.eval_update">
+<span class="sig-name descname"><span class="pre">eval_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.eval_update" title="Link to this definition">#</a></dt>
+<dd><p>Evaluates the model on the samples in x and updates it with inliers.
+This method iterates over each sample in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to evaluate and update the model.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decision function values for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.fit" title="Link to this definition">#</a></dt>
+<dd><p>Generate n_estimators DyCF models and fit them on the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>, </em><em>d</em><em>)</em>) – The input data to fit the models on.</p></li>
+<li><p><strong>n_samples</strong> (<em>int</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – The number of samples to use for fitting each model. If None or greater than N, all samples are used, by default None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The fitted BaggingDyCF instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#cristal.detectors.datasteams.BaggingDyCF" title="cristal.detectors.datasteams.BaggingDyCF">BaggingDyCF</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.fit_predict">
+<span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.fit_predict" title="Link to this definition">#</a></dt>
+<dd><p>Fits the model with x and predicts the outlier labels for the samples in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>, </em><em>d</em><em>)</em>) – The input data to fit and predict.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted labels for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (N,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.is_fitted">
+<span class="sig-name descname"><span class="pre">is_fitted</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.is_fitted" title="Link to this definition">#</a></dt>
+<dd><p>Checks if the model is fitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the model is fitted, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.load_model">
+<span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.load_model" title="Link to this definition">#</a></dt>
+<dd><p>Loads the BaggingDyCF model from a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_dict</strong> (<em>dict</em>) – <dl class="simple">
+<dt>The dictionary containing the BaggingDyCF model parameters returned by <a class="reference internal" href="#cristal.detectors.datasteams.BaggingDyCF.save_model" title="cristal.detectors.datasteams.BaggingDyCF.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">save_model()</span></code></a>:</dt><dd><ul class="simple">
+<li><p>”n_values”: list[int], the degrees of the polynomial basis for each DyCF model.</p></li>
+<li><p>”n_estimators”: int, the number of DyCF models in the ensemble.</p></li>
+<li><p>”d”: int, the dimension of the input data.</p></li>
+<li><p>”regularizer_opt”: str, the regularization method used.</p></li>
+<li><p>”C”: float | int, the constant factor used in the regularization.</p></li>
+<li><p>”regularizer_value”: float | int | None, the regularization factor.</p></li>
+<li><p>”models”: list[dict], the saved DyCF models.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The loaded BaggingDyCF model with updated parameters.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#cristal.detectors.datasteams.BaggingDyCF" title="cristal.detectors.datasteams.BaggingDyCF">BaggingDyCF</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.method_name">
+<span class="sig-name descname"><span class="pre">method_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.method_name" title="Link to this definition">#</a></dt>
+<dd><p>Returns the name of the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The name of the method.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.predict" title="Link to this definition">#</a></dt>
+<dd><p>Predicts the outlier labels for the samples in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to predict the labels.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted labels for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.predict_update">
+<span class="sig-name descname"><span class="pre">predict_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.predict_update" title="Link to this definition">#</a></dt>
+<dd><p>Predict the model on the samples in x and updates it with inliers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to evaluate and update the model.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted labels for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.save_model">
+<span class="sig-name descname"><span class="pre">save_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.save_model" title="Link to this definition">#</a></dt>
+<dd><p>Saves the BaggingDyCF model as a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>The BaggingDyCF model represented as a dictionary, with keys:</dt><dd><ul class="simple">
+<li><p>”n_values”: list[int], the degrees of the polynomial basis for each DyCF model.</p></li>
+<li><p>”n_estimators”: int, the number of DyCF models in the ensemble.</p></li>
+<li><p>”d”: int, the dimension of the input data.</p></li>
+<li><p>”regularizer_opt”: str, the regularization method used.</p></li>
+<li><p>”C”: float | int, the constant factor used in the regularization.</p></li>
+<li><p>”regularizer_value”: float | int | None, the regularization factor.</p></li>
+<li><p>”models”: list[dict], the saved DyCF models.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.score_samples">
+<span class="sig-name descname"><span class="pre">score_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.score_samples" title="Link to this definition">#</a></dt>
+<dd><p>Computes the outlier scores for the samples in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to compute the scores.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The outlier scores for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.BaggingDyCF.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sym</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.BaggingDyCF.update" title="Link to this definition">#</a></dt>
+<dd><p>Update the current model with instances in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>N'</em><em>, </em><em>d</em><em>)</em>) – The input data to update the model.</p></li>
+<li><p><strong>sym</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether the inverse of the moments matrix should be considered as symmetric, by default True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The updated DyCF instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#cristal.detectors.datasteams.DyCF" title="cristal.detectors.datasteams.DyCF">DyCF</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.detectors.datasteams.</span></span><span class="sig-name descname"><span class="pre">DyCF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regularizer_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.regularizers.html#cristal.regularizers.IMPLEMENTED_REGULARIZERS" title="cristal.regularizers.IMPLEMENTED_REGULARIZERS"><span class="pre">IMPLEMENTED_REGULARIZERS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_REGULARIZERS.VU_C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polynomial_family_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.polynomials.html#cristal.polynomials.IMPLEMENTED_POLYNOMIALS" title="cristal.polynomials.IMPLEMENTED_POLYNOMIALS"><span class="pre">IMPLEMENTED_POLYNOMIALS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_POLYNOMIALS.MONOMIALS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inverter_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.inverters.html#cristal.inverters.IMPLEMENTED_INVERTERS" title="cristal.inverters.IMPLEMENTED_INVERTERS"><span class="pre">IMPLEMENTED_INVERTERS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_INVERTERS.FPD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incrementer_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.incrementers.html#cristal.incrementers.IMPLEMENTED_INCREMENTERS" title="cristal.incrementers.IMPLEMENTED_INCREMENTERS"><span class="pre">IMPLEMENTED_INCREMENTERS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_INCREMENTERS.INVERSE</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector" title="cristal.detectors.base.BaseDetector"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDetector</span></code></a></p>
+<p>Dynamical Christoffel Function</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.n">
+<span class="sig-name descname"><span class="pre">n</span></span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.n" title="Link to this definition">#</a></dt>
+<dd><p>The degree of polynomials, usually set between 2 and 8.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.regularizer_opt">
+<span class="sig-name descname"><span class="pre">regularizer_opt</span></span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.regularizer_opt" title="Link to this definition">#</a></dt>
+<dd><p>The regularization method to use to divide the scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="cristal.regularizers.html#cristal.regularizers.IMPLEMENTED_REGULARIZERS" title="cristal.regularizers.IMPLEMENTED_REGULARIZERS">IMPLEMENTED_REGULARIZERS</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.C">
+<span class="sig-name descname"><span class="pre">C</span></span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.C" title="Link to this definition">#</a></dt>
+<dd><p>The constant factor used in the <code class="xref py py-const docutils literal notranslate"><span class="pre">&quot;vu_C&quot;</span></code> or <code class="xref py py-const docutils literal notranslate"><span class="pre">&quot;constant&quot;</span></code> regularizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float | int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.moments_matrix">
+<span class="sig-name descname"><span class="pre">moments_matrix</span></span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.moments_matrix" title="Link to this definition">#</a></dt>
+<dd><p>The moments matrix object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html#cristal.moments_matrix.moments_matrix.MomentsMatrix" title="cristal.moments_matrix.moments_matrix.MomentsMatrix">MomentsMatrix</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.d">
+<span class="sig-name descname"><span class="pre">d</span></span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.d" title="Link to this definition">#</a></dt>
+<dd><p>The dimension of the input data. 0 if not fitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.regularizer_value">
+<span class="sig-name descname"><span class="pre">regularizer_value</span></span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.regularizer_value" title="Link to this definition">#</a></dt>
+<dd><p>The regularization factor computed based on the degree and dimension. None if not fitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float | int | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regularizer_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.regularizers.html#cristal.regularizers.IMPLEMENTED_REGULARIZERS" title="cristal.regularizers.IMPLEMENTED_REGULARIZERS"><span class="pre">IMPLEMENTED_REGULARIZERS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_REGULARIZERS.VU_C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polynomial_family_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.polynomials.html#cristal.polynomials.IMPLEMENTED_POLYNOMIALS" title="cristal.polynomials.IMPLEMENTED_POLYNOMIALS"><span class="pre">IMPLEMENTED_POLYNOMIALS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_POLYNOMIALS.MONOMIALS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inverter_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.inverters.html#cristal.inverters.IMPLEMENTED_INVERTERS" title="cristal.inverters.IMPLEMENTED_INVERTERS"><span class="pre">IMPLEMENTED_INVERTERS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_INVERTERS.FPD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incrementer_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.incrementers.html#cristal.incrementers.IMPLEMENTED_INCREMENTERS" title="cristal.incrementers.IMPLEMENTED_INCREMENTERS"><span class="pre">IMPLEMENTED_INCREMENTERS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_INCREMENTERS.INVERSE</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize the DyCF model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – The degree of polynomials, usually set between 2 and 8.</p></li>
+<li><p><strong>regularizer_opt</strong> (<a class="reference internal" href="cristal.regularizers.html#cristal.regularizers.IMPLEMENTED_REGULARIZERS" title="cristal.regularizers.IMPLEMENTED_REGULARIZERS"><em>IMPLEMENTED_REGULARIZERS</em></a><em>, </em><em>optional</em><em>, </em><em>by default IMPLEMENTED_REGULARIZERS.VU_C</em>) – The regularization method to use to divide the scores.
+See <a class="reference internal" href="cristal.regularizers.html#cristal.regularizers.IMPLEMENTED_REGULARIZERS" title="cristal.regularizers.IMPLEMENTED_REGULARIZERS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS</span></code></a> for more details.</p></li>
+<li><p><strong>C</strong> (<em>float</em><em> | </em><em>int</em><em>, </em><em>optional</em><em>, </em><em>by default 1</em>) – The constant factor used in the <code class="xref py py-const docutils literal notranslate"><span class="pre">&quot;vu_C&quot;</span></code> or <code class="xref py py-const docutils literal notranslate"><span class="pre">&quot;constant&quot;</span></code> regularizer.</p></li>
+<li><p><strong>polynomial_family_opt</strong> (<a class="reference internal" href="cristal.polynomials.html#cristal.polynomials.IMPLEMENTED_POLYNOMIALS" title="cristal.polynomials.IMPLEMENTED_POLYNOMIALS"><em>IMPLEMENTED_POLYNOMIALS</em></a><em>, </em><em>optional</em><em>, </em><em>by default IMPLEMENTED_POLYNOMIALS.MONOMIALS</em>) – The polynomial basis to use for the moments matrix.
+See <a class="reference internal" href="cristal.polynomials.html#cristal.polynomials.IMPLEMENTED_POLYNOMIALS" title="cristal.polynomials.IMPLEMENTED_POLYNOMIALS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS</span></code></a> for more details.</p></li>
+<li><p><strong>inverter_opt</strong> (<a class="reference internal" href="cristal.inverters.html#cristal.inverters.IMPLEMENTED_INVERTERS" title="cristal.inverters.IMPLEMENTED_INVERTERS"><em>IMPLEMENTED_INVERTERS</em></a><em>, </em><em>optional</em><em>, </em><em>by default IMPLEMENTED_INVERTERS.FPD</em>) – The inversion option to use for the moments matrix.
+See <a class="reference internal" href="cristal.inverters.html#cristal.inverters.IMPLEMENTED_INVERTERS" title="cristal.inverters.IMPLEMENTED_INVERTERS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS</span></code></a> for more details.</p></li>
+<li><p><strong>incrementer_opt</strong> (<a class="reference internal" href="cristal.incrementers.html#cristal.incrementers.IMPLEMENTED_INCREMENTERS" title="cristal.incrementers.IMPLEMENTED_INCREMENTERS"><em>IMPLEMENTED_INCREMENTERS</em></a><em>, </em><em>optional</em><em>, </em><em>by default IMPLEMENTED_INCREMENTERS.INVERSE</em>) – The incrementation option to use for updating the moments matrix.
+See <a class="reference internal" href="cristal.incrementers.html#cristal.incrementers.IMPLEMENTED_INCREMENTERS" title="cristal.incrementers.IMPLEMENTED_INCREMENTERS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS</span></code></a> for more details.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.assert_shape_fitted">
+<span class="sig-name descname"><span class="pre">assert_shape_fitted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.assert_shape_fitted" title="Link to this definition">#</a></dt>
+<dd><p>Asserts that the input array x has the correct shape to use the model after it has been fitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – The input data to check. Should be a 2D array with shape (N, d)
+where N is the number of samples and d is the number of features (the same as during fitting).</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.NotFittedError" title="cristal.detectors.base.NotFittedError"><strong>NotFittedError</strong></a> – If the model has not been fitted yet.</p></li>
+<li><p><strong>ValueError</strong> – If the input array does not have the expected shape.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.assert_shape_unfitted">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">assert_shape_unfitted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.assert_shape_unfitted" title="Link to this definition">#</a></dt>
+<dd><p>Asserts that the input array x has the correct shape to fit the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – The input data to check. Should be a 2D array with shape (N, d)
+where N is the number of samples and d is the number of features.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input array does not have the expected shape.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.copy" title="Link to this definition">#</a></dt>
+<dd><p>Returns a copy of the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A copy of the current model.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.decision_function">
+<span class="sig-name descname"><span class="pre">decision_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.decision_function" title="Link to this definition">#</a></dt>
+<dd><p>Computes the decision function for the samples in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to compute the decision function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decision function values for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.eval_update">
+<span class="sig-name descname"><span class="pre">eval_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.eval_update" title="Link to this definition">#</a></dt>
+<dd><p>Evaluates the model on the samples in x and updates it with inliers.
+This method iterates over each sample in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to evaluate and update the model.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decision function values for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.fit" title="Link to this definition">#</a></dt>
+<dd><p>Generates a model that fit dataset x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>, </em><em>d</em><em>)</em>) – The input data to fit the model.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The fitted model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.fit_predict">
+<span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.fit_predict" title="Link to this definition">#</a></dt>
+<dd><p>Fits the model with x and predicts the outlier labels for the samples in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>, </em><em>d</em><em>)</em>) – The input data to fit and predict.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted labels for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (N,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.is_fitted">
+<span class="sig-name descname"><span class="pre">is_fitted</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.is_fitted" title="Link to this definition">#</a></dt>
+<dd><p>Checks if the model is fitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the model is fitted, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.load_model">
+<span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.load_model" title="Link to this definition">#</a></dt>
+<dd><p>Loads the DyCF model from a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_dict</strong> (<em>dict</em>) – <dl class="simple">
+<dt>The dictionary containing the DyCF parameters returned by <a class="reference internal" href="#cristal.detectors.datasteams.DyCF.save_model" title="cristal.detectors.datasteams.DyCF.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">save_model()</span></code></a>:</dt><dd><ul class="simple">
+<li><p>”n”: int, the degree of the polynomial basis.</p></li>
+<li><p>”regularizer_opt”: str, the regularization method used.</p></li>
+<li><p>”C”: float | int, the constant factor used in the regularization.</p></li>
+<li><p>”moments_matrix”: dict, the saved moments matrix.</p></li>
+<li><p>”d”: int, the dimension of the input data.</p></li>
+<li><p>”regularizer_value”: float | int | None, the regularization factor.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The loaded DyCF instance with updated parameters.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#cristal.detectors.datasteams.DyCF" title="cristal.detectors.datasteams.DyCF">DyCF</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.method_name">
+<span class="sig-name descname"><span class="pre">method_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.method_name" title="Link to this definition">#</a></dt>
+<dd><p>Returns the name of the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The name of the method.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.predict" title="Link to this definition">#</a></dt>
+<dd><p>Predicts the outlier labels for the samples in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to predict the labels.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted labels for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.predict_update">
+<span class="sig-name descname"><span class="pre">predict_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.predict_update" title="Link to this definition">#</a></dt>
+<dd><p>Predict the model on the samples in x and updates it with inliers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to evaluate and update the model.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted labels for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.save_model">
+<span class="sig-name descname"><span class="pre">save_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.save_model" title="Link to this definition">#</a></dt>
+<dd><p>Saves the DyCF model as a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>The DyCF model represented as a dictionary, with keys:</dt><dd><ul class="simple">
+<li><p>”n”: int, the degree of the polynomial basis.</p></li>
+<li><p>”regularizer_opt”: str, the regularization method used.</p></li>
+<li><p>”C”: float | int, the constant factor used in the regularization.</p></li>
+<li><p>”moments_matrix”: dict, the saved moments matrix.</p></li>
+<li><p>”d”: int, the dimension of the input data.</p></li>
+<li><p>”regularizer_value”: float | int | None, the regularization factor.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.score_samples">
+<span class="sig-name descname"><span class="pre">score_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.score_samples" title="Link to this definition">#</a></dt>
+<dd><p>Computes the outlier scores for the samples in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to compute the scores.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The outlier scores for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCF.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sym</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCF.update" title="Link to this definition">#</a></dt>
+<dd><p>Update the current model with instances in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>N'</em><em>, </em><em>d</em><em>)</em>) – The input data to update the model.</p></li>
+<li><p><strong>sym</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether the inverse of the moments matrix should be considered as symmetric, by default True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The updated DyCF instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#cristal.detectors.datasteams.DyCF" title="cristal.detectors.datasteams.DyCF">DyCF</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.detectors.datasteams.</span></span><span class="sig-name descname"><span class="pre">DyCG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degrees</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">array([2,</span> <span class="pre">8])</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">dycf_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector" title="cristal.detectors.base.BaseDetector"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDetector</span></code></a></p>
+<p>Dynamical Christoffel Growth</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.degrees">
+<span class="sig-name descname"><span class="pre">degrees</span></span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.degrees" title="Link to this definition">#</a></dt>
+<dd><p>The degrees of at least two DyCF models inside (default is np.array([2, 8]))</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.models">
+<span class="sig-name descname"><span class="pre">models</span></span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.models" title="Link to this definition">#</a></dt>
+<dd><p>The list of DyCF models with different degrees n.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#cristal.detectors.datasteams.DyCF" title="cristal.detectors.datasteams.DyCF">DyCF</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.d">
+<span class="sig-name descname"><span class="pre">d</span></span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.d" title="Link to this definition">#</a></dt>
+<dd><p>The dimension of the input data. 0 if not fitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degrees</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">array([2,</span> <span class="pre">8])</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">dycf_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize the DyCG model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>degrees</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – The degrees of at least two DyCF models inside (default is np.array([2, 8]))</p></li>
+<li><p><strong>dycf_kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – Additional keyword arguments to pass to the DyCF constructor (other than n).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.assert_shape_fitted">
+<span class="sig-name descname"><span class="pre">assert_shape_fitted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.assert_shape_fitted" title="Link to this definition">#</a></dt>
+<dd><p>Asserts that the input array x has the correct shape to use the model after it has been fitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – The input data to check. Should be a 2D array with shape (N, d)
+where N is the number of samples and d is the number of features (the same as during fitting).</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.NotFittedError" title="cristal.detectors.base.NotFittedError"><strong>NotFittedError</strong></a> – If the model has not been fitted yet.</p></li>
+<li><p><strong>ValueError</strong> – If the input array does not have the expected shape.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.assert_shape_unfitted">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">assert_shape_unfitted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.assert_shape_unfitted" title="Link to this definition">#</a></dt>
+<dd><p>Asserts that the input array x has the correct shape to fit the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – The input data to check. Should be a 2D array with shape (N, d)
+where N is the number of samples and d is the number of features.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input array does not have the expected shape.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.copy" title="Link to this definition">#</a></dt>
+<dd><p>Returns a copy of the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A copy of the current model.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.decision_function">
+<span class="sig-name descname"><span class="pre">decision_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.decision_function" title="Link to this definition">#</a></dt>
+<dd><p>Computes the decision function for the samples in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to compute the decision function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decision function values for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.eval_update">
+<span class="sig-name descname"><span class="pre">eval_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.eval_update" title="Link to this definition">#</a></dt>
+<dd><p>Evaluates the model on the samples in x and updates it with inliers.
+This method iterates over each sample in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to evaluate and update the model.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decision function values for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.fit" title="Link to this definition">#</a></dt>
+<dd><p>Generates a model that fit dataset x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>, </em><em>d</em><em>)</em>) – The input data to fit the model.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The fitted model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.fit_predict">
+<span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.fit_predict" title="Link to this definition">#</a></dt>
+<dd><p>Fits the model with x and predicts the outlier labels for the samples in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>, </em><em>d</em><em>)</em>) – The input data to fit and predict.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted labels for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (N,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.is_fitted">
+<span class="sig-name descname"><span class="pre">is_fitted</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.is_fitted" title="Link to this definition">#</a></dt>
+<dd><p>Checks if the model is fitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the model is fitted, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.load_model">
+<span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.load_model" title="Link to this definition">#</a></dt>
+<dd><p>Loads the DyCG model from a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_dict</strong> (<em>dict</em>) – <dl class="simple">
+<dt>The dictionary containing the DyCG model parameters returned by <a class="reference internal" href="#cristal.detectors.datasteams.DyCG.save_model" title="cristal.detectors.datasteams.DyCG.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">save_model()</span></code></a>:</dt><dd><ul class="simple">
+<li><p>”degrees”: list[int], the degrees of the polynomial basis.</p></li>
+<li><p>”d”: int, the dimension of the input data.</p></li>
+<li><p>”models”: list[dict], the saved DyCF models.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The loaded DyCG model with updated parameters.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#cristal.detectors.datasteams.DyCG" title="cristal.detectors.datasteams.DyCG">DyCG</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.method_name">
+<span class="sig-name descname"><span class="pre">method_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.method_name" title="Link to this definition">#</a></dt>
+<dd><p>Returns the name of the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The name of the method.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.predict" title="Link to this definition">#</a></dt>
+<dd><p>Predicts the outlier labels for the samples in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to predict the labels.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted labels for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.predict_update">
+<span class="sig-name descname"><span class="pre">predict_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.predict_update" title="Link to this definition">#</a></dt>
+<dd><p>Predict the model on the samples in x and updates it with inliers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to evaluate and update the model.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted labels for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.save_model">
+<span class="sig-name descname"><span class="pre">save_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.save_model" title="Link to this definition">#</a></dt>
+<dd><p>Saves the DyCG model as a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>The DyCG model represented as a dictionary, with keys:</dt><dd><ul class="simple">
+<li><p>”degrees”: list[int], the degrees of the polynomial basis.</p></li>
+<li><p>”d”: int, the dimension of the input data.</p></li>
+<li><p>”models”: list[dict], the saved DyCF models.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.score_samples">
+<span class="sig-name descname"><span class="pre">score_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.score_samples" title="Link to this definition">#</a></dt>
+<dd><p>Computes the outlier scores for the samples in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to compute the scores.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The outlier scores for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.datasteams.DyCG.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.datasteams.DyCG.update" title="Link to this definition">#</a></dt>
+<dd><p>Updates the current model with instances in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>N'</em><em>, </em><em>d</em><em>)</em>) – The input data to update the model.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The updated model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Self</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="cristal.detectors.base.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">cristal.detectors.base</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cristal.evaluation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">cristal.evaluation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.n_estimators"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.n_estimators</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.models"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.models</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.d"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.d</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.__init__"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.assert_shape_fitted"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.assert_shape_fitted()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.assert_shape_unfitted"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.assert_shape_unfitted()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.copy"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.copy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.decision_function"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.decision_function()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.eval_update"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.eval_update()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.fit"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.fit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.fit_predict"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.fit_predict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.is_fitted"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.is_fitted()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.load_model"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.load_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.method_name"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.method_name()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.predict"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.predict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.predict_update"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.predict_update()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.save_model"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.save_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.score_samples"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.score_samples()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.BaggingDyCF.update"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF"><code class="docutils literal notranslate"><span class="pre">DyCF</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.n"><code class="docutils literal notranslate"><span class="pre">DyCF.n</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.regularizer_opt"><code class="docutils literal notranslate"><span class="pre">DyCF.regularizer_opt</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.C"><code class="docutils literal notranslate"><span class="pre">DyCF.C</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.moments_matrix"><code class="docutils literal notranslate"><span class="pre">DyCF.moments_matrix</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.d"><code class="docutils literal notranslate"><span class="pre">DyCF.d</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.regularizer_value"><code class="docutils literal notranslate"><span class="pre">DyCF.regularizer_value</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.__init__"><code class="docutils literal notranslate"><span class="pre">DyCF.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.assert_shape_fitted"><code class="docutils literal notranslate"><span class="pre">DyCF.assert_shape_fitted()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.assert_shape_unfitted"><code class="docutils literal notranslate"><span class="pre">DyCF.assert_shape_unfitted()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.copy"><code class="docutils literal notranslate"><span class="pre">DyCF.copy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.decision_function"><code class="docutils literal notranslate"><span class="pre">DyCF.decision_function()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.eval_update"><code class="docutils literal notranslate"><span class="pre">DyCF.eval_update()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.fit"><code class="docutils literal notranslate"><span class="pre">DyCF.fit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.fit_predict"><code class="docutils literal notranslate"><span class="pre">DyCF.fit_predict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.is_fitted"><code class="docutils literal notranslate"><span class="pre">DyCF.is_fitted()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.load_model"><code class="docutils literal notranslate"><span class="pre">DyCF.load_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.method_name"><code class="docutils literal notranslate"><span class="pre">DyCF.method_name()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.predict"><code class="docutils literal notranslate"><span class="pre">DyCF.predict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.predict_update"><code class="docutils literal notranslate"><span class="pre">DyCF.predict_update()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.save_model"><code class="docutils literal notranslate"><span class="pre">DyCF.save_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.score_samples"><code class="docutils literal notranslate"><span class="pre">DyCF.score_samples()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCF.update"><code class="docutils literal notranslate"><span class="pre">DyCF.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG"><code class="docutils literal notranslate"><span class="pre">DyCG</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.degrees"><code class="docutils literal notranslate"><span class="pre">DyCG.degrees</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.models"><code class="docutils literal notranslate"><span class="pre">DyCG.models</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.d"><code class="docutils literal notranslate"><span class="pre">DyCG.d</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.__init__"><code class="docutils literal notranslate"><span class="pre">DyCG.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.assert_shape_fitted"><code class="docutils literal notranslate"><span class="pre">DyCG.assert_shape_fitted()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.assert_shape_unfitted"><code class="docutils literal notranslate"><span class="pre">DyCG.assert_shape_unfitted()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.copy"><code class="docutils literal notranslate"><span class="pre">DyCG.copy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.decision_function"><code class="docutils literal notranslate"><span class="pre">DyCG.decision_function()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.eval_update"><code class="docutils literal notranslate"><span class="pre">DyCG.eval_update()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.fit"><code class="docutils literal notranslate"><span class="pre">DyCG.fit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.fit_predict"><code class="docutils literal notranslate"><span class="pre">DyCG.fit_predict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.is_fitted"><code class="docutils literal notranslate"><span class="pre">DyCG.is_fitted()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.load_model"><code class="docutils literal notranslate"><span class="pre">DyCG.load_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.method_name"><code class="docutils literal notranslate"><span class="pre">DyCG.method_name()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.predict"><code class="docutils literal notranslate"><span class="pre">DyCG.predict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.predict_update"><code class="docutils literal notranslate"><span class="pre">DyCG.predict_update()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.save_model"><code class="docutils literal notranslate"><span class="pre">DyCG.save_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.score_samples"><code class="docutils literal notranslate"><span class="pre">DyCG.score_samples()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datasteams.DyCG.update"><code class="docutils literal notranslate"><span class="pre">DyCG.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/API/cristal.detectors.datasteams.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Florian Grivet.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

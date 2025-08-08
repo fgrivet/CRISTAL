@@ -1,0 +1,861 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cristal.decomposers.fourier &#8212; CRISTAL Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2d458d10" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'API/cristal.decomposers.fourier';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cristal.decomposers.wavelet" href="cristal.decomposers.wavelet.html" />
+    <link rel="prev" title="cristal.decomposers.base" href="cristal.decomposers.base.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CRISTAL Documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="cristal.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="cristal.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cristal.type_checking.html">cristal.type_checking</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="cristal.decomposers.html">cristal.decomposers</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.base.html">cristal.decomposers.base</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">cristal.decomposers.fourier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.wavelet.html">cristal.decomposers.wavelet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.window.html">cristal.decomposers.window</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datasteams.html">cristal.detectors.datasteams</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.evaluation.data.html">cristal.evaluation.data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.evaluation.metrics.html">cristal.evaluation.metrics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.incrementers.html">cristal.incrementers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.incrementers.base.html">cristal.incrementers.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.incrementers.inverse.html">cristal.incrementers.inverse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.incrementers.sherman.html">cristal.incrementers.sherman</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.incrementers.woodbury.html">cristal.incrementers.woodbury</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.inverters.html">cristal.inverters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.base.html">cristal.inverters.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.lapack.html">cristal.inverters.lapack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.scipy.html">cristal.inverters.scipy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.moments_matrix.html">cristal.moments_matrix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html">cristal.moments_matrix.moments_matrix</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.plotters.html">cristal.plotters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.plotters.base.html">cristal.plotters.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.plotters.dycf.html">cristal.plotters.dycf</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.polynomials.html">cristal.polynomials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.polynomials.base.html">cristal.polynomials.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.polynomials.chebyshev.html">cristal.polynomials.chebyshev</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.polynomials.legendre.html">cristal.polynomials.legendre</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.polynomials.monomials.html">cristal.polynomials.monomials</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.regularizers.html">cristal.regularizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.base.html">cristal.regularizers.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.comb.html">cristal.regularizers.comb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.constant.html">cristal.regularizers.constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.vu.html">cristal.regularizers.vu</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="cristal.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="cristal.decomposers.html" class="nav-link">cristal.decomposers</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">cristal.decomposers.fourier</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-cristal.decomposers.fourier">
+<span id="cristal-decomposers-fourier"></span><h1>cristal.decomposers.fourier<a class="headerlink" href="#module-cristal.decomposers.fourier" title="Link to this heading">#</a></h1>
+<p>Class for signal decomposition using Fourier Transform. <a class="reference internal" href="#cristal.decomposers.fourier.FourierDecomposer" title="cristal.decomposers.fourier.FourierDecomposer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FourierDecomposer</span></code></a> decomposes a signal using the Fourier Transform, <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer" title="cristal.decomposers.fourier.WindowFourierDecomposer"><code class="xref py py-class docutils literal notranslate"><span class="pre">WindowFourierDecomposer</span></code></a> extends this functionality to handle signals with a sliding window approach.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cristal.decomposers.fourier.FourierDecomposer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.decomposers.fourier.</span></span><span class="sig-name descname"><span class="pre">FourierDecomposer</span></span><a class="headerlink" href="#cristal.decomposers.fourier.FourierDecomposer" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cristal.decomposers.base.html#cristal.decomposers.base.BaseDecomposer" title="cristal.decomposers.base.BaseDecomposer"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDecomposer</span></code></a></p>
+<p>Class for signal decomposition using Fourier Transform.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.decomposers.fourier.FourierDecomposer.decompose">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decompose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_coefs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cristal.decomposers.fourier.FourierDecomposer.decompose" title="Link to this definition">#</a></dt>
+<dd><p>Decompose the signal into the n_coefs largest Fourier coefficients in absolute value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>,</em><em>)</em>) – The input signal to decompose.</p></li>
+<li><p><strong>n_coefs</strong> (<em>int</em>) – The number of coefficients to retain.</p></li>
+<li><p><strong>args</strong> – Unused positional arguments.</p></li>
+<li><p><strong>kwargs</strong> – Unused keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The indices and values of the largest Fourier coefficients in absolute value in the first half of the spectrum.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[np.ndarray (n_coefs,), np.ndarray (n_coefs,)]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.decomposers.fourier.FourierDecomposer.full_decompose">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">full_decompose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cristal.decomposers.fourier.FourierDecomposer.full_decompose" title="Link to this definition">#</a></dt>
+<dd><p>Return the first half of the Fourier Transform spectrum of the signal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>,</em><em>)</em>) – The input signal to decompose.</p></li>
+<li><p><strong>args</strong> – Unused positional arguments.</p></li>
+<li><p><strong>kwargs</strong> – Unused keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The first half of the Fourier Transform spectrum of the signal.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (N//2 + 1,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.decomposers.fourier.FourierDecomposer.get_coefficients_at_indices">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_coefficients_at_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cristal.decomposers.fourier.FourierDecomposer.get_coefficients_at_indices" title="Link to this definition">#</a></dt>
+<dd><p>Get the coefficients of the signal at the specified indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>,</em><em>)</em>) – The input signal to decompose.</p></li>
+<li><p><strong>indices</strong> (<em>np.ndarray</em><em> (</em><em>n_coefs</em><em>,</em><em>)</em>) – The indices at which to retrieve the coefficients.</p></li>
+<li><p><strong>args</strong> – See <a class="reference internal" href="#cristal.decomposers.fourier.FourierDecomposer.full_decompose" title="cristal.decomposers.fourier.FourierDecomposer.full_decompose"><code class="xref py py-meth docutils literal notranslate"><span class="pre">full_decompose()</span></code></a> for specific positional arguments.</p></li>
+<li><p><strong>kwargs</strong> – See <a class="reference internal" href="#cristal.decomposers.fourier.FourierDecomposer.full_decompose" title="cristal.decomposers.fourier.FourierDecomposer.full_decompose"><code class="xref py py-meth docutils literal notranslate"><span class="pre">full_decompose()</span></code></a> for specific keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The coefficients of the signal at the specified indices.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (n_coefs,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.decomposers.fourier.FourierDecomposer.reconstruct">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reconstruct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coefficients</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cristal.decomposers.fourier.FourierDecomposer.reconstruct" title="Link to this definition">#</a></dt>
+<dd><p>Reconstruct the signal from the specified Fourier coefficients at the given indices (should be in the first half of the spectrum).
+Ensure symmetry in the Fourier spectrum by setting the conjugate coefficients in the second half of the spectrum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> (<em>int</em>) – The length of the original signal.</p></li>
+<li><p><strong>indices</strong> (<em>np.ndarray</em><em> (</em><em>n_coefs</em><em>,</em><em>)</em>) – The indices of the Fourier coefficients to use for reconstruction.</p></li>
+<li><p><strong>coefficients</strong> (<em>np.ndarray</em><em> (</em><em>n_coefs</em><em>,</em><em>)</em>) – The Fourier coefficients to use for reconstruction.</p></li>
+<li><p><strong>args</strong> – Unused positional arguments.</p></li>
+<li><p><strong>kwargs</strong> – Unused keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The reconstructed signal.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (N,)</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the number of coefficients differ from the number of indices
+    or if the indices are not in the first half of the Fourier spectrum.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.decomposers.fourier.FourierDecomposer.transform">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_coefs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cristal.decomposers.fourier.FourierDecomposer.transform" title="Link to this definition">#</a></dt>
+<dd><p>Reconstruct the signal from its decomposition into n_coefs components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>,</em><em>)</em>) – The input signal to decompose.</p></li>
+<li><p><strong>n_coefs</strong> (<em>int</em>) – The number of coefficients to retain.</p></li>
+<li><p><strong>args</strong> – See <a class="reference internal" href="#cristal.decomposers.fourier.FourierDecomposer.decompose" title="cristal.decomposers.fourier.FourierDecomposer.decompose"><code class="xref py py-meth docutils literal notranslate"><span class="pre">decompose()</span></code></a> and <a class="reference internal" href="#cristal.decomposers.fourier.FourierDecomposer.reconstruct" title="cristal.decomposers.fourier.FourierDecomposer.reconstruct"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reconstruct()</span></code></a> for specific positional arguments.</p></li>
+<li><p><strong>kwargs</strong> – See <a class="reference internal" href="#cristal.decomposers.fourier.FourierDecomposer.decompose" title="cristal.decomposers.fourier.FourierDecomposer.decompose"><code class="xref py py-meth docutils literal notranslate"><span class="pre">decompose()</span></code></a> and <a class="reference internal" href="#cristal.decomposers.fourier.FourierDecomposer.reconstruct" title="cristal.decomposers.fourier.FourierDecomposer.reconstruct"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reconstruct()</span></code></a> for specific keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The reconstructed signal.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (N,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cristal.decomposers.fourier.WindowFourierDecomposer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.decomposers.fourier.</span></span><span class="sig-name descname"><span class="pre">WindowFourierDecomposer</span></span><a class="headerlink" href="#cristal.decomposers.fourier.WindowFourierDecomposer" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cristal.decomposers.window.html#cristal.decomposers.window.BaseWindowDecomposer" title="cristal.decomposers.window.BaseWindowDecomposer"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseWindowDecomposer</span></code></a></p>
+<p>Class for signal decomposition using Fourier Transform with a sliding window approach.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.decomposers.fourier.WindowFourierDecomposer.decompose">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decompose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_coefs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cristal.decomposers.fourier.WindowFourierDecomposer.decompose" title="Link to this definition">#</a></dt>
+<dd><p>Decompose the signal into n_coefs components for each window.
+Select the <cite>n_coefs</cite> most represented indices from the <cite>margin*n_coefs</cite> best coefficients of all windows.
+Thus each window will have the same indices ensuring consistency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>,</em><em>)</em>) – The input signal to decompose.</p></li>
+<li><p><strong>n_coefs</strong> (<em>int</em>) – The number of coefficients to retain.</p></li>
+<li><p><strong>L</strong> (<em>int</em><em>, </em><em>optional</em>) – The window size for the decomposition, by default <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.default_L" title="cristal.decomposers.fourier.WindowFourierDecomposer.default_L"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_L</span></code></a>.</p></li>
+<li><p><strong>margin</strong> (<em>int</em><em> | </em><em>float</em><em>, </em><em>optional</em>) – The margin for the decomposition, by default <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.default_margin" title="cristal.decomposers.fourier.WindowFourierDecomposer.default_margin"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_margin</span></code></a>.</p></li>
+<li><p><strong>args</strong> – See <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.full_decompose" title="cristal.decomposers.fourier.WindowFourierDecomposer.full_decompose"><code class="xref py py-meth docutils literal notranslate"><span class="pre">full_decompose()</span></code></a> for specific positional arguments.</p></li>
+<li><p><strong>kwargs</strong> – See <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.full_decompose" title="cristal.decomposers.fourier.WindowFourierDecomposer.full_decompose"><code class="xref py py-meth docutils literal notranslate"><span class="pre">full_decompose()</span></code></a> for specific keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the indices and coefficients of the decomposition for each window of size L.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[np.ndarray (n_window=N-L+1, n_coefs), np.ndarray (n_window=N-L+1, n_coefs)]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.decomposers.fourier.WindowFourierDecomposer.decomposer_cls">
+<span class="sig-name descname"><span class="pre">decomposer_cls</span></span><a class="headerlink" href="#cristal.decomposers.fourier.WindowFourierDecomposer.decomposer_cls" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cristal.decomposers.fourier.FourierDecomposer" title="cristal.decomposers.fourier.FourierDecomposer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FourierDecomposer</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.decomposers.fourier.WindowFourierDecomposer.default_L">
+<span class="sig-name descname"><span class="pre">default_L</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100</span></em><a class="headerlink" href="#cristal.decomposers.fourier.WindowFourierDecomposer.default_L" title="Link to this definition">#</a></dt>
+<dd><p>Default window size for decomposition</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.decomposers.fourier.WindowFourierDecomposer.default_margin">
+<span class="sig-name descname"><span class="pre">default_margin</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#cristal.decomposers.fourier.WindowFourierDecomposer.default_margin" title="Link to this definition">#</a></dt>
+<dd><p>Default margin for windowed decomposition</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.decomposers.fourier.WindowFourierDecomposer.full_decompose">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">full_decompose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cristal.decomposers.fourier.WindowFourierDecomposer.full_decompose" title="Link to this definition">#</a></dt>
+<dd><p>Return the full decomposition (all coefficients) of the signal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>,</em><em>)</em>) – The input signal to decompose.</p></li>
+<li><p><strong>L</strong> (<em>int</em><em>, </em><em>optional</em>) – The window size for the decomposition, by default <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.default_L" title="cristal.decomposers.fourier.WindowFourierDecomposer.default_L"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_L</span></code></a>.</p></li>
+<li><p><strong>args</strong> – See <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.full_decompose" title="cristal.decomposers.fourier.WindowFourierDecomposer.full_decompose"><code class="xref py py-meth docutils literal notranslate"><span class="pre">full_decompose()</span></code></a> for specific positional arguments.</p></li>
+<li><p><strong>kwargs</strong> – See <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.full_decompose" title="cristal.decomposers.fourier.WindowFourierDecomposer.full_decompose"><code class="xref py py-meth docutils literal notranslate"><span class="pre">full_decompose()</span></code></a> for specific keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The full decomposition of the signal,
+where each row corresponds to the decomposition in ? coefficients (depending on the decomposition method) for each window of size L.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (n_window=N-L+1, ?)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.decomposers.fourier.WindowFourierDecomposer.get_coefficients_at_indices">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_coefficients_at_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cristal.decomposers.fourier.WindowFourierDecomposer.get_coefficients_at_indices" title="Link to this definition">#</a></dt>
+<dd><p>Get the coefficients of the signal at the specified indices for each window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>,</em><em>)</em>) – The input signal to decompose.</p></li>
+<li><p><strong>indices</strong> (<em>np.ndarray</em><em> (</em><em>n_coefs</em><em>,</em><em>)</em>) – The indices at which to retrieve the coefficients.</p></li>
+<li><p><strong>L</strong> (<em>int</em><em>, </em><em>optional</em>) – The window size for the decomposition, by default <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.default_L" title="cristal.decomposers.fourier.WindowFourierDecomposer.default_L"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_L</span></code></a>.</p></li>
+<li><p><strong>margin</strong> (<em>int</em><em> | </em><em>float</em><em>, </em><em>optional</em>) – The margin for the decomposition, by default <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.default_margin" title="cristal.decomposers.fourier.WindowFourierDecomposer.default_margin"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_margin</span></code></a>.</p></li>
+<li><p><strong>args</strong> – See <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.full_decompose" title="cristal.decomposers.fourier.WindowFourierDecomposer.full_decompose"><code class="xref py py-meth docutils literal notranslate"><span class="pre">full_decompose()</span></code></a> for specific positional arguments.</p></li>
+<li><p><strong>kwargs</strong> – See <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.full_decompose" title="cristal.decomposers.fourier.WindowFourierDecomposer.full_decompose"><code class="xref py py-meth docutils literal notranslate"><span class="pre">full_decompose()</span></code></a> for specific keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The coefficients of the signal at the specified indices.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (n_window=N-L+1, n_coefs)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.decomposers.fourier.WindowFourierDecomposer.reconstruct">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reconstruct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coefficients</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cristal.decomposers.fourier.WindowFourierDecomposer.reconstruct" title="Link to this definition">#</a></dt>
+<dd><p>Reconstruct the signal from the indices and coefficients.
+Reconstruct each window of size L from the coefficients and indices, then average the results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> (<em>int</em>) – The length of the original signal.</p></li>
+<li><p><strong>indices</strong> (<em>np.ndarray</em><em> (</em><em>n_coefs</em><em>,</em><em>)</em>) – The indices of the coefficients to use for reconstruction.</p></li>
+<li><p><strong>coefficients</strong> (<em>np.ndarray</em><em> (</em><em>n_window=N-L+1</em><em>, </em><em>n_coefs</em><em>)</em>) – The coefficients of each window to use for reconstruction.</p></li>
+<li><p><strong>L</strong> (<em>int</em><em>, </em><em>optional</em>) – The window size for the decomposition, by default <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.default_L" title="cristal.decomposers.fourier.WindowFourierDecomposer.default_L"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_L</span></code></a>.</p></li>
+<li><p><strong>args</strong> – See <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.reconstruct" title="cristal.decomposers.fourier.WindowFourierDecomposer.reconstruct"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reconstruct()</span></code></a> of <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.decomposer_cls" title="cristal.decomposers.fourier.WindowFourierDecomposer.decomposer_cls"><code class="xref py py-attr docutils literal notranslate"><span class="pre">decomposer_cls</span></code></a> for specific positional arguments.</p></li>
+<li><p><strong>kwargs</strong> – See <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.reconstruct" title="cristal.decomposers.fourier.WindowFourierDecomposer.reconstruct"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reconstruct()</span></code></a> of <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.decomposer_cls" title="cristal.decomposers.fourier.WindowFourierDecomposer.decomposer_cls"><code class="xref py py-attr docutils literal notranslate"><span class="pre">decomposer_cls</span></code></a> for specific keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The reconstructed signal.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (N,)</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the number of coefficient rows does not match the number of windows (N-L+1)
+    or if the number of coefficient columns does not match the number of indices.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.decomposers.fourier.WindowFourierDecomposer.top_n_most_frequent_indices">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">top_n_most_frequent_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indices_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cristal.decomposers.fourier.WindowFourierDecomposer.top_n_most_frequent_indices" title="Link to this definition">#</a></dt>
+<dd><p>Get the top n most frequent indices from a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>indices_list</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – The list of indices to analyze.</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – The number of top frequent indices to return.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An array containing the top n most frequent indices.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray[int] (n,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.decomposers.fourier.WindowFourierDecomposer.transform">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_coefs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cristal.decomposers.fourier.WindowFourierDecomposer.transform" title="Link to this definition">#</a></dt>
+<dd><p>Reconstruct the signal from its decomposition into n_coefs components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>,</em><em>)</em>) – The input signal to decompose.</p></li>
+<li><p><strong>n_coefs</strong> (<em>int</em>) – The number of coefficients to retain.</p></li>
+<li><p><strong>args</strong> – See <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.decompose" title="cristal.decomposers.fourier.WindowFourierDecomposer.decompose"><code class="xref py py-meth docutils literal notranslate"><span class="pre">decompose()</span></code></a> and <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.reconstruct" title="cristal.decomposers.fourier.WindowFourierDecomposer.reconstruct"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reconstruct()</span></code></a> for specific positional arguments.</p></li>
+<li><p><strong>kwargs</strong> – See <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.decompose" title="cristal.decomposers.fourier.WindowFourierDecomposer.decompose"><code class="xref py py-meth docutils literal notranslate"><span class="pre">decompose()</span></code></a> and <a class="reference internal" href="#cristal.decomposers.fourier.WindowFourierDecomposer.reconstruct" title="cristal.decomposers.fourier.WindowFourierDecomposer.reconstruct"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reconstruct()</span></code></a> for specific keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The reconstructed signal.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (N,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="cristal.decomposers.base.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">cristal.decomposers.base</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cristal.decomposers.wavelet.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">cristal.decomposers.wavelet</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.fourier.FourierDecomposer"><code class="docutils literal notranslate"><span class="pre">FourierDecomposer</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.fourier.FourierDecomposer.decompose"><code class="docutils literal notranslate"><span class="pre">FourierDecomposer.decompose()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.fourier.FourierDecomposer.full_decompose"><code class="docutils literal notranslate"><span class="pre">FourierDecomposer.full_decompose()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.fourier.FourierDecomposer.get_coefficients_at_indices"><code class="docutils literal notranslate"><span class="pre">FourierDecomposer.get_coefficients_at_indices()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.fourier.FourierDecomposer.reconstruct"><code class="docutils literal notranslate"><span class="pre">FourierDecomposer.reconstruct()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.fourier.FourierDecomposer.transform"><code class="docutils literal notranslate"><span class="pre">FourierDecomposer.transform()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.fourier.WindowFourierDecomposer"><code class="docutils literal notranslate"><span class="pre">WindowFourierDecomposer</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.fourier.WindowFourierDecomposer.decompose"><code class="docutils literal notranslate"><span class="pre">WindowFourierDecomposer.decompose()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.fourier.WindowFourierDecomposer.decomposer_cls"><code class="docutils literal notranslate"><span class="pre">WindowFourierDecomposer.decomposer_cls</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.fourier.WindowFourierDecomposer.default_L"><code class="docutils literal notranslate"><span class="pre">WindowFourierDecomposer.default_L</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.fourier.WindowFourierDecomposer.default_margin"><code class="docutils literal notranslate"><span class="pre">WindowFourierDecomposer.default_margin</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.fourier.WindowFourierDecomposer.full_decompose"><code class="docutils literal notranslate"><span class="pre">WindowFourierDecomposer.full_decompose()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.fourier.WindowFourierDecomposer.get_coefficients_at_indices"><code class="docutils literal notranslate"><span class="pre">WindowFourierDecomposer.get_coefficients_at_indices()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.fourier.WindowFourierDecomposer.reconstruct"><code class="docutils literal notranslate"><span class="pre">WindowFourierDecomposer.reconstruct()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.fourier.WindowFourierDecomposer.top_n_most_frequent_indices"><code class="docutils literal notranslate"><span class="pre">WindowFourierDecomposer.top_n_most_frequent_indices()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.fourier.WindowFourierDecomposer.transform"><code class="docutils literal notranslate"><span class="pre">WindowFourierDecomposer.transform()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/API/cristal.decomposers.fourier.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Florian Grivet.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
