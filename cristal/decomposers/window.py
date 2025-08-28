@@ -13,6 +13,11 @@ from .base import BaseDecomposer
 logger = logging.getLogger(__name__)
 
 
+# TODO Ajouter un paramètre `shift` pour le décalage entre chaque fenêtre
+# TODO Implémenter la bande de fréquence du papier AAAI
+# TODO Ajouter la possibilité de passer un signal déjà découpé en fenêtres
+
+
 class BaseWindowDecomposer(BaseDecomposer, ABC):
     """Base class for signal decomposition methods using a sliding window approach."""
 
@@ -138,7 +143,7 @@ class BaseWindowDecomposer(BaseDecomposer, ABC):
 
         # Do the first decomposition to initialize the array with the right shape (depending on the decomposer)
         decomposition_0 = cls.decomposer_cls.full_decompose(signal[0:L], *args, **kwargs)
-        decompositions = np.zeros((n_window, len(decomposition_0)), dtype=complex)
+        decompositions = np.zeros((n_window, len(decomposition_0)), dtype=decomposition_0.dtype)
         decompositions[0, :] = decomposition_0
 
         # Iterate over the windows and collect decompositions
@@ -150,7 +155,7 @@ class BaseWindowDecomposer(BaseDecomposer, ABC):
 
     @classmethod
     def decompose(
-        cls, signal: np.ndarray, n_coefs: int, *args, L: int = default_L, margin: int | float = default_margin, kwargs
+        cls, signal: np.ndarray, n_coefs: int, *args, L: int = default_L, margin: int | float = default_margin, **kwargs
     ) -> tuple[np.ndarray, np.ndarray]:
         """Decompose the signal into n_coefs components for each window.
         Select the `n_coefs` most represented indices from the `margin*n_coefs` best coefficients of all windows.
@@ -176,13 +181,15 @@ class BaseWindowDecomposer(BaseDecomposer, ABC):
         tuple[np.ndarray (n_window=N-L+1, n_coefs), np.ndarray (n_window=N-L+1, n_coefs)]
             A tuple containing the indices and coefficients of the decomposition for each window of size L.
         """
+        # Add L in kwargs to check its validity
+        kwargs["L"] = L
         # Initialize parameters and check validity
         kwargs = cls._check_kwargs(kwargs)
         margin = cls._check_margin(margin)
         n_coefs_with_margin = int(margin * n_coefs)
 
         # Get the full decomposition of the signal
-        decompositions = cls.full_decompose(signal, *args, L=L, **kwargs)
+        decompositions = cls.full_decompose(signal, *args, **kwargs)
         indices = np.argsort(np.abs(decompositions), axis=1)[:, ::-1][:, :n_coefs_with_margin]
 
         # Get the most frequent indices
@@ -252,7 +259,7 @@ class BaseWindowDecomposer(BaseDecomposer, ABC):
 
     @classmethod
     def get_coefficients_at_indices(
-        cls, signal: np.ndarray, indices: np.ndarray, *args, L: int = default_L, margin: int | float = default_margin, kwargs
+        cls, signal: np.ndarray, indices: np.ndarray, *args, L: int = default_L, margin: int | float = default_margin, **kwargs
     ) -> np.ndarray:
         """Get the coefficients of the signal at the specified indices for each window.
 

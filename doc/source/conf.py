@@ -68,9 +68,9 @@ html_theme_options = {
     "search_bar_text": "Search the docs ...",
     "navigation_with_keys": False,
     "collapse_navigation": False,
-    "navigation_depth": 3,
-    "show_nav_level": 1,
-    "show_toc_level": 4,
+    # "navigation_depth": 3,
+    # "show_nav_level": 1,
+    # "show_toc_level": 1,
     "navbar_align": "left",
     # -- Template placement in theme layouts ----------------------------------
     "navbar_start": ["navbar-logo"],

@@ -7,7 +7,7 @@ from .base import BaseRegularizer
 
 class ConstantRegularizer(BaseRegularizer):
     """
-    Regularizer that applies a constant factor C : : :math:`reg = C`.
+    Regularizer that applies a constant factor C : :math:`reg = C`.
     """
 
     @staticmethod

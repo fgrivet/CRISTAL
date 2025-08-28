@@ -10,7 +10,7 @@ import os
 from . import decomposers, detectors, evaluation, incrementers, inverters, moments_matrix, plotters, polynomials, regularizers, type_checking
 from .__version__ import __author__, __date__, __version__
 from .decomposers import IMPLEMENTED_DECOMPOSERS
-from .detectors import BaggingDyCF, DyCF, DyCG
+from .detectors import UTSCF, BaggingDyCF, DyCF, DyCG
 from .incrementers import IMPLEMENTED_INCREMENTERS
 from .inverters import IMPLEMENTED_INVERTERS
 from .moments_matrix import MomentsMatrix
@@ -40,13 +40,14 @@ __all__ = [
     "polynomials",
     "regularizers",
     "type_checking",
+    "UTSCF",
 ]
 
 logger = logging.getLogger("cristal")
 
 try:
     login = os.getlogin()
-except Exception:
+except OSError:
     login = "unknown"
 
 

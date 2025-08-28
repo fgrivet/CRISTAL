@@ -5,7 +5,7 @@ Classes for signal decomposition using Fourier Transform. \
 """
 
 import numpy as np
-from scipy import fftpack
+from scipy import fft
 
 from .base import BaseDecomposer
 from .window import BaseWindowDecomposer
@@ -34,8 +34,8 @@ class FourierDecomposer(BaseDecomposer):
         """
         N = len(signal)
         middle = N // 2
-        fs = fftpack.fft(signal)[: middle + 1]  # Take only the first half of the spectrum
-        return fs
+        fs = fft.fft(signal)[: middle + 1]  # Take only the first half of the spectrum
+        return fs  # type: ignore
 
     @staticmethod
     def decompose(signal: np.ndarray, n_coefs: int, *args, **kwargs) -> tuple[np.ndarray, np.ndarray]:
@@ -103,7 +103,7 @@ class FourierDecomposer(BaseDecomposer):
             if ind != 0:
                 fsrec[N - ind] = np.conj(coef)
         # Reconstruct the signal using the inverse Fourier Transform on the modified spectrum
-        f_reconstruct = np.real(fftpack.ifft(fsrec))
+        f_reconstruct = np.real(fft.ifft(fsrec))  # type: ignore
         return f_reconstruct
 
 

@@ -58,7 +58,7 @@ class WaveletDecomposer(BaseDecomposer):
 
     @staticmethod
     def full_decompose(
-        signal: np.ndarray, *args, wavelet: str = default_wavelet, level: int = default_level, mode: str = default_mode, kwargs
+        signal: np.ndarray, *args, wavelet: str = default_wavelet, level: int = default_level, mode: str = default_mode, **kwargs
     ) -> np.ndarray:
         """Returns the full decomposition (all coefficients) of the signal using wavelet decomposition.
 
@@ -92,7 +92,7 @@ class WaveletDecomposer(BaseDecomposer):
 
     @staticmethod
     def decompose(
-        signal: np.ndarray, n_coefs: int, *args, wavelet: str = default_wavelet, level: int = default_level, mode: str = default_mode, kwargs
+        signal: np.ndarray, n_coefs: int, *args, wavelet: str = default_wavelet, level: int = default_level, mode: str = default_mode, **kwargs
     ) -> tuple[np.ndarray, np.ndarray]:
         """Decompose the signal into n_coefs wavelet coefficients.
 
@@ -172,7 +172,7 @@ class WaveletDecomposer(BaseDecomposer):
         dummy_arr, dummy_slices = pywt.coeffs_to_array(dummy_coeffs)
 
         # Create the array of coefficients with the same shape as the dummy array and fill it with the provided coefficients at the specified indices
-        coeff_arr = np.zeros(dummy_arr.shape, dtype="complex")
+        coeff_arr = np.zeros_like(dummy_arr)
         coeff_arr[indices] = coefficients
 
         # Convert the array of coefficients back to the wavelet coefficients format and reconstruct the signal

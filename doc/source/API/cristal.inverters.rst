@@ -5,13 +5,6 @@
    :exclude-members: BaseInverter, FPDInverter, InvInverter, PDInverter, PseudoInverter
 
 
-   Classes
-   -------
-
-   .. autosummary::
-   
-      IMPLEMENTED_INVERTERS
-   
 Modules
 -------
 
@@ -22,3 +15,22 @@ Modules
    base
    lapack
    scipy
+
+Classes
+-------
+
+.. autosummary::
+
+   IMPLEMENTED_INVERTERS
+   base.BaseInverter
+   lapack.FPDInverter
+   scipy.InvInverter
+   scipy.PDInverter
+   scipy.PseudoInverter
+
+Functions
+---------
+
+.. autosummary::
+
+   base.BaseInverter.invert

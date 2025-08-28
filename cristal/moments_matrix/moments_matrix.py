@@ -98,6 +98,9 @@ class MomentsMatrix:
         Self
             The fitted MomentsMatrix instance.
         """
+        # Take modulus if x is complex
+        # if np.iscomplexobj(x):
+        #     x = np.abs(x)
         self.N = x.shape[0]
         # Generate the monomials based on the degree n and the number of features in x
         multidegree_combinations = MultivariatePolynomialBasis.generate_multidegree_combinations(self.n, x.shape[1])
@@ -125,12 +128,19 @@ class MomentsMatrix:
         """
         if not self.is_fitted():
             raise ValueError("MomentsMatrix is not fitted. Call fit() before score_samples().")
+        # Take modulus if x is complex
+        # if np.iscomplexobj(x):
+        #     x = np.abs(x)
         # Compute the design matrix for the input data
         v_matrix = MultivariatePolynomialBasis.make_design_matrix(x, self.multidegree_combinations, self.polynomial_class)  # type: ignore
         # Compute the scores using the moments matrix and its inverse
         # The score is computed as v(xx) @ M^-1 @ v(xx)^T for each sample xx in x
         temp = np.dot(v_matrix, self.inverse_moments_matrix)  # type: ignore
         scores = np.sum(temp * v_matrix, axis=1)
+        # Take modulus if scores are complex
+        # Keep a complex matrix and vectors v and apply modulus to the scores only
+        if np.iscomplexobj(scores):
+            scores = np.abs(scores)
         return scores
 
     def update(self, x: np.ndarray, sym: bool = True) -> "MomentsMatrix":
@@ -152,7 +162,7 @@ class MomentsMatrix:
         self.N += x.shape[0]
         if not self.incrementer_class.update_moments_matrix:
             logger.warning(
-                "The moment matrix has not been updated, only the inverse matrix has been updated. "
+                "The moments matrix has not been updated, only the inverse matrix has been updated. "
                 "This means that moments_matrix x inverse_moments_matrix is not equal to the identity matrix."
             )
         return self
