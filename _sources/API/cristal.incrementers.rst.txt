@@ -5,13 +5,6 @@
    :exclude-members: BaseIncrementer, InverseIncrementer, ShermanIncrementer, WoodburyIncrementer
 
 
-   Classes
-   -------
-
-   .. autosummary::
-   
-      IMPLEMENTED_INCREMENTERS
-   
 Modules
 -------
 
@@ -23,3 +16,21 @@ Modules
    inverse
    sherman
    woodbury
+
+Classes
+-------
+
+.. autosummary::
+
+   IMPLEMENTED_INCREMENTERS
+   base.BaseIncrementer
+   inverse.InverseIncrementer
+   sherman.ShermanIncrementer
+   woodbury.WoodburyIncrementer
+
+Functions
+---------
+
+.. autosummary::
+
+   base.BaseIncrementer.increment

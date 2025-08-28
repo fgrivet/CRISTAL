@@ -338,6 +338,7 @@
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">cristal.detectors</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datastreams.html">cristal.detectors.datastreams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.timeseries.html">cristal.detectors.timeseries</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -437,7 +438,7 @@
                   
   <section id="module-cristal.detectors">
 <span id="cristal-detectors"></span><h1>cristal.detectors<a class="headerlink" href="#module-cristal.detectors" title="Link to this heading">#</a></h1>
-<p>CRISTAL Detectors Subpackage Contains various detector classes, including BaggingDyCF, DyCF, and DyCG.</p>
+<p>CRISTAL Detectors Subpackage Contains various detector classes, including BaggingDyCF, DyCF, DyCG, and UTSCF.</p>
 <section id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
@@ -447,6 +448,85 @@
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.datastreams.html#module-cristal.detectors.datastreams" title="cristal.detectors.datastreams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datastreams</span></code></a></p></td>
 <td><p>This module implements the <code class="xref py py-class docutils literal notranslate"><span class="pre">DyCF</span></code> (Dynamical Christoffel Function) and <code class="xref py py-class docutils literal notranslate"><span class="pre">DyCG</span></code> (Dynamical Christoffel Growth) anomaly detection algorithms.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.detectors.timeseries.html#module-cristal.detectors.timeseries" title="cristal.detectors.timeseries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timeseries</span></code></a></p></td>
+<td><p>This module implements the <code class="xref py py-class docutils literal notranslate"><span class="pre">UTSCF</span></code> (Univariate Time Series Christoffel Function) anomaly detection algorithm.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector" title="cristal.detectors.base.BaseDetector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDetector</span></code></a>()</p></td>
+<td><p>Base class for outlier detection methods</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.datastreams.html#cristal.detectors.datastreams.BaggingDyCF" title="cristal.detectors.datastreams.BaggingDyCF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datastreams.BaggingDyCF</span></code></a>(n_values[, n_estimators])</p></td>
+<td><p>Bagging DyCF model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.detectors.datastreams.html#cristal.detectors.datastreams.DyCF" title="cristal.detectors.datastreams.DyCF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datastreams.DyCF</span></code></a>(n[, regularizer_opt, C, ...])</p></td>
+<td><p>Dynamical Christoffel Function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.datastreams.html#cristal.detectors.datastreams.DyCG" title="cristal.detectors.datastreams.DyCG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datastreams.DyCG</span></code></a>([degrees])</p></td>
+<td><p>Dynamical Christoffel Growth</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.detectors.timeseries.html#cristal.detectors.timeseries.UTSCF" title="cristal.detectors.timeseries.UTSCF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timeseries.UTSCF</span></code></a>(n[, regularizer_opt, C, ...])</p></td>
+<td><p>Univariate Time Series Christoffel Function</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector.assert_shape_fitted" title="cristal.detectors.base.BaseDetector.assert_shape_fitted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDetector.assert_shape_fitted</span></code></a>(x)</p></td>
+<td><p>Asserts that the input array x has the correct shape to use the model after it has been fitted.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector.assert_shape_unfitted" title="cristal.detectors.base.BaseDetector.assert_shape_unfitted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDetector.assert_shape_unfitted</span></code></a>(x)</p></td>
+<td><p>Asserts that the input array x has the correct shape to fit the model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector.copy" title="cristal.detectors.base.BaseDetector.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDetector.copy</span></code></a>()</p></td>
+<td><p>Returns a copy of the model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector.decision_function" title="cristal.detectors.base.BaseDetector.decision_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDetector.decision_function</span></code></a>(x)</p></td>
+<td><p>Computes the decision function for the samples in x.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector.eval_update" title="cristal.detectors.base.BaseDetector.eval_update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDetector.eval_update</span></code></a>(x)</p></td>
+<td><p>Evaluates the model on the samples in x and updates it with inliers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector.fit" title="cristal.detectors.base.BaseDetector.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDetector.fit</span></code></a>(x)</p></td>
+<td><p>Generates a model that fit dataset x.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector.fit_predict" title="cristal.detectors.base.BaseDetector.fit_predict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDetector.fit_predict</span></code></a>(x)</p></td>
+<td><p>Fits the model with x and predicts the outlier labels for the samples in x.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector.is_fitted" title="cristal.detectors.base.BaseDetector.is_fitted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDetector.is_fitted</span></code></a>()</p></td>
+<td><p>Checks if the model is fitted.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector.load_model" title="cristal.detectors.base.BaseDetector.load_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDetector.load_model</span></code></a>(model_dict)</p></td>
+<td><p>Loads the model from a dictionary.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector.method_name" title="cristal.detectors.base.BaseDetector.method_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDetector.method_name</span></code></a>()</p></td>
+<td><p>Returns the name of the method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector.predict" title="cristal.detectors.base.BaseDetector.predict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDetector.predict</span></code></a>(x)</p></td>
+<td><p>Predicts the outlier labels for the samples in x.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector.predict_update" title="cristal.detectors.base.BaseDetector.predict_update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDetector.predict_update</span></code></a>(x)</p></td>
+<td><p>Predict the model on the samples in x and updates it with inliers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector.save_model" title="cristal.detectors.base.BaseDetector.save_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDetector.save_model</span></code></a>()</p></td>
+<td><p>Saves the model as a dictionary.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector.score_samples" title="cristal.detectors.base.BaseDetector.score_samples"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDetector.score_samples</span></code></a>(x)</p></td>
+<td><p>Computes the outlier scores for the samples in x.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector.update" title="cristal.detectors.base.BaseDetector.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDetector.update</span></code></a>(x)</p></td>
+<td><p>Updates the current model with instances in x.</p></td>
 </tr>
 </tbody>
 </table>
@@ -506,6 +586,8 @@
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
 </ul>
   </nav></div>
 

@@ -48,6 +48,7 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'API/cristal.regularizers';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -338,6 +339,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datastreams.html">cristal.detectors.datastreams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.timeseries.html">cristal.detectors.timeseries</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -438,16 +440,6 @@
   <section id="module-cristal.regularizers">
 <span id="cristal-regularizers"></span><h1>cristal.regularizers<a class="headerlink" href="#module-cristal.regularizers" title="Link to this heading">#</a></h1>
 <p>CRISTAL Regularizers Subpackage Contains various regularization classes, including Vu, Vu_C, Constant and Comb regularizers.</p>
-<section id="classes">
-<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.regularizers.IMPLEMENTED_REGULARIZERS" title="cristal.regularizers.IMPLEMENTED_REGULARIZERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS</span></code></a>(*values)</p></td>
-<td><p>The implemented regularization classes.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="cristal.regularizers.IMPLEMENTED_REGULARIZERS">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.regularizers.</span></span><span class="sig-name descname"><span class="pre">IMPLEMENTED_REGULARIZERS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.regularizers.IMPLEMENTED_REGULARIZERS" title="Link to this definition">#</a></dt>
@@ -475,7 +467,6 @@
 
 </dd></dl>
 
-</section>
 <section id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
@@ -491,6 +482,43 @@
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="cristal.regularizers.vu.html#module-cristal.regularizers.vu" title="cristal.regularizers.vu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vu</span></code></a></p></td>
 <td><p>Classes for Vu regularization method.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.regularizers.IMPLEMENTED_REGULARIZERS" title="cristal.regularizers.IMPLEMENTED_REGULARIZERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS</span></code></a>(*values)</p></td>
+<td><p>The implemented regularization classes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.regularizers.base.html#cristal.regularizers.base.BaseRegularizer" title="cristal.regularizers.base.BaseRegularizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseRegularizer</span></code></a>()</p></td>
+<td><p>Base class for regularization methods.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.regularizers.comb.html#cristal.regularizers.comb.CombRegularizer" title="cristal.regularizers.comb.CombRegularizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">comb.CombRegularizer</span></code></a>()</p></td>
+<td><p>Regularizer for the combinatorial regularization method : <span class="math notranslate nohighlight">\(reg = \begin{pmatrix} d + n \\ d \end{pmatrix}\)</span>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.regularizers.constant.html#cristal.regularizers.constant.ConstantRegularizer" title="cristal.regularizers.constant.ConstantRegularizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">constant.ConstantRegularizer</span></code></a>()</p></td>
+<td><p>Regularizer that applies a constant factor C : <span class="math notranslate nohighlight">\(reg = C\)</span>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.regularizers.vu.html#cristal.regularizers.vu.VuRegularizer" title="cristal.regularizers.vu.VuRegularizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vu.VuRegularizer</span></code></a>()</p></td>
+<td><p>Regularizer for the Vu regularization method : <span class="math notranslate nohighlight">\(reg = n^{3d/2}\)</span>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.regularizers.vu.html#cristal.regularizers.vu.VuCRegularizer" title="cristal.regularizers.vu.VuCRegularizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vu.VuCRegularizer</span></code></a>()</p></td>
+<td><p>Regularizer for the Vu_C regularization method : <span class="math notranslate nohighlight">\(reg = \frac{n^{3d/2}}{C}\)</span>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.regularizers.base.html#cristal.regularizers.base.BaseRegularizer.compute_value" title="cristal.regularizers.base.BaseRegularizer.compute_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseRegularizer.compute_value</span></code></a>(n, d, C)</p></td>
+<td><p>Compute the regularization value.</p></td>
 </tr>
 </tbody>
 </table>
@@ -549,17 +577,16 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.regularizers.IMPLEMENTED_REGULARIZERS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.regularizers.IMPLEMENTED_REGULARIZERS.COMB"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS.COMB</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.regularizers.IMPLEMENTED_REGULARIZERS.CONSTANT"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS.CONSTANT</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.regularizers.IMPLEMENTED_REGULARIZERS.VU"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS.VU</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.regularizers.IMPLEMENTED_REGULARIZERS.VU_C"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS.VU_C</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.regularizers.IMPLEMENTED_REGULARIZERS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.regularizers.IMPLEMENTED_REGULARIZERS.COMB"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS.COMB</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.regularizers.IMPLEMENTED_REGULARIZERS.CONSTANT"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS.CONSTANT</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.regularizers.IMPLEMENTED_REGULARIZERS.VU"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS.VU</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.regularizers.IMPLEMENTED_REGULARIZERS.VU_C"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS.VU_C</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
 </ul>
   </nav></div>
 

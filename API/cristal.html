@@ -338,6 +338,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datastreams.html">cristal.detectors.datastreams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.timeseries.html">cristal.detectors.timeseries</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -444,7 +445,7 @@
 <td><p>CRISTAL Decomposers Subpackage Contains various decomposer classes for time series analysis, including Fourier and Wavelet decompositions.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.html#module-cristal.detectors" title="cristal.detectors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detectors</span></code></a></p></td>
-<td><p>CRISTAL Detectors Subpackage Contains various detector classes, including BaggingDyCF, DyCF, and DyCG.</p></td>
+<td><p>CRISTAL Detectors Subpackage Contains various detector classes, including BaggingDyCF, DyCF, DyCG, and UTSCF.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="cristal.evaluation.html#module-cristal.evaluation" title="cristal.evaluation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluation</span></code></a></p></td>
 <td><p>CRISTAL Evaluation Subpackage Contains various evaluation metrics and data utilities.</p></td>
@@ -485,6 +486,8 @@
 <section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
 <p>The following classes are available using directly <code class="docutils literal notranslate"><span class="pre">cristal.ClassName</span></code> instead of <code class="docutils literal notranslate"><span class="pre">cristal.package.module.ClassName</span></code>.</p>
+<section id="implemented-options">
+<h3>Implemented options<a class="headerlink" href="#implemented-options" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="cristal.decomposers.html#cristal.decomposers.IMPLEMENTED_DECOMPOSERS" title="cristal.decomposers.IMPLEMENTED_DECOMPOSERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decomposers.IMPLEMENTED_DECOMPOSERS</span></code></a>(*values)</p></td>
@@ -502,29 +505,49 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="cristal.regularizers.html#cristal.regularizers.IMPLEMENTED_REGULARIZERS" title="cristal.regularizers.IMPLEMENTED_REGULARIZERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">regularizers.IMPLEMENTED_REGULARIZERS</span></code></a>(*values)</p></td>
 <td><p>The implemented regularization classes.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.datastreams.html#cristal.detectors.datastreams.BaggingDyCF" title="cristal.detectors.datastreams.BaggingDyCF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detectors.datastreams.BaggingDyCF</span></code></a>(n_values)</p></td>
+</tbody>
+</table>
+</div>
+</section>
+<section id="detectors">
+<h3>Detectors<a class="headerlink" href="#detectors" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.detectors.datastreams.html#cristal.detectors.datastreams.BaggingDyCF" title="cristal.detectors.datastreams.BaggingDyCF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detectors.datastreams.BaggingDyCF</span></code></a>(n_values)</p></td>
 <td><p>Bagging DyCF model.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="cristal.detectors.datastreams.html#cristal.detectors.datastreams.DyCF" title="cristal.detectors.datastreams.DyCF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detectors.datastreams.DyCF</span></code></a>(n[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.datastreams.html#cristal.detectors.datastreams.DyCF" title="cristal.detectors.datastreams.DyCF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detectors.datastreams.DyCF</span></code></a>(n[, ...])</p></td>
 <td><p>Dynamical Christoffel Function</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.datastreams.html#cristal.detectors.datastreams.DyCG" title="cristal.detectors.datastreams.DyCG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detectors.datastreams.DyCG</span></code></a>([degrees])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.detectors.datastreams.html#cristal.detectors.datastreams.DyCG" title="cristal.detectors.datastreams.DyCG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detectors.datastreams.DyCG</span></code></a>([degrees])</p></td>
 <td><p>Dynamical Christoffel Growth</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="cristal.plotters.dycf.html#cristal.plotters.dycf.DyCFPlotter" title="cristal.plotters.dycf.DyCFPlotter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotters.dycf.DyCFPlotter</span></code></a>(model)</p></td>
-<td><p>Plotter for levelsets and boundaries associated with a DyCF model.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.detectors.timeseries.html#cristal.detectors.timeseries.UTSCF" title="cristal.detectors.timeseries.UTSCF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detectors.timeseries.UTSCF</span></code></a>(n[, ...])</p></td>
+<td><p>Univariate Time Series Christoffel Function</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="utils">
+<h3>Utils<a class="headerlink" href="#utils" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html#cristal.moments_matrix.moments_matrix.MomentsMatrix" title="cristal.moments_matrix.moments_matrix.MomentsMatrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moments_matrix.moments_matrix.MomentsMatrix</span></code></a>(n)</p></td>
+<td><p>Class for computing and storing moments matrix and its inverse.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="cristal.polynomials.base.html#cristal.polynomials.base.MultivariatePolynomialBasis" title="cristal.polynomials.base.MultivariatePolynomialBasis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">polynomials.base.MultivariatePolynomialBasis</span></code></a>()</p></td>
 <td><p>Class for generating polynomial combinations and applying polynomial basis functions.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html#cristal.moments_matrix.moments_matrix.MomentsMatrix" title="cristal.moments_matrix.moments_matrix.MomentsMatrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moments_matrix.moments_matrix.MomentsMatrix</span></code></a>(n)</p></td>
-<td><p>Class for computing and storing moments matrix and its inverse.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.plotters.dycf.html#cristal.plotters.dycf.DyCFPlotter" title="cristal.plotters.dycf.DyCFPlotter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotters.dycf.DyCFPlotter</span></code></a>(model)</p></td>
+<td><p>Plotter for levelsets and boundaries associated with a DyCF model.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="toctree-wrapper compound">
 </div>
+</section>
 </section>
 </section>
 
@@ -581,7 +604,12 @@
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implemented-options">Implemented options</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detectors">Detectors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utils">Utils</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

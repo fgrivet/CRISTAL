@@ -338,6 +338,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datastreams.html">cristal.detectors.datastreams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.timeseries.html">cristal.detectors.timeseries</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -438,16 +439,6 @@
   <section id="module-cristal.incrementers">
 <span id="cristal-incrementers"></span><h1>cristal.incrementers<a class="headerlink" href="#module-cristal.incrementers" title="Link to this heading">#</a></h1>
 <p>CRISTAL Incrementers Subpackage Contains various incrementer classes for updating moments matrices, including Woodbury, Sherman-Morrison, and inverse methods.</p>
-<section id="classes">
-<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.incrementers.IMPLEMENTED_INCREMENTERS" title="cristal.incrementers.IMPLEMENTED_INCREMENTERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS</span></code></a>(*values)</p></td>
-<td><p>The implemented incrementer classes.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="cristal.incrementers.IMPLEMENTED_INCREMENTERS">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.incrementers.</span></span><span class="sig-name descname"><span class="pre">IMPLEMENTED_INCREMENTERS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.incrementers.IMPLEMENTED_INCREMENTERS" title="Link to this definition">#</a></dt>
@@ -470,7 +461,6 @@
 
 </dd></dl>
 
-</section>
 <section id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
@@ -486,6 +476,40 @@
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="cristal.incrementers.woodbury.html#module-cristal.incrementers.woodbury" title="cristal.incrementers.woodbury"><code class="xref py py-obj docutils literal notranslate"><span class="pre">woodbury</span></code></a></p></td>
 <td><p>Class for incrementing moments matrix using the Woodbury matrix identity.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.incrementers.IMPLEMENTED_INCREMENTERS" title="cristal.incrementers.IMPLEMENTED_INCREMENTERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS</span></code></a>(*values)</p></td>
+<td><p>The implemented incrementer classes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.incrementers.base.html#cristal.incrementers.base.BaseIncrementer" title="cristal.incrementers.base.BaseIncrementer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseIncrementer</span></code></a>()</p></td>
+<td><p>Base class for moments matrix incrementers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.incrementers.inverse.html#cristal.incrementers.inverse.InverseIncrementer" title="cristal.incrementers.inverse.InverseIncrementer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse.InverseIncrementer</span></code></a>()</p></td>
+<td><p>Incrementer for moments matrix using the inverse method.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.incrementers.sherman.html#cristal.incrementers.sherman.ShermanIncrementer" title="cristal.incrementers.sherman.ShermanIncrementer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sherman.ShermanIncrementer</span></code></a>()</p></td>
+<td><p>Incrementer for moments matrix using the Sherman-Morrison formula.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.incrementers.woodbury.html#cristal.incrementers.woodbury.WoodburyIncrementer" title="cristal.incrementers.woodbury.WoodburyIncrementer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">woodbury.WoodburyIncrementer</span></code></a>()</p></td>
+<td><p>Incrementer for moments matrix using the Woodbury matrix identity.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.incrementers.base.html#cristal.incrementers.base.BaseIncrementer.increment" title="cristal.incrementers.base.BaseIncrementer.increment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseIncrementer.increment</span></code></a>(mm, x, n, ...)</p></td>
+<td><p>Increment the inverse moments matrix (and possibly the moments matrix).</p></td>
 </tr>
 </tbody>
 </table>
@@ -544,16 +568,15 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.incrementers.IMPLEMENTED_INCREMENTERS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.incrementers.IMPLEMENTED_INCREMENTERS.INVERSE"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS.INVERSE</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.incrementers.IMPLEMENTED_INCREMENTERS.SHERMAN"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS.SHERMAN</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.incrementers.IMPLEMENTED_INCREMENTERS.WOODBURY"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS.WOODBURY</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.incrementers.IMPLEMENTED_INCREMENTERS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.incrementers.IMPLEMENTED_INCREMENTERS.INVERSE"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS.INVERSE</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.incrementers.IMPLEMENTED_INCREMENTERS.SHERMAN"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS.SHERMAN</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.incrementers.IMPLEMENTED_INCREMENTERS.WOODBURY"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS.WOODBURY</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
 </ul>
   </nav></div>
 

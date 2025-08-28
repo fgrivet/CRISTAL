@@ -338,6 +338,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datastreams.html">cristal.detectors.datastreams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.timeseries.html">cristal.detectors.timeseries</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -449,6 +450,46 @@
 </table>
 </div>
 </section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html#cristal.moments_matrix.moments_matrix.MomentsMatrix" title="cristal.moments_matrix.moments_matrix.MomentsMatrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moments_matrix.MomentsMatrix</span></code></a>(n[, ...])</p></td>
+<td><p>Class for computing and storing moments matrix and its inverse.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html#cristal.moments_matrix.moments_matrix.MomentsMatrix.copy" title="cristal.moments_matrix.moments_matrix.MomentsMatrix.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moments_matrix.MomentsMatrix.copy</span></code></a>()</p></td>
+<td><p>Create a copy of the MomentsMatrix instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html#cristal.moments_matrix.moments_matrix.MomentsMatrix.fit" title="cristal.moments_matrix.moments_matrix.MomentsMatrix.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moments_matrix.MomentsMatrix.fit</span></code></a>(x)</p></td>
+<td><p>Construct the moments matrix and its inverse from the input data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html#cristal.moments_matrix.moments_matrix.MomentsMatrix.is_fitted" title="cristal.moments_matrix.moments_matrix.MomentsMatrix.is_fitted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moments_matrix.MomentsMatrix.is_fitted</span></code></a>()</p></td>
+<td><p>Check if the MomentsMatrix is fitted.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html#cristal.moments_matrix.moments_matrix.MomentsMatrix.load_model" title="cristal.moments_matrix.moments_matrix.MomentsMatrix.load_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moments_matrix.MomentsMatrix.load_model</span></code></a>(...)</p></td>
+<td><p>Load the model parameters from a dictionary.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html#cristal.moments_matrix.moments_matrix.MomentsMatrix.save_model" title="cristal.moments_matrix.moments_matrix.MomentsMatrix.save_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moments_matrix.MomentsMatrix.save_model</span></code></a>()</p></td>
+<td><p>Save the MomentsMatrix model as a dictionary.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html#cristal.moments_matrix.moments_matrix.MomentsMatrix.score_samples" title="cristal.moments_matrix.moments_matrix.MomentsMatrix.score_samples"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moments_matrix.MomentsMatrix.score_samples</span></code></a>(x)</p></td>
+<td><p>Compute the score for each sample in the input data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html#cristal.moments_matrix.moments_matrix.MomentsMatrix.update" title="cristal.moments_matrix.moments_matrix.MomentsMatrix.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moments_matrix.MomentsMatrix.update</span></code></a>(x[, sym])</p></td>
+<td><p>Update the inverse of the moments matrix with new data.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 </section>
 
 
@@ -503,6 +544,8 @@
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
 </ul>
   </nav></div>
 

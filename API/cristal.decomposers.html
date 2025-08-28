@@ -338,6 +338,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datastreams.html">cristal.detectors.datastreams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.timeseries.html">cristal.detectors.timeseries</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -438,16 +439,6 @@
   <section id="module-cristal.decomposers">
 <span id="cristal-decomposers"></span><h1>cristal.decomposers<a class="headerlink" href="#module-cristal.decomposers" title="Link to this heading">#</a></h1>
 <p>CRISTAL Decomposers Subpackage Contains various decomposer classes for time series analysis, including Fourier and Wavelet decompositions.</p>
-<section id="classes">
-<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS" title="cristal.decomposers.IMPLEMENTED_DECOMPOSERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS</span></code></a>(*values)</p></td>
-<td><p>The implemented decomposers classes.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="cristal.decomposers.IMPLEMENTED_DECOMPOSERS">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.decomposers.</span></span><span class="sig-name descname"><span class="pre">IMPLEMENTED_DECOMPOSERS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS" title="Link to this definition">#</a></dt>
@@ -475,7 +466,6 @@
 
 </dd></dl>
 
-</section>
 <section id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
@@ -491,6 +481,58 @@
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="cristal.decomposers.window.html#module-cristal.decomposers.window" title="cristal.decomposers.window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">window</span></code></a></p></td>
 <td><p>Base class for signal decomposition methods using a sliding window approach.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS" title="cristal.decomposers.IMPLEMENTED_DECOMPOSERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS</span></code></a>(*values)</p></td>
+<td><p>The implemented decomposers classes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.decomposers.base.html#cristal.decomposers.base.BaseDecomposer" title="cristal.decomposers.base.BaseDecomposer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDecomposer</span></code></a>()</p></td>
+<td><p>Base class for signal decomposition methods.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.decomposers.fourier.html#cristal.decomposers.fourier.FourierDecomposer" title="cristal.decomposers.fourier.FourierDecomposer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fourier.FourierDecomposer</span></code></a>()</p></td>
+<td><p>Class for signal decomposition using Fourier Transform.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.decomposers.fourier.html#cristal.decomposers.fourier.WindowFourierDecomposer" title="cristal.decomposers.fourier.WindowFourierDecomposer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fourier.WindowFourierDecomposer</span></code></a>()</p></td>
+<td><p>Class for signal decomposition using Fourier Transform with a sliding window approach.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.decomposers.wavelet.html#cristal.decomposers.wavelet.WaveletDecomposer" title="cristal.decomposers.wavelet.WaveletDecomposer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wavelet.WaveletDecomposer</span></code></a>()</p></td>
+<td><p>Class for signal decomposition using Wavelet Transform.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.decomposers.wavelet.html#cristal.decomposers.wavelet.WindowWaveletDecomposer" title="cristal.decomposers.wavelet.WindowWaveletDecomposer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wavelet.WindowWaveletDecomposer</span></code></a>()</p></td>
+<td><p>Class for signal decomposition using Wavelet Transform with a sliding window approach.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.decomposers.base.html#cristal.decomposers.base.BaseDecomposer.decompose" title="cristal.decomposers.base.BaseDecomposer.decompose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDecomposer.decompose</span></code></a>(signal, ...)</p></td>
+<td><p>Decompose the signal into n_coefs components.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.decomposers.base.html#cristal.decomposers.base.BaseDecomposer.full_decompose" title="cristal.decomposers.base.BaseDecomposer.full_decompose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDecomposer.full_decompose</span></code></a>(signal, ...)</p></td>
+<td><p>Return the full decomposition (all coefficients) of the signal.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.decomposers.base.html#cristal.decomposers.base.BaseDecomposer.get_coefficients_at_indices" title="cristal.decomposers.base.BaseDecomposer.get_coefficients_at_indices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDecomposer.get_coefficients_at_indices</span></code></a>(...)</p></td>
+<td><p>Get the coefficients of the signal at the specified indices.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.decomposers.base.html#cristal.decomposers.base.BaseDecomposer.plot" title="cristal.decomposers.base.BaseDecomposer.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDecomposer.plot</span></code></a>(signal, indices, *args)</p></td>
+<td><p>Plot the original and reconstructed signals.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.decomposers.base.html#cristal.decomposers.base.BaseDecomposer.reconstruct" title="cristal.decomposers.base.BaseDecomposer.reconstruct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDecomposer.reconstruct</span></code></a>(N, indices, ...)</p></td>
+<td><p>Reconstruct the signal from the indices and coefficients.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.decomposers.base.html#cristal.decomposers.base.BaseDecomposer.transform" title="cristal.decomposers.base.BaseDecomposer.transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BaseDecomposer.transform</span></code></a>(signal, *args)</p></td>
+<td><p>Reconstruct the signal from its decomposition into n_coefs components.</p></td>
 </tr>
 </tbody>
 </table>
@@ -549,17 +591,16 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.FOURIER"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.FOURIER</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.WAVELET"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.WAVELET</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.WINDOW_FOURIER"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.WINDOW_FOURIER</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.WINDOW_WAVELET"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.WINDOW_WAVELET</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.FOURIER"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.FOURIER</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.WAVELET"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.WAVELET</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.WINDOW_FOURIER"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.WINDOW_FOURIER</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.decomposers.IMPLEMENTED_DECOMPOSERS.WINDOW_WAVELET"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS.WINDOW_WAVELET</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
 </ul>
   </nav></div>
 

@@ -51,7 +51,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'API/cristal.detectors.datastreams';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cristal.evaluation" href="cristal.evaluation.html" />
+    <link rel="next" title="cristal.detectors.timeseries" href="cristal.detectors.timeseries.html" />
     <link rel="prev" title="cristal.detectors.base" href="cristal.detectors.base.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -338,6 +338,7 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">cristal.detectors.datastreams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.timeseries.html">cristal.detectors.timeseries</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1485,11 +1486,11 @@ This method iterates over each sample in x.</p>
       </div>
     </a>
     <a class="right-next"
-       href="cristal.evaluation.html"
+       href="cristal.detectors.timeseries.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">cristal.evaluation</p>
+        <p class="prev-next-title">cristal.detectors.timeseries</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1516,7 +1517,7 @@ This method iterates over each sample in x.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datastreams.BaggingDyCF"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datastreams.BaggingDyCF"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datastreams.BaggingDyCF.n_estimators"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.n_estimators</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datastreams.BaggingDyCF.models"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.models</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datastreams.BaggingDyCF.d"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.d</span></code></a></li>
@@ -1538,7 +1539,7 @@ This method iterates over each sample in x.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datastreams.BaggingDyCF.update"><code class="docutils literal notranslate"><span class="pre">BaggingDyCF.update()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datastreams.DyCF"><code class="docutils literal notranslate"><span class="pre">DyCF</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datastreams.DyCF"><code class="docutils literal notranslate"><span class="pre">DyCF</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datastreams.DyCF.n"><code class="docutils literal notranslate"><span class="pre">DyCF.n</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datastreams.DyCF.regularizer_opt"><code class="docutils literal notranslate"><span class="pre">DyCF.regularizer_opt</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datastreams.DyCF.C"><code class="docutils literal notranslate"><span class="pre">DyCF.C</span></code></a></li>
@@ -1563,7 +1564,7 @@ This method iterates over each sample in x.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datastreams.DyCF.update"><code class="docutils literal notranslate"><span class="pre">DyCF.update()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datastreams.DyCG"><code class="docutils literal notranslate"><span class="pre">DyCG</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datastreams.DyCG"><code class="docutils literal notranslate"><span class="pre">DyCG</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datastreams.DyCG.degrees"><code class="docutils literal notranslate"><span class="pre">DyCG.degrees</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datastreams.DyCG.models"><code class="docutils literal notranslate"><span class="pre">DyCG.models</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.datastreams.DyCG.d"><code class="docutils literal notranslate"><span class="pre">DyCG.d</span></code></a></li>

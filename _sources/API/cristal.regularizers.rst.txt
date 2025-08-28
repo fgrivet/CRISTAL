@@ -5,12 +5,6 @@
    :exclude-members: BaseRegularizer, CombRegularizer, ConstantRegularizer, VuRegularizer, VuCRegularizer
 
 
-   Classes
-   -------
-
-   .. autosummary::
-   
-      IMPLEMENTED_REGULARIZERS
    
 Modules
 -------
@@ -23,3 +17,22 @@ Modules
    comb
    constant
    vu
+
+Classes
+-------
+
+.. autosummary::
+
+   IMPLEMENTED_REGULARIZERS
+   base.BaseRegularizer
+   comb.CombRegularizer
+   constant.ConstantRegularizer
+   vu.VuRegularizer
+   vu.VuCRegularizer
+
+Functions
+---------
+
+.. autosummary::
+
+   base.BaseRegularizer.compute_value

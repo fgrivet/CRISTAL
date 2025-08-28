@@ -1,0 +1,1004 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cristal.detectors.timeseries &#8212; CRISTAL Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2d458d10" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'API/cristal.detectors.timeseries';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cristal.evaluation" href="cristal.evaluation.html" />
+    <link rel="prev" title="cristal.detectors.datastreams" href="cristal.detectors.datastreams.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CRISTAL Documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="cristal.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="cristal.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/fgrivet/CRISTAL" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.decomposers.html">cristal.decomposers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.base.html">cristal.decomposers.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.fourier.html">cristal.decomposers.fourier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.wavelet.html">cristal.decomposers.wavelet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.decomposers.window.html">cristal.decomposers.window</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datastreams.html">cristal.detectors.datastreams</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">cristal.detectors.timeseries</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.evaluation.data.html">cristal.evaluation.data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.evaluation.metrics.html">cristal.evaluation.metrics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.incrementers.html">cristal.incrementers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.incrementers.base.html">cristal.incrementers.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.incrementers.inverse.html">cristal.incrementers.inverse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.incrementers.sherman.html">cristal.incrementers.sherman</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.incrementers.woodbury.html">cristal.incrementers.woodbury</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.inverters.html">cristal.inverters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.base.html">cristal.inverters.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.lapack.html">cristal.inverters.lapack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.inverters.scipy.html">cristal.inverters.scipy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.moments_matrix.html">cristal.moments_matrix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html">cristal.moments_matrix.moments_matrix</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.plotters.html">cristal.plotters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.plotters.base.html">cristal.plotters.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.plotters.dycf.html">cristal.plotters.dycf</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.polynomials.html">cristal.polynomials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.polynomials.base.html">cristal.polynomials.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.polynomials.chebyshev.html">cristal.polynomials.chebyshev</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.polynomials.legendre.html">cristal.polynomials.legendre</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.polynomials.monomials.html">cristal.polynomials.monomials</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="cristal.regularizers.html">cristal.regularizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.base.html">cristal.regularizers.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.comb.html">cristal.regularizers.comb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.constant.html">cristal.regularizers.constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.regularizers.vu.html">cristal.regularizers.vu</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="cristal.type_checking.html">cristal.type_checking</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="cristal.html" class="nav-link">CRISTAL</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="cristal.detectors.html" class="nav-link">cristal.detectors</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">cristal.detectors.timeseries</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-cristal.detectors.timeseries">
+<span id="cristal-detectors-timeseries"></span><h1>cristal.detectors.timeseries<a class="headerlink" href="#module-cristal.detectors.timeseries" title="Link to this heading">#</a></h1>
+<p>This module implements the <a class="reference internal" href="#cristal.detectors.timeseries.UTSCF" title="cristal.detectors.timeseries.UTSCF"><code class="xref py py-class docutils literal notranslate"><span class="pre">UTSCF</span></code></a> (Univariate Time Series Christoffel Function) anomaly detection algorithm.</p>
+<p class="rubric">Classes</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.detectors.timeseries.UTSCF" title="cristal.detectors.timeseries.UTSCF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UTSCF</span></code></a>(n[, regularizer_opt, C, ...])</p></td>
+<td><p>Univariate Time Series Christoffel Function</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.detectors.timeseries.</span></span><span class="sig-name descname"><span class="pre">UTSCF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regularizer_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.regularizers.html#cristal.regularizers.IMPLEMENTED_REGULARIZERS" title="cristal.regularizers.IMPLEMENTED_REGULARIZERS"><span class="pre">IMPLEMENTED_REGULARIZERS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_REGULARIZERS.VU_C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polynomial_family_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.polynomials.html#cristal.polynomials.IMPLEMENTED_POLYNOMIALS" title="cristal.polynomials.IMPLEMENTED_POLYNOMIALS"><span class="pre">IMPLEMENTED_POLYNOMIALS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_POLYNOMIALS.MONOMIALS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inverter_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.inverters.html#cristal.inverters.IMPLEMENTED_INVERTERS" title="cristal.inverters.IMPLEMENTED_INVERTERS"><span class="pre">IMPLEMENTED_INVERTERS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_INVERTERS.FPD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incrementer_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.incrementers.html#cristal.incrementers.IMPLEMENTED_INCREMENTERS" title="cristal.incrementers.IMPLEMENTED_INCREMENTERS"><span class="pre">IMPLEMENTED_INCREMENTERS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_INCREMENTERS.INVERSE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decomposer_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.decomposers.html#cristal.decomposers.IMPLEMENTED_DECOMPOSERS" title="cristal.decomposers.IMPLEMENTED_DECOMPOSERS"><span class="pre">IMPLEMENTED_DECOMPOSERS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_DECOMPOSERS.WINDOW_FOURIER</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decomposer_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.BaseDetector" title="cristal.detectors.base.BaseDetector"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDetector</span></code></a></p>
+<p>Univariate Time Series Christoffel Function</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.n">
+<span class="sig-name descname"><span class="pre">n</span></span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.n" title="Link to this definition">#</a></dt>
+<dd><p>The degree of polynomials, usually set between 2 and 8.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.regularizer_opt">
+<span class="sig-name descname"><span class="pre">regularizer_opt</span></span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.regularizer_opt" title="Link to this definition">#</a></dt>
+<dd><p>The regularization method to use to divide the scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="cristal.regularizers.html#cristal.regularizers.IMPLEMENTED_REGULARIZERS" title="cristal.regularizers.IMPLEMENTED_REGULARIZERS">IMPLEMENTED_REGULARIZERS</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.C">
+<span class="sig-name descname"><span class="pre">C</span></span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.C" title="Link to this definition">#</a></dt>
+<dd><p>The constant factor used in the <code class="xref py py-const docutils literal notranslate"><span class="pre">&quot;vu_C&quot;</span></code> or <code class="xref py py-const docutils literal notranslate"><span class="pre">&quot;constant&quot;</span></code> regularizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float | int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.decomposer_opt">
+<span class="sig-name descname"><span class="pre">decomposer_opt</span></span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.decomposer_opt" title="Link to this definition">#</a></dt>
+<dd><p>The decomposition method to use to decompose the timeseries into <a class="reference internal" href="#cristal.detectors.timeseries.UTSCF.d" title="cristal.detectors.timeseries.UTSCF.d"><code class="xref py py-attr docutils literal notranslate"><span class="pre">d</span></code></a> components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="cristal.decomposers.html#cristal.decomposers.IMPLEMENTED_DECOMPOSERS" title="cristal.decomposers.IMPLEMENTED_DECOMPOSERS">IMPLEMENTED_DECOMPOSERS</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.decomposer_kwargs">
+<span class="sig-name descname"><span class="pre">decomposer_kwargs</span></span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.decomposer_kwargs" title="Link to this definition">#</a></dt>
+<dd><p>The keyword arguments to pass to the decomposer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.decomposer_class">
+<span class="sig-name descname"><span class="pre">decomposer_class</span></span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.decomposer_class" title="Link to this definition">#</a></dt>
+<dd><p>The class of the decomposer to use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>type[<a class="reference internal" href="cristal.decomposers.base.html#cristal.decomposers.base.BaseDecomposer" title="cristal.decomposers.base.BaseDecomposer">BaseDecomposer</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.d">
+<span class="sig-name descname"><span class="pre">d</span></span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.d" title="Link to this definition">#</a></dt>
+<dd><p>The number of components to retain during decomposition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.moments_matrix">
+<span class="sig-name descname"><span class="pre">moments_matrix</span></span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.moments_matrix" title="Link to this definition">#</a></dt>
+<dd><p>The moments matrix object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="cristal.moments_matrix.moments_matrix.html#cristal.moments_matrix.moments_matrix.MomentsMatrix" title="cristal.moments_matrix.moments_matrix.MomentsMatrix">MomentsMatrix</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.regularizer_value">
+<span class="sig-name descname"><span class="pre">regularizer_value</span></span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.regularizer_value" title="Link to this definition">#</a></dt>
+<dd><p>The regularization factor computed based on the degree and dimension. None if not fitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float | int | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.indices_train">
+<span class="sig-name descname"><span class="pre">indices_train</span></span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.indices_train" title="Link to this definition">#</a></dt>
+<dd><p>The decomposition indices retained during training. None if not fitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regularizer_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.regularizers.html#cristal.regularizers.IMPLEMENTED_REGULARIZERS" title="cristal.regularizers.IMPLEMENTED_REGULARIZERS"><span class="pre">IMPLEMENTED_REGULARIZERS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_REGULARIZERS.VU_C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polynomial_family_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.polynomials.html#cristal.polynomials.IMPLEMENTED_POLYNOMIALS" title="cristal.polynomials.IMPLEMENTED_POLYNOMIALS"><span class="pre">IMPLEMENTED_POLYNOMIALS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_POLYNOMIALS.MONOMIALS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inverter_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.inverters.html#cristal.inverters.IMPLEMENTED_INVERTERS" title="cristal.inverters.IMPLEMENTED_INVERTERS"><span class="pre">IMPLEMENTED_INVERTERS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_INVERTERS.FPD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incrementer_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.incrementers.html#cristal.incrementers.IMPLEMENTED_INCREMENTERS" title="cristal.incrementers.IMPLEMENTED_INCREMENTERS"><span class="pre">IMPLEMENTED_INCREMENTERS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_INCREMENTERS.INVERSE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decomposer_opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cristal.decomposers.html#cristal.decomposers.IMPLEMENTED_DECOMPOSERS" title="cristal.decomposers.IMPLEMENTED_DECOMPOSERS"><span class="pre">IMPLEMENTED_DECOMPOSERS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">IMPLEMENTED_DECOMPOSERS.WINDOW_FOURIER</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decomposer_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize the UTSCF model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – The degree of polynomials, usually set between 2 and 8.</p></li>
+<li><p><strong>regularizer_opt</strong> (<a class="reference internal" href="cristal.regularizers.html#cristal.regularizers.IMPLEMENTED_REGULARIZERS" title="cristal.regularizers.IMPLEMENTED_REGULARIZERS"><em>IMPLEMENTED_REGULARIZERS</em></a><em>, </em><em>optional</em>) – The regularization method to use to divide the scores, by default IMPLEMENTED_REGULARIZERS.VU_C
+See <a class="reference internal" href="cristal.regularizers.html#cristal.regularizers.IMPLEMENTED_REGULARIZERS" title="cristal.regularizers.IMPLEMENTED_REGULARIZERS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">IMPLEMENTED_REGULARIZERS</span></code></a> for more details.</p></li>
+<li><p><strong>C</strong> (<em>float</em><em> | </em><em>int</em><em>, </em><em>optional</em>) – The constant factor used in the <code class="xref py py-const docutils literal notranslate"><span class="pre">&quot;vu_C&quot;</span></code> or <code class="xref py py-const docutils literal notranslate"><span class="pre">&quot;constant&quot;</span></code> regularizer, by default 1</p></li>
+<li><p><strong>polynomial_family_opt</strong> (<a class="reference internal" href="cristal.polynomials.html#cristal.polynomials.IMPLEMENTED_POLYNOMIALS" title="cristal.polynomials.IMPLEMENTED_POLYNOMIALS"><em>IMPLEMENTED_POLYNOMIALS</em></a><em>, </em><em>optional</em>) – The polynomial basis to use for the moments matrix, by default IMPLEMENTED_POLYNOMIALS.MONOMIALS
+See <a class="reference internal" href="cristal.polynomials.html#cristal.polynomials.IMPLEMENTED_POLYNOMIALS" title="cristal.polynomials.IMPLEMENTED_POLYNOMIALS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS</span></code></a> for more details.</p></li>
+<li><p><strong>inverter_opt</strong> (<a class="reference internal" href="cristal.inverters.html#cristal.inverters.IMPLEMENTED_INVERTERS" title="cristal.inverters.IMPLEMENTED_INVERTERS"><em>IMPLEMENTED_INVERTERS</em></a><em>, </em><em>optional</em>) – The inversion option to use for the moments matrix, by default IMPLEMENTED_INVERTERS.FPD
+See <a class="reference internal" href="cristal.inverters.html#cristal.inverters.IMPLEMENTED_INVERTERS" title="cristal.inverters.IMPLEMENTED_INVERTERS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">IMPLEMENTED_INVERTERS</span></code></a> for more details.</p></li>
+<li><p><strong>incrementer_opt</strong> (<a class="reference internal" href="cristal.incrementers.html#cristal.incrementers.IMPLEMENTED_INCREMENTERS" title="cristal.incrementers.IMPLEMENTED_INCREMENTERS"><em>IMPLEMENTED_INCREMENTERS</em></a><em>, </em><em>optional</em>) – The incrementation option to use for updating the moments matrix, by default IMPLEMENTED_INCREMENTERS.INVERSE
+See <a class="reference internal" href="cristal.incrementers.html#cristal.incrementers.IMPLEMENTED_INCREMENTERS" title="cristal.incrementers.IMPLEMENTED_INCREMENTERS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">IMPLEMENTED_INCREMENTERS</span></code></a> for more details.</p></li>
+<li><p><strong>decomposer_opt</strong> (<a class="reference internal" href="cristal.decomposers.html#cristal.decomposers.IMPLEMENTED_DECOMPOSERS" title="cristal.decomposers.IMPLEMENTED_DECOMPOSERS"><em>IMPLEMENTED_DECOMPOSERS</em></a><em>, </em><em>optional</em>) – The decomposition method to use to decompose the timeseries into <a class="reference internal" href="#cristal.detectors.timeseries.UTSCF.d" title="cristal.detectors.timeseries.UTSCF.d"><code class="xref py py-attr docutils literal notranslate"><span class="pre">d</span></code></a> components, by default IMPLEMENTED_DECOMPOSERS.WINDOW_FOURIER
+See <a class="reference internal" href="cristal.decomposers.html#cristal.decomposers.IMPLEMENTED_DECOMPOSERS" title="cristal.decomposers.IMPLEMENTED_DECOMPOSERS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">IMPLEMENTED_DECOMPOSERS</span></code></a> for more details.</p></li>
+<li><p><strong>decomposer_kwargs</strong> (<em>dict</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – The keyword arguments to pass to the decomposer, by default None</p></li>
+<li><p><strong>d</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of components to retain during decomposition, by default 5</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.assert_shape_fitted">
+<span class="sig-name descname"><span class="pre">assert_shape_fitted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.assert_shape_fitted" title="Link to this definition">#</a></dt>
+<dd><p>Asserts that the input array x has the correct shape to use the model after it has been fitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – The input data to check. Should be a 2D array with shape (N, d)
+where N is the number of samples and d is the number of features (the same as during fitting).</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="cristal.detectors.base.html#cristal.detectors.base.NotFittedError" title="cristal.detectors.base.NotFittedError"><strong>NotFittedError</strong></a> – If the model has not been fitted yet.</p></li>
+<li><p><strong>ValueError</strong> – If the input array does not have the expected shape.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.assert_shape_unfitted">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">assert_shape_unfitted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.assert_shape_unfitted" title="Link to this definition">#</a></dt>
+<dd><p>Asserts that the input array x has the correct shape to fit the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – The input data to check. Should be a 2D array with shape (N, d)
+where N is the number of samples and d is the number of features.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input array does not have the expected shape.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.copy" title="Link to this definition">#</a></dt>
+<dd><p>Returns a copy of the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A copy of the current model.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.decision_function">
+<span class="sig-name descname"><span class="pre">decision_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.decision_function" title="Link to this definition">#</a></dt>
+<dd><p>Computes the decision function for the samples in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to compute the decision function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decision function values for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.eval_update">
+<span class="sig-name descname"><span class="pre">eval_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.eval_update" title="Link to this definition">#</a></dt>
+<dd><p>Evaluates the model on the samples in x and updates it with inliers.
+This method iterates over each sample in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to evaluate and update the model.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decision function values for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.fit" title="Link to this definition">#</a></dt>
+<dd><p>Generates a model that fit dataset x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>, </em><em>d</em><em>)</em>) – The input data to fit the model.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The fitted model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.fit_predict">
+<span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.fit_predict" title="Link to this definition">#</a></dt>
+<dd><p>Fits the model with x and predicts the outlier labels for the samples in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>N</em><em>, </em><em>d</em><em>)</em>) – The input data to fit and predict.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted labels for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (N,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.is_fitted">
+<span class="sig-name descname"><span class="pre">is_fitted</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.is_fitted" title="Link to this definition">#</a></dt>
+<dd><p>Checks if the model is fitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the model is fitted, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.load_model">
+<span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.load_model" title="Link to this definition">#</a></dt>
+<dd><p>Loads the UTSCF model from a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_dict</strong> (<em>dict</em>) – <dl class="simple">
+<dt>The dictionary containing the UTSCF parameters returned by <a class="reference internal" href="#cristal.detectors.timeseries.UTSCF.save_model" title="cristal.detectors.timeseries.UTSCF.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">save_model()</span></code></a>:</dt><dd><ul class="simple">
+<li><p>”n”: int, the degree of the polynomial basis.</p></li>
+<li><p>”regularizer_opt”: str, the regularization method used.</p></li>
+<li><p>”C”: float | int, the constant factor used in the regularization.</p></li>
+<li><p>”moments_matrix”: dict, the saved moments matrix.</p></li>
+<li><p>”decomposer_opt”: str, the decomposition method used.</p></li>
+<li><p>”decomposer_kwargs”: dict, the keyword arguments for the decomposer.</p></li>
+<li><p>”d”: int, the number of components to retain during decomposition.</p></li>
+<li><p>”regularizer_value”: float | int | None, the regularization factor.</p></li>
+<li><p>”indices_train”: np.ndarray | None, the decomposition indices retained during training. None if not fitted.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The loaded UTSCF instance with updated parameters.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#cristal.detectors.timeseries.UTSCF" title="cristal.detectors.timeseries.UTSCF">UTSCF</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.method_name">
+<span class="sig-name descname"><span class="pre">method_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.method_name" title="Link to this definition">#</a></dt>
+<dd><p>Returns the name of the method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The name of the method.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.predict" title="Link to this definition">#</a></dt>
+<dd><p>Predicts the outlier labels for the samples in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to predict the labels.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted labels for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.predict_update">
+<span class="sig-name descname"><span class="pre">predict_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.predict_update" title="Link to this definition">#</a></dt>
+<dd><p>Predict the model on the samples in x and updates it with inliers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to evaluate and update the model.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted labels for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.save_model">
+<span class="sig-name descname"><span class="pre">save_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.save_model" title="Link to this definition">#</a></dt>
+<dd><p>Saves the UTSCF model as a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>The UTSCF model represented as a dictionary, with keys:</dt><dd><ul class="simple">
+<li><p>”n”: int, the degree of the polynomial basis.</p></li>
+<li><p>”regularizer_opt”: str, the regularization method used.</p></li>
+<li><p>”C”: float | int, the constant factor used in the regularization.</p></li>
+<li><p>”moments_matrix”: dict, the saved moments matrix.</p></li>
+<li><p>”decomposer_opt”: str, the decomposition method used.</p></li>
+<li><p>”decomposer_kwargs”: dict, the keyword arguments for the decomposer.</p></li>
+<li><p>”d”: int, the number of components to retain during decomposition.</p></li>
+<li><p>”regularizer_value”: float | int | None, the regularization factor.</p></li>
+<li><p>”indices_train”: np.ndarray | None, the decomposition indices retained during training. None if not fitted.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.score_samples">
+<span class="sig-name descname"><span class="pre">score_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.score_samples" title="Link to this definition">#</a></dt>
+<dd><p>Computes the outlier scores for the samples in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>L</em><em>, </em><em>d</em><em>)</em>) – The input data to compute the scores.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The outlier scores for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray (L,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cristal.detectors.timeseries.UTSCF.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sym</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.detectors.timeseries.UTSCF.update" title="Link to this definition">#</a></dt>
+<dd><p>Update the current model with instances in x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>np.ndarray</em><em> (</em><em>N'</em><em>, </em><em>d</em><em>)</em>) – The input data to update the model.</p></li>
+<li><p><strong>sym</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether the inverse of the moments matrix should be considered as symmetric, by default True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The updated UTSCF instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#cristal.detectors.timeseries.UTSCF" title="cristal.detectors.timeseries.UTSCF">UTSCF</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="cristal.detectors.datastreams.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">cristal.detectors.datastreams</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cristal.evaluation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">cristal.evaluation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF"><code class="docutils literal notranslate"><span class="pre">UTSCF</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.n"><code class="docutils literal notranslate"><span class="pre">UTSCF.n</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.regularizer_opt"><code class="docutils literal notranslate"><span class="pre">UTSCF.regularizer_opt</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.C"><code class="docutils literal notranslate"><span class="pre">UTSCF.C</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.decomposer_opt"><code class="docutils literal notranslate"><span class="pre">UTSCF.decomposer_opt</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.decomposer_kwargs"><code class="docutils literal notranslate"><span class="pre">UTSCF.decomposer_kwargs</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.decomposer_class"><code class="docutils literal notranslate"><span class="pre">UTSCF.decomposer_class</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.d"><code class="docutils literal notranslate"><span class="pre">UTSCF.d</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.moments_matrix"><code class="docutils literal notranslate"><span class="pre">UTSCF.moments_matrix</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.regularizer_value"><code class="docutils literal notranslate"><span class="pre">UTSCF.regularizer_value</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.indices_train"><code class="docutils literal notranslate"><span class="pre">UTSCF.indices_train</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.__init__"><code class="docutils literal notranslate"><span class="pre">UTSCF.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.assert_shape_fitted"><code class="docutils literal notranslate"><span class="pre">UTSCF.assert_shape_fitted()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.assert_shape_unfitted"><code class="docutils literal notranslate"><span class="pre">UTSCF.assert_shape_unfitted()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.copy"><code class="docutils literal notranslate"><span class="pre">UTSCF.copy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.decision_function"><code class="docutils literal notranslate"><span class="pre">UTSCF.decision_function()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.eval_update"><code class="docutils literal notranslate"><span class="pre">UTSCF.eval_update()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.fit"><code class="docutils literal notranslate"><span class="pre">UTSCF.fit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.fit_predict"><code class="docutils literal notranslate"><span class="pre">UTSCF.fit_predict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.is_fitted"><code class="docutils literal notranslate"><span class="pre">UTSCF.is_fitted()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.load_model"><code class="docutils literal notranslate"><span class="pre">UTSCF.load_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.method_name"><code class="docutils literal notranslate"><span class="pre">UTSCF.method_name()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.predict"><code class="docutils literal notranslate"><span class="pre">UTSCF.predict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.predict_update"><code class="docutils literal notranslate"><span class="pre">UTSCF.predict_update()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.save_model"><code class="docutils literal notranslate"><span class="pre">UTSCF.save_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.score_samples"><code class="docutils literal notranslate"><span class="pre">UTSCF.score_samples()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.detectors.timeseries.UTSCF.update"><code class="docutils literal notranslate"><span class="pre">UTSCF.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/API/cristal.detectors.timeseries.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Florian Grivet.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

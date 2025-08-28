@@ -338,6 +338,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.detectors.html">cristal.detectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.base.html">cristal.detectors.base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cristal.detectors.datastreams.html">cristal.detectors.datastreams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cristal.detectors.timeseries.html">cristal.detectors.timeseries</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cristal.evaluation.html">cristal.evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -438,16 +439,6 @@
   <section id="module-cristal.polynomials">
 <span id="cristal-polynomials"></span><h1>cristal.polynomials<a class="headerlink" href="#module-cristal.polynomials" title="Link to this heading">#</a></h1>
 <p>CRISTAL Polynomials Subpackage Contains various polynomial classes, including Monomials, Chebyshev and Legendre polynomials.</p>
-<section id="classes">
-<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.polynomials.IMPLEMENTED_POLYNOMIALS" title="cristal.polynomials.IMPLEMENTED_POLYNOMIALS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS</span></code></a>(*values)</p></td>
-<td><p>The implemented polynomial classes.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="cristal.polynomials.IMPLEMENTED_POLYNOMIALS">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cristal.polynomials.</span></span><span class="sig-name descname"><span class="pre">IMPLEMENTED_POLYNOMIALS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cristal.polynomials.IMPLEMENTED_POLYNOMIALS" title="Link to this definition">#</a></dt>
@@ -480,7 +471,6 @@
 
 </dd></dl>
 
-</section>
 <section id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
@@ -496,6 +486,58 @@
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="cristal.polynomials.monomials.html#module-cristal.polynomials.monomials" title="cristal.polynomials.monomials"><code class="xref py py-obj docutils literal notranslate"><span class="pre">monomials</span></code></a></p></td>
 <td><p>Monomials polynomial family.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cristal.polynomials.IMPLEMENTED_POLYNOMIALS" title="cristal.polynomials.IMPLEMENTED_POLYNOMIALS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS</span></code></a>(*values)</p></td>
+<td><p>The implemented polynomial classes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.polynomials.base.html#cristal.polynomials.base.BasePolynomialFamily" title="cristal.polynomials.base.BasePolynomialFamily"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BasePolynomialFamily</span></code></a>()</p></td>
+<td><p>Base class for polynomial families.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.polynomials.base.html#cristal.polynomials.base.MultivariatePolynomialBasis" title="cristal.polynomials.base.MultivariatePolynomialBasis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.MultivariatePolynomialBasis</span></code></a>()</p></td>
+<td><p>Class for generating polynomial combinations and applying polynomial basis functions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.polynomials.chebyshev.html#cristal.polynomials.chebyshev.ChebyshevT1Family" title="cristal.polynomials.chebyshev.ChebyshevT1Family"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chebyshev.ChebyshevT1Family</span></code></a>()</p></td>
+<td><p>Class for generating first order Chebyshev polynomials as a polynomial basis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.polynomials.chebyshev.html#cristal.polynomials.chebyshev.ChebyshevT2Family" title="cristal.polynomials.chebyshev.ChebyshevT2Family"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chebyshev.ChebyshevT2Family</span></code></a>()</p></td>
+<td><p>Class for generating second order Chebyshev polynomials as a polynomial basis.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.polynomials.chebyshev.html#cristal.polynomials.chebyshev.ChebyshevUFamily" title="cristal.polynomials.chebyshev.ChebyshevUFamily"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chebyshev.ChebyshevUFamily</span></code></a>()</p></td>
+<td><p>Class for generating U order Chebyshev polynomials as a polynomial basis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.polynomials.legendre.html#cristal.polynomials.legendre.LegendreFamily" title="cristal.polynomials.legendre.LegendreFamily"><code class="xref py py-obj docutils literal notranslate"><span class="pre">legendre.LegendreFamily</span></code></a>()</p></td>
+<td><p>Class for generating Legendre polynomials as a polynomial basis.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.polynomials.monomials.html#cristal.polynomials.monomials.MonomialsFamily" title="cristal.polynomials.monomials.MonomialsFamily"><code class="xref py py-obj docutils literal notranslate"><span class="pre">monomials.MonomialsFamily</span></code></a>()</p></td>
+<td><p>Class for generating monomials as a polynomial basis.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.polynomials.base.html#cristal.polynomials.base.BasePolynomialFamily.apply" title="cristal.polynomials.base.BasePolynomialFamily.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.BasePolynomialFamily.apply</span></code></a>(x, ...)</p></td>
+<td><p>Apply the polynomial basis function to the input data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.polynomials.base.html#cristal.polynomials.base.MultivariatePolynomialBasis.apply_polynomial_family" title="cristal.polynomials.base.MultivariatePolynomialBasis.apply_polynomial_family"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.MultivariatePolynomialBasis.apply_polynomial_family</span></code></a>(x, ...)</p></td>
+<td><p>Applies the polynomial basis to the input data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cristal.polynomials.base.html#cristal.polynomials.base.MultivariatePolynomialBasis.generate_multidegree_combinations" title="cristal.polynomials.base.MultivariatePolynomialBasis.generate_multidegree_combinations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.MultivariatePolynomialBasis.generate_multidegree_combinations</span></code></a>(...)</p></td>
+<td><p>Generate degree combinations for each dimension up to a specified maximum degree.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cristal.polynomials.base.html#cristal.polynomials.base.MultivariatePolynomialBasis.make_design_matrix" title="cristal.polynomials.base.MultivariatePolynomialBasis.make_design_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.MultivariatePolynomialBasis.make_design_matrix</span></code></a>(x, ...)</p></td>
+<td><p>Compute the design matrix for the given data points and monomials.</p></td>
 </tr>
 </tbody>
 </table>
@@ -554,18 +596,17 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.polynomials.IMPLEMENTED_POLYNOMIALS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.polynomials.IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_T1"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_T1</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.polynomials.IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_T2"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_T2</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.polynomials.IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_U"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_U</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.polynomials.IMPLEMENTED_POLYNOMIALS.LEGENDRE"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS.LEGENDRE</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.polynomials.IMPLEMENTED_POLYNOMIALS.MONOMIALS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS.MONOMIALS</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.polynomials.IMPLEMENTED_POLYNOMIALS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.polynomials.IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_T1"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_T1</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.polynomials.IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_T2"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_T2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.polynomials.IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_U"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS.CHEBYSHEV_U</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.polynomials.IMPLEMENTED_POLYNOMIALS.LEGENDRE"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS.LEGENDRE</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cristal.polynomials.IMPLEMENTED_POLYNOMIALS.MONOMIALS"><code class="docutils literal notranslate"><span class="pre">IMPLEMENTED_POLYNOMIALS.MONOMIALS</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
 </ul>
   </nav></div>
 
