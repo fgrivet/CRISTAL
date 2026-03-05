@@ -24,7 +24,7 @@ echo Running unit tests...
 echo.
 
 :: Run the unittest command
-python -m unittest discover -s cristal/tests -p "test_*.py"
+python -m unittest discover -s tests -p "test_*.py"
 
 :: Capture the exit code
 set EXIT_CODE=%errorlevel%

@@ -1,5 +1,9 @@
 # CRISTAL
 
+<div align="center">
+    <img src="logo/logo.svg" alt="CRISTAL logo" width="50%">
+</div>
+
 ## Description
 
 **C**h**RIST**offel **A**nomaly **L**ocator (CRISTAL)  is an anomaly detection framework based on the Christoffel Function.
