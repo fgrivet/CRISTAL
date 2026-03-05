@@ -29,8 +29,3 @@ If you use this work in your research, please cite it as:
 ```bibtex
 inconming
 ```
-
-
-<div align="center">
-    <img src="doc/source/_static/logo.png" alt="CRISTAL logo" width="50%">
-</div>
