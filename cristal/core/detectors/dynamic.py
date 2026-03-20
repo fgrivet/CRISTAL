@@ -2,7 +2,7 @@ from math import comb
 from typing import Literal, cast
 
 from ...config.detector_config import DynamicDetectorConfig
-from ..types import ArrayLike, DTypeLike
+from ...types import ArrayLike, DTypeLike
 from .base_detector import BaseCGDetector, BaseDetector
 
 
@@ -20,8 +20,10 @@ class DyCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
         return self.config.backend.einsum("ni,ij,nj->n", component_x, component_support, component_x)
 
     def _compute_components(self, X: ArrayLike) -> tuple[ArrayLike, ArrayLike]:
-        assert isinstance(self.n, int) and self.n > 0, "n must be a positive integer."
-        assert self.M_inv is not None, "M_inv must be computed."
+        if not isinstance(self.n, int) or self.n <= 0:
+            raise ValueError(f"n must be a positive integer. Got {self.n}.")
+        if self.M_inv is None:
+            raise ValueError("M_inv must be computed.")
 
         # Compute the polynomial basis v(x) for each point in X
         V = self.config.polynomial_basis.vandermonde_nd(X, self.n)
@@ -29,10 +31,14 @@ class DyCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
         return self.M_inv, V
 
     def _crop_components(self, component_support: ArrayLike, component_x: ArrayLike, n: int) -> tuple[ArrayLike, ArrayLike]:
-        assert isinstance(self.n, int) and self.n > 0, "n must be a positive integer."
-        assert self.d is not None and self.d > 0, "d must be a positive integer."
-        assert n <= self.n, "n must be lower or equal than self.n"
-        assert self.M is not None, "M must be fitted."
+        if not isinstance(self.n, int) or self.n <= 0:
+            raise ValueError(f"n must be a positive integer. Got {self.n}.")
+        if self.d is None or self.d <= 0:
+            raise ValueError(f"d must be a positive integer. Got {self.d}.")
+        if n > self.n:
+            raise ValueError(f"n ({n}) must be lower or equal than self.n ({self.n}).")
+        if self.M is None:
+            raise ValueError("M must be fitted.")
 
         new_size = comb(self.d + n, n)
 
@@ -44,7 +50,8 @@ class DyCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
         return M_inv, component_x[:, :new_size]
 
     def fit(self, X: ArrayLike) -> BaseDetector:
-        assert X.ndim == 2, "X must be a 2D ArrayLike."
+        if X.ndim != 2:
+            raise ValueError(f"X must be a 2D ArrayLike. Got {X.shape}.")
 
         # Define The number of training data and the diension of training data
         N, d = X.shape

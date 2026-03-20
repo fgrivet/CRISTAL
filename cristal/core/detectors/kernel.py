@@ -2,7 +2,7 @@ from typing import Literal, cast
 
 from ...commons.distance import Distance
 from ...config.detector_config import DynamicDetectorConfig
-from ..types import ArrayLike, DTypeLike, Number
+from ...types import ArrayLike, DTypeLike, Number
 from .base_detector import BaseCGDetector, BaseDetector
 
 
@@ -29,7 +29,8 @@ class KernelCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
         self.G_inv = None  #: The inverse of the gram matrix
 
     def _rbf_kernel(self, X, Y=None):
-        assert self.sigma != "auto", "Sigma must be specified when using RBF kernel."
+        if self.sigma == "auto":
+            raise ValueError(f"Sigma must be specified when using RBF kernel. Got {self.sigma}.")
         gamma = 1 / (2 * self.sigma**2)
         distance = Distance(metric="euclidean")
         distance.backend = self.config.backend
@@ -48,7 +49,8 @@ class KernelCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
 
     def _compute_rho(self, rho: Literal["auto"] | Number, n: int) -> float:
         if rho == "auto":
-            assert self.G is not None
+            if self.G is None:
+                raise ValueError("G must be set before computing rho.")
             return self.config.backend.norm(self.G, p="fro") / (self.config.C * self.config.backend.sqrt(n))
         return float(rho)
 
@@ -67,7 +69,8 @@ class KernelCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
         return component_support, component_x
 
     def fit(self, X: ArrayLike) -> BaseDetector:
-        assert X.ndim == 2, "X must be a 2D ArrayLike."
+        if X.ndim != 2:
+            raise ValueError(f"X must be a 2D ArrayLike. Got {X.shape}.")
 
         # Define The number of training data and the diension of training data
         N, d = X.shape

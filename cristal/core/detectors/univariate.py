@@ -1,7 +1,7 @@
 from typing import Literal, cast
 
 from ...config.detector_config import StaticDetectorConfig
-from ..types import ArrayLike, DTypeLike
+from ...types import ArrayLike, DTypeLike
 from .base_detector import BaseCGDetector, BaseDetector
 
 
@@ -14,13 +14,16 @@ class UCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
         self.X_train: ArrayLike | None = None  #: The training data
 
     def _compute_scores(self, component_support: ArrayLike, component_x: ArrayLike) -> ArrayLike:
-        # Here M is the vandermonde matrix for each point and V the make_v depending on the polynomial basis
-        assert self.N is not None, "Model must be fitted before computing scores."
+        # Here component_support is the vandermonde matrix for each point and component_x the make_v depending on the polynomial basis
+        if self.N is None:
+            raise ValueError("Model must be fitted before computing scores.")
         return self.config.solver(component_support, component_x, self.N)
 
     def _compute_components(self, X: ArrayLike) -> tuple[ArrayLike, ArrayLike]:
-        assert isinstance(self.n, int) and self.n > 0, "n must be a positive integer."
-        assert self.d is not None and self.d > 0, "d must be a positive integer."
+        if not isinstance(self.n, int) or self.n <= 0:
+            raise ValueError(f"n must be a positive integer. Got {self.n}.")
+        if self.d is None or self.d <= 0:
+            raise ValueError(f"d must be a positive integer. Got {self.d}.")
 
         N_test = len(X)
 
@@ -35,15 +38,18 @@ class UCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
         return M, V
 
     def _crop_components(self, component_support: ArrayLike, component_x: ArrayLike, n: int) -> tuple[ArrayLike, ArrayLike]:
-        assert isinstance(self.n, int) and self.n > 0, "n must be a positive integer."
-        assert n <= self.n, "n must be lower or equal than self.n"
+        if not isinstance(self.n, int) or self.n <= 0:
+            raise ValueError(f"n must be a positive integer. Got {self.n}.")
+        if n > self.n:
+            raise ValueError(f"n ({n}) must be lower or equal than self.n ({self.n}).")
 
         # M shape is (N_test, N, n+1) with the polynomial basis of each distance in D (thus N_test, N)
         # V shape is (N_test, n+1, 1) the vector of size n+1 to apply to M for each testing point
         return component_support[:, :, : n + 1], component_x[:, : n + 1]
 
     def fit(self, X: ArrayLike) -> BaseDetector:
-        assert X.ndim == 2, "X must be a 2D ArrayLike."
+        if X.ndim != 2:
+            raise ValueError(f"X must be a 2D ArrayLike. Got {X.shape}.")
 
         # Define The number of training data and the diension of training data
         N, d = X.shape

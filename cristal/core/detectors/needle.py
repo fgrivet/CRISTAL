@@ -1,7 +1,7 @@
 from typing import Literal, cast
 
 from ...config.detector_config import StaticDetectorConfig
-from ..types import ArrayLike, DTypeLike
+from ...types import ArrayLike, DTypeLike
 from .base_detector import BaseCGDetector, BaseDetector
 
 
@@ -27,8 +27,10 @@ class NeedleCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
         return res
 
     def _compute_components(self, X: ArrayLike) -> tuple[ArrayLike, ArrayLike]:
-        assert isinstance(self.n, int) and self.n > 0, "n must be a positive integer."
-        assert self.d is not None and self.d > 0, "d must be a positive integer."
+        if not isinstance(self.n, int) or self.n <= 0:
+            raise ValueError(f"n must be a positive integer. Got {self.n}.")
+        if self.d is None or self.d <= 0:
+            raise ValueError(f"d must be a positive integer. Got {self.d}.")
 
         # Compute the distances between all points in X and in X_train
         D = self.config.distance(X, self.X_train)  # Shape (N_test, N)
@@ -52,13 +54,16 @@ class NeedleCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
         return T_n_A, T_n_A_B
 
     def _crop_components(self, component_support: ArrayLike, component_x: ArrayLike, n: int) -> tuple[ArrayLike, ArrayLike]:
-        assert isinstance(self.n, int) and self.n > 0, "n must be a positive integer."
-        assert n <= self.n, "n must be lower or equal than self.n"
+        if not isinstance(self.n, int) or self.n <= 0:
+            raise ValueError(f"n must be a positive integer. Got {self.n}.")
+        if n > self.n:
+            raise ValueError(f"n ({n}) must be lower or equal than self.n ({self.n}).")
 
         return component_support[:, :, [n]], component_x[:, :, [n]]
 
     def fit(self, X: ArrayLike) -> BaseDetector:
-        assert X.ndim == 2, "X must be a 2D ArrayLike."
+        if X.ndim != 2:
+            raise ValueError(f"X must be a 2D ArrayLike. Got {X.shape}.")
 
         # Define The number of training data and the diension of training data
         N, d = X.shape

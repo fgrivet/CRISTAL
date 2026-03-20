@@ -1,7 +1,7 @@
 from typing import Generic, Literal, cast, get_args
 
 from ..backend.base_backend import Backend
-from ..core.types import ArrayLike, DTypeLike
+from ..types import ArrayLike, DTypeLike
 from .base_commons import BaseCommons
 
 IMPLEMENTED_SOLVER = Literal["cholesky", "qr", "inverse", "solve"]
@@ -11,7 +11,9 @@ class Solver(BaseCommons, Generic[ArrayLike, DTypeLike]):
     requires = ["backend"]
 
     def __init__(self, solver: IMPLEMENTED_SOLVER = "solve", eps: float | None = None):
-        assert solver in get_args(IMPLEMENTED_SOLVER), f"solver must be in {IMPLEMENTED_SOLVER}. Got {solver}."
+        # eps only for cholesky, inverse and solve, not for QR
+        if solver not in get_args(IMPLEMENTED_SOLVER):
+            raise ValueError(f"solver must be in {IMPLEMENTED_SOLVER}. Got {solver}.")
         self.solver = solver
         self.eps = eps
 
@@ -19,7 +21,8 @@ class Solver(BaseCommons, Generic[ArrayLike, DTypeLike]):
         self.backend: Backend[ArrayLike, DTypeLike]
 
     def solve(self, V: ArrayLike, v: ArrayLike, N: int) -> ArrayLike:
-        assert self.backend is not None, "A backend must be bound to the Solver class before using it."
+        if self.backend is None:
+            raise ValueError("A backend must be bound to the Solver class before using it.")
 
         x = None
 
@@ -49,21 +52,19 @@ class Solver(BaseCommons, Generic[ArrayLike, DTypeLike]):
             if self.solver == "inverse":
                 # z = v^T G^-1 v with x = G^-1 v but compute explicitly G^-1
                 # Inverse G using solve
-                G_inv = self.backend.solve(G, eye)
+                G_inv = self.backend.solve(G, self.backend.stack([eye for _ in range(len(G))], axis=0))
                 x = G_inv @ v
 
-            if self.solver == "solve":
+            elif self.solver == "solve":
                 # z = v^T G^-1 v with x = G^-1 v
                 x = self.backend.solve(G, v)  # G x = v
 
-            if self.solver == "cholesky":
+            # Cholesky
+            else:
                 # z = v^T L^-T L^-1 v with y = L^-1 v and x = L^-T y
                 L = self.backend.cholesky(G)
                 y = self.backend.solve(L, v)  # L y = v
                 x = self.backend.solve(self.backend.swap(L, 1, 2), y)  # L^T x = y
-
-        if x is None:
-            raise ValueError(f"Wrong solver name / solver implementation in Solver. Got {self.solver}. Should be in {IMPLEMENTED_SOLVER}")
 
         return self.backend.einsum("i,mi->m", v[0, :, 0], x[..., 0])  # z = v^T x
 

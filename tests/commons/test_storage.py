@@ -2,13 +2,14 @@
 Unit tests for Storage class
 """
 
+import unittest
+
 import numpy as np
-import pytest
 
 from cristal.commons.storage import IMPLEMENTED_STORAGE, Storage
 
 
-class TestStorage:
+class TestStorage(unittest.TestCase):
     """Test the Storage class functionality"""
 
     def test_storage_initialization(self):
@@ -16,16 +17,15 @@ class TestStorage:
         # Test valid storage methods
         for method in IMPLEMENTED_STORAGE.__args__:
             storage = Storage(method=method, batch_size=10)
-            assert storage.method == method
-            assert storage.batch_size == 10
+            self.assertEqual(storage.method, method)
+            self.assertEqual(storage.batch_size, 10)
 
         # Test invalid method
-        with pytest.raises(AssertionError):
-            Storage(method="invalid_method", batch_size=10)
+        self.assertRaises(ValueError, Storage, method="invalid_method")
 
         # Test invalid batch size
-        with pytest.raises(AssertionError):
-            Storage(method="full", batch_size=0)
+        self.assertRaises(ValueError, Storage, method="batch", batch_size=0)
+        self.assertRaises(ValueError, Storage, method="batch", batch_size=-5)
 
     def test_iterate_full_method(self):
         """Test full iteration method"""
@@ -33,10 +33,10 @@ class TestStorage:
         X = np.array([[1, 2], [3, 4]])
 
         # Test iteration
-        iterator = storage.iterate(X)
+        iterator = storage(X)
         result = list(iterator)
-        assert len(result) == 1
-        assert np.array_equal(result[0], X)
+        self.assertEqual(len(result), 1)
+        np.testing.assert_almost_equal(result[0], X)
 
     def test_iterate_batch_method(self):
         """Test batch iteration method"""
@@ -44,9 +44,9 @@ class TestStorage:
         X = np.array([[1, 2], [3, 4], [5, 6]])
 
         # Test iteration
-        iterator = storage.iterate(X)
+        iterator = storage(X)
         result = list(iterator)
-        assert len(result) == 3
-        assert np.array_equal(result[0], np.array([[1, 2]]))
-        assert np.array_equal(result[1], np.array([[3, 4]]))
-        assert np.array_equal(result[2], np.array([[5, 6]]))
+        self.assertEqual(len(result), 3)
+        np.testing.assert_almost_equal(result[0], np.array([[1, 2]]))
+        np.testing.assert_almost_equal(result[1], np.array([[3, 4]]))
+        np.testing.assert_almost_equal(result[2], np.array([[5, 6]]))

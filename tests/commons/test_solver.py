@@ -2,43 +2,81 @@
 Unit tests for Solver class
 """
 
-from unittest.mock import Mock
+import unittest
 
-import pytest
+import numpy as np
 
+from cristal.backend.numpy_backend import NumpyBackend
+from cristal.commons.inverter import Inverter
 from cristal.commons.solver import IMPLEMENTED_SOLVER, Solver
 
 
-class TestSolver:
+class TestSolver(unittest.TestCase):
     """Test the Solver class functionality"""
+
+    def setUp(self):
+        np.random.seed(42)
+        self.N = 5
+        # Create symmetric positive definite matrix
+        self.V = np.random.rand(self.N, 3, 3)
+
+        # Create test vector
+        self.v = np.random.rand(3)
+        self.v = np.stack([self.v for _ in range(self.N)], axis=0).reshape(self.N, 3, 1)
+
+        # Compute expected results manually
+        self.exp_result = self._compute_expected_result(self.V, self.v, self.N)
+
+    def _compute_expected_result(self, V, v, N):
+        """Manually compute expected result for validation"""
+        inverter = Inverter()
+        inverter.backend = NumpyBackend()
+        G_inv = inverter(V.swapaxes(-1, -2) @ V / N)
+        return (v.swapaxes(-1, -2) @ G_inv @ v)[:, 0, 0]
 
     def test_solver_initialization(self):
         """Test Solver initialization with valid parameters"""
-        # Test valid solver types
-        for solver_type in IMPLEMENTED_SOLVER.__args__:
-            solver = Solver(solver=solver_type)
-            assert solver.solver == solver_type
+        for method in IMPLEMENTED_SOLVER.__args__:
+            solver = Solver(solver=method)
+            self.assertEqual(solver.solver, method)
+            self.assertIsNone(solver.eps)
 
-        # Test invalid solver type
-        with pytest.raises(AssertionError):
-            Solver(solver="invalid_solver")
+            # Test no backend bound
+            self.assertRaises(ValueError, solver, self.V, self.v, self.N)
 
-    def test_solver_with_mock_backend(self):
-        """Test Solver with mocked backend"""
-        # Create a mock backend
-        backend = Mock()
-        backend.qr.return_value = (Mock(), Mock())
-        backend.swap.return_value = Mock()
-        backend.solve.return_value = Mock()
-        backend.eye.return_value = Mock()
-        backend.einsum.return_value = Mock()
+        # Test invalid method
+        self.assertRaises(ValueError, Solver, solver="invalid_method")
 
-        # Create solver
-        solver = Solver(solver="solve")
+    def test_solver(self):
+        """Test Solver method"""
+        backend = NumpyBackend()
 
-        # Bind backend
-        solver.backend = backend
+        for method in IMPLEMENTED_SOLVER.__args__:
+            # Create inverter
+            solver = Solver(solver=method)
 
-        # Test that solver can be called without error
-        # Note: This test requires more complex mocking to fully test the solve method
-        assert solver.solver == "solve"
+            # Bind backend
+            solver.backend = backend
+
+            # Solve the system
+            result = solver(self.V, self.v, self.N)
+
+            # Check that the inverse is correct
+            np.testing.assert_almost_equal(result, self.exp_result, decimal=8, err_msg=f"{method}")
+
+    def test_solver_with_eps(self):
+        """Test Solver method with regularization eps"""
+        backend = NumpyBackend()
+
+        for method in IMPLEMENTED_SOLVER.__args__:
+            # Create inverter
+            solver = Solver(solver=method, eps=1e-12)
+
+            # Bind backend
+            solver.backend = backend
+
+            # Solve the system
+            result = solver(self.V, self.v, self.N)
+
+            # Check that the inverse is correct
+            np.testing.assert_almost_equal(result, self.exp_result, decimal=5, err_msg=f"{method}")

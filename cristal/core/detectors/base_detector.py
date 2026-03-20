@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Generic, Literal, cast
 
 from ...config.detector_config import ConfigType
-from ..types import ArrayLike, DTypeLike
+from ...types import ArrayLike, DTypeLike
 
 
 class BaseDetector(ABC, Generic[ArrayLike, DTypeLike, ConfigType]):
@@ -19,12 +19,14 @@ class BaseDetector(ABC, Generic[ArrayLike, DTypeLike, ConfigType]):
 
     def _compute_n(self, n: int | Literal["auto"], N: int) -> int:
         # n = N**(1/(2+d))
-        assert self.intrinsic_dim is not None, "Model must be fitted before computing n."
+        if self.intrinsic_dim is None:
+            raise ValueError("Model must be fitted before computing n.")
 
         if n == "auto":
             n = int(N ** (1 / (2 + self.intrinsic_dim)))
             print("auto n =", n)
-        assert isinstance(n, int), "Error during the computation of n."
+        if not isinstance(n, int):
+            raise ValueError("Error during the computation of n.")
         return n
 
     @abstractmethod
@@ -43,10 +45,13 @@ class BaseDetector(ABC, Generic[ArrayLike, DTypeLike, ConfigType]):
     def is_fitted(self) -> bool: ...
 
     def score_samples(self, X: ArrayLike) -> ArrayLike:
-        assert self.is_fitted(), "Model must be fitted before scoring samples."
-        assert isinstance(self.n, int) and self.n > 0, "n must be a positive integer."
+        if not self.is_fitted():
+            raise ValueError("Model must be fitted before scoring samples.")
+        if not isinstance(self.n, int) or self.n <= 0:
+            raise ValueError(f"n must be a positive integer. Got {self.n}.")
         d = X.shape[1]
-        assert d == self.d, f"Dimension mismatch between training ({self.d}) and test ({d})."
+        if d != self.d:
+            raise ValueError(f"Dimension mismatch between training ({self.d}) and test ({d}).")
 
         # Preprocess the data
         if self.config.preprocessing is not None:
@@ -59,7 +64,8 @@ class BaseDetector(ABC, Generic[ArrayLike, DTypeLike, ConfigType]):
         return self._compute_scores(component_support, component_x)
 
     def predict_from_scores(self, scores: ArrayLike) -> ArrayLike:
-        assert self.threshold is not None, "Model must be fitted before predicting scores."
+        if self.threshold is None:
+            raise ValueError("Model must be fitted before predicting scores.")
         return self.config.backend.where(scores > self.threshold, -1, 1)
 
     def predict(self, X) -> ArrayLike:
@@ -69,7 +75,7 @@ class BaseDetector(ABC, Generic[ArrayLike, DTypeLike, ConfigType]):
 class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
     def __init__(self, detector_class: type[BaseDetector[ArrayLike, DTypeLike, ConfigType]], n: list[int], config: ConfigType, *args, **kwargs):
         if len(n) == 0:
-            raise ValueError("n must not be empty")
+            raise ValueError("n must not be empty.")
 
         # Sort unique values of n
         n = sorted(set(n))
@@ -87,13 +93,14 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
     # =====================================
     def _polynomial_regression(self, Y: ArrayLike, degree: int, x: ArrayLike | None = None, normalize: bool = False) -> ArrayLike:
         # Compute a polynomial regression of degree 'degree' such as y = f(x)
-        assert Y.ndim == 2, "Y must be a 2D ArrayLike."
+        if Y.ndim != 2:
+            raise ValueError(f"Y must be a 2D ArrayLike. Got {Y.shape}.")
 
         # Get the number of scores in the Y values
         _, k = Y.shape
 
         if k == 1:
-            raise ValueError("Can't do regression with only 1 point")
+            raise ValueError("Can't do regression with only 1 point.")
 
         # If x values are not provided, create a default sequence of x values from 0 to k-1
         if x is None:
@@ -127,8 +134,10 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
 
     def _compute_regressions(self, scores: ArrayLike) -> tuple[ArrayLike, ArrayLike]:
         # Compute 2 regressions on the scores and return their R2
-        assert self.d is not None, "Detector must be fitted before calling _compute_regressions"
-        assert scores.ndim == 2, "scores must be a 2D ArrayLike."
+        if self.intrinsic_dim is None:
+            raise ValueError("Detector must be fitted before calling _compute_regressions.")
+        if scores.ndim != 2:
+            raise ValueError(f"scores must be a 2D ArrayLike. Got {scores.shape}.")
 
         # Get the current number of scores to get the current degree of UCG (not necessarily the max degree)
         _, n_scores = scores.shape
@@ -138,7 +147,7 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
         x = self.config.backend.arange(self.n_min, current_n + 1, dtype=self.dtype)  # x values = polynomial degrees
         log_scores = self.config.backend.log(scores)  # The log of the scores
         # The degree of the theoretical polynomial that should fit normal data : the dimension of data
-        degree = self.d  # TODO : Change it for 1 with Univariate / Needle
+        degree = self.intrinsic_dim
 
         # Compute R2 of polynomial regression with specific degree. If well fitted then it's nominal data
         R2_poly_reg = self._compute_R2(scores, self._polynomial_regression(scores, degree=degree, x=x))

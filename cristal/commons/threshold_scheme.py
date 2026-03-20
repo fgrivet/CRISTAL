@@ -9,7 +9,8 @@ IMPLEMENTED_THRESHOLD_SCHEME = Literal["constant", "comb", "vu", "vuC"]
 class ThresholdScheme(BaseCommons):
 
     def __init__(self, scheme: IMPLEMENTED_THRESHOLD_SCHEME = "constant"):
-        assert scheme in get_args(IMPLEMENTED_THRESHOLD_SCHEME), f"scheme must be in {IMPLEMENTED_THRESHOLD_SCHEME}. Got {scheme}."
+        if scheme not in get_args(IMPLEMENTED_THRESHOLD_SCHEME):
+            raise ValueError(f"scheme must be in {IMPLEMENTED_THRESHOLD_SCHEME}. Got {scheme}.")
         self.scheme = scheme
 
     def compute_threshold(self, n: int | float, d: int, C: float | int) -> float:
@@ -19,7 +20,7 @@ class ThresholdScheme(BaseCommons):
                 n = int(n)
             return comb(d + n, n)
         # Vu / VuC
-        if self.scheme in ["vu, vuC"]:
+        if self.scheme in ["vu", "vuC"]:
             threshold = n ** (3 * d / 2)
             if self.scheme == "vuC":
                 threshold /= C

@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING, Generic, TypeVar, Union
 
 from ..backend.base_backend import Backend
-from ..backend.torch_backend import TorchBackend
+from ..backend.numpy_backend import NumpyBackend
 from ..commons.base_commons import BaseCommons
 from ..commons.distance import Distance
 from ..commons.incrementer import Incrementer
@@ -10,7 +10,7 @@ from ..commons.polynomial_basis import PolynomialBasis
 from ..commons.solver import Solver
 from ..commons.storage import Storage
 from ..commons.threshold_scheme import ThresholdScheme
-from ..core.types import ArrayLike, DTypeLike, Number
+from ..types import ArrayLike, DTypeLike, Number
 from ..preprocessing.base_preprocessor import BasePreprocessor
 
 if TYPE_CHECKING:
@@ -28,7 +28,7 @@ class DetectorConfig(Generic[ArrayLike, DTypeLike]):
         threshold_scheme: ThresholdScheme | None = None,
         C: Number = 1,
     ):
-        self.backend: Backend = backend or TorchBackend()
+        self.backend: Backend = backend or NumpyBackend()
         self.preprocessing = preprocessing
         self.polynomial_basis = polynomial_basis or PolynomialBasis()
         self.storage = storage or Storage()

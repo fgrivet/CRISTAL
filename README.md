@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="logo/logo.svg" alt="CRISTAL logo" width="70%">
+    <img src="doc/source/_static/logo.svg" alt="CRISTAL logo" width="70%">
 </div>
 
 # Description

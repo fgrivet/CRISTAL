@@ -1,7 +1,7 @@
 from typing import Generic, Literal, cast, get_args
 
 from ..backend.base_backend import Backend
-from ..core.types import ArrayLike, DTypeLike
+from ..types import ArrayLike, DTypeLike
 from .base_commons import BaseCommons
 
 IMPLEMENTED_POLYNOMIAL_BASIS = Literal["monomials", "chebyshev"]
@@ -11,7 +11,8 @@ class PolynomialBasis(BaseCommons, Generic[ArrayLike, DTypeLike]):
     requires = ["backend"]
 
     def __init__(self, basis: IMPLEMENTED_POLYNOMIAL_BASIS = "chebyshev", normalize: bool = True):
-        assert basis in get_args(IMPLEMENTED_POLYNOMIAL_BASIS), f"basis must be in {IMPLEMENTED_POLYNOMIAL_BASIS}. Got {basis}."
+        if basis not in get_args(IMPLEMENTED_POLYNOMIAL_BASIS):
+            raise ValueError(f"basis must be in {IMPLEMENTED_POLYNOMIAL_BASIS}. Got {basis}.")
         self.basis = basis
         self.normalize = normalize
 
@@ -19,6 +20,13 @@ class PolynomialBasis(BaseCommons, Generic[ArrayLike, DTypeLike]):
         self.backend: Backend[ArrayLike, DTypeLike]
 
     def generate_multi_indices_combinations(self, max_degree, dimensions):
+        if self.backend is None:
+            raise ValueError("A backend must be bound to the PolynomialBasis class before using it.")
+        if max_degree <= 0:
+            raise ValueError(f"max_degree must be positive. Got {max_degree}.")
+        if dimensions <= 0:
+            raise ValueError(f"dimensions must be positive. Got {dimensions}.")
+
         def generate_exact_degree(total_degree: int, dims_left: int):
             if dims_left == 1:
                 yield (total_degree,)
@@ -33,12 +41,17 @@ class PolynomialBasis(BaseCommons, Generic[ArrayLike, DTypeLike]):
 
     # ---------- 1D ----------
     def vandermonde_1d(self, X: ArrayLike, n: int, d: float, normalize: bool | None = None) -> ArrayLike:
-        assert self.backend is not None, "A backend must be bound to the PolynomialBasis class before using it."
-        assert X.ndim == 2, "X must be a 2D ArrayLike."
-        assert n > 0, f"n must be positive. Got {n}"
-        assert d > 0, f"d must be positive. Got {d}"
+        if self.backend is None:
+            raise ValueError("A backend must be bound to the PolynomialBasis class before using it.")
+        if X.ndim != 2:
+            raise ValueError(f"X must be a 2D ArrayLike. Got {X.shape}.")
+        if n <= 0:
+            raise ValueError(f"n must be positive. Got {n}.")
+        if d <= 0:
+            raise ValueError(f"d must be positive. Got {d}.")
 
-        normalize = normalize or self.normalize
+        if normalize is None:
+            normalize = self.normalize
 
         k = n + 1
         dtype = cast(DTypeLike, X.dtype)
@@ -68,18 +81,21 @@ class PolynomialBasis(BaseCommons, Generic[ArrayLike, DTypeLike]):
 
     # ---------- ND ----------
     def vandermonde_nd(self, X: ArrayLike, n: int) -> ArrayLike:
-        assert self.backend is not None, "A backend must be bound to the PolynomialBasis class before using it."
-        assert X.ndim == 2, "X must be a 2D ArrayLike."
-        assert n > 0, f"n must be positive. Got {n}"
+        if self.backend is None:
+            raise ValueError("A backend must be bound to the PolynomialBasis class before using it.")
+        if X.ndim != 2:
+            raise ValueError(f"X must be a 2D ArrayLike. Got {X.shape}.")
+        if n <= 0:
+            raise ValueError(f"n must be positive. Got {n}.")
 
         M, d = X.shape
-        alpha = self.generate_multi_indices_combinations(n, d)  # (n+1, d)
+        alpha = self.generate_multi_indices_combinations(n, d)  # (s_d(n), d)
 
         # Monomials
         if self.basis == "monomials":
             # broadcasting
             X_exp = X[:, None, :]  # (M, 1, d)
-            alpha_exp = alpha[None, :, :]  # (1, n+1, d)
+            alpha_exp = alpha[None, :, :]  # (1, s_d(n), d)
 
             V = self.backend.prod(self.backend.pow(X_exp, alpha_exp), axis=2)
 
@@ -87,7 +103,7 @@ class PolynomialBasis(BaseCommons, Generic[ArrayLike, DTypeLike]):
 
         # Chebyshev
         # Compute all 1D Chebyshev up to degree n for each dimension
-        temp = self.backend.stack([self.vandermonde_1d(X[:, j : j + 1], n, d=d) for j in range(d)], axis=-1)
+        temp = self.backend.stack([self.vandermonde_1d(X[:, j : j + 1], n, d=d, normalize=False) for j in range(d)], axis=-1)
         temp = temp.reshape(M, n + 1, d)  # (M, n+1, d)
 
         # Gather appropriate degrees per dimension
@@ -99,7 +115,10 @@ class PolynomialBasis(BaseCommons, Generic[ArrayLike, DTypeLike]):
 
     # ---------- v ----------
     def make_v(self, n: int, dtype: DTypeLike):
-        assert self.backend is not None, "A backend must be bound to the PolynomialBasis class before using it."
+        if self.backend is None:
+            raise ValueError("A backend must be bound to the PolynomialBasis class before using it.")
+        if n <= 0:
+            raise ValueError(f"n must be positive. Got {n}.")
 
         # Monomials
         if self.basis == "monomials":
