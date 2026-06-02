@@ -14,7 +14,7 @@ Classes
    * - Class
      - Description
    * - :class:`cristal.core.UCF <cristal.core.detectors.univariate.UCF>`
-     - Base class for the detectors.
+     - Class to compute our Univariate version of the Christoffel function based outlier detection algorithm.
    * - :class:`cristal.core.UCG <cristal.core.detectors.univariate.UCG>`
      - An extension of the :class:`BaseDetector <cristal.core.detectors.base_detector.BaseDetector>` class to detect anomalies based on the growth of the socres as the degree :attr:`n` increases.
    * - :class:`cristal.core.DyCF <cristal.core.detectors.dynamic.DyCF>`
