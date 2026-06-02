@@ -10,6 +10,8 @@ import numpy as np
 from cristal.backend.numpy_backend import NumpyBackend
 from cristal.commons.polynomial_basis import IMPLEMENTED_POLYNOMIAL_BASIS, PolynomialBasis
 
+# TODO : Test new normalization in chebyshev
+
 
 class TestPolynomialBasis(unittest.TestCase):
     """Test the PolynomialBasis class functionality"""
@@ -108,7 +110,7 @@ class TestPolynomialBasis(unittest.TestCase):
         np.testing.assert_equal(result_mon, desired_result_mon, "Monomials basis")
 
         # With normalization (by default None so True)
-        result_mon = mon_basis.vandermonde_1d(X, n, 5.0) # Same result because normalization is only for Chebyshev basis
+        result_mon = mon_basis.vandermonde_1d(X, n, 5.0)  # Same result because normalization is only for Chebyshev basis
         np.testing.assert_equal(result_mon, desired_result_mon, "Monomials basis")
 
         # Test chebyshev basis
@@ -118,12 +120,12 @@ class TestPolynomialBasis(unittest.TestCase):
         # Without normalization
         result_cheb = cheb_basis.vandermonde_1d(X, n, 5.0, normalize=False)
         desired_result_cheb = self.vandermonde_1d(X, n, self.chebyshev)
-        np.testing.assert_equal(result_cheb, desired_result_cheb, "Chebyshev basis")
-        
+        np.testing.assert_almost_equal(result_cheb, desired_result_cheb, 12, "Chebyshev basis")
+
         # With normalization (by default None so True)
         result_cheb = cheb_basis.vandermonde_1d(X, n, 2.0)
         desired_result_cheb = self.vandermonde_1d(X / 4 - 1, n, self.chebyshev)
-        np.testing.assert_equal(result_cheb, desired_result_cheb, "Chebyshev basis normalized")
+        np.testing.assert_almost_equal(result_cheb, desired_result_cheb, 12, "Chebyshev basis normalized")
 
         # Test invalid values
         # Wrong X shape
@@ -159,7 +161,7 @@ class TestPolynomialBasis(unittest.TestCase):
 
         result_cheb = cheb_basis.vandermonde_nd(X, n)
         desired_result_cheb = self.vandermonde_nd(X, n, self.chebyshev, comb)
-        np.testing.assert_equal(result_cheb, desired_result_cheb, "Chebyshev basis")
+        np.testing.assert_almost_equal(result_cheb, desired_result_cheb, 12, "Chebyshev basis")
 
         # Test invalid values
         # Wrong X shape

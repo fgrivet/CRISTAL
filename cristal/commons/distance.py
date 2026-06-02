@@ -1,22 +1,64 @@
-from typing import Generic, Literal, get_args
+"""Contains the :class:`Distance <cristal.commons.distance.Distance>` class used in static detectors."""
+
+from typing import Generic, get_args
 
 from ..backend.base_backend import Backend
-from ..types import ArrayLike, DTypeLike
+from ..types import IMPLEMENTED_DISTANCES, ArrayLike, DTypeLike
 from .base_commons import BaseCommons
-
-IMPLEMENTED_DISTANCE = Literal["euclidean", "mahalanobis"]
 
 
 class Distance(BaseCommons, Generic[ArrayLike, DTypeLike]):
+    """Class to compute the distance between each pair of two collections of inputs.
+
+    Attributes
+    ----------
+    metric : :class:`IMPLEMENTED_DISTANCES <cristal.types.IMPLEMENTED_DISTANCES>`
+        The distance metric to use.
+    backend : :class:`Backend <cristal.backend.base_backend.Backend>`
+        The backend to use for the computation.
+
+    Examples
+    --------
+    >>> distance = Distance(metric="euclidean")
+    >>> distance.backend = NumpyBackend()
+    >>> X = np.random.rand(10, 5)
+    >>> Y = np.random.rand(20, 5)
+    >>> D = distance(X, X)  # Computes the distance between X and X resulting shape of (10, 10)
+    >>> D = distance(X, Y)  # Computes the distance between X and Y resulting shape of (10, 20)
+    """
+
     requires = ["backend"]
 
-    def __init__(self, metric: IMPLEMENTED_DISTANCE = "euclidean"):
-        if metric not in get_args(IMPLEMENTED_DISTANCE):
-            raise ValueError(f"metric must be in {IMPLEMENTED_DISTANCE}. Got {metric}.")
-        self.metric = metric
+    def __init__(self, metric: IMPLEMENTED_DISTANCES = "euclidean"):
+        """Class constructor.
+        Define the :attr:`metric` and bind the :attr:`backend`.
+
+        Parameters
+        ----------
+        metric : :class:`IMPLEMENTED_DISTANCES <cristal.types.IMPLEMENTED_DISTANCES>`, optional
+            The distance metric to use, by default :const:`euclidean`.
+
+        Raises
+        ------
+        ValueError
+            If the distance :const:`metric` is not valid.
+
+        See Also
+        --------
+        cristal.types.IMPLEMENTED_DISTANCES : For more details on how the methods work.
+        """
+        if metric not in get_args(IMPLEMENTED_DISTANCES):
+            raise ValueError(f"metric must be in {IMPLEMENTED_DISTANCES}. Got {metric}.")
+        self.metric: IMPLEMENTED_DISTANCES = metric
+        """The distance metric to use.
+
+        See Also
+        --------
+        cristal.types.IMPLEMENTED_DISTANCES : For more details on how the methods work.
+        """
 
         # Attributes bound in the configuration __init__
-        self.backend: Backend[ArrayLike, DTypeLike]
+        self.backend: Backend[ArrayLike, DTypeLike]  #: The backend to use for the computation.
 
     def _cdist_euclidean(self, X: ArrayLike, Y: ArrayLike | None = None, p: int = 2) -> ArrayLike:
         if self.backend is None:
@@ -57,6 +99,31 @@ class Distance(BaseCommons, Generic[ArrayLike, DTypeLike]):
         return Sigma
 
     def cdist(self, X: ArrayLike, Y: ArrayLike | None = None, p=2) -> ArrayLike:
+        """Compute the distance matrix between X and Y.
+
+        Parameters
+        ----------
+        X : ArrayLike
+            The first collection of points in :math:`\\mathbb{R}^d` of shape (M, d).
+        Y : ArrayLike | None, optional
+            The second collection of points in :math:`\\mathbb{R}^d` of shape (N, d). :attr:`X` if None, by default None.
+        p : int, optional
+            The power to apply to the distance, by default 2.
+
+        Returns
+        -------
+        ArrayLike
+            The distance between each pair (x, y). A matrix of shape (M, N).
+
+        Examples
+        --------
+        >>> distance = Distance(metric="euclidean")
+        >>> distance.backend = NumpyBackend()
+        >>> X = np.random.rand(10, 5)
+        >>> Y = np.random.rand(20, 5)
+        >>> D = distance(X, X)  # Computes the distance between X and X resulting shape of (10, 10)
+        >>> D = distance(X, Y)  # Computes the distance between X and Y resulting shape of (10, 20)
+        """
         if self.backend is None:
             raise ValueError("A backend must be bound to the Distance class before using it.")
 
@@ -84,4 +151,24 @@ class Distance(BaseCommons, Generic[ArrayLike, DTypeLike]):
         return D
 
     def __call__(self, X: ArrayLike, Y: ArrayLike | None = None, p=2) -> ArrayLike:
+        """Compute the distance matrix between X and Y.
+
+        .. hint::
+
+            This function is a wrapper for :func:`cdist`.
+
+        Parameters
+        ----------
+        X : ArrayLike
+            The first collection of points in :math:`\\mathbb{R}^d` of shape (M, d).
+        Y : ArrayLike | None, optional
+            The second collection of points in :math:`\\mathbb{R}^d` of shape (N, d). :attr:`X` if None, by default None.
+        p : int, optional
+            The power to apply to the distance, by default 2.
+
+        Returns
+        -------
+        ArrayLike
+            The distance between each pair (x, y). A matrix of shape (M, N).
+        """
         return self.cdist(X=X, Y=Y, p=p)

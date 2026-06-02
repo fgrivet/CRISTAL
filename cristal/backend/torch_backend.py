@@ -1,3 +1,6 @@
+"""Contains the :class:`TorchBackend <cristal.backend.torch_backend.TorchBackend>`: a backend using torch with `cpu` and `GPU` implementations."""
+
+import logging
 from typing import Any, Literal, Optional, TypeGuard, overload
 
 import numpy as np
@@ -6,13 +9,17 @@ import torch
 from ..types import Number, ShapeType
 from .base_backend import Backend
 
+logger = logging.getLogger(__name__)
+
 
 class TorchBackend(Backend[torch.Tensor, torch.dtype]):
+    """Backend using torch with `cpu` and `GPU` implementations."""
 
     def __init__(self, dtype: torch.dtype = torch.float64, device: Optional[str | torch.device] = None):
         super().__init__(dtype)
         if device is None:
             device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            logger.info(f"Using device={device}")
         if isinstance(device, str):
             device = torch.device(device)
         self.device = device
@@ -31,6 +38,10 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
         return x.cpu().detach().numpy()
 
     # ===== Creation =====
+
+    def empty(self, shape: ShapeType, dtype: torch.dtype | None = None) -> torch.Tensor:
+        dtype = dtype or self.default_dtype  # dtype if is not None else self.default_dtype
+        return torch.empty(shape, device=self.device, dtype=dtype)
 
     def zeros(self, shape: ShapeType, dtype: torch.dtype | None = None) -> torch.Tensor:
         dtype = dtype or self.default_dtype  # dtype if is not None else self.default_dtype
@@ -255,6 +266,9 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
 
     # ===== Math ops =====
 
+    def sign(self, A: torch.Tensor) -> torch.Tensor:
+        return torch.sign(A)
+
     def isnan(self, A: torch.Tensor) -> torch.Tensor:
         return torch.isnan(A)
 
@@ -295,6 +309,12 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
     def tanh(self, A: torch.Tensor) -> torch.Tensor:
         return torch.tanh(A)
 
+    def arccos(self, A: torch.Tensor) -> torch.Tensor:
+        return torch.arccos(A)
+
+    def arccosh(self, A: torch.Tensor) -> torch.Tensor:
+        return torch.arccosh(A)
+
     # ===== Linear algebra =====
 
     def inv(self, A: torch.Tensor) -> torch.Tensor:
@@ -332,6 +352,7 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
                         continue
                     L, new_info = torch.linalg.cholesky_ex(A_reg, upper=upper)
                     if new_info == 0:
+                        logger.info("Regularization successful with eps=1e-%d", eps)
                         # If successful, break out of the loop
                         break
                 else:
@@ -359,6 +380,7 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
                         continue
                     inv, new_info = torch.linalg.inv_ex(A_reg)
                     if new_info == 0:
+                        logger.info("Regularization successful with eps=1e-%d", eps)
                         # If successful, break out of the loop
                         break
                 else:
@@ -372,8 +394,8 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
     def qr(self, A: torch.Tensor, mode="reduced") -> tuple[torch.Tensor, torch.Tensor]:
         return torch.linalg.qr(A, mode=mode)
 
-    def vander(self, a: torch.Tensor, degree: int, increasing: bool = True) -> torch.Tensor:
-        return torch.vander(a, degree + 1, increasing=increasing)
+    def vander(self, A: torch.Tensor, degree: int, increasing: bool = True) -> torch.Tensor:
+        return torch.vander(A, degree + 1, increasing=increasing).to(A.dtype)
 
     def lstsq(self, A: torch.Tensor, B: torch.Tensor) -> torch.Tensor:
         return torch.linalg.lstsq(A, B).solution

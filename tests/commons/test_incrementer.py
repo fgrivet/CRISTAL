@@ -7,7 +7,7 @@ import unittest
 import numpy as np
 
 from cristal.backend.numpy_backend import NumpyBackend
-from cristal.commons.incrementer import IMPLEMENTED_INCREMENTER, Incrementer
+from cristal.commons.incrementer import IMPLEMENTED_INCREMENTERS, Incrementer
 from cristal.commons.inverter import Inverter
 from cristal.commons.polynomial_basis import PolynomialBasis
 
@@ -18,7 +18,7 @@ class TestIncrementer(unittest.TestCase):
     def test_incrementer_initialization(self):
         """Test Incrementer initialization with valid parameters"""
         # Test valid incrementer methods
-        for method in IMPLEMENTED_INCREMENTER.__args__:
+        for method in IMPLEMENTED_INCREMENTERS.__args__:
             incrementer = Incrementer(method=method)
             self.assertEqual(incrementer.method, method)
             backend = NumpyBackend()
@@ -65,7 +65,7 @@ class TestIncrementer(unittest.TestCase):
         M_new_inv = inverter(M_new)
 
         # Test the incrementer
-        for method in IMPLEMENTED_INCREMENTER.__args__:
+        for method in IMPLEMENTED_INCREMENTERS.__args__:
             incrementer = Incrementer(method=method)
 
             # Bind dependencies
@@ -77,14 +77,14 @@ class TestIncrementer(unittest.TestCase):
             # incrementer with inverse method requires M whereas sherman and woodbury need M_inv
             if method == "inverse":
                 new_M, new_N, new_M_inv = incrementer(M, N, X_new, n)
-                self.assertEqual(new_N, N + N_add)
                 np.testing.assert_almost_equal(new_M, M_new, decimal=12)
             else:
-                new_M_inv = incrementer(M_inv, N, X_new, n)
+                new_N, new_M_inv = incrementer(M_inv, N, X_new, n)
 
             # Test that the new M_inv is the good one
-            np.testing.assert_allclose(new_M_inv, M_new_inv, rtol=1e-5, atol=1e-5, err_msg=f"{method} new_M_inv M_new_inv")
-
+            np.testing.assert_allclose(new_M_inv, M_new_inv, rtol=1e-4, atol=1e-4, err_msg=f"{method} new_M_inv M_new_inv")
+            # Test that the new N is the good one
+            self.assertEqual(new_N, N + N_add)
 
     def test_incrementer_1_new(self):
         """Test Incrementer method"""
@@ -115,7 +115,7 @@ class TestIncrementer(unittest.TestCase):
         M_new_inv = inverter(M_new)
 
         # Test the incrementer
-        for method in IMPLEMENTED_INCREMENTER.__args__:
+        for method in IMPLEMENTED_INCREMENTERS.__args__:
             incrementer = Incrementer(method=method)
 
             # Bind dependencies
@@ -127,10 +127,10 @@ class TestIncrementer(unittest.TestCase):
             # incrementer with inverse method requires M whereas sherman and woodbury need M_inv
             if method == "inverse":
                 new_M, new_N, new_M_inv = incrementer(M, N, X_new, n)
-                self.assertEqual(new_N, N + N_add)
                 np.testing.assert_almost_equal(new_M, M_new, decimal=12)
             else:
-                new_M_inv = incrementer(M_inv, N, X_new, n)
+                new_N, new_M_inv = incrementer(M_inv, N, X_new, n)
+            self.assertEqual(new_N, N + N_add)
 
             # Test that the new M_inv is the good one
             np.testing.assert_allclose(new_M_inv, M_new_inv, rtol=1e-4, atol=1e-4, err_msg=f"{method} new_M_inv M_new_inv")

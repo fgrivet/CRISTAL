@@ -3,4 +3,5 @@ from .backend import *
 from .commons import *
 from .config import *
 from .core import *
+from .evaluation import *
 from .preprocessing import *

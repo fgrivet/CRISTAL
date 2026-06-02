@@ -1,10 +1,16 @@
+"""Contains Base class for all backends."""
+
 from abc import ABC, abstractmethod
-from typing import Any, Generic, Literal, TypeGuard, overload, Union
+from typing import Any, Generic, Literal, TypeGuard, overload
+
 import numpy as np
+
 from ..types import ArrayLike, DTypeLike, Number, ShapeType
 
 
 class Backend(ABC, Generic[ArrayLike, DTypeLike]):
+    """Base class for all backends. Contains all methods that a Backend should implementer in order to be used in CRISTAL."""
+
     def __init__(self, default_dtype: DTypeLike):
         self.default_dtype = default_dtype
 
@@ -80,6 +86,30 @@ class Backend(ABC, Generic[ArrayLike, DTypeLike]):
         """
 
     # ===== Creation =====
+
+    @abstractmethod
+    def empty(self, shape: ShapeType, dtype: DTypeLike | None = None) -> ArrayLike:
+        """Create an empty object with the given `shape` and `dtype`.
+
+        Parameters
+        ----------
+        shape : ShapeType
+            The shape of the object to create.
+        dtype : DTypeLike | None, optional
+            The target dtype of the output. If `None`, the default dtype of the backend, by default `None`.
+
+        Returns
+        -------
+        ArrayLike
+            The empty object of the given `shape` and `dtype`.
+
+        Examples
+        --------
+        >>> empty(3).shape # or equivalently empty((3,))
+        (3,)
+        >>> zeros((2, 5)).shape
+        (2, 5)
+        """
 
     @abstractmethod
     def zeros(self, shape: ShapeType, dtype: DTypeLike | None = None) -> ArrayLike:
@@ -804,7 +834,8 @@ class Backend(ABC, Generic[ArrayLike, DTypeLike]):
         For a matrix of shape (m, n), return a vector of shape (m,) containing the sum of the squares of the elements for each row.
 
         .. math::
-        ||\\mathbf{A}_{i, :}||_2^2 = \\sum_{j=1}^{n} X_{i,j}^2
+
+            \\|\\mathbf{A}_{i, :}\\|_2^2 = \\sum_{j=1}^{n} A_{i,j}^2
 
         Parameters
         ----------
@@ -961,6 +992,26 @@ class Backend(ABC, Generic[ArrayLike, DTypeLike]):
         """
 
     # ===== Math ops =====
+
+    @abstractmethod
+    def sign(self, A: ArrayLike) -> ArrayLike:
+        """Calculate the sign value element-wise.
+
+        Parameters
+        ----------
+        A : ArrayLike
+            The input array.
+
+        Returns
+        -------
+        ArrayLike
+            The sign value of each element.
+
+        Examples
+        --------
+        >>> sign(ArrayLike([-2, -1, 0, 1, 1]))
+        ArrayLike([-1, -1, 0, 1, 1])
+        """
 
     @abstractmethod
     def isnan(self, A: ArrayLike) -> ArrayLike:
@@ -1216,6 +1267,46 @@ class Backend(ABC, Generic[ArrayLike, DTypeLike]):
         ArrayLike([0])
         """
 
+    @abstractmethod
+    def arccos(self, A: ArrayLike) -> ArrayLike:
+        """Calculate the trigonometric arccosine, element-wise.
+
+        Parameters
+        ----------
+        A : ArrayLike
+            The input array (angles in radians).
+
+        Returns
+        -------
+        ArrayLike
+            The arccosine value of each element.
+
+        Examples
+        --------
+        >>> arccos(ArrayLike([-1, 1]))
+        ArrayLike([0, pi])
+        """
+
+    @abstractmethod
+    def arccosh(self, A: ArrayLike) -> ArrayLike:
+        """Calculate the trigonometric hyperbolic arccosine, element-wise.
+
+        Parameters
+        ----------
+        A : ArrayLike
+            The input array (angles in radians).
+
+        Returns
+        -------
+        ArrayLike
+            The cosine value of each element.
+
+        Examples
+        --------
+        >>> arccosh(ArrayLike([1]))
+        ArrayLike([0])
+        """
+
     # ===== Linear algebra =====
 
     @abstractmethod
@@ -1355,21 +1446,21 @@ class Backend(ABC, Generic[ArrayLike, DTypeLike]):
 
     @abstractmethod
     def inverse_cholesky(self, A: ArrayLike, upper: bool = False, allow_adding_reg: bool = True) -> ArrayLike:
-        """Calculate the inverse Cholesky factorisation of a positive definite matrix A.
+        """Calculate the inverse of a positive definite matrix A using Cholesky factorisation.
 
         Parameters
         ----------
         A : ArrayLike
             The positive definite input matrix.
         upper : bool, optional
-            If True, return the upper triangular inverse factor, by default False.
+            Wheter to use the upper triangular factors, by default False.
         allow_adding_reg : bool, optional
             If True, allow regularisation if matrix is not strictly positive definite, by default True.
 
         Returns
         -------
         ArrayLike
-            The inverse of the Cholesky factor.
+            The inverse of the matrix A.
 
         Raises
         ------
@@ -1407,7 +1498,7 @@ class Backend(ABC, Generic[ArrayLike, DTypeLike]):
         """
 
     @abstractmethod
-    def vander(self, a: ArrayLike, degree: int, increasing: bool = True) -> ArrayLike:
+    def vander(self, A: ArrayLike, degree: int, increasing: bool = True) -> ArrayLike:
         """Generate a Vandermonde matrix.
 
         Parameters

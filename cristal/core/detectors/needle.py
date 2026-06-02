@@ -1,3 +1,7 @@
+"""Contains the Needle polynomial version of the Christoffel function based outlier detection algorithm, adapted from :cite:t:`kroo2013christoffel`."""
+
+# TODO : doc
+
 from typing import Literal, cast
 
 from ...config.detector_config import StaticDetectorConfig
@@ -6,19 +10,19 @@ from .base_detector import BaseCGDetector, BaseDetector
 
 
 class NeedleCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
-    def __init__(self, n: int | Literal["auto"], config: StaticDetectorConfig[ArrayLike, DTypeLike]):
+    def __init__(self, n: int | Literal["auto"], config: StaticDetectorConfig[ArrayLike, DTypeLike] = StaticDetectorConfig()):
         super().__init__(n, config)
         self.intrinsic_dim = 1
 
         # Variables defined during fitting specific to NeedleCF
         self.X_train: ArrayLike | None = None  #: The training data
 
-    def _compute_scores(self, component_support: ArrayLike, component_x: ArrayLike) -> ArrayLike:
+    def _compute_scores(self, component_support: ArrayLike, component_X: ArrayLike) -> ArrayLike:
         # component_support = T_n_A[:, : , n+1] = T_n(A)  --> Shape (N_test, 1, 1)
-        # component_x = T_n_A_B[:, :, n+1] = T_n(A - B) --> Shape (N_test, N, 1)
+        # component_X = T_n_A_B[:, :, n+1] = T_n(A - B) --> Shape (N_test, N, 1)
         # Compute T_n(A)^2 and 1/N sum(T_n(A - B)^2)
         num = self.config.backend.pow(component_support, 2)  # Shape (N_test, 1, 1)
-        denom = self.config.backend.mean(self.config.backend.pow(component_x, 2), axis=1, keepdims=True)  # Shape (N_test, 1, 1)
+        denom = self.config.backend.mean(self.config.backend.pow(component_X, 2), axis=1, keepdims=True)  # Shape (N_test, 1, 1)
 
         # Final result : 1 / int(q^2) = T_n(A)^2  / mean(T_n(A - B)^2)
         res = num / denom  # Shape (N_test, 1, 1)
@@ -53,13 +57,13 @@ class NeedleCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
 
         return T_n_A, T_n_A_B
 
-    def _crop_components(self, component_support: ArrayLike, component_x: ArrayLike, n: int) -> tuple[ArrayLike, ArrayLike]:
+    def _crop_components(self, component_support: ArrayLike, component_X: ArrayLike, n_crop: int) -> tuple[ArrayLike, ArrayLike]:
         if not isinstance(self.n, int) or self.n <= 0:
             raise ValueError(f"n must be a positive integer. Got {self.n}.")
-        if n > self.n:
-            raise ValueError(f"n ({n}) must be lower or equal than self.n ({self.n}).")
+        if n_crop > self.n:
+            raise ValueError(f"n ({n_crop}) must be lower or equal than self.n ({self.n}).")
 
-        return component_support[:, :, [n]], component_x[:, :, [n]]
+        return component_support[:, :, [n_crop]], component_X[:, :, [n_crop]]
 
     def fit(self, X: ArrayLike) -> BaseDetector:
         if X.ndim != 2:
@@ -70,7 +74,7 @@ class NeedleCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
 
         # Preprocess the data
         if self.config.preprocessing is not None:
-            X = self.config.preprocessing.fit_transform(X)
+            X = self.config.preprocessing.fit_transform(X)  # type: ignore
         if not self.config.backend.is_array_like(X):
             X = self.config.backend.to_array_like(X)
 
@@ -83,7 +87,7 @@ class NeedleCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
         self.n = self._compute_n(self.n, self.N)
 
         # Compute the threshold
-        self.threshold = self.config.threshold_scheme(self.n, self.d, self.config.C)
+        self.threshold = self.config.threshold_scheme(self.n, self.d)
 
         assert self.is_fitted(), "Error during fitting."
         return self
@@ -92,5 +96,6 @@ class NeedleCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
         return self.N is not None and self.d is not None and self.X_train is not None and self.threshold is not None and isinstance(self.n, int)
 
 
-def NeedleCG(n_list: list[int], config: StaticDetectorConfig[ArrayLike, DTypeLike]):
-    return BaseCGDetector(NeedleCF, n=n_list, config=config)
+class NeedleCG(BaseCGDetector):
+    def __init__(self, n_list: list[int], config: StaticDetectorConfig = StaticDetectorConfig(), *args, **kwargs):
+        super().__init__(NeedleCF, n=n_list, config=config, *args, **kwargs)

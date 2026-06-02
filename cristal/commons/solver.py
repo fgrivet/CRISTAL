@@ -1,26 +1,97 @@
-from typing import Generic, Literal, cast, get_args
+"""Contains the :class:`Solver <cristal.commons.solver.Solver>` class used in static detectors."""
+
+from typing import Generic, cast, get_args
 
 from ..backend.base_backend import Backend
-from ..types import ArrayLike, DTypeLike
+from ..types import IMPLEMENTED_SOLVERS, ArrayLike, DTypeLike
 from .base_commons import BaseCommons
-
-IMPLEMENTED_SOLVER = Literal["cholesky", "qr", "inverse", "solve"]
 
 
 class Solver(BaseCommons, Generic[ArrayLike, DTypeLike]):
+    """Class to solve the equation :math:`z = v^T G^{-1} v`.
+
+    Attributes
+    ----------
+    solver : :class:`IMPLEMENTED_SOLVERS <cristal.types.IMPLEMENTED_SOLVERS>`
+        The solver to use.
+    eps : float | None
+        The regularization to add to the matrix G before solving the system.
+    backend : :class:`Backend <cristal.backend.base_backend.Backend>`
+        The backend to use for the computation.
+
+    Examples
+    --------
+    >>> solver = Solver(solver="solve", eps=None)
+    >>> solver.backend = NumpyBackend()
+    >>> # For a matrix G constructed with N points
+    >>> z = solver(G, v, N)
+    """
+
     requires = ["backend"]
 
-    def __init__(self, solver: IMPLEMENTED_SOLVER = "solve", eps: float | None = None):
+    def __init__(self, solver: IMPLEMENTED_SOLVERS = "solve", eps: float | None = None):
+        """Class constructor.
+        Define the :attr:`solver`, the regularization :attr:`eps`, and bind the :attr:`backend`.
+
+        Parameters
+        ----------
+        solver : IMPLEMENTED_SOLVERS, optional
+            The solver to use, by default "solve"
+        eps : float | None, optional
+            The regularization to add to the matrix G before solving the system, by default None
+
+        Raises
+        ------
+        ValueError
+            If the :const:`solver` is not valid.
+
+        See Also
+        --------
+        cristal.types.IMPLEMENTED_SOLVERS : For more details on how the solvers work.
+        """
         # eps only for cholesky, inverse and solve, not for QR
-        if solver not in get_args(IMPLEMENTED_SOLVER):
-            raise ValueError(f"solver must be in {IMPLEMENTED_SOLVER}. Got {solver}.")
+        if solver not in get_args(IMPLEMENTED_SOLVERS):
+            raise ValueError(f"solver must be in {IMPLEMENTED_SOLVERS}. Got {solver}.")
         self.solver = solver
-        self.eps = eps
+        """The solver to use.
+        
+        See Also
+        --------
+        cristal.types.IMPLEMENTED_SOLVERS : For more details on how the solvers work.
+        """
+        self.eps = eps  #: The regularization to add to the matrix G before solving the system.
 
         # Attributes bound in the configuration __init__
-        self.backend: Backend[ArrayLike, DTypeLike]
+        self.backend: Backend[ArrayLike, DTypeLike]  #: The backend to use for the computation.
 
     def solve(self, V: ArrayLike, v: ArrayLike, N: int) -> ArrayLike:
+        """Solve the equation :math:`z = v^T G^{-1} v`.
+
+        Parameters
+        ----------
+        V : ArrayLike
+            If :const:`solver = qr`, the vandermonde matrix V of shape (N_samples_test, N_samples_train, n+1). Otherwise, the Gram matrix :math:`G = V^T V` of shape (N_samples_test, n+1, n+1).
+        v : ArrayLike
+            The vector v of shape (n+1,) based on the polynomial basis used.
+        N : int
+            The number of points used to construct V : N_samples_train.
+
+        Returns
+        -------
+        ArrayLike
+            The scores for each sample. A 1D ArrayLike of shape (N_samples_test,).
+
+        See Also
+        --------
+        cristal.commons.polynomial_basis.PolynomialBasis.make_v : For more details on how to construct :attr:`v`.
+
+        Examples
+        --------
+        >>> solver = Solver(solver="solve", eps=None)
+        >>> solver.backend = NumpyBackend()
+        >>> # For a matrix G constructed with N points
+        >>> z = solver(G, v, N)
+        """
         if self.backend is None:
             raise ValueError("A backend must be bound to the Solver class before using it.")
 
@@ -38,8 +109,7 @@ class Solver(BaseCommons, Generic[ArrayLike, DTypeLike]):
 
         # Other solvers need to compute G
         else:
-            G = self.backend.swap(V, 1, 2) @ V / N
-            G = (G + self.backend.swap(G, 1, 2)) / 2  # Ensure G is symmetric
+            G = (V + self.backend.swap(V, 1, 2)) / 2  # Ensure G is symmetric
 
             k: int = V.shape[-1]
             dtype = cast(DTypeLike, V.dtype)
@@ -69,4 +139,24 @@ class Solver(BaseCommons, Generic[ArrayLike, DTypeLike]):
         return self.backend.einsum("i,mi->m", v[0, :, 0], x[..., 0])  # z = v^T x
 
     def __call__(self, V: ArrayLike, v: ArrayLike, N: int) -> ArrayLike:
+        """Solve the equation :math:`z = v^T G^{-1} v`.
+
+        .. hint::
+
+            This function is a wrapper for :func:`solve`.
+
+        Parameters
+        ----------
+        V : ArrayLike
+            If :const:`solver = qr`, the vandermonde matrix V of shape (N_samples_test, N_samples_train, n+1). Otherwise, the Gram matrix :math:`G = V^T V` of shape (N_samples_test, n+1, n+1).
+        v : ArrayLike
+            The vector v of shape (n+1,) based on the polynomial basis used.
+        N : int
+            The number of points used to construct V : N_samples_train.
+
+        Returns
+        -------
+        ArrayLike
+            The scores for each sample. A 1D ArrayLike of shape (N_samples_test,).
+        """
         return self.solve(V=V, v=v, N=N)

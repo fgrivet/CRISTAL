@@ -2,11 +2,26 @@ cristal.backend.base\_backend
 =============================
 
 .. automodule:: cristal.backend.base_backend
+   :no-members:
+   :no-index:
 
-   
-   .. rubric:: Classes
+Classes
+-------
 
-   .. autosummary::
-   
-      Backend
-   
+.. list-table::
+   :widths: 35 65
+   :header-rows: 1
+
+   * - Name
+     - Description
+   * - :class:`Backend <cristal.backend.base_backend.Backend>`
+     - Base class for all backends. Contains all methods that a Backend should implementer in order to be used in CRISTAL.
+
+Detailed reference
+------------------
+
+.. automodule:: cristal.backend.base_backend
+   :members:
+   :show-inheritance:
+   :special-members: __init__, __call__
+   :private-members: _compute_scores

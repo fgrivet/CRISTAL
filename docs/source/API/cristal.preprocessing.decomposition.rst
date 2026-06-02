@@ -2,14 +2,27 @@ cristal.preprocessing.decomposition
 ===================================
 
 .. automodule:: cristal.preprocessing.decomposition
+   :no-members:
 
-   
-.. rubric:: Modules
+Submodules / Subpackages
+-----------------------------
 
-.. autosummary::
-   :toctree:
-   :recursive:
+.. list-table::
+   :widths: 40 60
+   :header-rows: 1
 
-   cosine
-   fourier
-   wavelet
+   * - Module
+     - Description
+   * - :mod:`cristal.preprocessing.decomposition.cosine`
+     - —
+   * - :mod:`cristal.preprocessing.decomposition.fourier`
+     - —
+   * - :mod:`cristal.preprocessing.decomposition.wavelet`
+     - —
+
+.. toctree::
+   :hidden:
+
+   cristal.preprocessing.decomposition.cosine
+   cristal.preprocessing.decomposition.fourier
+   cristal.preprocessing.decomposition.wavelet

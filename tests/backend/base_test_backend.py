@@ -79,6 +79,20 @@ class BaseTestBackend(unittest.TestCase, metaclass=BaseTestBackendMeta):
 
     # ===== Creation Tests =====
 
+    def test_empty(self):
+        """Test empty creation with 1D, 2D, 3D arrays."""
+        # 1D
+        arr_1d = self.backend.empty(5)
+        self.assertEqual(arr_1d.shape, (5,))
+
+        # 2D
+        arr_2d = self.backend.empty((3, 4))
+        self.assertEqual(arr_2d.shape, (3, 4))
+
+        # 3D
+        arr_3d = self.backend.empty((2, 3, 4))
+        self.assertEqual(arr_3d.shape, (2, 3, 4))
+
     def test_zeros(self):
         """Test zeros creation with 1D, 2D, 3D arrays."""
         # 1D
@@ -864,6 +878,12 @@ class BaseTestBackend(unittest.TestCase, metaclass=BaseTestBackendMeta):
         expected = np.diag(diag_arr)
         self.assert_array_equal(result, expected)
 
+    def test_sign(self):
+        arr = self.backend.to_array_like(np.array([[1, 0, 2], [-1, 3, 4], [1, 2, -4]]))
+        result = self.backend.sign(arr)
+        expected = np.array([[1, 0, 1], [-1, 1, 1], [1, 1, -1]])
+        self.assert_array_equal(result, expected)
+
     def test_isnan_simple(self):
         """Test isnan with NaN values."""
         arr = self.backend.to_array_like([1.0, float("nan"), 3.0])
@@ -962,6 +982,19 @@ class BaseTestBackend(unittest.TestCase, metaclass=BaseTestBackendMeta):
         arr = self.backend.to_array_like([0.0, 1.0])
         result = self.backend.tanh(arr)
         self.assert_almost_equal(result, np.tanh(self.backend.to_numpy(arr)))
+
+    # ===== Inverse Trigonometric =====
+    def test_arccos(self):
+        """Test inverse cosine."""
+        arr = self.backend.to_array_like([0.0, 1.0])
+        result = self.backend.arccos(arr)
+        self.assert_almost_equal(result, np.arccos(self.backend.to_numpy(arr)))
+
+    def test_arccosh(self):
+        """Test inverse hyperbolic cosine."""
+        arr = self.backend.to_array_like([1.0, 2.0])
+        result = self.backend.arccosh(arr)
+        self.assert_almost_equal(result, np.arccosh(self.backend.to_numpy(arr)))
 
     def test_inv_square(self):
         """Test matrix inverse."""

@@ -2,8 +2,9 @@
 .vscode
 __pycache__
 CRISTAL.egg-info
-doc/build
-doc/jupyter_execute
+docs/build
+docs/jupyter_execute
 build/
 htmlcov/
 .coverage
+examples

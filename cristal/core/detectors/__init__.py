@@ -1,3 +1,5 @@
+"""Contains the Christoffel-based detectors."""
+
 from .dynamic import DyCF, DyCG
 from .kernel import KernelCF, KernelCG
 from .needle import NeedleCF, NeedleCG

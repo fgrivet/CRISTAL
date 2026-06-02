@@ -1,3 +1,5 @@
-from .detector_config import DetectorConfig, DynamicDetectorConfig, StaticDetectorConfig
+"""Contains the configurations needed in the detectors."""
 
-__all__ = ["DetectorConfig", "DynamicDetectorConfig", "StaticDetectorConfig"]
+from .detector_config import DynamicDetectorConfig, StaticDetectorConfig
+
+__all__ = ["DynamicDetectorConfig", "StaticDetectorConfig"]

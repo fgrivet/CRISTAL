@@ -8,7 +8,7 @@ import numpy as np
 from scipy.spatial.distance import cdist
 
 from cristal.backend import NumpyBackend
-from cristal.commons.distance import IMPLEMENTED_DISTANCE, Distance
+from cristal.commons.distance import IMPLEMENTED_DISTANCES, Distance
 
 
 class TestDistance(unittest.TestCase):
@@ -22,7 +22,7 @@ class TestDistance(unittest.TestCase):
     def test_distance_initialization(self):
         """Test Distance initialization with valid parameters"""
         # Test valid distance metrics
-        for metric in IMPLEMENTED_DISTANCE.__args__:
+        for metric in IMPLEMENTED_DISTANCES.__args__:
             distance = Distance(metric=metric)
             self.assertEqual(distance.metric, metric)
 

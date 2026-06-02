@@ -7,7 +7,7 @@ import unittest
 import numpy as np
 
 from cristal.backend import NumpyBackend
-from cristal.commons.inverter import IMPLEMENTED_INVERTER, Inverter
+from cristal.commons.inverter import IMPLEMENTED_INVERTERS, Inverter
 
 
 class TestInverter(unittest.TestCase):
@@ -37,13 +37,13 @@ class TestInverter(unittest.TestCase):
         d, e, f = mat[1, 0], mat[1, 1], mat[1, 2]
         g, h, i = mat[2, 0], mat[2, 1], mat[2, 2]
 
-        # Calcul du déterminant
+        # Calculating the determinant
         det = a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g)
 
         if det == 0:
             raise ValueError("Matrix is not invertible (det nul).")
 
-        # Calcul de l'inverse
+        # Calculating the inverse
         inv = np.zeros((3, 3))
         inv[0, 0] = (e * i - f * h) / det
         inv[0, 1] = -(b * i - c * h) / det
@@ -60,7 +60,7 @@ class TestInverter(unittest.TestCase):
     def test_inverter_initialization(self):
         """Test Inverter initialization with valid parameters"""
         # Test valid inverter methods
-        for method in IMPLEMENTED_INVERTER.__args__:
+        for method in IMPLEMENTED_INVERTERS.__args__:
             inverter = Inverter(method=method)
             self.assertEqual(inverter.method, method)
             self.assertIsNone(inverter.eps)
@@ -83,7 +83,7 @@ class TestInverter(unittest.TestCase):
         """Test Inverter method"""
         backend = NumpyBackend()
 
-        for method in IMPLEMENTED_INVERTER.__args__:
+        for method in IMPLEMENTED_INVERTERS.__args__:
             # Create inverter
             inverter = Inverter(method=method)
 
@@ -102,7 +102,7 @@ class TestInverter(unittest.TestCase):
         """Test Inverter method with regularization eps"""
         backend = NumpyBackend()
 
-        for method in IMPLEMENTED_INVERTER.__args__:
+        for method in IMPLEMENTED_INVERTERS.__args__:
             # Create inverter
             inverter = Inverter(method=method)
 

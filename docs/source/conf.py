@@ -23,10 +23,12 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.doctest",
     "sphinx.ext.intersphinx",
+    "sphinx.ext.mathjax",
     "sphinx_copybutton",
     "sphinx_design",
     "myst_nb",
     "sphinx_collections",
+    "sphinxcontrib.bibtex",
 ]
 
 templates_path = ["_templates"]
@@ -34,11 +36,15 @@ exclude_patterns = []
 modindex_common_prefix = ["cristal."]
 
 
+bibtex_bibfiles = ["references.bib"]
+bibtex_default_style = "unsrt"
+bibtex_reference_style = "label"
+
 autosummary_generate = True
+autosummary_imported_members = False
+autosummary_ignore_module_all = False
 autodoc_inherit_docstrings = True
 numpydoc_show_class_members = False
-autodoc_default_options = {"member": True, "undoc-members": False, "special-members": "__init__", "show-inheritance": True, "inherited-members": True}
-autosummary_imported_members = False
 
 # Collection of Sphinx extensions
 collections = {
@@ -73,8 +79,8 @@ html_theme_options = {
     "navigation_with_keys": False,
     "collapse_navigation": False,
     # "navigation_depth": 3,
-    # "show_nav_level": 1,
-    # "show_toc_level": 1,
+    # "show_nav_level": 1, # Levels on the left
+    "show_toc_level": 3,  # Levels on the right
     "navbar_align": "left",
     "logo": {
         "alt_text": "CRISTAL Documentation",
@@ -82,6 +88,7 @@ html_theme_options = {
         "image_light": "logo.svg",
         "image_dark": "logo.svg",
     },
+    "header_links_before_dropdown": 6,  # Number of header before "More"
     # -- Template placement in theme layouts ----------------------------------
     "navbar_start": ["navbar-logo"],
     # Note that the alignment of navbar_center is controlled by navbar_align
@@ -99,3 +106,13 @@ html_theme_options = {
     "footer_center": [],
     "footer_end": [],
 }
+
+
+def remove_module_docstring(app, what, name, obj, options, lines):
+    """Removes the docstring from modules without :no-members: in automodule."""
+    if what == "module" and options.get("members") is not None:
+        del lines[:]
+
+
+def setup(app):
+    app.connect("autodoc-process-docstring", remove_module_docstring)

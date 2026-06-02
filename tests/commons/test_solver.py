@@ -8,7 +8,7 @@ import numpy as np
 
 from cristal.backend.numpy_backend import NumpyBackend
 from cristal.commons.inverter import Inverter
-from cristal.commons.solver import IMPLEMENTED_SOLVER, Solver
+from cristal.commons.solver import IMPLEMENTED_SOLVERS, Solver
 
 
 class TestSolver(unittest.TestCase):
@@ -31,12 +31,14 @@ class TestSolver(unittest.TestCase):
         """Manually compute expected result for validation"""
         inverter = Inverter()
         inverter.backend = NumpyBackend()
-        G_inv = inverter(V.swapaxes(-1, -2) @ V / N)
+        G = V.swapaxes(-1, -2) @ V / N
+        G = (G + G.swapaxes(-1, -2)) / 2
+        G_inv = inverter(G)
         return (v.swapaxes(-1, -2) @ G_inv @ v)[:, 0, 0]
 
     def test_solver_initialization(self):
         """Test Solver initialization with valid parameters"""
-        for method in IMPLEMENTED_SOLVER.__args__:
+        for method in IMPLEMENTED_SOLVERS.__args__:
             solver = Solver(solver=method)
             self.assertEqual(solver.solver, method)
             self.assertIsNone(solver.eps)
@@ -51,15 +53,21 @@ class TestSolver(unittest.TestCase):
         """Test Solver method"""
         backend = NumpyBackend()
 
-        for method in IMPLEMENTED_SOLVER.__args__:
+        for method in IMPLEMENTED_SOLVERS.__args__:
             # Create inverter
             solver = Solver(solver=method)
 
             # Bind backend
             solver.backend = backend
 
+            # Compute G if method is not QR
+            if method == "qr":
+                G = self.V
+            else:
+                G = self.V.swapaxes(1, 2) @ self.V / self.N
+
             # Solve the system
-            result = solver(self.V, self.v, self.N)
+            result = solver(G, self.v, self.N)
 
             # Check that the inverse is correct
             np.testing.assert_almost_equal(result, self.exp_result, decimal=8, err_msg=f"{method}")
@@ -68,15 +76,21 @@ class TestSolver(unittest.TestCase):
         """Test Solver method with regularization eps"""
         backend = NumpyBackend()
 
-        for method in IMPLEMENTED_SOLVER.__args__:
+        for method in IMPLEMENTED_SOLVERS.__args__:
             # Create inverter
             solver = Solver(solver=method, eps=1e-12)
 
             # Bind backend
             solver.backend = backend
 
+            # Compute G if method is not QR
+            if method == "qr":
+                G = self.V
+            else:
+                G = self.V.swapaxes(1, 2) @ self.V / self.N
+
             # Solve the system
-            result = solver(self.V, self.v, self.N)
+            result = solver(G, self.v, self.N)
 
             # Check that the inverse is correct
             np.testing.assert_almost_equal(result, self.exp_result, decimal=5, err_msg=f"{method}")

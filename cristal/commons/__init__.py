@@ -1,3 +1,5 @@
+"""Contains all common classes and functions used across all detectors."""
+
 from .distance import Distance
 from .incrementer import Incrementer
 from .inverter import Inverter

@@ -1,3 +1,6 @@
+"""Contains the :class:`NumpyBackend <cristal.backend.numpy_backend.NumpyBackend>`: a backend using Numpy and Scipy."""
+
+import logging
 from typing import Any, Literal, TypeGuard, overload
 
 import numpy as np
@@ -8,8 +11,11 @@ from numpy.typing import DTypeLike as NumpyDTypeLike
 from ..types import Number, ShapeType
 from .base_backend import Backend
 
+logger = logging.getLogger(__name__)
+
 
 class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
+    """Backend using Numpy and Scipy."""
 
     def __init__(self, dtype: NumpyDTypeLike = np.float64):
         super().__init__(dtype)
@@ -28,6 +34,10 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
         return x
 
     # ===== Creation =====
+
+    def empty(self, shape: ShapeType, dtype: NumpyDTypeLike | None = None) -> np.ndarray:
+        dtype = dtype or self.default_dtype  # dtype if is not None else self.default_dtype
+        return np.empty(shape, dtype=dtype)
 
     def zeros(self, shape: ShapeType, dtype: NumpyDTypeLike | None = None) -> np.ndarray:
         dtype = dtype or self.default_dtype  # dtype if is not None else self.default_dtype
@@ -206,11 +216,14 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
 
     # ===== Math ops =====
 
+    def sign(self, A: np.ndarray) -> np.ndarray:
+        return np.sign(A)
+
     def isnan(self, A: np.ndarray) -> np.ndarray:
         return np.isnan(A)
 
     def pow(self, A: np.ndarray, power: int | float | np.ndarray) -> np.ndarray:
-        return np.pow(A, power)
+        return np.power(A, power)
 
     def sqrt(self, A: np.ndarray) -> np.ndarray:
         if np.any(A < 0):
@@ -245,6 +258,12 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
 
     def tanh(self, A: np.ndarray) -> np.ndarray:
         return np.tanh(A)
+
+    def arccos(self, A: np.ndarray) -> np.ndarray:
+        return np.arccos(A)
+
+    def arccosh(self, A: np.ndarray) -> np.ndarray:
+        return np.arccosh(A)
 
     # ===== Linear algebra =====
 
@@ -287,6 +306,7 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
                         continue
                     L, new_info = scipy.linalg.lapack.dpotrf(A_reg, lower=not upper)  # type: ignore
                     if new_info == 0:
+                        logger.info("Regularization successful with eps=1e-%d", eps)
                         # If successful, break out of the loop
                         break
                 else:
@@ -315,8 +335,8 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
     def qr(self, A: np.ndarray, mode="reduced") -> tuple[np.ndarray, np.ndarray]:
         return np.linalg.qr(A, mode=mode)
 
-    def vander(self, a: np.ndarray, degree: int, increasing: bool = True) -> np.ndarray:
-        return np.vander(a, degree + 1, increasing=increasing)
+    def vander(self, A: np.ndarray, degree: int, increasing: bool = True) -> np.ndarray:
+        return np.vander(A, degree + 1, increasing=increasing)
 
     def lstsq(self, A: np.ndarray, B: np.ndarray):
         res = scipy.linalg.lstsq(A, B, lapack_driver="gelsy")
