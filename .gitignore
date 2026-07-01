@@ -1,5 +1,10 @@
+.pytest_cache
 .vscode
 __pycache__
-cristal.egg-info
-doc/build
-doc/jupyter_execute
+CRISTAL.egg-info
+docs/build
+docs/jupyter_execute
+build/
+htmlcov/
+.coverage
+examples

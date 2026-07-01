@@ -7,17 +7,18 @@ name = "CRISTAL"
 authors = [
     {name = "Florian Grivet", email = "floriangrivet.pro@gmail.com"},
 ]
-description = "Anomaly detection framework based on the Christoffel Function"
+description = "Anomaly detection framework based on the Christoffel Function. This package contains DyCF, KernelCF, NeedleCF and UCF methods."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "numpy",
+    "torch",
     "matplotlib",
     "scipy",
     "scikit-learn",
     "pandas",
-    "tqdm",
-    "PyWavelets",
+    # "tqdm",
+    # "PyWavelets",
 ]
 dynamic = ["version"]
 
@@ -44,6 +45,7 @@ docs = [
     "myst-nb",
     "sphinx-autodoc-typehints",
     "sphinx-collections",
+    "sphinxcontrib-bibtex",
     "setuptools >= 77.0.3",
 ]
 dev = [

@@ -1,6 +1,5 @@
-"""
-CRISTAL Evaluation Subpackage \
-Contains various evaluation metrics and data utilities.
-"""
+"""Contains various evaluation metrics and data generators."""
 
-from . import data, metrics
+from .data import make_T_rotated, make_uniform_square
+
+__all__ = ["make_T_rotated", "make_uniform_square"]
