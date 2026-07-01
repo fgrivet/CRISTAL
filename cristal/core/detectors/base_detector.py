@@ -781,7 +781,7 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
 
         return all_scores
 
-    def score_samples(self, X: ArrayLike, method: Literal["clip", "linear"] = "linear") -> ArrayLike:
+    def score_samples(self, X: ArrayLike, method: Literal["mean", "clip", "linear"] = "mean") -> ArrayLike:
         """Compute the anomaly scores for each sample in :attr:`X`.
         First transform the data to the ArrayLike type, then preprocess it, compute the scores with a CF of each degree in :attr:`n_list`,
         compute both polynomial regression on the scores and linear regression on their log, and finally compute one score per sample based on the given :attr:`method`.
@@ -790,8 +790,8 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
         ----------
         X : ArrayLike
             The points on which to calculate the scores of shape (N_samples_test, d)
-        method : :const:`clip` | :const:`linear`, optional
-            The method to use to compute the final score from the scores of each degree, by default :const:`linear`.
+        method : :const:`mean` | :const:`clip` | :const:`linear`, optional
+            The method to use to compute the final score from the scores of each degree, by default :const:`mean`.
 
         Returns
         -------
@@ -806,15 +806,17 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
             scores = self.unique_score(scores)
         return self.config.backend.where(scores > 0.5, -1, 1)
 
-    def unique_score(self, scores: ArrayLike, method: Literal["clip", "linear"] = "linear") -> ArrayLike:
+    def unique_score(self, scores: ArrayLike, method: Literal["mean", "clip", "linear"] = "mean") -> ArrayLike:
         """Based on the scores for all degree in :attr:`n_list`, aggregate them to return only one score per sample.
 
         Parameters
         ----------
         scores : ArrayLike
             The scores for each degree in :attr:`n_list` of shape (N_samples_test, :attr:`n_val`).
-        method : :const:`clip` | :const:`linear`, optional
-            The method to use to compute the final score from the scores of each degree, by default :const:`linear`.
+        method : :const:`mean` | :const:`clip` | :const:`linear`, optional
+            The method to use to compute the final score from the scores of each degree, by default :const:`mean`.
+
+            `mean` : :math:`\\frac{1}{n\\_{val}} \\sum_{i=1}^{n\\_{val}} \\frac{s_{i+1} - s_{i}}{n\\_{list}_{i+1} - n\\_{list}_{i}}`.
 
             `clip` : :math:`min(0, R2_{lin} - R2_{poly})`. Greater than 0 means that it is an outlier.
 
@@ -825,8 +827,9 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
         ArrayLike
             The scores of each point between 0 (inlier) and 1 (outlier) of shape (N_samples_test,).
         """
-        n_list = self.config.backend.to_array_like(self.n_list)
-        return self.config.backend.mean((scores[:, 1:] - scores[:, :-1]) / (n_list[1:] - n_list[:-1]), axis=1)
+        if method == "mean":
+            n_list = self.config.backend.to_array_like(self.n_list)
+            return self.config.backend.mean((scores[:, 1:] - scores[:, :-1]) / (n_list[1:] - n_list[:-1]), axis=1)
 
         # Compute regressions
         R2_poly_reg, R2_linear_reg = self._compute_regressions(scores)

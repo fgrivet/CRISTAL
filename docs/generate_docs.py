@@ -2,10 +2,10 @@
 Automatic generation of .rst files for Sphinx.
 
 Usage:
-    python generate_docs.py <package_name> <output_folder>
+    python generate_docs.py <package_name> <output_folder> <examples_folder> <examples_output>
 
 Example:
-    python generate_docs.py cristal source/API
+    python generate_docs.py cristal source/API ../examples source/examples.rst
 
 Generated structure:
     - Package/subpackage → list-table of members + toctree (without displaying the contents)
@@ -14,11 +14,13 @@ Generated structure:
 
 import importlib
 import inspect
+import json
 import os
 import pkgutil
 import re
 import shutil
 import sys
+from pathlib import Path
 from typing import TypeVar
 
 # ---------------------------------------------------------------------------
@@ -129,6 +131,32 @@ def get_first_doc_line(obj, module=None, name: str = "") -> str:
 
 def underline(title: str, char: str = "=") -> str:
     return f"{title}\n{char * len(title)}"
+
+
+def extract_name_description(notebook_path: Path):
+    """Extract the first and second cell's content as a name and description from a Jupyter notebook."""
+    with open(notebook_path, "r", encoding="utf-8") as f:
+        notebook = json.load(f)
+
+    # Default values
+    name = notebook_path.stem
+    description = "No description available."
+
+    cells = notebook.get("cells", [])
+    if len(cells) >= 1:
+        first_cell = cells[0]
+        if first_cell["cell_type"] == "markdown":
+            title = " ".join(first_cell["source"]).strip()
+            # Remove markdown formatting for simplicity
+            name = title.replace("**", "").replace("*", "").replace("#", "").replace("`", "").strip()
+
+    if len(cells) >= 2:
+        second_cell = cells[1]
+        if second_cell["cell_type"] == "markdown":
+            description = " ".join(second_cell["source"]).strip()
+            # Remove markdown formatting for simplicity
+            description = description.replace("**", "").replace("*", "").replace("#", "").replace("`", "").strip()
+    return name, description
 
 
 # ---------------------------------------------------------------------------
@@ -343,6 +371,56 @@ def make_module_rst(mod_name: str) -> str:
     return "\n".join(lines)
 
 
+def generate_example_rst_file(folder_path: str, output_file: str):
+    """Generate an RST file with a list-table of notebooks and their descriptions."""
+    folder = Path(folder_path)
+    notebooks = list(folder.glob("*.ipynb"))
+
+    if len(notebooks) == 0:
+        raise FileNotFoundError(f"No .ipynb files found in {folder_path}")
+
+    # Start building the RST content
+    rst_content = [
+        "Examples",
+        "========",
+        "",
+        "Here are the available examples:",
+        "",
+        ".. list-table::",
+        "   :header-rows: 1",
+        "   :widths: 30 70",
+        "",
+        "   * - Name",
+        "     - Description",
+    ]
+
+    toctree_content = [
+        "",
+        ".. toctree::",
+        "   :maxdepth: 1",
+        "   :hidden:",
+        "",
+    ]
+
+    for notebook in notebooks:
+        # Use the correct path for the :doc: reference
+        rel_path = f"_collections/notebooks/{notebook.relative_to(folder).as_posix()}"
+        toctree_content.append(f"   {rel_path}")
+
+        name, description = extract_name_description(notebook)
+        # Use the title in the Notebook column and link to the correct path
+        rst_content.append(f"   * - :doc:`{name} <{rel_path.rsplit(".", 1)[0]}>`")
+        rst_content.append(f"     - {description}")
+
+    # Combine everything
+    rst_content.extend(toctree_content)
+
+    # Write to file
+    _write(output_file, "\n".join(rst_content))
+
+    return output_file
+
+
 # ---------------------------------------------------------------------------
 # Recursive traversal of the package
 # ---------------------------------------------------------------------------
@@ -402,15 +480,18 @@ def _write(path: str, content: str):
 
 
 def main():
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 5:
         print(__doc__)
         sys.exit(1)
 
     pkg_name = sys.argv[1]  # ex: my_package
     output_dir = sys.argv[2]  # ex: source/API
+    example_dir = sys.argv[3]  # ex: ../examples
+    example_output = sys.argv[4]  # ex: source/examples.rst
 
     # Remove dir to recreate it
     if os.path.isdir(output_dir):
+        print(f"\n=== Removing all previous files in '{output_dir}' ===")
         shutil.rmtree(output_dir)
 
     print(f"\n=== Generating .rst for '{pkg_name}' in '{output_dir}' ===\n")
@@ -421,6 +502,10 @@ def main():
     created = walk_package(pkg_name, output_dir)
 
     print(f"\n✓ {len(created)} file(s) .rst generated in '{output_dir}'.")
+
+    print(f"\n=== Generating {example_output} from '{example_dir}' ===\n")
+    generate_example_rst_file(example_dir, example_output)
+    print("\nDone.\n")
 
 
 if __name__ == "__main__":
