@@ -7,4 +7,3 @@ docs/jupyter_execute
 build/
 htmlcov/
 .coverage
-examples
