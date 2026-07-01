@@ -59,7 +59,7 @@ jobs:
       - name: Build Sphinx docs
         run: |
           cd docs
-          sphinx-build -b html source build
+          sphinx-build -b html source build/html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
