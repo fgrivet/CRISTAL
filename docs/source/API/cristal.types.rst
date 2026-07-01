@@ -52,7 +52,7 @@ Detailed reference
 
    The data type of the main manipulated object.
 
-   Constrained to ``Union``, ``dtype``.
+   Constrained to ``DTypeLike``, ``dtype``.
 
 .. automodule:: cristal.types
    :members:
