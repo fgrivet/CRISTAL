@@ -44,8 +44,6 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
 
-    if: github.ref == 'refs/heads/unified'
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
