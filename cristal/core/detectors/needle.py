@@ -65,6 +65,17 @@ class NeedleCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
 
         return component_support[:, :, [n_crop]], component_X[:, :, [n_crop]]
 
+    def update(self, X: ArrayLike, online: Literal["constant", "increment"]):
+        if self.X_train is None:
+            raise ValueError("Model must be fitted before being updated.")
+        if online == "constant":
+            # Concatenate the previous training set with the new one
+            self.X_train = self.config.backend.concat([self.X_train, X], axis=0)
+        else:  # Increment
+            # Replace the oldest data in the training set by the new one (FIFO)
+            self.X_train = self.config.backend.concat([self.X_train[len(X) :], X], axis=0)
+        return self
+
     def fit(self, X: ArrayLike) -> BaseDetector:
         if X.ndim != 2:
             raise ValueError(f"X must be a 2D ArrayLike. Got {X.shape}.")

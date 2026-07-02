@@ -17,7 +17,7 @@ Classes
    * - :class:`DyCF <cristal.core.detectors.dynamic.DyCF>`
      - Class to compute the original Christoffel function based outlier detection scores and predictions, adapted from :cite:t:`ducharlet2025leveraging`.
    * - :class:`DyCG <cristal.core.detectors.dynamic.DyCG>`
-     - An extension of the :class:`BaseDetector <cristal.core.detectors.base_detector.BaseDetector>` class to detect anomalies based on the growth of the socres as the degree :attr:`n` increases.
+     - Class to compute the original Christoffel function based outlier detection scores, and predictions based on the growth of scores as the degree :attr:`n` increases, adapted from :cite:t:`ducharlet2025leveraging`.
 
 Detailed reference
 ------------------

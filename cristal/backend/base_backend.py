@@ -729,6 +729,43 @@ class Backend(ABC, Generic[ArrayLike, DTypeLike]):
         """
 
     @overload
+    def quantile(self, A: ArrayLike, q: float | ArrayLike, axis: None = None, keepdims: bool = False) -> float: ...
+    @overload
+    def quantile(self, A: ArrayLike, q: float | ArrayLike, axis: int, keepdims: bool = False) -> ArrayLike: ...
+    @abstractmethod
+    def quantile(self, A: ArrayLike, q: float | ArrayLike, axis=None, keepdims: bool = False) -> ArrayLike | float:
+        """Return the q-th quantile along a specified axis.
+
+        Parameters
+        ----------
+        A : ArrayLike
+            The input array.
+        q : float | ArrayLike
+            Quantile or sequence of quantiles to compute, which must be between 0 and 1 inclusive.
+        axis : int | None, optional
+            Axis along which the quantile is computed. If `None`, quantile over all elements, by default None.
+        keepdims : bool, optional
+            If `True`, the axes which are reduced are left in the result as dimensions with size one, by default False.
+
+        Returns
+        -------
+        ArrayLike | float
+            The quantile value.
+
+        Raises
+        ------
+        ValueError
+            If q is outside the range [0, 1].
+
+        Examples
+        --------
+        >>> quantile(ArrayLike([[1, 2], [3, 4]]), 0.5)
+        2.5
+        >>> quantile(ArrayLike([[1, 2], [3, 4]]), 0.25, axis=1)
+        ArrayLike([1.25, 3.25])
+        """
+
+    @overload
     def mean(self, A: ArrayLike, axis: None = None, keepdims: bool = False) -> float: ...
     @overload
     def mean(self, A: ArrayLike, axis: int, keepdims: bool = False) -> ArrayLike: ...

@@ -234,14 +234,25 @@ class BaseDetector(ABC, Generic[ArrayLike, DTypeLike, ConfigType]):
             :const:`True` if the detector is fitted, :const:`False` otherwise.
         """
 
-    def score_samples(self, X: ArrayLike) -> ArrayLike:
+    def score_samples(self, X: ArrayLike, online: Literal["none", "constant", "increment"] = "none", quantile=0.95) -> ArrayLike:
         """Compute the anomaly scores for each sample in :attr:`X`.
         First transform the data to the ArrayLike type, then preprocess it, and finally compute the scores with a CF of degree :attr:`n`.
+        If :attr:`online` is enabled, update the support after each batch using the points with the :attr:`quantile` lowest scores.
 
         Parameters
         ----------
         X : ArrayLike
             The points on which to calculate the scores of shape (N_samples_test, d)
+        online : :const:`none` | :const:`constant` | :const:`increment`, optional
+            The online method to use, by default :const:`none`.
+
+            `none` : No update.
+
+            `constant` : Replace the oldest support points by the new ones based on the chosen `quantile`.
+
+            `increment` : Add the new support points to the existing set.
+        quantile : float, optional
+            The quantile to use to determine if a point is added to the support, by default 0.95.
 
         Returns
         -------
@@ -267,9 +278,39 @@ class BaseDetector(ABC, Generic[ArrayLike, DTypeLike, ConfigType]):
             component_support, component_X = self._crop_components(component_support, component_X, self.n)  # pyright: ignore[reportArgumentType]
 
             bs = self.config.storage.batch_size
-            scores[n_batch * bs : (n_batch + 1) * bs] = self._compute_scores(component_support, component_X)
+            current_scores = self._compute_scores(component_support, component_X)
+            scores[n_batch * bs : (n_batch + 1) * bs] = current_scores
+
+            if online != "none":
+                idx_to_include = self.config.backend.where(current_scores < self.config.backend.quantile(current_scores, quantile))[0]
+                self.update(X_batch[idx_to_include], online)
 
         return scores
+
+    @abstractmethod
+    def update(self, X: ArrayLike, online: Literal["constant", "increment"]) -> "BaseDetector":
+        """Update the support of the detector.
+
+        Parameters
+        ----------
+        X : ArrayLike
+            The points to include in the support of shape (N_new_support_points, d).
+        online : :const:`constant` | :const:`increment`
+            The online method to use.
+
+            `constant` : Replace the oldest support points by the new ones.
+
+            `increment` : Add the new support points to the existing set.
+
+        .. caution::
+
+            `online` is not used with :class:`DyCF <cristal.core.detectors.dynamic.DyCF>`.
+
+        Returns
+        -------
+        BaseDetector
+            The detector with its support updated.
+        """
 
     def decision_function(self, X: ArrayLike) -> ArrayLike:
         return self.score_samples(X)
@@ -727,7 +768,7 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
     #           public methods
     # =====================================
 
-    def fit(self, X: ArrayLike) -> BaseDetector:
+    def fit(self, X: ArrayLike) -> "BaseCGDetector":
         # Save the number of sample, and dimensionality of training data
         self.N, self.d = X.shape
         self.detector.fit(X)
@@ -740,7 +781,7 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
     def is_fitted(self) -> bool:
         return self.detector.is_fitted()
 
-    def all_score_samples(self, X: ArrayLike) -> ArrayLike:
+    def all_score_samples(self, X: ArrayLike, online: Literal["none", "constant", "increment"] = "none", quantile=0.95) -> ArrayLike:
         """Compute the anomaly scores for each sample in :attr:`X` and for each degree in :attr:`n_list`.
         First transform the data to the ArrayLike type, then preprocess it, and finally compute the scores with a CF of each degree in :attr:`n_list`.
 
@@ -765,23 +806,37 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
 
             If the dimension of the testing data `d` is not the same as the dimension of the training data :attr:`d`.
         """
-        X = self._preprocess_test_data(X)
-
-        N = X.shape[0]
-
         # Create the array to store all the scores
-        all_scores = self.detector.config.backend.empty((N, self.n_val), dtype=cast(DTypeLike, X.dtype))
-        # Compute the full components
-        component_support, component_X = self._compute_components(X)
+        all_scores = self.detector.config.backend.empty((len(X), self.n_val))
 
-        # For each degree to compute, crop component_support and component_X and compute the corresponding scores
-        for i, n in enumerate(self.n_list):
-            component_support_crop, component_X_crop = self._crop_components(component_support, component_X, n)
-            all_scores[:, i] = self._compute_scores(component_support_crop, component_X_crop)
+        # Compute the scores by batch
+        for n_batch, X_batch in enumerate(self.config.storage(X)):
+            X_batch = self._preprocess_test_data(X_batch)
+
+            # Compute the full components
+            component_support, component_X = self._compute_components(X_batch)
+            bs = self.config.storage.batch_size
+
+            # For each degree to compute, crop component_support and component_X and compute the corresponding scores
+            for i, n in enumerate(self.n_list):
+                component_support_crop, component_X_crop = self._crop_components(component_support, component_X, n)
+                all_scores[n_batch * bs : (n_batch + 1) * bs, i] = self._compute_scores(component_support_crop, component_X_crop)
+
+            # Update the support based on the mean scores on all degrees
+            if online != "none":
+                mean_batch_scores = self.config.backend.mean(all_scores[n_batch * bs : (n_batch + 1) * bs])
+                idx_to_include = self.config.backend.where(mean_batch_scores < self.config.backend.quantile(mean_batch_scores, quantile))[0]
+                self.update(X_batch[idx_to_include], online)
 
         return all_scores
 
-    def score_samples(self, X: ArrayLike, method: Literal["mean", "clip", "linear"] = "mean") -> ArrayLike:
+    def score_samples(
+        self,
+        X: ArrayLike,
+        online: Literal["none", "constant", "increment"] = "none",
+        quantile=0.95,
+        method: Literal["mean", "clip", "linear"] = "mean",
+    ) -> ArrayLike:
         """Compute the anomaly scores for each sample in :attr:`X`.
         First transform the data to the ArrayLike type, then preprocess it, compute the scores with a CF of each degree in :attr:`n_list`,
         compute both polynomial regression on the scores and linear regression on their log, and finally compute one score per sample based on the given :attr:`method`.
@@ -790,15 +845,32 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
         ----------
         X : ArrayLike
             The points on which to calculate the scores of shape (N_samples_test, d)
+        online : :const:`none` | :const:`constant` | :const:`increment`, optional
+            The online method to use, by default :const:`none`.
+
+            `none` : No update.
+
+            `constant` : Replace the oldest support points by the new ones based on the chosen `quantile`.
+
+            `increment` : Add the new support points to the existing set.
+        quantile : float, optional
+            The quantile to use to determine if a point is added to the support, by default 0.95.
         method : :const:`mean` | :const:`clip` | :const:`linear`, optional
             The method to use to compute the final score from the scores of each degree, by default :const:`mean`.
+
+            `mean` : :math:`\\frac{1}{n\\_{val}} \\sum_{i=1}^{n\\_{val}} \\frac{s_{i+1} - s_{i}}{n\\_{list}_{i+1} - n\\_{list}_{i}}`.
+
+            `clip` : :math:`min(0, R2_{lin} - R2_{poly})`. Greater than 0 means that it is an outlier.
+
+            `linear` : :math:`(1 + R2_{lin} - R2_{poly}) / 2`. Greater than 0.5 means that it is an outlier.
+
 
         Returns
         -------
         ArrayLike
             The scores of each point between 0 (inlier) and 1 (outlier) of shape (N_samples_test,).
         """
-        return self.unique_score(self.all_score_samples(X), method=method)
+        return self.unique_score(self.all_score_samples(X, online=online, quantile=quantile), method=method)
 
     def predict_from_scores(self, scores):
         # In case we got scores from all_score_samples
@@ -840,6 +912,10 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
 
         # Linear from 0 to 1
         return (R2_linear_reg - R2_poly_reg + 1) / 2
+
+    def update(self, X: ArrayLike, online: Literal["constant", "increment"]) -> "BaseCGDetector":
+        self.detector.update(X, online=online)
+        return self
 
     def __getattr__(self, name):
         return getattr(self.detector, name)

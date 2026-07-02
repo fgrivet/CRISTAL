@@ -17,7 +17,7 @@ Classes
    * - :class:`KernelCF <cristal.core.detectors.kernel.KernelCF>`
      - Class to compute the kernel version of the Christoffel function based outlier detection scores and predictions, adapted from :cite:t:`askari2018kernel`.
    * - :class:`KernelCG <cristal.core.detectors.kernel.KernelCG>`
-     - An extension of the :class:`BaseDetector <cristal.core.detectors.base_detector.BaseDetector>` class to detect anomalies based on the growth of the socres as the degree :attr:`n` increases.
+     - Class to compute the kernel version of the Christoffel function based outlier detection scores, and predictions based on the growth of scores as the degree :attr:`n` increases, adapted from :cite:t:`askari2018kernel`.
 
 Detailed reference
 ------------------

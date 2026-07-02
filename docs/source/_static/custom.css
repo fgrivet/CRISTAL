@@ -1,19 +1,44 @@
 /* Adjust page width */
 .bd-page-width {
-    max-width: 90% !important;
+  max-width: 90% !important;
 }
 
 /* Adjust content width */
 .bd-article-container {
-    max-width: 100% !important;
+  max-width: 100% !important;
 }
 
 /* Adjust the left navigation width */
 .bd-sidebar {
-    width: 18% !important;
+  width: 18% !important;
 }
 
 /* Adjust the right TOC width */
 .bd-toc {
-    width: 25% !important;
+  width: 25% !important;
+}
+
+/* Styling for tables in notebooks (pydata_sphinx_theme) */
+div.nboutput table,
+div.nbinput table,
+div.highlight table,
+div.output table,
+div.cell_output table {
+  border: 1px solid #ddd !important;
+  border-collapse: collapse !important;
+  width: 100% !important;
+}
+
+div.nboutput th,
+div.nboutput td,
+div.nbinput th,
+div.nbinput td,
+div.highlight th,
+div.highlight td,
+div.output th,
+div.output td,
+div.cell_output th,
+div.cell_output td {
+  border: 1px solid #ddd !important;
+  padding: 8px !important;
 }

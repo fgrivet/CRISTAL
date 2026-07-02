@@ -221,19 +221,30 @@ class DyCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
             and isinstance(self.n, int)
         )
 
+    def update(self, X: ArrayLike, online: Literal["constant", "increment"]):
+        if self.M is None or self.M_inv is None or self.N is None or self.n == "auto":
+            raise ValueError("Model must be fitted before being updated.")
+
+        if self.config.incrementer.method == "inverse":
+            self.M, self.N, self.M_inv = self.config.incrementer(M=self.M, N=self.N, X=X, n=self.n)
+        else:
+            self.N, self.M_inv = self.config.incrementer(M=self.M_inv, N=self.N, X=X, n=self.n)
+
+        return self
+
     # TODO : implement these functions
-    def update(self, X: ArrayLike) -> "DyCF": ...
     def save_model(self): ...
     def load_model(self): ...
 
 
 class DyCG(BaseCGDetector):
-    def __init__(self, n_list: list[int], config: DynamicDetectorConfig = DynamicDetectorConfig(), *args, **kwargs):
-        """Class to compute the original Christoffel function based outlier detection scores, and predictions based on the growth of scores as the degree :attr:`n` increases, adapted from :cite:t:`ducharlet2025leveraging`.
-        The scoring function is modified from :cite:p:`ducharlet2025leveraging` to be the same as all :class:`BaseCGDetector <cristal.core.detectors.base_detector.BaseCGDetector>` classes.
+    """Class to compute the original Christoffel function based outlier detection scores, and predictions based on the growth of scores as the degree :attr:`n` increases, adapted from :cite:t:`ducharlet2025leveraging`.
+    The scoring function is modified from :cite:p:`ducharlet2025leveraging` to be the same as all :class:`BaseCGDetector <cristal.core.detectors.base_detector.BaseCGDetector>` classes.
 
-        See Also
-        --------
-        DyCF, cristal.core.detectors.base_detector.BaseDetector : For more attributes.
-        """
+    See Also
+    --------
+    DyCF, cristal.core.detectors.base_detector.BaseDetector : For more attributes.
+    """
+
+    def __init__(self, n_list: list[int], config: DynamicDetectorConfig = DynamicDetectorConfig(), *args, **kwargs):
         super().__init__(DyCF, n=n_list, config=config, *args, **kwargs)

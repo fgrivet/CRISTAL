@@ -10,6 +10,11 @@
       <stop offset="0%" stop-color="#FF4D6D" stop-opacity="0.9"/>
       <stop offset="100%" stop-color="#FF4D6D" stop-opacity="0"/>
     </radialGradient>
+
+    <filter id="textGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="5" result="blur"/>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
   </defs>
 
   <!-- Crystal Outer Shape -->
@@ -52,7 +57,7 @@
         font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif"
         font-size="20"
         fill="#888">
-    Christoffel Anomaly Locator
+    Christoffel <tspan fill="#FF4D6D" filter="url(#textGlow)">Anomaly</tspan> Locator
   </text>
 
 </svg>

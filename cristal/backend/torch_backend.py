@@ -205,6 +205,15 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
         return A.argmax(dim=axis, keepdim=keepdims)
 
     @overload
+    def quantile(self, A: torch.Tensor, q: float | torch.Tensor, axis: None = None, keepdims: bool = False) -> float: ...
+
+    @overload
+    def quantile(self, A: torch.Tensor, q: float | torch.Tensor, axis: int, keepdims: bool = False) -> torch.Tensor: ...
+
+    def quantile(self, A: torch.Tensor, q: float | torch.Tensor, axis=None, keepdims: bool = False) -> torch.Tensor | float:
+        return A.quantile(q, dim=axis, keepdim=keepdims)
+
+    @overload
     def mean(self, A: torch.Tensor, axis: None = None, keepdims: bool = False) -> float: ...
 
     @overload

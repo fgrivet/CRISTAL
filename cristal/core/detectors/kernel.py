@@ -1,5 +1,6 @@
 """Contains the kernel version of the Christoffel function based outlier detection algorithm, adapted from :cite:t:`askari2018kernel`."""
 
+import logging
 import math
 from typing import Literal, cast
 
@@ -7,6 +8,8 @@ from ...commons.distance import Distance
 from ...config.detector_config import DynamicDetectorConfig
 from ...types import ArrayLike, DTypeLike, Number
 from .base_detector import BaseCGDetector, BaseDetector
+
+logger = logging.getLogger(__name__)
 
 
 class KernelCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
@@ -238,6 +241,10 @@ class KernelCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
             return component_support ** (n_crop / self.n), component_X ** (n_crop / self.n)
         return component_support, component_X
 
+    def update(self, X: ArrayLike, online: Literal["constant", "increment"]):
+        logger.warning("Update method not implemented. Doing nothing. Use the fit method with the new support instead.")
+        return self
+
     def fit(self, X: ArrayLike) -> BaseDetector:
         """Fit the model to the data :attr:`X`.
         Compute :attr:`sigma`, the gram matrix :math:`G = K(X\\_train, X\\_train)` of shape (N_samples_train, N_samples_train),
@@ -297,6 +304,17 @@ class KernelCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
 
 
 class KernelCG(BaseCGDetector):
+    """Class to compute the kernel version of the Christoffel function based outlier detection scores, and predictions based on the growth of scores as the degree :attr:`n` increases, adapted from :cite:t:`askari2018kernel`.
+
+    .. caution::
+
+        This class only works with :const:`kernel=linear`, and may not work well.
+
+    See Also
+    --------
+    KernelCF, cristal.core.detectors.base_detector.BaseDetector : For more attributes.
+    """
+
     def __init__(
         self,
         n_list: list[int],
@@ -308,16 +326,6 @@ class KernelCG(BaseCGDetector):
         *args,
         **kwargs,
     ):
-        """Class to compute the kernel version of the Christoffel function based outlier detection scores, and predictions based on the growth of scores as the degree :attr:`n` increases, adapted from :cite:t:`askari2018kernel`.
-
-        .. caution::
-
-            This class may not work well.
-
-        See Also
-        --------
-        KernelCF, cristal.core.detectors.base_detector.BaseDetector : For more attributes.
-        """
         if kernel == "rbf":
             raise ValueError("Growth accoding to n impossible with RBF kernel since it does not depend on n.")
         super().__init__(KernelCF, n=n_list, config=config, kernel=kernel, rho=rho, sigma=sigma, C=C, *args, **kwargs)

@@ -158,6 +158,14 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
         return A.argmax(axis=axis, keepdims=keepdims)  # type: ignore
 
     @overload
+    def quantile(self, A: np.ndarray, q: float | np.ndarray, axis: None = None, keepdims: bool = False) -> float: ...
+    @overload
+    def quantile(self, A: np.ndarray, q: float | np.ndarray, axis: int, keepdims: bool = False) -> np.ndarray: ...
+
+    def quantile(self, A: np.ndarray, q: float | np.ndarray, axis=None, keepdims: bool = False):
+        return np.quantile(A, q, axis=axis, keepdims=keepdims)
+
+    @overload
     def mean(self, A: np.ndarray, axis: None = None, keepdims: bool = False) -> float: ...
 
     @overload

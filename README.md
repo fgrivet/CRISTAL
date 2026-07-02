@@ -11,9 +11,9 @@
 
 This package implements several Christoffel Function-based methods for Anomaly Detection:
 
-- **Univariate version** (`UCF`) - for **all cases** - [paper incoming]()
+- **Univariate version** (`UCF`) - for **all cases** - [paper](https://arxiv.org/abs/2606.12483)
 
-- **Dynamical version** (`DyCF`) - for low dimensional ($< 8$), high-sampled/streaming use cases - [paper](https://doi.org/10.1007/s41060-024-00581-2)
+- **Dynamical version** (`DyCF`) - for low dimensional ($< 8$), high-sampled/streaming use cases - [paper](https://doi.org/10.1007/s41060-024-00581-2) - [Original code](https://github.com/kyducharlet/odds)
   
 - **Kernel-based version** (`KernelCF`) - for high dimensional, low-sampled use cases - [paper](https://doi.org/10.48550/arXiv.1806.06775)
 
@@ -29,6 +29,6 @@ For installation instructions and usage examples, please refer to the documentat
 # Citation
 If you use this work in your research, please cite it as:
 
-```bibtex
-
+```
+F. Grivet and D. Henrion and J-B. Lasserre and L. Travé-Massuyès, Scalable anomaly detection via a univariate Christoffel function. Submitted (2026), doi: https://doi.org/10.48550/arXiv.2606.12483.
 ```
