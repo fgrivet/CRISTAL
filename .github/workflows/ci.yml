@@ -53,8 +53,8 @@ jobs:
         with:
           name: badges
           path: |
-            docs/source/_static/pylint_badge.json pylint
-            docs/source/_static/coverage_badge.json coverage
+            docs/source/_static/pylint_badge.json
+            docs/source/_static/coverage_badge.json
 
   # 2. BUILD DOCS + DEPLOY
   docs:
