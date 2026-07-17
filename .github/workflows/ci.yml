@@ -39,8 +39,8 @@ jobs:
 
       - name: Generate badges
         run: |
-          python docs/scripts/generate_pylint_badge.py pylint_report.json docs/source/_static/pylint_badge.json pylint
-          python docs/scripts/generate_coverage_badge.py coverage.json docs/source/_static/coverage_badge.json coverage
+          python docs/scripts/generate_badge_endpoint.py pylint_report.json docs/source/_static/pylint_badge.json pylint
+          python docs/scripts/generate_badge_endpoint.py coverage.json docs/source/_static/coverage_badge.json coverage
 
       - name: Upload coverage HTML
         uses: actions/upload-artifact@v4
@@ -90,14 +90,14 @@ jobs:
           cd docs
           sphinx-build -b html source build/html
 
-      - name: Copy coverage to docs
-        run: |
-          mkdir -p docs/build/html/coverage
-          cp -r htmlcov/* docs/build/html/coverage/
+      # - name: Copy coverage to docs
+      #   run: |
+      #     mkdir -p docs/build/html/coverage
+      #     cp -r htmlcov/* docs/build/html/coverage/
 
-      - name: Copy badges to docs
-        run: |
-          cp -r docs/source/_static/*.json docs/build/html/_static/
+      # - name: Copy badges to docs
+      #   run: |
+      #     cp -r docs/source/_static/*.json docs/build/html/_static/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
