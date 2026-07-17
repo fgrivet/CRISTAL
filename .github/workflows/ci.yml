@@ -90,14 +90,10 @@ jobs:
           cd docs
           sphinx-build -b html source build/html
 
-      # - name: Copy coverage to docs
-      #   run: |
-      #     mkdir -p docs/build/html/coverage
-      #     cp -r htmlcov/* docs/build/html/coverage/
-
-      # - name: Copy badges to docs
-      #   run: |
-      #     cp -r docs/source/_static/*.json docs/build/html/_static/
+      - name: Copy coverage to docs
+        run: |
+          mkdir -p docs/build/html/coverage
+          cp -r htmlcov/* docs/build/html/coverage/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
