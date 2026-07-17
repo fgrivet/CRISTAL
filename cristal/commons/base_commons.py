@@ -6,6 +6,7 @@ if TYPE_CHECKING:
     from ..config.detector_config import DetectorConfig
 
 
+# pylint: disable=unused-variable
 class BaseCommons:
     """Base class for all commons classes. Useful to bind configuration dependencies to the class.
 
@@ -19,12 +20,19 @@ class BaseCommons:
     >>> class Test(BaseCommons):
     >>>     requires = ["dep1", "dep2"]
     >>> test = Test()
+    >>> # config contains "dep1", "dep2", "dep3"
     >>> test.bind(config)  # Binds the dependencies to the object. Must contain "dep1" AND "dep2".
     >>> test.dep1  # Accesses the bound dependency.
+    >>> test.dep3 # Access an attribute in config but not required
+    AttributeError(dep3)
+    >>> test.dep4 # Access an attribute not bound
+    AttributeError(dep4)
     """
 
-    requires: list[str] = []  #: List of required dependency names
-    _dependencies = None  #: Internal storage for dependencies
+    requires: list[str] = []
+    """List of required dependency names"""
+    _dependencies = None
+    """Internal storage for dependencies"""
 
     def bind(self, config: "DetectorConfig"):
         """Bind the dependencies in :attr:`requires` to the class so that the object can access them.
@@ -44,8 +52,13 @@ class BaseCommons:
         >>> class Test(BaseCommons):
         >>>     requires = ["dep1", "dep2"]
         >>> test = Test()
+        >>> # config contains "dep1", "dep2", "dep3"
         >>> test.bind(config)  # Binds the dependencies to the object. Must contain "dep1" AND "dep2".
         >>> test.dep1  # Accesses the bound dependency.
+        >>> test.dep3 # Access an attribute in config but not required
+        AttributeError(dep3)
+        >>> test.dep4 # Access an attribute not bound
+        AttributeError(dep4)
         """
         self._dependencies = {}
 

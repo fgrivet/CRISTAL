@@ -7,8 +7,14 @@ from ..types import IMPLEMENTED_DISTANCES, ArrayLike, DTypeLike
 from .base_commons import BaseCommons
 
 
+# pylint: disable=unused-variable
 class Distance(BaseCommons, Generic[ArrayLike, DTypeLike]):
     """Class to compute the distance between each pair of two collections of inputs.
+
+    Parameters
+    ----------
+    metric : :class:`IMPLEMENTED_DISTANCES <cristal.types.IMPLEMENTED_DISTANCES>`, optional
+        The distance metric to use, by default :const:`euclidean`.
 
     Attributes
     ----------
@@ -16,6 +22,15 @@ class Distance(BaseCommons, Generic[ArrayLike, DTypeLike]):
         The distance metric to use.
     backend : :class:`Backend <cristal.backend.base_backend.Backend>`
         The backend to use for the computation.
+
+    Raises
+    ------
+    ValueError
+        If the distance :const:`metric` is not valid.
+
+    See Also
+    --------
+    cristal.types.IMPLEMENTED_DISTANCES : For more details on how the methods work.
 
     Examples
     --------
@@ -58,7 +73,8 @@ class Distance(BaseCommons, Generic[ArrayLike, DTypeLike]):
         """
 
         # Attributes bound in the configuration __init__
-        self.backend: Backend[ArrayLike, DTypeLike]  #: The backend to use for the computation.
+        self.backend: Backend[ArrayLike, DTypeLike]
+        """The backend to use for the computation."""
 
     def _cdist_euclidean(self, X: ArrayLike, Y: ArrayLike | None = None, p: int = 2) -> ArrayLike:
         if self.backend is None:

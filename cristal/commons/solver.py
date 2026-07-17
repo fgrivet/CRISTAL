@@ -7,8 +7,16 @@ from ..types import IMPLEMENTED_SOLVERS, ArrayLike, DTypeLike
 from .base_commons import BaseCommons
 
 
+# pylint: disable=unused-variable
 class Solver(BaseCommons, Generic[ArrayLike, DTypeLike]):
     """Class to solve the equation :math:`z = v^T G^{-1} v`.
+
+    Parameters
+    ----------
+    solver : IMPLEMENTED_SOLVERS, optional
+        The solver to use, by default "solve"
+    eps : float | None, optional
+        The regularization to add to the matrix G before solving the system, by default None
 
     Attributes
     ----------
@@ -18,6 +26,15 @@ class Solver(BaseCommons, Generic[ArrayLike, DTypeLike]):
         The regularization to add to the matrix G before solving the system.
     backend : :class:`Backend <cristal.backend.base_backend.Backend>`
         The backend to use for the computation.
+
+    Raises
+    ------
+    ValueError
+        If the :const:`solver` is not valid.
+
+    See Also
+    --------
+    cristal.types.IMPLEMENTED_SOLVERS : For more details on how the solvers work.
 
     Examples
     --------
@@ -59,10 +76,13 @@ class Solver(BaseCommons, Generic[ArrayLike, DTypeLike]):
         --------
         cristal.types.IMPLEMENTED_SOLVERS : For more details on how the solvers work.
         """
-        self.eps = eps  #: The regularization to add to the matrix G before solving the system.
+
+        self.eps = eps
+        """The regularization to add to the matrix G before solving the system."""
 
         # Attributes bound in the configuration __init__
-        self.backend: Backend[ArrayLike, DTypeLike]  #: The backend to use for the computation.
+        self.backend: Backend[ArrayLike, DTypeLike]
+        """The backend to use for the computation."""
 
     def solve(self, V: ArrayLike, v: ArrayLike, N: int) -> ArrayLike:
         """Solve the equation :math:`z = v^T G^{-1} v`.
@@ -70,7 +90,8 @@ class Solver(BaseCommons, Generic[ArrayLike, DTypeLike]):
         Parameters
         ----------
         V : ArrayLike
-            If :const:`solver = qr`, the vandermonde matrix V of shape (N_samples_test, N_samples_train, n+1). Otherwise, the Gram matrix :math:`G = V^T V` of shape (N_samples_test, n+1, n+1).
+            - If :const:`solver = qr`, the vandermonde matrix V of shape (N_samples_test, N_samples_train, n+1).
+            - Otherwise, the Gram matrix :math:`G = V^T V` of shape (N_samples_test, n+1, n+1).
         v : ArrayLike
             The vector v of shape (n+1,) based on the polynomial basis used.
         N : int
@@ -148,7 +169,8 @@ class Solver(BaseCommons, Generic[ArrayLike, DTypeLike]):
         Parameters
         ----------
         V : ArrayLike
-            If :const:`solver = qr`, the vandermonde matrix V of shape (N_samples_test, N_samples_train, n+1). Otherwise, the Gram matrix :math:`G = V^T V` of shape (N_samples_test, n+1, n+1).
+            - If :const:`solver = qr`, the vandermonde matrix V of shape (N_samples_test, N_samples_train, n+1).
+            - Otherwise, the Gram matrix :math:`G = V^T V` of shape (N_samples_test, n+1, n+1).
         v : ArrayLike
             The vector v of shape (n+1,) based on the polynomial basis used.
         N : int

@@ -2,12 +2,19 @@
     <img src="docs/source/_static/logo.svg" alt="CRISTAL logo" width="70%">
 </div>
 
-# Description
+# CRISTAL - Christoffel-based Anomaly Detection
+
+[![Python Version](https://img.shields.io/badge/python-%3E=3.11-blue)](https://github.com/fgrivet/cristal)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+![Pylint](https://img.shields.io/endpoint?url=https://github.com/fgrivet/CRISTAL/_static/pylint_badge.json)
+![Coverage](https://img.shields.io/endpoint?url=https://github.com/fgrivet/CRISTAL/_static/coverage_badge.json)
+
+## Description
 
 **C**h**RIST**offel **A**nomaly **L**ocator (CRISTAL)  is an anomaly detection framework based on the Christoffel Function.
 
 
-# Content
+## Content
 
 This package implements several Christoffel Function-based methods for Anomaly Detection:
 
@@ -21,12 +28,12 @@ This package implements several Christoffel Function-based methods for Anomaly D
 
 
 
-# Installation and Documentation
+## Installation and Documentation
 
 For installation instructions and usage examples, please refer to the documentation at [CRISTAL Documentation](https://fgrivet.github.io/CRISTAL/).
 
 
-# Citation
+## Citation
 If you use this work in your research, please cite it as:
 
 ```

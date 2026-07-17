@@ -7,8 +7,16 @@ from ..types import IMPLEMENTED_THRESHOLD_SCHEMES, Number
 from .base_commons import BaseCommons
 
 
+# pylint: disable=unused-variable
 class ThresholdScheme(BaseCommons):
     """Class to compute a threshold based on data properties.
+
+    Parameters
+    ----------
+    scheme : IMPLEMENTED_THRESHOLD_SCHEMES, optional
+        The threshold scheme to use, by default "constant"
+    C : Number
+        A constant (potentially) used during the computation of the threshold.
 
     Attributes
     ----------
@@ -16,6 +24,15 @@ class ThresholdScheme(BaseCommons):
         The threshold scheme to use.
     C : Number
         A constant (potentially) used during the computation of the threshold.
+
+    Raises
+    ------
+    ValueError
+        If the threshold :const:`scheme` is not valid.
+
+    See Also
+    --------
+    cristal.types.IMPLEMENTED_THRESHOLD_SCHEMES : For more details on how the threshold schemes work.
 
     Examples
     --------
@@ -52,7 +69,9 @@ class ThresholdScheme(BaseCommons):
         --------
         cristal.types.IMPLEMENTED_THRESHOLD_SCHEMES : For more details on how the threshold schemes work.
         """
-        self.C: Number = C  #: A constant (potentially) used during the computation of the threshold.
+
+        self.C: Number = C
+        """A constant (potentially) used during the computation of the threshold."""
 
     def compute_threshold(self, n: int | float, d: int) -> float:
         """Compute a threshold based on data properties.
@@ -63,8 +82,6 @@ class ThresholdScheme(BaseCommons):
             The maximum degree of polynomials.
         d : int
             The dimension of data.
-        C : float | int
-            A constant.
 
         Returns
         -------
@@ -103,8 +120,6 @@ class ThresholdScheme(BaseCommons):
             The maximum degree of polynomials.
         d : int
             The dimension of data.
-        C : float | int
-            A constant.
 
         Returns
         -------

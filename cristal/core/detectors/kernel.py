@@ -13,7 +13,38 @@ logger = logging.getLogger(__name__)
 
 
 class KernelCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
-    """Class to compute the kernel version of the Christoffel function based outlier detection scores and predictions, adapted from :cite:t:`askari2018kernel`.
+    """Kernel-based Christoffel Function detector.
+
+    This detector computes anomaly scores using the kernel-based Christoffel function,
+    adapted from :cite:t:`askari2018kernel`. It uses the kernel trick to avoid the
+    combinatorial explosion of the moment matrix size, making it suitable for
+    high-dimensional data. However, it needs to invert a matrix whose size grows linearly with the number of training sample.
+
+    The kernel Christoffel function for a point :math:`x` is computed as:
+
+    .. math::
+        \\Lambda_n(x)^{-1} = K(x, X)^T (G + \\rho I)^{-1} K(x, X)
+
+    where:
+        - :math:`K(x, X)` is the kernel matrix between :math:`x` and training points
+        - :math:`G` is the Gram matrix of training points
+        - :math:`\\rho` is a regularization parameter
+
+    Parameters
+    ----------
+    n : int | Literal["auto"]
+        The degree of the CF. If :const:`auto`, set to :math:`N^{1 / (2+intrinsic\\_dim)}` during :func:`fit`.
+    config : DynamicDetectorConfig[ArrayLike, DTypeLike], optional
+        The configuration of the model, by default DynamicDetectorConfig().
+    kernel : Literal["linear", "rbf"], optional
+        The kernel type, by default "rbf".
+    rho : Literal["auto"] | Number, optional
+        The parameter rho for the regularization of the kernel.
+        If :const:`auto`, set to :math:`\\frac{\\|G\\|_F}{C \\times \\sqrt{n}}` during :func:`fit`, by default :const:`auto`.
+    sigma : Literal["auto"] | Number, optional
+        The parameter sigma for the rbf kernel. If :const:`auto`, set to :math:`\\sqrt{d} / 2` during :func:`fit`tion_, by default :const:`auto`.
+    C : Number, optional
+        A constant parameter used in the computation of :attr:`rho`, by default 1.
 
     Attributes
     ----------
@@ -22,7 +53,8 @@ class KernelCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
     kernel_func : Callable[[ArrayLike, ArrayLike | None], ArrayLike]
         The kernel function associated to :attr:`kernel`.
     rho : Literal["auto"] | Number
-        The parameter rho for the regularization of the kernel. If :const:`auto`, set to :math:`\\frac{\\|G\\|_F}{C \\times \\sqrt{n}}` during :func:`fit`.
+        The parameter rho for the regularization of the kernel.
+        If :const:`auto`, set to :math:`\\frac{\\|G\\|_F}{C \\times \\sqrt{n}}` during :func:`fit`.
     sigma : Literal["auto"] | Number
         The parameter sigma for the rbf kernel. If :const:`auto`, set to :math:`\\sqrt{d} / 2` during :func:`fit`.
     C : Number
@@ -64,7 +96,8 @@ class KernelCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
         kernel : Literal["linear", "rbf"], optional
             The kernel type, by default "rbf".
         rho : Literal["auto"] | Number, optional
-            The parameter rho for the regularization of the kernel. If :const:`auto`, set to :math:`\\frac{\\|G\\|_F}{C \\times \\sqrt{n}}` during :func:`fit`, by default :const:`auto`.
+            The parameter rho for the regularization of the kernel.
+            If :const:`auto`, set to :math:`\\frac{\\|G\\|_F}{C \\times \\sqrt{n}}` during :func:`fit`, by default :const:`auto`.
         sigma : Literal["auto"] | Number, optional
             The parameter sigma for the rbf kernel. If :const:`auto`, set to :math:`\\sqrt{d} / 2` during :func:`fit`tion_, by default :const:`auto`.
         C : Number, optional
@@ -77,15 +110,20 @@ class KernelCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
         self.kernel_func = self._rbf_kernel if self.kernel == "rbf" else self._linear_kernel
         """The kernel function associated to :attr:`kernel`."""
         self.rho: Literal["auto"] | Number = rho
-        """The parameter rho for the regularization of the kernel. If :const:`auto`, set to :math:`\\frac{\\|G\\|_F}{C \\times \\sqrt{n}}` during :func:`fit`."""
+        """The parameter rho for the regularization of the kernel.
+        If :const:`auto`, set to :math:`\\frac{\\|G\\|_F}{C \\times \\sqrt{n}}` during :func:`fit`."""
         self.sigma: Literal["auto"] | Number = sigma
         """The parameter sigma for the rbf kernel. If :const:`auto`, set to :math:`\\sqrt{d} / 2` during :func:`fit`."""
-        self.C = C  #: A constant parameter used in the computation of :attr:`rho`.
+        self.C = C
+        """A constant parameter used in the computation of :attr:`rho`."""
 
         # Variables defined during fitting specific to KernelCF
-        self.X_train: ArrayLike | None = None  #: The training data of shape (N_samples_train, d).
-        self.G = None  #: The gram matrix of shape (N_samples_train, N_samples_train).
-        self.G_inv = None  #: The inverse of the gram matrix of shape (N_samples_train, N_samples_train).
+        self.X_train: ArrayLike | None = None
+        """The training data of shape (N_samples_train, d)."""
+        self.G = None
+        """The gram matrix of shape (N_samples_train, N_samples_train)."""
+        self.G_inv = None
+        """The inverse of the gram matrix of shape (N_samples_train, N_samples_train)."""
 
     def _rbf_kernel(self, X: ArrayLike, Y: ArrayLike | None = None) -> ArrayLike:
         """Compute the RBF kernel between two ArrayLike: :math:`K(X, Y) = \\exp\\left( - \\frac{\\|X - Y\\|^2_2}{2 \\sigma^2} \\right)`.
@@ -207,7 +245,8 @@ class KernelCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
         Returns
         -------
         tuple[ArrayLike, ArrayLike]
-            :math:`g = K(X\\_train, X)` of shape (N_samples_train, N_samples_test), :math:`\\gamma = (K(X, X)_{ii})_{1\\leq i\\leq N\\_samples\\_test}` of shape (N_samples_test,).
+            :math:`g = K(X\\_train, X)` of shape (N_samples_train, N_samples_test),
+            :math:`\\gamma = (K(X, X)_{ii})_{1\\leq i\\leq N\\_samples\\_test}` of shape (N_samples_test,).
 
         Raises
         ------
@@ -221,7 +260,7 @@ class KernelCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
         return g, gamma
 
     def _crop_components(self, component_support: ArrayLike, component_X: ArrayLike, n_crop: int) -> tuple[ArrayLike, ArrayLike]:
-        """Do nothing, in the kernel version, matrices shapes are based on the number of samples in training :attr:`N`, not on the polynomial degree :attr:`n`.
+        """Do nothing, here matrices shapes are based on the number of samples in training :attr:`N`, not on the polynomial degree :attr:`n`.
 
         Parameters
         ----------
@@ -235,8 +274,10 @@ class KernelCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
         Returns
         -------
         tuple[ArrayLike, ArrayLike]
-            :math:`g = K(X\\_train, X)` of shape (N_samples_train, N_samples_test), :math:`\\gamma = (K(X, X)_{ii})_{1\\leq i\\leq N\\_samples\\_test}` of shape (N_samples_test,).
+            :math:`g = K(X\\_train, X)` of shape (N_samples_train, N_samples_test),
+            :math:`\\gamma = (K(X, X)_{ii})_{1\\leq i\\leq N\\_samples\\_test}` of shape (N_samples_test,).
         """
+        assert isinstance(self.n, int)
         if self.kernel == "linear":
             return component_support ** (n_crop / self.n), component_X ** (n_crop / self.n)
         return component_support, component_X
@@ -303,12 +344,35 @@ class KernelCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
         return self.N is not None and self.d is not None and self.X_train is not None and self.threshold is not None and isinstance(self.n, int)
 
 
+# pylint: disable=unused-variable
 class KernelCG(BaseCGDetector):
-    """Class to compute the kernel version of the Christoffel function based outlier detection scores, and predictions based on the growth of scores as the degree :attr:`n` increases, adapted from :cite:t:`askari2018kernel`.
+    """Class to compute the kernel version of the Christoffel function based outlier detection scores,
+    and predictions based on the growth of scores as the degree :attr:`n` increases, adapted from :cite:t:`askari2018kernel`.
 
     .. caution::
 
         This class only works with :const:`kernel=linear`, and may not work well.
+
+    Parameters
+    ----------
+    n_list : list[int]
+        The list of degrees on which to evaluate the model.
+    config : DynamicDetectorConfig[ArrayLike, DTypeLike], optional
+        The configuration of the model, by default DynamicDetectorConfig().
+    kernel : Literal["linear"], optional
+        The kernel type, by default "linear".
+    rho : Literal["auto"] | Number, optional
+        The parameter rho for the regularization of the kernel.
+        If :const:`auto`, set to :math:`\\frac{\\|G\\|_F}{C \\times \\sqrt{n}}` during :func:`fit`, by default :const:`auto`.
+    sigma : Literal["auto"] | Number, optional
+        The parameter sigma for the rbf kernel. If :const:`auto`, set to :math:`\\sqrt{d} / 2` during :func:`fit`tion_, by default :const:`auto`.
+    C : Number, optional
+        A constant parameter used in the computation of :attr:`rho`, by default 1.
+
+    Raises
+    ------
+    ValueError
+        If :const:`kernel` is not :const:`linear`.
 
     See Also
     --------
@@ -319,13 +383,12 @@ class KernelCG(BaseCGDetector):
         self,
         n_list: list[int],
         config: DynamicDetectorConfig[ArrayLike, DTypeLike] = DynamicDetectorConfig(),
-        kernel: Literal["linear", "rbf"] = "rbf",
+        kernel: Literal["linear"] = "linear",
         rho: Literal["auto"] | Number = "auto",
         sigma: Literal["auto"] | Number = "auto",
         C: Number = 1,
-        *args,
         **kwargs,
     ):
         if kernel == "rbf":
             raise ValueError("Growth accoding to n impossible with RBF kernel since it does not depend on n.")
-        super().__init__(KernelCF, n=n_list, config=config, kernel=kernel, rho=rho, sigma=sigma, C=C, *args, **kwargs)
+        super().__init__(KernelCF, n=n_list, config=config, kernel=kernel, rho=rho, sigma=sigma, C=C, **kwargs)

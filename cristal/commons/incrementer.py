@@ -9,8 +9,14 @@ from .inverter import Inverter
 from .polynomial_basis import PolynomialBasis
 
 
+# pylint: disable=unused-variable
 class Incrementer(BaseCommons, Generic[ArrayLike, DTypeLike]):
     """Class to increment the moment matrix :attr:`M` constructed from :attr:`N` points with new data points :attr:`X`.
+
+    Parameters
+    ----------
+    method : :class:`IMPLEMENTED_INCREMENTERS <cristal.types.IMPLEMENTED_INCREMENTERS>`, optional
+        The incrementing method to use, by default :const:`woodbury`.
 
     Attributes
     ----------
@@ -18,10 +24,19 @@ class Incrementer(BaseCommons, Generic[ArrayLike, DTypeLike]):
         The incrementing method to use.
     backend : :class:`Backend <cristal.backend.base_backend.Backend>`
         The backend to use for the computation.
-    inverter: :class:`Inverter <cristal.commons.inverter.Inverter>`
+    inverter : :class:`Inverter <cristal.commons.inverter.Inverter>`
         The inversion class to use.
-    polynomial_basis: :class:`PolynomialBasis <cristal.commons.polynomial_basis.PolynomialBasis>`:
+    polynomial_basis : :class:`PolynomialBasis <cristal.commons.polynomial_basis.PolynomialBasis>`
         The polynomial basis used to generate the moment matrix.
+
+    Raises
+    ------
+    ValueError
+        If the incrementing :const:`method` is not valid.
+
+    See Also
+    --------
+    cristal.types.IMPLEMENTED_INCREMENTERS : For more details on how the methods work.
 
     Examples
     --------
@@ -29,7 +44,8 @@ class Incrementer(BaseCommons, Generic[ArrayLike, DTypeLike]):
     >>> incrementer.backend = NumpyBackend()
     >>> incrementer.inverter = Inverter()
     >>> incrementer.polynomial_basis = PolynomialBasis()
-    >>> incrementer(M, N, X, n) # Increment by the points X the inverse of the moment matrix M computed with N points and a polynomial basis of degree n
+    # Increment by the points X, the inverse of the moment matrix M which is computed with N points and a polynomial basis of degree n
+    >>> incrementer(M, N, X, n)
     """
 
     requires = ["backend", "inverter", "polynomial_basis"]
@@ -63,9 +79,12 @@ class Incrementer(BaseCommons, Generic[ArrayLike, DTypeLike]):
         """
 
         # Attributes bound in the configuration __init__
-        self.backend: Backend[ArrayLike, DTypeLike]  #: The backend to use for the computation.
-        self.inverter: Inverter[ArrayLike, DTypeLike]  #: The inversion class to use.
-        self.polynomial_basis: PolynomialBasis[ArrayLike, DTypeLike]  #: The polynomial basis used to generate the moment matrix.
+        self.backend: Backend[ArrayLike, DTypeLike]
+        """The backend to use for the computation."""
+        self.inverter: Inverter[ArrayLike, DTypeLike]
+        """The inversion class to use."""
+        self.polynomial_basis: PolynomialBasis[ArrayLike, DTypeLike]
+        """The polynomial basis used to generate the moment matrix."""
 
     def increment(self, M: ArrayLike, N: int, X: ArrayLike, n: int) -> tuple[ArrayLike, int, ArrayLike] | tuple[int, ArrayLike]:
         """Increment the moment matrix :attr:`M` constructed from :attr:`N` points with new data points :attr:`X`.
@@ -96,7 +115,8 @@ class Incrementer(BaseCommons, Generic[ArrayLike, DTypeLike]):
         >>> incrementer.backend = NumpyBackend()
         >>> incrementer.inverter = Inverter()
         >>> incrementer.polynomial_basis = PolynomialBasis()
-        >>> incrementer(M, N, X, n) # Increment by the points X the inverse of the moment matrix M computed with N points and a polynomial basis of degree n
+        # Increment by the points X, the inverse of the moment matrix M which is computed with N points and a polynomial basis of degree n
+        >>> incrementer(M, N, X, n)
         """
 
         if self.backend is None:
@@ -144,6 +164,7 @@ class Incrementer(BaseCommons, Generic[ArrayLike, DTypeLike]):
                 # Reduce the division cost from O(N^2) to O(N) by using the fact that left is a vector and numerator is a matrix
                 left_div = left / (1 + denom)
                 M -= left_div @ left.T
+            M = cast(ArrayLike, M)
             # Compute the mean of the updated inverse moment matrix
             return new_N, M * new_N
 

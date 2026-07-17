@@ -4,26 +4,15 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "CRISTAL"
-authors = [
-    {name = "Florian Grivet", email = "floriangrivet.pro@gmail.com"},
-]
-description = "Anomaly detection framework based on the Christoffel Function. This package contains DyCF, KernelCF, NeedleCF and UCF methods."
+authors = [{ name = "Florian Grivet", email = "floriangrivet.pro@gmail.com" }]
+description = "A Python anomaly detection framework based on the Christoffel Function."
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = [
-    "numpy",
-    "torch",
-    "matplotlib",
-    "scipy",
-    "scikit-learn",
-    "pandas",
-    # "tqdm",
-    # "PyWavelets",
-]
+dependencies = ["numpy", "matplotlib", "scipy", "scikit-learn"]
 dynamic = ["version"]
 
 [tool.setuptools.dynamic]
-version = {attr = "cristal.__version__.__version__"}
+version = { attr = "cristal.__version__.__version__" }
 
 [project.urls]
 homepage = "https://github.com/fgrivet/cristal"
@@ -31,11 +20,9 @@ repository = "https://github.com/fgrivet/cristal"
 documentation = "https://fgrivet.github.io/CRISTAL/"
 
 [project.optional-dependencies]
-testing = [
-    "pylint",
-    "pytest",
-    "pytest-cov",
-]
+torch = ["torch"]
+pylint = ["pylint"]
+testing = ["cristal[torch, pylint]", "pytest", "pytest-cov"]
 docs = [
     "sphinx",
     "pydata-sphinx-theme",
@@ -48,7 +35,4 @@ docs = [
     "sphinxcontrib-bibtex",
     "setuptools >= 77.0.3",
 ]
-dev = [
-    "cristal[testing]",
-    "cristal[docs]",
-]
+dev = ["cristal[testing,docs]", "build"]

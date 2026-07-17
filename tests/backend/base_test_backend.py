@@ -8,6 +8,7 @@ import unittest
 from abc import ABCMeta, abstractmethod
 
 import numpy as np
+import pytest
 import scipy
 
 from cristal.backend.base_backend import Backend
@@ -1108,3 +1109,140 @@ class BaseTestBackend(unittest.TestCase, metaclass=BaseTestBackendMeta):
         result = self.backend.lstsq(A, b)
         expected = np.linalg.lstsq(A, b, rcond=None)[0]
         self.assert_almost_equal(result, expected)
+
+    # ===== Quantile =====
+    def test_quantile_1d(self):
+        """Test quantile on 1D array."""
+        arr = self.backend.to_array_like(np.arange(10), float)
+        result = self.backend.quantile(arr, 0.5)
+        self.assert_almost_equal(result, np.quantile(np.arange(10), 0.5))
+
+    def test_quantile_2d_axis(self):
+        """Test quantile on 2D array along axis."""
+        arr = self.backend.to_array_like(np.arange(1, 10).reshape(3, 3), float)
+        result = self.backend.quantile(arr, 0.5, axis=0)
+        expected = np.quantile(arr, 0.5, axis=0)
+        self.assert_almost_equal(result, expected)
+
+    def test_quantile_2d_keepdims(self):
+        """Test quantile with keepdims."""
+        arr = self.backend.to_array_like(np.arange(1, 10).reshape(3, 3), float)
+        result = self.backend.quantile(arr, 0.5, axis=0, keepdims=True)
+        expected = np.quantile(arr, 0.5, axis=0, keepdims=True)
+        self.assert_almost_equal(result, expected)
+
+    def test_quantile_invalid(self):
+        """Test quantile with invalid q values."""
+        arr = self.backend.to_array_like(np.arange(10), float)
+        with self.assertRaises((ValueError, RuntimeError)):
+            self.backend.quantile(arr, -0.1)
+        with self.assertRaises((ValueError, RuntimeError)):
+            self.backend.quantile(arr, 1.5)
+
+    def test_quantile_multiple(self):
+        """Test multiple quantiles individually."""
+        arr = self.backend.to_array_like(np.arange(10), float)
+        for q in [0.25, 0.5, 0.75]:
+            result = self.backend.quantile(arr, q)
+            expected = np.quantile(np.arange(10), q)
+            self.assert_almost_equal(result, expected)
+
+    # ===== Make Windows =====
+    def test_make_windows_1d(self):
+        """Test make_windows on 1D array."""
+        arr = self.backend.to_array_like(np.arange(11), float)
+        result = self.backend.make_windows(arr, window_size=5, shift=2)
+        expected = np.array([[0, 1, 2, 3, 4], [2, 3, 4, 5, 6], [4, 5, 6, 7, 8], [6, 7, 8, 9, 10]])
+        self.assert_array_equal(result, expected)
+
+    def test_make_windows_1d_non_overlapping(self):
+        """Test make_windows on 1D array with non-overlapping windows."""
+        arr = self.backend.to_array_like(np.arange(10), float)
+        result = self.backend.make_windows(arr, window_size=3, shift=3)
+        expected = np.array([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+        self.assert_array_equal(result, expected)
+
+    def test_make_windows_2d(self):
+        """Test make_windows on 2D array."""
+        arr = self.backend.to_array_like(np.arange(12).reshape(3, 4), float)
+        result = self.backend.make_windows(arr, window_size=2, shift=1)
+        # Result shape: (n_windows, n_channels, window_size)
+        # n_windows = floor((3-2)/1) + 1 = 2, n_channels = 4
+        self.assertEqual(result.shape, (2, 4, 2))
+
+    def test_make_windows_3d(self):
+        """Test make_windows on 3D array."""
+        arr = self.backend.to_array_like(np.arange(24).reshape(2, 3, 4), float)
+        result = self.backend.make_windows(arr, window_size=2, shift=1)
+        # Result shape: (n_windows, n_channels, extra_dims, window_size)
+        # n_windows = floor((2-2)/1) + 1 = 1, n_channels = 3, extra_dims = 4
+        self.assertEqual(result.shape, (1, 3, 4, 2))
+
+    # ===== Add At =====
+    def test_add_at_1d(self):
+        """Test add_at on 1D array with 1D indices and values."""
+        arr = self.backend.zeros(5)
+        # indices is 1D, arr and values have the same shape
+        indices = self.backend.to_array_like([0, 1, 2, 1], dtype=self.int64())
+        values = self.backend.to_array_like([1, 2, 3, 4])  # Same shape as arr
+        self.backend.add_at(arr, indices, values)
+        # arr[0] += values[0]=1, arr[1] += values[1]=2, arr[2] += values[2]=3, arr[1] += values[3]=4
+        expected = np.array([1.0, 6.0, 3.0, 0.0, 0.0])
+        self.assert_array_equal(arr, expected)
+
+    def test_add_at_2d(self):
+        """Test add_at on 2D array with 1D indices.
+
+        A and values have the same shape. For each i, A[indices[i]] += values[i].
+        """
+        arr = self.backend.zeros((3, 3))
+        # Same shape as arr
+        values = self.backend.to_array_like([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
+        indices = self.backend.to_array_like([0, 1, 2], dtype=self.int64())
+        self.backend.add_at(arr, indices, values)
+        # A[0] += values[0] = [1,2,3]
+        # A[1] += values[1] = [1,2,3]
+        # A[1] += values[2] = [1,2,3]
+        # Result: [[1,2,3], [1,2,3], [1,2,3]]
+        expected = np.array([[1.0, 2.0, 3.0], [1.0, 2.0, 3.0], [1.0, 2.0, 3.0]])
+        self.assert_array_equal(arr, expected)
+
+    def test_add_at_2d_different_values(self):
+        """Test add_at on 2D array with different values for each index."""
+        arr = self.backend.zeros((3, 2))
+        values = self.backend.to_array_like([[10, 20], [30, 40], [50, 60]])  # Same shape as arr
+        indices = self.backend.to_array_like([0, 1, 1], dtype=self.int64())
+        self.backend.add_at(arr, indices, values)
+        # A[0] += values[0] = [10,20]
+        # A[1] += values[1] = [30,40]
+        # A[1] += values[2] = [80,100]
+        expected = np.array([[10.0, 20.0], [80.0, 100.0], [0.0, 0.0]])
+        self.assert_array_equal(arr, expected)
+
+    # ===== Divide =====
+    def test_divide_simple(self):
+        """Test simple division."""
+        A = self.backend.to_array_like([1.0, 2.0, 3.0, 4.0])
+        B = self.backend.to_array_like([2.0, 2.0, 2.0, 2.0])
+        result = self.backend.divide(A, B)
+        expected = np.array([0.5, 1.0, 1.5, 2.0])
+        self.assert_array_equal(result, expected)
+
+    @pytest.mark.filterwarnings("ignore:divide by zero encountered in divide:RuntimeWarning")
+    def test_divide_with_out(self):
+        """Test divide with out parameter."""
+        A = self.backend.to_array_like([1.0, 2.0, 3.0, 4.0])
+        B = self.backend.to_array_like([2.0, 2.0, 0.0, 2.0])
+        out = self.backend.full(4, 99.0)  # Use a non-zero out value for clarity
+        result = self.backend.divide(A, B, out=out)
+        expected = self.backend.to_array_like([0.5, 1.0, float("inf"), 2.0])
+        self.assert_array_equal(result, expected)
+
+    def test_divide_with_where(self):
+        """Test divide with where condition."""
+        A = self.backend.to_array_like([1.0, 2.0, 3.0, 4.0])
+        B = self.backend.to_array_like([2.0, 0.0, 2.0, 0.0])
+        condition = B != 0
+        result = self.backend.divide(A, B, out=self.backend.zeros(4), where=condition)
+        expected = np.array([0.5, 0.0, 1.5, 0.0])
+        self.assert_array_equal(result, expected)

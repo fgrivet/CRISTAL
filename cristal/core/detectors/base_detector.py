@@ -1,4 +1,7 @@
-"""Contains the class :class:`BaseDetector <cristal.core.detectors.base_detector.BaseDetector>` which defines all the functions available in detectors and its extension :class:`BaseCGDetector <cristal.core.detectors.base_detector.BaseCGDetector>` which detects anomalies based on the growth of scores as the degree :attr:`n` increases."""
+"""Contains the class :class:`BaseDetector <cristal.core.detectors.base_detector.BaseDetector>`
+which defines all the functions available in detectors
+and its extension :class:`BaseCGDetector <cristal.core.detectors.base_detector.BaseCGDetector>`
+which detects anomalies based on the growth of scores as the degree :attr:`n` increases."""
 
 import logging
 import textwrap
@@ -23,6 +26,13 @@ class BaseDetector(ABC, Generic[ArrayLike, DTypeLike, ConfigType]):
     """Base class for the detectors.
     Define all the functions and attributes available in the detectors.
 
+    Parameters
+    ----------
+    n : int | Literal["auto"]
+        The degree of the CF. If :const:`auto`, set to :math:`N^{1 / (2+intrinsic\\_dim)}` during :func:`fit`.
+    config : DynamicDetectorConfig[ArrayLike, DTypeLike]
+        The configuration of the model.
+
     Attributes
     ----------
     n : int | :const:`auto`
@@ -34,7 +44,9 @@ class BaseDetector(ABC, Generic[ArrayLike, DTypeLike, ConfigType]):
     d : int | None
         The dimension of training data, set during :func:`fit`.
     intrinsic_dim : int | None
-        The intrinsic dimension of the data (the one in the CF), :const:`1` for :class:`UCF <cristal.core.detectors.univariate.UCF>` and :class:`NeedleCF <cristal.core.detectors.needle.NeedleCF>`, and :const:`d` for :class:`DyCF <cristal.core.detectors.dynamic.DyCF>` and :class:`KernelCF <cristal.core.detectors.kernel.KernelCF>`.
+        The intrinsic dimension of the data (the one in the CF),
+        :const:`1` for :class:`UCF <cristal.core.detectors.univariate.UCF>` and :class:`NeedleCF <cristal.core.detectors.needle.NeedleCF>`,
+        and :const:`d` for :class:`DyCF <cristal.core.detectors.dynamic.DyCF>` and :class:`KernelCF <cristal.core.detectors.kernel.KernelCF>`.
     threshold : int | None
         The threshold for a score to be considered as an anomaly, set during :func:`fit`.
 
@@ -55,15 +67,22 @@ class BaseDetector(ABC, Generic[ArrayLike, DTypeLike, ConfigType]):
             The configuration of the model.
         """
 
-        self.n: int | Literal["auto"] = n  #: The degree of the CF. If :const:`auto`, set to :math:`N^{1 / (2+intrinsic\\_dim)}` during :func:`fit`.
-        self.config: ConfigType = config  #: The configuration of the model.
+        self.n: int | Literal["auto"] = n
+        """The degree of the CF. If :const:`auto`, set to :math:`N^{1 / (2+intrinsic\\_dim)}` during :func:`fit`."""
+        self.config: ConfigType = config
+        """The configuration of the model."""
 
         # Variables defined during fitting
-        self.N: int | None = None  #: The number of training data in the moment matrix, set during :func:`fit`.
-        self.d: int | None = None  #: The dimension of training data, set during :func:`fit`.
+        self.N: int | None = None
+        """The number of training data in the moment matrix, set during :func:`fit`."""
+        self.d: int | None = None
+        """The dimension of training data, set during :func:`fit`."""
         self.intrinsic_dim: int | None = None
-        """The intrinsic dimension of the data (the one in the CF), :const:`1` for :class:`UCF <cristal.core.detectors.univariate.UCF>` and :class:`NeedleCF <cristal.core.detectors.needle.NeedleCF>`, and :attr:`d` for :class:`DyCF <cristal.core.detectors.dynamic.DyCF>` and :class:`KernelCF <cristal.core.detectors.kernel.KernelCF>`."""
-        self.threshold: float | None = None  #: The threshold for a score to be considered as an anomaly, set during :func:`fit`.
+        """The intrinsic dimension of the data (the one in the CF),
+        :const:`1` for :class:`UCF <cristal.core.detectors.univariate.UCF>` and :class:`NeedleCF <cristal.core.detectors.needle.NeedleCF>`,
+        and :attr:`d` for :class:`DyCF <cristal.core.detectors.dynamic.DyCF>` and :class:`KernelCF <cristal.core.detectors.kernel.KernelCF>`."""
+        self.threshold: float | None = None
+        """The threshold for a score to be considered as an anomaly, set during :func:`fit`."""
 
     # =====================================
     #          private methods
@@ -95,7 +114,7 @@ class BaseDetector(ABC, Generic[ArrayLike, DTypeLike, ConfigType]):
 
         if n == "auto":
             n = int(N ** (1 / (2 + self.intrinsic_dim)))
-            logger.info("auto n =", n)
+            logger.info("auto n =%s", n)
         if not isinstance(n, int):
             raise ValueError("Error during the computation of n.")
         return n
@@ -239,6 +258,9 @@ class BaseDetector(ABC, Generic[ArrayLike, DTypeLike, ConfigType]):
         First transform the data to the ArrayLike type, then preprocess it, and finally compute the scores with a CF of degree :attr:`n`.
         If :attr:`online` is enabled, update the support after each batch using the points with the :attr:`quantile` lowest scores.
 
+        .. version-changed::0.0.2
+            Added :attr:`online` and :attr:`quantile` to do online learning
+
         Parameters
         ----------
         X : ArrayLike
@@ -271,19 +293,21 @@ class BaseDetector(ABC, Generic[ArrayLike, DTypeLike, ConfigType]):
             If the dimension of the testing data `d` is not the same as the dimension of the training data :attr:`d`.
         """
         scores = self.config.backend.empty(len(X))
-        for n_batch, X_batch in enumerate(self.config.storage(X)):
-            X_batch = self._preprocess_test_data(X_batch)
+        start_idx = 0
+        for X_batch in self.config.storage(X):
+            preprocessed_X_batch = self._preprocess_test_data(X_batch)
 
-            component_support, component_X = self._compute_components(X_batch)
+            component_support, component_X = self._compute_components(preprocessed_X_batch)
             component_support, component_X = self._crop_components(component_support, component_X, self.n)  # pyright: ignore[reportArgumentType]
 
-            bs = self.config.storage.batch_size
             current_scores = self._compute_scores(component_support, component_X)
-            scores[n_batch * bs : (n_batch + 1) * bs] = current_scores
+            end_idx = start_idx + len(current_scores)
+            scores[start_idx:end_idx] = current_scores
+            start_idx = end_idx
 
             if online != "none":
                 idx_to_include = self.config.backend.where(current_scores < self.config.backend.quantile(current_scores, quantile))[0]
-                self.update(X_batch[idx_to_include], online)
+                self.update(preprocessed_X_batch[idx_to_include], online)
 
         return scores
 
@@ -312,8 +336,38 @@ class BaseDetector(ABC, Generic[ArrayLike, DTypeLike, ConfigType]):
             The detector with its support updated.
         """
 
-    def decision_function(self, X: ArrayLike) -> ArrayLike:
-        return self.score_samples(X)
+    def decision_function(self, X: ArrayLike, online: Literal["none", "constant", "increment"] = "none", quantile=0.95) -> ArrayLike:
+        """Compute the anomaly scores for each sample in :attr:`X`.
+        First transform the data to the ArrayLike type, then preprocess it, and finally compute the scores with a CF of degree :attr:`n`.
+        If :attr:`online` is enabled, update the support after each batch using the points with the :attr:`quantile` lowest scores.
+
+        .. hint::
+
+            This function is a wrapper for :func:`score_samples` for compatibility with PyOD and sklearn.
+
+        .. version-added::0.0.3
+
+        Parameters
+        ----------
+        X : ArrayLike
+            The points on which to calculate the scores of shape (N_samples_test, d)
+        online : :const:`none` | :const:`constant` | :const:`increment`, optional
+            The online method to use, by default :const:`none`.
+
+            `none` : No update.
+
+            `constant` : Replace the oldest support points by the new ones based on the chosen `quantile`.
+
+            `increment` : Add the new support points to the existing set.
+        quantile : float, optional
+            The quantile to use to determine if a point is added to the support, by default 0.95.
+
+        Returns
+        -------
+        ArrayLike
+            The scores of each sample of shape (N_samples_test,).
+        """
+        return self.score_samples(X, online=online, quantile=quantile)
 
     def predict_from_scores(self, scores: ArrayLike) -> ArrayLike:
         """Compute the prediction from the scores for each sample.
@@ -461,7 +515,10 @@ class BaseDetector(ABC, Generic[ArrayLike, DTypeLike, ConfigType]):
             cs_ref = ax.contour(x1_grid, x2_grid, scores, levels=[1], colors=["r"])
             ax.clabel(cs_ref, inline=1)
 
-        title = f"Level sets of {self.__class__.__name__} with degree={self.n} and threshold scheme={self.config.threshold_scheme.scheme}={self.threshold}"
+        title = (
+            f"Level sets of {self.__class__.__name__} with degree={self.n} and "
+            f"threshold scheme={self.config.threshold_scheme.scheme}={self.threshold}"
+        )
         ax.set_title("\n".join(textwrap.wrap(title, width=40)))
 
         if save:
@@ -563,8 +620,19 @@ class BaseDetector(ABC, Generic[ArrayLike, DTypeLike, ConfigType]):
         return to_return
 
 
+# pylint: disable=unused-variable
 class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
-    """An extension of the :class:`BaseDetector <cristal.core.detectors.base_detector.BaseDetector>` class to detect anomalies based on the growth of the socres as the degree :attr:`n` increases.
+    """An extension of the :class:`BaseDetector <cristal.core.detectors.base_detector.BaseDetector>` class
+    to detect anomalies based on the growth of the socres as the degree :attr:`n` increases.
+
+    Parameters
+    ----------
+    detector_class: type[BaseDetector[ArrayLike, DTypeLike, ConfigType]]
+        The detector to use.
+    n: list[int]
+        The list of degrees on which to evaluate the model.
+    config: ConfigType
+        The configuration of the model.
 
     Attributes
     ----------
@@ -585,7 +653,9 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
     d : int | None
         The dimension of training data, set during :func:`fit`.
     intrinsic_dim : int | None
-        The intrinsic dimension of the data (the one in the CF), :const:`1` for :class:`UCF <cristal.core.detectors.univariate.UCF>` and :class:`NeedleCF <cristal.core.detectors.needle.NeedleCF>`, and :const:`d` for :class:`DyCF <cristal.core.detectors.dynamic.DyCF>` and :class:`KernelCF <cristal.core.detectors.kernel.KernelCF>`.
+        The intrinsic dimension of the data (the one in the CF),
+        :const:`1` for :class:`UCF <cristal.core.detectors.univariate.UCF>` and :class:`NeedleCF <cristal.core.detectors.needle.NeedleCF>`,
+        and :const:`d` for :class:`DyCF <cristal.core.detectors.dynamic.DyCF>` and :class:`KernelCF <cristal.core.detectors.kernel.KernelCF>`.
     threshold : int | None
         The threshold for a score to be considered as an anomaly, set during :func:`fit`.
     detector: BaseDetector[ArrayLike, DTypeLike, ConfigType]
@@ -607,13 +677,18 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
         # Sort unique values of n
         n = sorted(set(n))
         # Store n_list, n_min, n_max, n_val to avoid recomputing it over and over again
-        self.n_list: list[int] = n  #: The list of degrees on which to evaluate the model
-        self.n_min: int = n[0]  #: The minimum degree on which to evaluate the model
-        self.n_max: int = n[-1]  #: The maximum degree on which to evaluate the model
-        self.n_val: int = len(n)  #: The number of degrees on which to evaluate the model
+        self.n_list: list[int] = n
+        """The list of degrees on which to evaluate the model"""
+        self.n_min: int = n[0]
+        """The minimum degree on which to evaluate the model"""
+        self.n_max: int = n[-1]
+        """The maximum degree on which to evaluate the model"""
+        self.n_val: int = len(n)
+        """The number of degrees on which to evaluate the model"""
 
         super().__init__(self.n_min, config)
-        self.detector: BaseDetector = detector_class(self.n_max, config, *args, **kwargs)  #: The detector to use
+        self.detector: BaseDetector = detector_class(self.n_max, config, *args, **kwargs)
+        """The detector to use."""
 
     # =====================================
     #              CG methods
@@ -710,7 +785,8 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
         Returns
         -------
         tuple[ArrayLike, ArrayLike]
-            The R2 scores for the polynomial regression on the scores of shape (N_samples_test,), The R2 scores for the linear regression on the log of the scores of shape (N_samples_test,).
+            The R2 scores for the polynomial regression on the scores of shape (N_samples_test,),
+            The R2 scores for the linear regression on the log of the scores of shape (N_samples_test,).
 
         Raises
         ------
@@ -755,6 +831,7 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
     #          private methods
     # =====================================
 
+    # pylint: disable=protected-access
     def _compute_scores(self, component_support: ArrayLike, component_X: ArrayLike) -> ArrayLike:
         return self.detector._compute_scores(component_support, component_X)
 
@@ -789,6 +866,16 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
         ----------
         X : ArrayLike
             The points on which to calculate the scores of shape (N_samples_test, d).
+        online : :const:`none` | :const:`constant` | :const:`increment`, optional
+            The online method to use, by default :const:`none`.
+
+            `none` : No update.
+
+            `constant` : Replace the oldest support points by the new ones based on the chosen `quantile`.
+
+            `increment` : Add the new support points to the existing set.
+        quantile : float, optional
+            The quantile to use to determine if a point is added to the support, by default 0.95.
 
         Returns
         -------
@@ -810,23 +897,28 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
         all_scores = self.detector.config.backend.empty((len(X), self.n_val))
 
         # Compute the scores by batch
-        for n_batch, X_batch in enumerate(self.config.storage(X)):
-            X_batch = self._preprocess_test_data(X_batch)
+        start_idx = 0
+        for X_batch in self.config.storage(X):
+            preprocessed_X_batch = self._preprocess_test_data(X_batch)
 
             # Compute the full components
-            component_support, component_X = self._compute_components(X_batch)
-            bs = self.config.storage.batch_size
+            component_support, component_X = self._compute_components(preprocessed_X_batch)
+            end_idx = start_idx + len(component_X)
 
             # For each degree to compute, crop component_support and component_X and compute the corresponding scores
             for i, n in enumerate(self.n_list):
                 component_support_crop, component_X_crop = self._crop_components(component_support, component_X, n)
-                all_scores[n_batch * bs : (n_batch + 1) * bs, i] = self._compute_scores(component_support_crop, component_X_crop)
+                current_scores = self._compute_scores(component_support_crop, component_X_crop)
+                all_scores[start_idx:end_idx, i] = current_scores
 
             # Update the support based on the mean scores on all degrees
             if online != "none":
-                mean_batch_scores = self.config.backend.mean(all_scores[n_batch * bs : (n_batch + 1) * bs])
+                batch_scores = all_scores[start_idx:end_idx]
+                mean_batch_scores = self.config.backend.mean(batch_scores, axis=1)
                 idx_to_include = self.config.backend.where(mean_batch_scores < self.config.backend.quantile(mean_batch_scores, quantile))[0]
-                self.update(X_batch[idx_to_include], online)
+                self.update(preprocessed_X_batch[idx_to_include], online)
+
+            start_idx = end_idx
 
         return all_scores
 
@@ -839,7 +931,8 @@ class BaseCGDetector(BaseDetector[ArrayLike, DTypeLike, ConfigType]):
     ) -> ArrayLike:
         """Compute the anomaly scores for each sample in :attr:`X`.
         First transform the data to the ArrayLike type, then preprocess it, compute the scores with a CF of each degree in :attr:`n_list`,
-        compute both polynomial regression on the scores and linear regression on their log, and finally compute one score per sample based on the given :attr:`method`.
+        compute both polynomial regression on the scores and linear regression on their log,
+        and finally compute one score per sample based on the given :attr:`method`.
 
         Parameters
         ----------

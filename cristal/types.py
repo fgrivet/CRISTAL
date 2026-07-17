@@ -1,29 +1,46 @@
 """Contains custom types and implemented options for the detectors."""
 
+import logging
 from typing import Literal, TypeAlias, TypeVar
 
 import numpy as np
-import torch
 from numpy.typing import DTypeLike as NumpyDTypeLike
 
-# The type of the main manipulated object.
-ArrayLike = TypeVar("ArrayLike", np.ndarray, torch.Tensor)  #: The type of the main manipulated object.
-DTypeLike = TypeVar("DTypeLike", NumpyDTypeLike, torch.dtype)  #: The data type of the main manipulated object.
+logger = logging.getLogger(__name__)
+
+# pylint: disable=unused-variable
+try:
+    import torch
+
+    TORCH_AVAILABLE: bool = True
+    """Define is PyTorch is installed."""
+    ArrayLike = TypeVar("ArrayLike", np.ndarray, torch.Tensor)
+    """The type of the main manipulated object."""
+    DTypeLike = TypeVar("DTypeLike", NumpyDTypeLike, torch.dtype)
+    """The data type of the main manipulated object."""
+except ImportError:  # pragma: no cover
+    TORCH_AVAILABLE = False
+    ArrayLike = TypeVar("ArrayLike", bound=np.ndarray)
+    DTypeLike = TypeVar("DTypeLike", bound=NumpyDTypeLike)
+    logger.warning("PyTorch is not installed. Features requiring tensor operations or GPU acceleration will be disabled.")
+
 
 # Types aliases
-ShapeType: TypeAlias = int | tuple[int, ...]  #: Alias for the type of the shape of an array.
-Number: TypeAlias = float | int  #: Alias for the type of a number.
+ShapeType: TypeAlias = int | tuple[int, ...]
+"""Alias for the type of the shape of an array."""
+Number: TypeAlias = float | int
+"""Alias for the type of a number."""
 
 IMPLEMENTED_BACKEND = Literal["numpy", "torch"]
 """The implemented backends.
 
 :const:`numpy`
 
-A backend using Numpy and Scipy.
+    A backend using Numpy and Scipy.
 
 :const:`torch`
 
-A backend using torch with `cpu` and `GPU` implementations.
+    A backend using torch with `cpu` and `GPU` implementations.
 """
 
 # Implemented options for commons classes
@@ -32,15 +49,15 @@ IMPLEMENTED_DISTANCES = Literal["euclidean", "mahalanobis"]
 
 :const:`euclidean`
 
-.. math::
+    .. math::
 
-    D_{i,j} = d_E(X_i, Y_j) = \\sqrt{(X_i - Y_j)^T (X_i - Y_j)}^p.
+        D_{i,j} = d_E(X_i, Y_j) = \\sqrt{(X_i - Y_j)^T (X_i - Y_j)}^p.
 
 :const:`mahalanobis`
 
-.. math::
+    .. math::
 
-    D_{i,j} = d_M(X_i, Y_j) = \\sqrt{(X_i - Y_j)^T \\Sigma^{-1} (X_i - Y_j)}^p.
+        D_{i,j} = d_M(X_i, Y_j) = \\sqrt{(X_i - Y_j)^T \\Sigma^{-1} (X_i - Y_j)}^p.
 """
 IMPLEMENTED_INCREMENTERS = Literal["inverse", "sherman", "woodbury"]
 """The implemented incrementer methods.
@@ -92,34 +109,35 @@ IMPLEMENTED_INVERTERS = Literal["inv", "pseudo", "solve", "fpd"]
 
 :const:`inv`
 
-Compute the classical inversion implemented in :attr:`backend`.
+    Compute the classical inversion implemented in :attr:`backend`.
 
 :const:`pseudo`
 
-Compute the (Moore-Penrose) pseudo-inverse.
+    Compute the (Moore-Penrose) pseudo-inverse.
 
 :const:`solve`
 
-Compute the inverse by solving the system :math:`X X^{-1} = I` to obtain :math:`X^{-1}`.
+    Compute the inverse by solving the system :math:`X X^{-1} = I` to obtain :math:`X^{-1}`.
 
 :const:`fpd`
 
-Compute the fast positive definite inverse of matrix using Cholesky decomposition: :math:`X^{-1} = L^{-T} L^{-1}` where :math:`X = L L^T`.
+    Compute the fast positive definite inverse of matrix using Cholesky decomposition: :math:`X^{-1} = L^{-T} L^{-1}` where :math:`X = L L^T`.
 """
 IMPLEMENTED_POLYNOMIAL_BASIS = Literal["monomials", "chebyshev"]
 """The implemented polynomial basis.
 
 :const:`monomials`
 
-.. math::
+    .. math::
 
-    P_k(x) = x^k.
+        P_k(x) = x^k.
 
 :const:`chebyshev`
 
-.. math::
+    .. math::
 
-    P_k(x) = T_k(x) = \\begin{cases} & cos(n ~ arccos(x)) & \\text{if } |x| < 1 \\\\ & cosh(n ~ arccosh(x)) & \\text{if } x \\geq 1 \\\\ & (-1)^n cosh(n ~ arccosh(-x)) & \\text{if } x \\leq -1 \\end{cases}.
+        P_k(x) = T_k(x) = \\begin{cases} & cos(n ~ arccos(x)) & \\text{if } |x| < 1 \\\\ &
+        cosh(n ~ arccosh(x)) & \\text{if } x \\geq 1 \\\\ & (-1)^n cosh(n ~ arccosh(-x)) & \\text{if } x \\leq -1 \\end{cases}.
 """
 IMPLEMENTED_SOLVERS = Literal["cholesky", "qr", "inverse", "solve"]
 """The implemented solvers.
@@ -130,36 +148,36 @@ For all methods, :math:`x = A^{-1} b` is computed by solving :math:`A x = b`.
 
 :const:`cholesky`
 
-.. math::
+    .. math::
 
-    & \\text{Find } L \\text{ such that } G = L L^T \\text{ with } L \\text{ a lower triangular matrix} \\\\
-    & y = L^{-1} v \\\\
-    & x = L^{-T} y \\\\
-    & z = v^T x \\\\
+        & \\text{Find } L \\text{ such that } G = L L^T \\text{ with } L \\text{ a lower triangular matrix} \\\\
+        & y = L^{-1} v \\\\
+        & x = L^{-T} y \\\\
+        & z = v^T x \\\\
 
 :const:`qr`
 
-.. math::
+    .. math::
 
-    & \\text{Find } R \\text{ such that } V = Q R \\text{ with } Q \\text{ an orthogonal matrix and } R \\text{ an upper triangular matrix} \\\\
-    & y = (R^{-T} v) / N \\\\
-    & x = R^{-1} y \\\\
-    & z = v^T x
+        & \\text{Find } R \\text{ such that } V = Q R \\text{ with } Q \\text{ an orthogonal matrix and } R \\text{ an upper triangular matrix} \\\\
+        & y = (R^{-T} v) / N \\\\
+        & x = R^{-1} y \\\\
+        & z = v^T x
 
 :const:`inverse`
 
-.. math::
+    .. math::
 
-    & G_{inv} = G^{-1} I \\\\
-    & x = G_{inv} v \\\\
-    & z = v^T x
+        & G_{inv} = G^{-1} I \\\\
+        & x = G_{inv} v \\\\
+        & z = v^T x
 
 :const:`solve`
 
-.. math::
+    .. math::
 
-    & x = G^{-1} v \\\\
-    & z = v^T x
+        & x = G^{-1} v \\\\
+        & z = v^T x
 
 """
 IMPLEMENTED_STORAGES = Literal["full", "batch"]
@@ -167,11 +185,11 @@ IMPLEMENTED_STORAGES = Literal["full", "batch"]
 
 :const:`full`
 
-:attr:`batch_size` is set to :math:`|X|`, thus returning the whole matrix in one iteration.
+    :attr:`batch_size` is set to :math:`|X|`, thus returning the whole matrix in one iteration.
 
 :const:`batch`
 
-Loop over the first dimension of :math:`X` returning matrices of shape (:attr:`batch_size`, ...).
+    Loop over the first dimension of :math:`X` returning matrices of shape (:attr:`batch_size`, ...).
 
 .. note ::
 
@@ -182,25 +200,29 @@ IMPLEMENTED_THRESHOLD_SCHEMES = Literal["constant", "comb", "vu", "vuC"]
 
 :const:`constant`
 
-.. math::
+    .. math::
 
-    C
+        C
 
 :const:`comb`
 
-.. math::
+    .. math::
 
-    \\begin{pmatrix} n+d \\\\ n \\end{pmatrix}
+        \\begin{pmatrix} n+d \\\\ n \\end{pmatrix}
 
 :const:`vu`
 
-.. math::
+    From :cite:t:`vu2022rate`
+    
+    .. math::
 
-    n^{3d / 2}
+        n^{3d / 2}
 
 :const:`vuC`
 
-.. math::
+    From :cite:t:`vu2022rate`
 
-    \\frac{1}{C} n^{3d / 2}
+    .. math::
+
+        \\frac{1}{C} n^{3d / 2}
 """

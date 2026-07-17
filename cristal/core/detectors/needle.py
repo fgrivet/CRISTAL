@@ -1,4 +1,5 @@
-"""Contains the Needle polynomial version of the Christoffel function based outlier detection algorithm, adapted from :cite:t:`kroo2013christoffel`."""
+"""Contains the Needle polynomial version of the Christoffel function based outlier detection algorithm,
+adapted from :cite:t:`kroo2013christoffel`."""
 
 # TODO : doc
 
@@ -107,6 +108,7 @@ class NeedleCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
         return self.N is not None and self.d is not None and self.X_train is not None and self.threshold is not None and isinstance(self.n, int)
 
 
+# pylint: disable=unused-variable
 class NeedleCG(BaseCGDetector):
-    def __init__(self, n_list: list[int], config: StaticDetectorConfig = StaticDetectorConfig(), *args, **kwargs):
-        super().__init__(NeedleCF, n=n_list, config=config, *args, **kwargs)
+    def __init__(self, n_list: list[int], config: StaticDetectorConfig = StaticDetectorConfig(), **kwargs):
+        super().__init__(NeedleCF, n=n_list, config=config, **kwargs)

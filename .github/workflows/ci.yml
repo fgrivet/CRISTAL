@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
     tags: ["v*"]
   workflow_dispatch: # Manual trigger from GitHub UI
 
@@ -12,8 +12,8 @@ permissions:
   id-token: write
 
 jobs:
-  # 1. TESTS + COVERAGE
-  test:
+  # 1. PYLINT + TESTS + COVERAGE
+  quality:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,25 +23,42 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
           pip install -e .[dev]
 
+      - name: Run Pylint
+        run: |
+          pylint cristal --rcfile=.pylintrc --output-format=json2:pylint_report.json || true
+
       - name: Run tests with coverage
         run: |
-          pytest --cov=cristal --cov-report=xml --cov-report=term
+          pytest --cov=cristal --cov-report=json:coverage.json --cov-report=term --cov-report=html
 
-      - name: Upload coverage
+      - name: Generate badges
+        run: |
+          python docs/scripts/generate_pylint_badge.py pylint_report.json docs/source/_static/pylint_badge.json pylint
+          python docs/scripts/generate_coverage_badge.py coverage.json docs/source/_static/coverage_badge.json coverage
+
+      - name: Upload coverage HTML
         uses: actions/upload-artifact@v4
         with:
-          name: coverage
-          path: coverage.xml
+          name: coverage-html
+          path: htmlcov/
 
-    # 2. BUILD DOCS + DEPLOY
+      - name: Upload badge JSON files
+        uses: actions/upload-artifact@v4
+        with:
+          name: badges
+          path: |
+            docs/source/_static/pylint_badge.json pylint
+            docs/source/_static/coverage_badge.json coverage
+
+  # 2. BUILD DOCS + DEPLOY
   docs:
-    needs: test
+    needs: quality
     runs-on: ubuntu-latest
 
     steps:
@@ -51,15 +68,36 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.11"
 
       - name: Install dependencies
         run: pip install -e .[dev]
+
+      - name: Download coverage HTML
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-html
+          path: htmlcov
+
+      - name: Download badge JSON files
+        uses: actions/download-artifact@v4
+        with:
+          name: badges
+          path: docs/source/_static/
 
       - name: Build Sphinx docs
         run: |
           cd docs
           sphinx-build -b html source build/html
+
+      - name: Copy coverage to docs
+        run: |
+          mkdir -p docs/build/html/coverage
+          cp -r htmlcov/* docs/build/html/coverage/
+
+      - name: Copy badges to docs
+        run: |
+          cp -r docs/source/_static/*.json docs/build/html/_static/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

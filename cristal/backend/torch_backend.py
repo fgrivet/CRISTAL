@@ -12,18 +12,38 @@ from .base_backend import Backend
 logger = logging.getLogger(__name__)
 
 
+# pylint: disable=unused-variable
 class TorchBackend(Backend[torch.Tensor, torch.dtype]):
-    """Backend using torch with `cpu` and `GPU` implementations."""
+    """Backend using torch with `cpu` and `GPU` implementations.
 
-    def __init__(self, dtype: torch.dtype = torch.float64, device: Optional[str | torch.device] = None):
-        super().__init__(dtype)
+    Parameters
+    ----------
+    default_dtype : NumpyDTypeLike, optional
+        The default dtype for all the created Tensor, by default torch.float64.
+    device : torch.device, optional
+        The default device on which create the Tensor. If None, :const:`cuda` if cuda is available, else `cpu`, by default None.
+
+    Attributes
+    ----------
+    default_dtype : torch.dtype
+        The default dtype for all the created Tensor.
+    device : torch.device
+        The default device on which create the Tensor. If None, :const:`cuda` if cuda is available, else `cpu`.
+    generator : torch.Generator
+        The random generator used.
+    """
+
+    def __init__(self, default_dtype: torch.dtype = torch.float64, device: Optional[str | torch.device] = None):
+        super().__init__(default_dtype)
         if device is None:
             device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-            logger.info(f"Using device={device}")
+            logger.info("Using device=%s", device)
         if isinstance(device, str):
             device = torch.device(device)
         self.device = device
+        """The default device on which create the Tensor. If None, :const:`cuda` if cuda is available, else `cpu`."""
         self.generator = torch.Generator(device=self.device)
+        """The random generator used."""
 
     # ===== Type =====
 
@@ -92,8 +112,8 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
         try:
             low_broadcast = low.expand(shape).to(dtype)
             high_broadcast = high.expand(shape).to(dtype)
-        except RuntimeError:
-            raise ValueError(f"Incompatible shapes between low / high and shape {shape}.")
+        except RuntimeError as exc:
+            raise ValueError(f"Incompatible shapes between low / high and shape {shape}.") from exc
 
         if torch.any(low_broadcast > high_broadcast):
             raise ValueError(f"Invalid range: low ({low}) > high ({high}).")
@@ -144,7 +164,7 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
     def sum(self, A: torch.Tensor, axis: None = None, keepdims: bool = False) -> float: ...
 
     @overload
-    def sum(self, A: torch.Tensor, axis: int, keepdims: bool = False) -> torch.Tensor: ...
+    def sum(self, A: torch.Tensor, axis: int, keepdims: bool = False) -> torch.Tensor: ...  # pylint: disable=signature-differs
 
     def sum(self, A: torch.Tensor, axis=None, keepdims: bool = False) -> torch.Tensor | float:
         return A.sum(dim=axis, keepdim=keepdims)
@@ -153,7 +173,7 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
     def prod(self, A: torch.Tensor, axis: None = None, keepdims: bool = False) -> float: ...
 
     @overload
-    def prod(self, A: torch.Tensor, axis: int, keepdims: bool = False) -> torch.Tensor: ...
+    def prod(self, A: torch.Tensor, axis: int, keepdims: bool = False) -> torch.Tensor: ...  # pylint: disable=signature-differs
 
     def prod(self, A: torch.Tensor, axis=None, keepdims: bool = False) -> torch.Tensor | float:
         if axis is None:
@@ -172,7 +192,7 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
     def min(self, A: torch.Tensor, axis: None = None, keepdims: bool = False) -> float: ...
 
     @overload
-    def min(self, A: torch.Tensor, axis: int, keepdims: bool = False) -> torch.Tensor: ...
+    def min(self, A: torch.Tensor, axis: int, keepdims: bool = False) -> torch.Tensor: ...  # pylint: disable=signature-differs
 
     def min(self, A: torch.Tensor, axis=None, keepdims: bool = False) -> torch.Tensor | float:
         return A.amin(dim=axis, keepdim=keepdims)  # type: ignore
@@ -181,7 +201,7 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
     def max(self, A: torch.Tensor, axis: None = None, keepdims: bool = False) -> float: ...
 
     @overload
-    def max(self, A: torch.Tensor, axis: int, keepdims: bool = False) -> torch.Tensor: ...
+    def max(self, A: torch.Tensor, axis: int, keepdims: bool = False) -> torch.Tensor: ...  # pylint: disable=signature-differs
 
     def max(self, A: torch.Tensor, axis=None, keepdims: bool = False) -> torch.Tensor | float:
         return A.amax(dim=axis, keepdim=keepdims)  # type: ignore
@@ -190,7 +210,7 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
     def argmin(self, A: torch.Tensor, axis: None = None, keepdims: bool = False) -> int: ...
 
     @overload
-    def argmin(self, A: torch.Tensor, axis: int, keepdims: bool = False) -> torch.Tensor: ...
+    def argmin(self, A: torch.Tensor, axis: int, keepdims: bool = False) -> torch.Tensor: ...  # pylint: disable=signature-differs
 
     def argmin(self, A: torch.Tensor, axis=None, keepdims: bool = False) -> torch.Tensor | int:
         return A.argmin(dim=axis, keepdim=keepdims)
@@ -199,7 +219,7 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
     def argmax(self, A: torch.Tensor, axis: None = None, keepdims: bool = False) -> int: ...
 
     @overload
-    def argmax(self, A: torch.Tensor, axis: int, keepdims: bool = False) -> torch.Tensor: ...
+    def argmax(self, A: torch.Tensor, axis: int, keepdims: bool = False) -> torch.Tensor: ...  # pylint: disable=signature-differs
 
     def argmax(self, A: torch.Tensor, axis=None, keepdims: bool = False) -> torch.Tensor | int:
         return A.argmax(dim=axis, keepdim=keepdims)
@@ -207,6 +227,7 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
     @overload
     def quantile(self, A: torch.Tensor, q: float | torch.Tensor, axis: None = None, keepdims: bool = False) -> float: ...
 
+    # pylint: disable=signature-differs
     @overload
     def quantile(self, A: torch.Tensor, q: float | torch.Tensor, axis: int, keepdims: bool = False) -> torch.Tensor: ...
 
@@ -217,7 +238,7 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
     def mean(self, A: torch.Tensor, axis: None = None, keepdims: bool = False) -> float: ...
 
     @overload
-    def mean(self, A: torch.Tensor, axis: int, keepdims: bool = False) -> torch.Tensor: ...
+    def mean(self, A: torch.Tensor, axis: int, keepdims: bool = False) -> torch.Tensor: ...  # pylint: disable=signature-differs
 
     def mean(self, A: torch.Tensor, axis=None, keepdims: bool = False) -> torch.Tensor | float:
         return A.mean(dim=axis, keepdim=keepdims)
@@ -226,7 +247,7 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
     def std(self, A: torch.Tensor, axis: None = None, ddof: int = 0, keepdims: bool = False) -> float: ...
 
     @overload
-    def std(self, A: torch.Tensor, axis: int, ddof: int = 0, keepdims: bool = False) -> torch.Tensor: ...
+    def std(self, A: torch.Tensor, axis: int, ddof: int = 0, keepdims: bool = False) -> torch.Tensor: ...  # pylint: disable=signature-differs
 
     def std(self, A: torch.Tensor, axis=None, ddof: int = 0, keepdims: bool = False) -> torch.Tensor | float:
         return A.std(dim=axis, correction=ddof, keepdim=keepdims)
@@ -234,11 +255,12 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
     @overload
     def norm(self, A: torch.Tensor, p: Literal["inf", "-inf", "fro", "nuc"] | int = "fro", keepdims: Literal[False] = False) -> float: ...
 
+    # pylint: disable=signature-differs
     @overload
     def norm(self, A: torch.Tensor, p: Literal["inf", "-inf", "fro", "nuc"] | int, keepdims: Literal[True]) -> torch.Tensor: ...
 
     def norm(self, A: torch.Tensor, p: Literal["inf", "-inf", "fro", "nuc"] | int = "fro", keepdims: bool = False) -> torch.Tensor | float:
-        return torch.linalg.norm(A, ord=p, keepdim=keepdims)
+        return torch.linalg.norm(A, ord=p, keepdim=keepdims)  # pylint: disable=not-callable
 
     def norm2D(self, A: torch.Tensor) -> torch.Tensor:
         if A.ndim != 2:
@@ -263,6 +285,23 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
 
     def clip(self, A: torch.Tensor, min_=None, max_=None) -> torch.Tensor:
         return torch.clamp(A, min=min_, max=max_)
+
+    def make_windows(self, A: torch.Tensor, window_size: int, shift: int) -> torch.Tensor:
+        return A.unfold(0, window_size, shift)
+
+    def add_at(self, A: torch.Tensor, indices: torch.Tensor, values: torch.Tensor):
+        if values.ndim == 1:
+            # 1D case
+            A.scatter_add_(0, indices, values)
+        else:
+            # 2D+ case: values is (M, *extra_dims)
+            indices_expanded = indices[:, *(None,) * (values.ndim - 1)].expand(values.shape)
+            A.scatter_add_(0, indices_expanded, values)
+
+    def divide(self, A: torch.Tensor, B: torch.Tensor, out: torch.Tensor | None = None, where: torch.Tensor | None = None) -> torch.Tensor:
+        if where is not None and out is not None:
+            return torch.where(where, torch.div(A, B), out)
+        return torch.div(A, B)
 
     def fill_diagonal(self, A: torch.Tensor, val) -> torch.Tensor:
         try:
@@ -327,28 +366,28 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
     # ===== Linear algebra =====
 
     def inv(self, A: torch.Tensor) -> torch.Tensor:
-        return torch.linalg.inv(A)
+        return torch.linalg.inv(A)  # pylint: disable=not-callable
 
     def pinv(self, A: torch.Tensor) -> torch.Tensor:
-        return torch.linalg.pinv(A)
+        return torch.linalg.pinv(A)  # pylint: disable=not-callable
 
     def solve(self, A: torch.Tensor, b: torch.Tensor) -> torch.Tensor:
-        return torch.linalg.solve(A, b)
+        return torch.linalg.solve(A, b)  # pylint: disable=not-callable
 
     def solve_triangular(self, A: torch.Tensor, B: torch.Tensor, upper: bool = False) -> torch.Tensor:
         B_2D = B
         if B_2D.ndim == 1:
             B_2D = B_2D.view(-1, 1)
-        res = torch.linalg.solve_triangular(A, B_2D, upper=upper)
+        res = torch.linalg.solve_triangular(A, B_2D, upper=upper)  # pylint: disable=not-callable
         if B.ndim == 1:
             res = res.view(-1)
         return res
 
     def cholesky(self, A: torch.Tensor, upper=False, allow_adding_reg: bool = True) -> torch.Tensor:
-        if torch.linalg.det(A) <= 0:
+        if torch.linalg.det(A) <= 0:  # pylint: disable=not-callable
             L, info = A, 1
         else:
-            L, info = torch.linalg.cholesky_ex(A, upper=upper)
+            L, info = torch.linalg.cholesky_ex(A, upper=upper)  # pylint: disable=not-callable
         if info != 0:
             if allow_adding_reg:
                 A_reg = self.copy(A)
@@ -357,9 +396,9 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
                 for eps in range(12, 3, -1):
                     A_reg = A + 10 ** (-eps) * eye
                     # While not spd, find a new eps
-                    if torch.linalg.det(A_reg) <= 0:
+                    if torch.linalg.det(A_reg) <= 0:  # pylint: disable=not-callable
                         continue
-                    L, new_info = torch.linalg.cholesky_ex(A_reg, upper=upper)
+                    L, new_info = torch.linalg.cholesky_ex(A_reg, upper=upper)  # pylint: disable=not-callable
                     if new_info == 0:
                         logger.info("Regularization successful with eps=1e-%d", eps)
                         # If successful, break out of the loop
@@ -373,10 +412,10 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
         return L
 
     def inverse_cholesky(self, A: torch.Tensor, upper: bool = False, allow_adding_reg=True) -> torch.Tensor:
-        if torch.linalg.det(A) <= 0:
+        if torch.linalg.det(A) <= 0:  # pylint: disable=not-callable
             inv, info = A, 1
         else:
-            inv, info = torch.linalg.inv_ex(A)
+            inv, info = torch.linalg.inv_ex(A)  # pylint: disable=not-callable
         if info != 0:
             if allow_adding_reg:
                 A_reg = self.copy(A)
@@ -385,9 +424,9 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
                 for eps in range(12, 3, -1):
                     A_reg = A + 10 ** (-eps) * eye
                     # While not spd, find a new eps
-                    if torch.linalg.det(A_reg) <= 0:
+                    if torch.linalg.det(A_reg) <= 0:  # pylint: disable=not-callable
                         continue
-                    inv, new_info = torch.linalg.inv_ex(A_reg)
+                    inv, new_info = torch.linalg.inv_ex(A_reg)  # pylint: disable=not-callable
                     if new_info == 0:
                         logger.info("Regularization successful with eps=1e-%d", eps)
                         # If successful, break out of the loop
@@ -401,10 +440,10 @@ class TorchBackend(Backend[torch.Tensor, torch.dtype]):
         return inv
 
     def qr(self, A: torch.Tensor, mode="reduced") -> tuple[torch.Tensor, torch.Tensor]:
-        return torch.linalg.qr(A, mode=mode)
+        return torch.linalg.qr(A, mode=mode)  # pylint: disable=not-callable
 
     def vander(self, A: torch.Tensor, degree: int, increasing: bool = True) -> torch.Tensor:
         return torch.vander(A, degree + 1, increasing=increasing).to(A.dtype)
 
     def lstsq(self, A: torch.Tensor, B: torch.Tensor) -> torch.Tensor:
-        return torch.linalg.lstsq(A, B).solution
+        return torch.linalg.lstsq(A, B).solution  # pylint: disable=not-callable

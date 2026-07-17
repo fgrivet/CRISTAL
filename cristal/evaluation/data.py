@@ -11,6 +11,7 @@ from sklearn.preprocessing import MinMaxScaler
 logger = logging.getLogger(__name__)
 
 
+# pylint: disable=unused-variable
 def make_T_rotated(n_samples: int = 1000, scaler: TransformerMixin | None = MinMaxScaler((-1, 1))) -> np.ndarray:  # pragma: no cover
     """Generate a 2D "T" rotated distribution.
 
@@ -63,6 +64,7 @@ def make_T_rotated(n_samples: int = 1000, scaler: TransformerMixin | None = MinM
     return data
 
 
+# pylint: disable=unused-variable
 def make_uniform_square(n_samples: int = 1000, scaler: TransformerMixin | None = MinMaxScaler((-1, 1))) -> np.ndarray:  # pragma: no cover
     """Generate a 2D square from uniform distribution.
 

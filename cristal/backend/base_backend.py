@@ -1,3 +1,4 @@
+# pylint: disable=too-many-lines
 """Contains Base class for all backends."""
 
 from abc import ABC, abstractmethod
@@ -8,11 +9,24 @@ import numpy as np
 from ..types import ArrayLike, DTypeLike, Number, ShapeType
 
 
+# pylint: disable=unused-variable
 class Backend(ABC, Generic[ArrayLike, DTypeLike]):
-    """Base class for all backends. Contains all methods that a Backend should implementer in order to be used in CRISTAL."""
+    """Base class for all backends. Contains all methods that a Backend should implement in order to be used in CRISTAL.
+
+    Parameters
+    ----------
+    default_dtype : DTypeLike
+        The default dtype for all the created ArrayLike.
+
+    Attributes
+    ----------
+    default_dtype : DTypeLike
+        The default dtype for all the created ArrayLike.
+    """
 
     def __init__(self, default_dtype: DTypeLike):
         self.default_dtype = default_dtype
+        """The default dtype for all the created ArrayLike."""
 
     # ===== Type =====
 
@@ -222,7 +236,8 @@ class Backend(ABC, Generic[ArrayLike, DTypeLike]):
         Parameters
         ----------
         start_or_stop : Number
-            Start value (inclusive) of the range. If only one argument is provided, this is treated as the stop value (exclusive) and start defaults to 0.
+            Start value (inclusive) of the range.
+            If only one argument is provided, this is treated as the stop value (exclusive) and start defaults to 0.
         stop : Number | None, optional
             Stop value (exclusive). Ignored if only one argument is provided, by default None.
         step : Number, optional
@@ -940,7 +955,8 @@ class Backend(ABC, Generic[ArrayLike, DTypeLike]):
         Returns
         -------
         ArrayLike | tuple[ArrayLike, ...]
-            If `true_val` and `false_val` are given, returns `ArrayLike`. Otherwise, returns indices where `condition` is True, i.e. tuple[ArrayLike, ...].
+            If `true_val` and `false_val` are given, returns `ArrayLike`.
+            Otherwise, returns indices where `condition` is True, i.e. tuple[ArrayLike, ...].
 
         Examples
         --------
@@ -973,6 +989,102 @@ class Backend(ABC, Generic[ArrayLike, DTypeLike]):
         --------
         >>> clip(ArrayLike([-1, 0, 1, 2]), 0, 1)
         ArrayLike([0, 0, 1, 1])
+        """
+
+    @abstractmethod
+    def make_windows(self, A: ArrayLike, window_size: int, shift: int) -> ArrayLike:
+        """Create sliding windows of size :attr:`window_size` and stride :attr:`shift`.
+
+        .. version-added:: 0.0.3
+
+        Parameters
+        ----------
+        A : ArrayLike
+            The array on which create windows.
+        window_size : int
+            The size of each windows.
+        shift : int
+            The stride between each windows.
+
+        Returns
+        -------
+        ArrayLike
+            The array cut into windows of shape (N_windows, window_size, extra_dims)
+
+        Examples
+        --------
+        >>> A = ArrayLike([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
+        >>> make_windows(A, 5, 2)
+        ArrayLike([[ 1,  2,  3,  4,  5],
+        [ 3,  4,  5,  6,  7],
+        [ 5,  6,  7,  8,  9],
+        [ 7,  8,  9, 10, 11]])
+        """
+
+    @abstractmethod
+    def add_at(self, A: ArrayLike, indices: ArrayLike, values: ArrayLike) -> None:
+        """Add values to the indicated indices of A (scatter add).
+
+        This is equivalent to numpy.add.at, allowing repeated indices.
+        Note: `A` and `values` must have the same shape. `indices` is 1D.
+
+        .. version-added:: 0.0.3
+
+        Parameters
+        ----------
+        A : ArrayLike
+            The array to add to. Will be modified in-place.
+        indices : ArrayLike
+            A 1D array of indices along the first dimension of `A`.
+            Can contain repeated indices. For each i, A[indices[i]] += values[i].
+        values : ArrayLike
+            The values to add. Must have the same shape as A.
+            For each i, values[i] is added to A[indices[i]].
+
+        Returns
+        -------
+        None
+            The array `A` is modified in-place.
+
+        Examples
+        --------
+        >>> a = ArrayLike([0, 0, 0, 0])
+        >>> indices = ArrayLike([1, 2, 2, 0])  # 1D indices
+        >>> values = ArrayLike([1, 2, 3, 4])  # Same shape as a
+        >>> add_at(a, indices, values)  # a is modified in-place
+        >>> a
+        ArrayLike([4, 1, 5, 0])  # a[0]+=values[0]=4, a[1]+=values[1]=1, a[2]+=values[2]+values[3]=2+3
+
+        >>> # For 2D array: A and values have same shape
+        >>> A = ArrayLike([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
+        >>> indices = ArrayLike([0, 1, 1])  # Select row 0 once, row 1 twice
+        >>> values = ArrayLike([[1, 2, 3], [4, 5, 6], [7, 8, 9]])  # Same shape as A
+        >>> add_at(A, indices, values)
+        >>> A
+        ArrayLike([[1, 2, 3], [11, 13, 15], [0, 0, 0]])  # A[0]+=values[0], A[1]+=values[1]+values[2]
+        """
+
+    @abstractmethod
+    def divide(self, A: ArrayLike, B: ArrayLike, out: ArrayLike | None = None, where: ArrayLike | None = None) -> ArrayLike:
+        """Divide arguments element-wise.
+
+        .. version-added:: 0.0.3
+
+        Parameters
+        ----------
+        A : ArrayLike
+            Dividend array.
+        B : ArrayLike
+            Divisor array.
+        out : ArrayLike | None, optional
+            Default division value.
+        where : ArrayLike | None, optional
+            Divide only at locations where the condition is True, elsewhere retains the :attr:`out` values, by default None
+
+        Returns
+        -------
+        ArrayLike
+            The quotient :const:`A/B`.
         """
 
     @abstractmethod
@@ -1521,7 +1633,10 @@ class Backend(ABC, Generic[ArrayLike, DTypeLike]):
         A : ArrayLike
             The input matrix.
         mode : Literal["reduced", "complete", "r"], optional
-            The size of the returned Q and R matrices. `reduced` gives A=m x n -> (m x n, n x n), `complete` -> (m x m, m x n), `r` -> R only, by default "reduced".
+            The size of the returned Q and R matrices,  by default "reduced".
+                - `reduced` gives A=m x n -> (m x n, n x n),
+                - `complete` -> (m x m, m x n),
+                - `r` -> R only.
 
         Returns
         -------
@@ -1540,7 +1655,7 @@ class Backend(ABC, Generic[ArrayLike, DTypeLike]):
 
         Parameters
         ----------
-        a : ArrayLike
+        A : ArrayLike
             Input values.
         degree : int
             The degree of the Vandermonde matrix.

@@ -1,13 +1,22 @@
 """Contains the :class:`Storage <cristal.commons.storage.Storage>` class used in detectors."""
 
-from typing import Iterator, get_args
+from collections.abc import Iterator
+from typing import get_args
 
 from ..types import IMPLEMENTED_STORAGES, ArrayLike
 from .base_commons import BaseCommons
 
 
+# pylint: disable=unused-variable
 class Storage(BaseCommons):
     """Class to loop over the data with a limited size to avoid OOM errors.
+
+    Parameters
+    ----------
+    method : IMPLEMENTED_STORAGES, optional
+        The method to use, by default "batch".
+    batch_size : int, optional
+        The size of each batch if :attr:`method` is :const:`batch`, by default 4096.
 
     Attributes
     ----------
@@ -15,6 +24,17 @@ class Storage(BaseCommons):
         The method to use.
     batch_size : int
         The size of each batch.
+
+    Raises
+    ------
+    ValueError
+        If :const:`method` is not valid.
+
+        If :const:`batch_size` is lower or equal to 0.
+
+    See Also
+    --------
+    cristal.types.IMPLEMENTED_STORAGES : For more details on how the storages work.
 
     Examples
     --------
@@ -58,7 +78,9 @@ class Storage(BaseCommons):
         --------
         cristal.types.IMPLEMENTED_STORAGES : For more details on how the storages work.
         """
-        self.batch_size = batch_size  #: The size of each batch.
+
+        self.batch_size = batch_size
+        """The size of each batch."""
 
     def iterate(self, X: ArrayLike) -> Iterator[ArrayLike]:
         """Allow to loop over the data with a limited size to avoid OOM errors.

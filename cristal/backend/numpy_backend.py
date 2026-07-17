@@ -14,12 +14,27 @@ from .base_backend import Backend
 logger = logging.getLogger(__name__)
 
 
+# pylint: disable=unused-variable
 class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
-    """Backend using Numpy and Scipy."""
+    """Backend using Numpy and Scipy.
 
-    def __init__(self, dtype: NumpyDTypeLike = np.float64):
-        super().__init__(dtype)
+    Parameters
+    ----------
+    default_dtype : NumpyDTypeLike, optional
+        The default dtype for all the created ndarray, by default np.float64.
+
+    Attributes
+    ----------
+    default_dtype : NumpyDTypeLike
+        The default dtype for all the created ndarray.
+    generator : np.random.Generator
+        The random generator used.
+    """
+
+    def __init__(self, default_dtype: NumpyDTypeLike = np.float64):
+        super().__init__(default_dtype)
         self.generator = np.random.default_rng()
+        """The random generator used."""
 
     # ===== Type =====
 
@@ -104,7 +119,7 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
     def sum(self, A: np.ndarray, axis: None = None, keepdims: bool = False) -> float: ...
 
     @overload
-    def sum(self, A: np.ndarray, axis: int, keepdims: bool = False) -> np.ndarray: ...
+    def sum(self, A: np.ndarray, axis: int, keepdims: bool = False) -> np.ndarray: ...  # pylint: disable=signature-differs
 
     def sum(self, A: np.ndarray, axis=None, keepdims: bool = False) -> np.ndarray | float:
         return A.sum(axis=axis, keepdims=keepdims)
@@ -113,7 +128,7 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
     def prod(self, A: np.ndarray, axis: None = None, keepdims: bool = False) -> float: ...
 
     @overload
-    def prod(self, A: np.ndarray, axis: int, keepdims: bool = False) -> np.ndarray: ...
+    def prod(self, A: np.ndarray, axis: int, keepdims: bool = False) -> np.ndarray: ...  # pylint: disable=signature-differs
 
     def prod(self, A: np.ndarray, axis=None, keepdims: bool = False) -> np.ndarray | float:
         return np.prod(A, axis=axis, keepdims=keepdims)
@@ -125,7 +140,7 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
     def min(self, A: np.ndarray, axis: None = None, keepdims: bool = False) -> float: ...
 
     @overload
-    def min(self, A: np.ndarray, axis: int, keepdims: bool = False) -> np.ndarray: ...
+    def min(self, A: np.ndarray, axis: int, keepdims: bool = False) -> np.ndarray: ...  # pylint: disable=signature-differs
 
     def min(self, A: np.ndarray, axis=None, keepdims: bool = False) -> np.ndarray | float:
         return A.min(axis=axis, keepdims=keepdims)
@@ -134,7 +149,7 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
     def max(self, A: np.ndarray, axis: None = None, keepdims: bool = False) -> float: ...
 
     @overload
-    def max(self, A: np.ndarray, axis: int, keepdims: bool = False) -> np.ndarray: ...
+    def max(self, A: np.ndarray, axis: int, keepdims: bool = False) -> np.ndarray: ...  # pylint: disable=signature-differs
 
     def max(self, A: np.ndarray, axis=None, keepdims: bool = False) -> np.ndarray | float:
         return A.max(axis=axis, keepdims=keepdims)
@@ -143,7 +158,7 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
     def argmin(self, A: np.ndarray, axis: None = None, keepdims: bool = False) -> int: ...
 
     @overload
-    def argmin(self, A: np.ndarray, axis: int, keepdims: bool = False) -> np.ndarray: ...
+    def argmin(self, A: np.ndarray, axis: int, keepdims: bool = False) -> np.ndarray: ...  # pylint: disable=signature-differs
 
     def argmin(self, A: np.ndarray, axis=None, keepdims: bool = False) -> np.ndarray | int:
         return A.argmin(axis=axis, keepdims=keepdims)  # type: ignore
@@ -152,13 +167,15 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
     def argmax(self, A: np.ndarray, axis: None = None, keepdims: bool = False) -> int: ...
 
     @overload
-    def argmax(self, A: np.ndarray, axis: int, keepdims: bool = False) -> np.ndarray: ...
+    def argmax(self, A: np.ndarray, axis: int, keepdims: bool = False) -> np.ndarray: ...  # pylint: disable=signature-differs
 
     def argmax(self, A: np.ndarray, axis=None, keepdims: bool = False) -> np.ndarray | int:
         return A.argmax(axis=axis, keepdims=keepdims)  # type: ignore
 
     @overload
     def quantile(self, A: np.ndarray, q: float | np.ndarray, axis: None = None, keepdims: bool = False) -> float: ...
+
+    # pylint: disable=signature-differs
     @overload
     def quantile(self, A: np.ndarray, q: float | np.ndarray, axis: int, keepdims: bool = False) -> np.ndarray: ...
 
@@ -169,7 +186,7 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
     def mean(self, A: np.ndarray, axis: None = None, keepdims: bool = False) -> float: ...
 
     @overload
-    def mean(self, A: np.ndarray, axis: int, keepdims: bool = False) -> np.ndarray: ...
+    def mean(self, A: np.ndarray, axis: int, keepdims: bool = False) -> np.ndarray: ...  # pylint: disable=signature-differs
 
     def mean(self, A: np.ndarray, axis=None, keepdims: bool = False) -> np.ndarray | float:
         return A.mean(axis=axis, keepdims=keepdims)
@@ -178,7 +195,7 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
     def std(self, A: np.ndarray, axis: None = None, ddof: int = 0, keepdims: bool = False) -> float: ...
 
     @overload
-    def std(self, A: np.ndarray, axis: int, ddof: int = 0, keepdims: bool = False) -> np.ndarray: ...
+    def std(self, A: np.ndarray, axis: int, ddof: int = 0, keepdims: bool = False) -> np.ndarray: ...  # pylint: disable=signature-differs
 
     def std(self, A: np.ndarray, axis=None, ddof: int = 0, keepdims: bool = False) -> np.ndarray | float:
         return A.std(axis=axis, ddof=ddof, keepdims=keepdims)
@@ -186,6 +203,7 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
     @overload
     def norm(self, A: np.ndarray, p: Literal["inf", "-inf", "fro", "nuc"] | int = "fro", keepdims: Literal[False] = False) -> float: ...
 
+    # pylint: disable=signature-differs
     @overload
     def norm(self, A: np.ndarray, p: Literal["inf", "-inf", "fro", "nuc"] | int, keepdims: Literal[True]) -> np.ndarray: ...
 
@@ -213,6 +231,17 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
 
     def clip(self, A: np.ndarray, min_=None, max_=None) -> np.ndarray:
         return np.clip(A, min_, max_)
+
+    def make_windows(self, A: np.ndarray, window_size: int, shift: int) -> np.ndarray:
+        return np.lib.stride_tricks.sliding_window_view(A, window_shape=window_size, axis=0)[::shift, ...]
+
+    def add_at(self, A: np.ndarray, indices: np.ndarray, values: np.ndarray):
+        np.add.at(A, indices, values)
+
+    def divide(self, A: np.ndarray, B: np.ndarray, out: np.ndarray | None = None, where: np.ndarray | None = None) -> np.ndarray:
+        if where is not None and out is not None:
+            return np.divide(A, B, out=out, where=where)
+        return np.divide(A, B)
 
     def fill_diagonal(self, A: np.ndarray, val) -> np.ndarray:
         B = self.copy(A)
@@ -301,7 +330,7 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
         if np.linalg.det(A) <= 0:
             L, info = A, 1
         else:
-            L, info = scipy.linalg.lapack.dpotrf(A, lower=not upper)  # type: ignore
+            L, info = scipy.linalg.lapack.dpotrf(A, lower=not upper)  # pylint: disable=no-member
         if info != 0:
             if allow_adding_reg:
                 A_reg = self.copy(A)
@@ -312,7 +341,7 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
                     # While not spd, find a new eps
                     if np.linalg.det(A_reg) <= 0:
                         continue
-                    L, new_info = scipy.linalg.lapack.dpotrf(A_reg, lower=not upper)  # type: ignore
+                    L, new_info = scipy.linalg.lapack.dpotrf(A_reg, lower=not upper)  # pylint: disable=no-member
                     if new_info == 0:
                         logger.info("Regularization successful with eps=1e-%d", eps)
                         # If successful, break out of the loop
@@ -331,7 +360,7 @@ class NumpyBackend(Backend[np.ndarray, NumpyDTypeLike]):
             return self.stack([self.inverse_cholesky(A[i], upper=upper, allow_adding_reg=allow_adding_reg) for i in range(len(A))], axis=0)
 
         L = self.cholesky(A, upper=upper, allow_adding_reg=allow_adding_reg)
-        inv, info = scipy.linalg.lapack.dpotri(L, lower=not upper)  # type: ignore
+        inv, info = scipy.linalg.lapack.dpotri(L, lower=not upper)  # pylint: disable=no-member
         if info != 0:
             raise ValueError("Could not compute Cholesky inverse. The matrix may not be positive definite.")
         # Make inv symetric

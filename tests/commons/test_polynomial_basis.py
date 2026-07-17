@@ -10,8 +10,6 @@ import numpy as np
 from cristal.backend.numpy_backend import NumpyBackend
 from cristal.commons.polynomial_basis import IMPLEMENTED_POLYNOMIAL_BASIS, PolynomialBasis
 
-# TODO : Test new normalization in chebyshev
-
 
 class TestPolynomialBasis(unittest.TestCase):
     """Test the PolynomialBasis class functionality"""
@@ -176,22 +174,39 @@ class TestPolynomialBasis(unittest.TestCase):
         """Test make_v method"""
         backend = NumpyBackend()
 
-        # Test monomials basis
+        # Test monomials basis with z=0
         mon_basis = PolynomialBasis(basis="monomials")
         mon_basis.backend = backend
         # Even number
-        np.testing.assert_array_equal(mon_basis.make_v(8, int), np.array([1, 0, 0, 0, 0, 0, 0, 0, 0]), "Monomials basis even n")
+        np.testing.assert_array_equal(mon_basis.make_v(8, int), np.array([1, 0, 0, 0, 0, 0, 0, 0, 0]), "Monomials basis even n, z=0")
         # Odd number
-        np.testing.assert_array_equal(mon_basis.make_v(5, int), np.array([1, 0, 0, 0, 0, 0]), "Monomials basis odd n")
+        np.testing.assert_array_equal(mon_basis.make_v(5, int), np.array([1, 0, 0, 0, 0, 0]), "Monomials basis odd n, z=0")
 
-        # Test chebyshev basis
+        # Test monomials basis with z>0
+        # For z=1, d=1: v = [1, 1, 1, ...] (P_k(1) = 1 for all k in monomials)
+        np.testing.assert_array_equal(mon_basis.make_v(4, int, z=1, d=1), np.array([1, 1, 1, 1, 1]), "Monomials basis n=4, z=1, d=1")
+
+        # Test chebyshev basis with z=0
         cheb_basis = PolynomialBasis(basis="chebyshev")
         cheb_basis.backend = backend
         # Even number
-        np.testing.assert_array_equal(cheb_basis.make_v(8, int), np.array([1, -1, 1, -1, 1, -1, 1, -1, 1], dtype=int), "Chebyshev basis even n")
+        np.testing.assert_array_equal(cheb_basis.make_v(8, int), np.array([1, -1, 1, -1, 1, -1, 1, -1, 1], dtype=int), "Chebyshev basis even n, z=0")
         # Odd number
-        np.testing.assert_array_equal(cheb_basis.make_v(5, int), np.array([1, -1, 1, -1, 1, -1], dtype=int), "Chebyshev basis odd n")
+        np.testing.assert_array_equal(cheb_basis.make_v(5, int), np.array([1, -1, 1, -1, 1, -1], dtype=int), "Chebyshev basis odd n, z=0")
+
+        # Test chebyshev basis with z>0
+        # For z=1, d=1: X = [[1/(2*1) - 1]] = [[-0.5]]
+        # T_0(-0.5) = 1, T_1(-0.5) = -0.5, T_2(-0.5) = 2*(-0.5)^2 - 1 = -0.5
+        np.testing.assert_almost_equal(cheb_basis.make_v(2, float, z=1, d=1), np.array([1.0, -0.5, -0.5]), err_msg="Chebyshev basis n=2, z=1, d=1")
 
         # Test invalid values
         self.assertRaises(ValueError, mon_basis.make_v, 0, int)
         self.assertRaises(ValueError, cheb_basis.make_v, -2, int)
+
+        # Test z < 0
+        self.assertRaises(ValueError, mon_basis.make_v, 4, int, z=-1, d=1)
+        self.assertRaises(ValueError, cheb_basis.make_v, 4, int, z=-1, d=1)
+
+        # Test z > 0 without d
+        self.assertRaises(ValueError, mon_basis.make_v, 4, int, z=1)
+        self.assertRaises(ValueError, cheb_basis.make_v, 4, int, z=1)

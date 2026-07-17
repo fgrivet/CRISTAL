@@ -1,11 +1,21 @@
 """Contains the configurations needed in the detectors.
 
-:class:`DynamicDetectorConfig <cristal.config.detector_config.DynamicDetectorConfig>` for :class:`DyCF <cristal.core.detectors.dynamic.DyCF>`, :class:`DyCG <cristal.core.detectors.dynamic.DyCG>`, :class:`KernelCF <cristal.core.detectors.kernel.KernelCF>`, :class:`KernelCG <cristal.core.detectors.kernel.KernelCG>`.
+- :class:`DynamicDetectorConfig <cristal.config.detector_config.DynamicDetectorConfig>` for:
+    - :class:`DyCF <cristal.core.detectors.dynamic.DyCF>`,
+    - :class:`DyCG <cristal.core.detectors.dynamic.DyCG>`,
+    - :class:`KernelCF <cristal.core.detectors.kernel.KernelCF>`,
+    - :class:`KernelCG <cristal.core.detectors.kernel.KernelCG>`.
 
-:class:`StaticDetectorConfig <cristal.config.detector_config.DynamicDetectorConfig>` for :class:`UCF <cristal.core.detectors.univariate.UCF>`, :class:`UCG <cristal.core.detectors.univariate.UCG>`, :class:`NeedleCF <cristal.core.detectors.needle.NeedleCF>`, :class:`NeedleCG <cristal.core.detectors.needle.NeedleCG>`.
+- :class:`StaticDetectorConfig <cristal.config.detector_config.DynamicDetectorConfig>` for:
+    - :class:`UCF <cristal.core.detectors.univariate.UCF>`,
+    - :class:`UCG <cristal.core.detectors.univariate.UCG>`,
+    - :class:`NeedleCF <cristal.core.detectors.needle.NeedleCF>`,
+    - :class:`NeedleCG <cristal.core.detectors.needle.NeedleCG>`.
 """
 
 from typing import TYPE_CHECKING, Generic, TypeVar, Union
+
+from sklearn.pipeline import Pipeline
 
 from ..backend.base_backend import Backend
 from ..backend.numpy_backend import NumpyBackend
@@ -28,17 +38,39 @@ from ..types import (
     IMPLEMENTED_SOLVERS,
     IMPLEMENTED_STORAGES,
     IMPLEMENTED_THRESHOLD_SCHEMES,
+    TORCH_AVAILABLE,
     ArrayLike,
     DTypeLike,
 )
 
 if TYPE_CHECKING:
     from sklearn.base import TransformerMixin
-    from sklearn.pipeline import Pipeline
 
 
 class DetectorConfig(Generic[ArrayLike, DTypeLike]):
     """Class to store the backend and commons classes for all detectors.
+
+    Parameters
+        ----------
+        backend : Backend[ArrayLike, DTypeLike] | None, optional
+            The backend to use for the computation.
+            If :const:`None`, defaults to :class:`TorchBackend <cristal.backend.torch_backend.TorchBackend>` if torch is installed,
+            else :class:`NumpyBackend <cristal.backend.numpy_backend.NumpyBackend>`, by default :const:`None`.
+        preprocessing : BasePreprocessor | TransformerMixin | Pipeline | None, optional
+            The preprocessing to class(es) to apply before the computation.
+            If provided, must have a :const:`fit_transform` and a :const:`transform` method.
+            If :const:`None`, no preprocessing is applied, by default :const:`None`.
+        polynomial_basis : PolynomialBasis | None, optional
+            The polynomial basis used to generate the moment matrix.
+            If :const:`None`, the default value of :class:`PolynomialBasis <cristal.commons.polynomial_basis.PolynomialBasis>`,
+            by default :const:`None`.
+        storage : Storage | None
+            The storage to use based on memory available.
+            If :const:`None`, the default value of :class:`Storage <cristal.commons.storage.Storage>`, by default :const:`None`.
+        threshold_scheme : ThresholdScheme | None
+            The threshold scheme to use to predict anomalies based on the scores.
+            If :const:`None`, the default value of :class:`ThresholdScheme <cristal.commons.threshold_scheme.ThresholdScheme>`,
+            by default :const:`None`.
 
     Attributes
     ----------
@@ -67,24 +99,40 @@ class DetectorConfig(Generic[ArrayLike, DTypeLike]):
 
         Parameters
         ----------
-        backend: Backend[ArrayLike, DTypeLike] | None, optional
-            The backend to use for the computation. If :const:`None`, defaults to :class:`TorchBackend <cristal.backend.torch_backend.TorchBackend>`, by default :const:`None`.
-        preprocessing: BasePreprocessor | TransformerMixin | Pipeline | None, optional
-            The preprocessing to class(es) to apply before the computation. If provided, must have a :const:`fit_transform` and a :const:`transform` method. If :const:`None`, no preprocessing is applied, by default :const:`None`.
+        backend : Backend[ArrayLike, DTypeLike] | None, optional
+            The backend to use for the computation.
+            If :const:`None`, defaults to :class:`TorchBackend <cristal.backend.torch_backend.TorchBackend>` if torch is installed,
+            else :class:`NumpyBackend <cristal.backend.numpy_backend.NumpyBackend>`, by default :const:`None`.
+        preprocessing : BasePreprocessor | TransformerMixin | Pipeline | None, optional
+            The preprocessing to class(es) to apply before the computation.
+            If provided, must have a :const:`fit_transform` and a :const:`transform` method.
+            If :const:`None`, no preprocessing is applied, by default :const:`None`.
         polynomial_basis : PolynomialBasis | None, optional
-            The polynomial basis used to generate the moment matrix. If :const:`None`, the default value of :class:`PolynomialBasis <cristal.commons.polynomial_basis.PolynomialBasis>`, by default :const:`None`.
+            The polynomial basis used to generate the moment matrix.
+            If :const:`None`, the default value of :class:`PolynomialBasis <cristal.commons.polynomial_basis.PolynomialBasis>`,
+            by default :const:`None`.
         storage : Storage | None
-            The storage to use based on memory available. If :const:`None`, the default value of :class:`Storage <cristal.commons.storage.Storage>`, by default :const:`None`.
+            The storage to use based on memory available.
+            If :const:`None`, the default value of :class:`Storage <cristal.commons.storage.Storage>`, by default :const:`None`.
         threshold_scheme : ThresholdScheme | None
-            The threshold scheme to use to predict anomalies based on the scores. If :const:`None`, the default value of :class:`ThresholdScheme <cristal.commons.threshold_scheme.ThresholdScheme>`, by default :const:`None`.
+            The threshold scheme to use to predict anomalies based on the scores.
+            If :const:`None`, the default value of :class:`ThresholdScheme <cristal.commons.threshold_scheme.ThresholdScheme>`,
+            by default :const:`None`.
         """
         if backend == "numpy":
             self.backend = NumpyBackend()
         elif backend == "torch":
+            if not TORCH_AVAILABLE:
+                raise ValueError("torch is not installed and backend is set to torch. Consider installing torch or using NumpyBackend.")
             self.backend = TorchBackend()
         else:
-            self.backend: Backend = backend or TorchBackend()
-            """The backend to use for the computation."""
+            if backend is not None:
+                self.backend: Backend = backend
+                """The backend to use for the computation."""
+            elif TORCH_AVAILABLE:
+                self.backend = TorchBackend()
+            else:
+                self.backend = NumpyBackend()
         self.preprocessing: Union[BasePreprocessor, "TransformerMixin", "Pipeline", None] = preprocessing
         """The preprocessing to class(es) to apply before the computation. Must have a :const:`fit_transform` and a :const:`transform` method."""
         if isinstance(polynomial_basis, str):
@@ -106,16 +154,55 @@ class DetectorConfig(Generic[ArrayLike, DTypeLike]):
         self._wire()  # Wire up dependencies with the config object
 
     def _wire(self):
-        for attr in vars(self).values():
-            if isinstance(attr, BaseCommons):
-                attr.bind(self)
+        def _bind_recursive(obj):
+            if isinstance(obj, BaseCommons):
+                obj.bind(self)
+            elif isinstance(obj, Pipeline):
+                for step in obj.named_steps.values():
+                    _bind_recursive(step)
+            elif hasattr(obj, "__dict__"):  # To handle objects with attributes
+                for attr in vars(obj).values():
+                    _bind_recursive(attr)
+
+        _bind_recursive(self)
 
 
+# pylint: disable=unused-variable
 ConfigType = TypeVar("ConfigType", bound=DetectorConfig)  #: The DetectorConfig type.
 
 
 class DynamicDetectorConfig(DetectorConfig[ArrayLike, DTypeLike]):
-    """Class to store the backend and commons classes for dynamic detectors: :class:`DyCF <cristal.core.detectors.dynamic.DyCF>`, :class:`DyCG <cristal.core.detectors.dynamic.DyCG>`, :class:`KernelCF <cristal.core.detectors.kernel.KernelCF>`, :class:`KernelCG <cristal.core.detectors.kernel.KernelCG>`.
+    """Class to store the backend and commons classes for dynamic detectors:
+    :class:`DyCF <cristal.core.detectors.dynamic.DyCF>`, :class:`DyCG <cristal.core.detectors.dynamic.DyCG>`,
+    :class:`KernelCF <cristal.core.detectors.kernel.KernelCF>`, :class:`KernelCG <cristal.core.detectors.kernel.KernelCG>`.
+
+    Parameters
+    ----------
+    backend : Backend[ArrayLike, DTypeLike] | None, optional
+        The backend to use for the computation.
+        If :const:`None`, defaults to :class:`TorchBackend <cristal.backend.torch_backend.TorchBackend>` if torch is installed,
+        else :class:`NumpyBackend <cristal.backend.numpy_backend.NumpyBackend>`, by default :const:`None`.
+    preprocessing : BasePreprocessor | TransformerMixin | Pipeline | None, optional
+        The preprocessing to class(es) to apply before the computation.
+        If provided, must have a :const:`fit_transform` and a :const:`transform` method.
+        If :const:`None`, no preprocessing is applied, by default :const:`None`.
+    polynomial_basis : PolynomialBasis | None, optional
+        The polynomial basis used to generate the moment matrix.
+        If :const:`None`, the default value of :class:`PolynomialBasis <cristal.commons.polynomial_basis.PolynomialBasis>`,
+        by default :const:`None`.
+    storage : Storage | None
+        The storage to use based on memory available.
+        If :const:`None`, the default value of :class:`Storage <cristal.commons.storage.Storage>`, by default :const:`None`.
+    threshold_scheme : ThresholdScheme | None
+        The threshold scheme to use to predict anomalies based on the scores.
+        If :const:`None`, the default value of :class:`ThresholdScheme <cristal.commons.threshold_scheme.ThresholdScheme>`,
+        by default :const:`None`.
+    inverter : Inverter | None
+        The inversion class to use.
+        If :const:`None`, the default value of :class:`Inverter <cristal.commons.inverter.Inverter>`, by default :const:`None`.
+    incrementer : Incrementer | None
+        The incrementer class to use.
+        If :const:`None`, the default value of :class:`Incrementer <cristal.commons.incrementer.Incrementer>`, by default :const:`None`.
 
     Attributes
     ----------
@@ -144,20 +231,31 @@ class DynamicDetectorConfig(DetectorConfig[ArrayLike, DTypeLike]):
 
         Parameters
         ----------
-        backend: Backend[ArrayLike, DTypeLike] | None, optional
-            The backend to use for the computation. If :const:`None`, defaults to :class:`TorchBackend <cristal.backend.torch_backend.TorchBackend>`, by default :const:`None`.
-        preprocessing: BasePreprocessor | TransformerMixin | Pipeline | None, optional
-            The preprocessing to class(es) to apply before the computation. If provided, must have a :const:`fit_transform` and a :const:`transform` method. If :const:`None`, no preprocessing is applied, by default :const:`None`.
+        backend : Backend[ArrayLike, DTypeLike] | None, optional
+            The backend to use for the computation.
+            If :const:`None`, defaults to :class:`TorchBackend <cristal.backend.torch_backend.TorchBackend>` if torch is installed,
+            else :class:`NumpyBackend <cristal.backend.numpy_backend.NumpyBackend>`, by default :const:`None`.
+        preprocessing : BasePreprocessor | TransformerMixin | Pipeline | None, optional
+            The preprocessing to class(es) to apply before the computation.
+            If provided, must have a :const:`fit_transform` and a :const:`transform` method.
+            If :const:`None`, no preprocessing is applied, by default :const:`None`.
         polynomial_basis : PolynomialBasis | None, optional
-            The polynomial basis used to generate the moment matrix. If :const:`None`, the default value of :class:`PolynomialBasis <cristal.commons.polynomial_basis.PolynomialBasis>`, by default :const:`None`.
+            The polynomial basis used to generate the moment matrix.
+            If :const:`None`, the default value of :class:`PolynomialBasis <cristal.commons.polynomial_basis.PolynomialBasis>`,
+            by default :const:`None`.
         storage : Storage | None
-            The storage to use based on memory available. If :const:`None`, the default value of :class:`Storage <cristal.commons.storage.Storage>`, by default :const:`None`.
+            The storage to use based on memory available.
+            If :const:`None`, the default value of :class:`Storage <cristal.commons.storage.Storage>`, by default :const:`None`.
         threshold_scheme : ThresholdScheme | None
-            The threshold scheme to use to predict anomalies based on the scores. If :const:`None`, the default value of :class:`ThresholdScheme <cristal.commons.threshold_scheme.ThresholdScheme>`, by default :const:`None`.
+            The threshold scheme to use to predict anomalies based on the scores.
+            If :const:`None`, the default value of :class:`ThresholdScheme <cristal.commons.threshold_scheme.ThresholdScheme>`,
+            by default :const:`None`.
         inverter : Inverter | None
-            The inversion class to use. If :const:`None`, the default value of :class:`Inverter <cristal.commons.inverter.Inverter>`, by default :const:`None`.
+            The inversion class to use.
+            If :const:`None`, the default value of :class:`Inverter <cristal.commons.inverter.Inverter>`, by default :const:`None`.
         incrementer : Incrementer | None
-            The incrementer class to use. If :const:`None`, the default value of :class:`Incrementer <cristal.commons.incrementer.Incrementer>`, by default :const:`None`.
+            The incrementer class to use.
+            If :const:`None`, the default value of :class:`Incrementer <cristal.commons.incrementer.Incrementer>`, by default :const:`None`.
         """
         if isinstance(inverter, str):
             self.inverter: Inverter = Inverter(method=inverter)
@@ -180,7 +278,37 @@ class DynamicDetectorConfig(DetectorConfig[ArrayLike, DTypeLike]):
 
 
 class StaticDetectorConfig(DetectorConfig[ArrayLike, DTypeLike]):
-    """Class to store the backend and commons classes for static detectors: :class:`UCF <cristal.core.detectors.univariate.UCF>`, :class:`UCG <cristal.core.detectors.univariate.UCG>`, :class:`NeedleCF <cristal.core.detectors.needle.NeedleCF>`, :class:`NeedleCG <cristal.core.detectors.needle.NeedleCG>`.
+    """Class to store the backend and commons classes for static detectors:
+    :class:`UCF <cristal.core.detectors.univariate.UCF>`, :class:`UCG <cristal.core.detectors.univariate.UCG>`,
+    :class:`NeedleCF <cristal.core.detectors.needle.NeedleCF>`, :class:`NeedleCG <cristal.core.detectors.needle.NeedleCG>`.
+
+    Parameters
+    ----------
+    backend : Backend[ArrayLike, DTypeLike] | None, optional
+        The backend to use for the computation.
+        If :const:`None`, defaults to :class:`TorchBackend <cristal.backend.torch_backend.TorchBackend>` if torch is installed,
+        else :class:`NumpyBackend <cristal.backend.numpy_backend.NumpyBackend>`, by default :const:`None`.
+    preprocessing : BasePreprocessor | TransformerMixin | Pipeline | None, optional
+        The preprocessing to class(es) to apply before the computation.
+        If provided, must have a :const:`fit_transform` and a :const:`transform` method.
+        If :const:`None`, no preprocessing is applied, by default :const:`None`.
+    polynomial_basis : PolynomialBasis | None, optional
+        The polynomial basis used to generate the moment matrix.
+        If :const:`None`, the default value of :class:`PolynomialBasis <cristal.commons.polynomial_basis.PolynomialBasis>`,
+        by default :const:`None`.
+    storage : Storage | None
+        The storage to use based on memory available.
+        If :const:`None`, the default value of :class:`Storage <cristal.commons.storage.Storage>`, by default :const:`None`.
+    threshold_scheme : ThresholdScheme | None
+        The threshold scheme to use to predict anomalies based on the scores.
+        If :const:`None`, the default value of :class:`ThresholdScheme <cristal.commons.threshold_scheme.ThresholdScheme>`,
+        by default :const:`None`.
+    distance : Distance | None
+        The distance class to use.
+        If :const:`None`, the default value of :class:`Distance <cristal.commons.distance.Distance>`, by default :const:`None`.
+    solver : Solver | None
+        The solver class to use.
+        If :const:`None`, the default value of :class:`Solver <cristal.commons.solver.Solver>`, by default :const:`None`.
 
     Attributes
     ----------
@@ -205,24 +333,35 @@ class StaticDetectorConfig(DetectorConfig[ArrayLike, DTypeLike]):
         solver: Solver[ArrayLike, DTypeLike] | IMPLEMENTED_SOLVERS | None = None,
     ):
         """Class constructor.
-        Define the attributes.
+         Define the attributes.
 
         Parameters
         ----------
-        backend: Backend[ArrayLike, DTypeLike] | None, optional
-            The backend to use for the computation. If :const:`None`, defaults to :class:`TorchBackend <cristal.backend.torch_backend.TorchBackend>`, by default :const:`None`.
-        preprocessing: BasePreprocessor | TransformerMixin | Pipeline | None, optional
-            The preprocessing to class(es) to apply before the computation. If provided, must have a :const:`fit_transform` and a :const:`transform` method. If :const:`None`, no preprocessing is applied, by default :const:`None`.
+        backend : Backend[ArrayLike, DTypeLike] | None, optional
+            The backend to use for the computation.
+            If :const:`None`, defaults to :class:`TorchBackend <cristal.backend.torch_backend.TorchBackend>` if torch is installed,
+            else :class:`NumpyBackend <cristal.backend.numpy_backend.NumpyBackend>`, by default :const:`None`.
+        preprocessing : BasePreprocessor | TransformerMixin | Pipeline | None, optional
+            The preprocessing to class(es) to apply before the computation.
+            If provided, must have a :const:`fit_transform` and a :const:`transform` method.
+            If :const:`None`, no preprocessing is applied, by default :const:`None`.
         polynomial_basis : PolynomialBasis | None, optional
-            The polynomial basis used to generate the moment matrix. If :const:`None`, the default value of :class:`PolynomialBasis <cristal.commons.polynomial_basis.PolynomialBasis>`, by default :const:`None`.
+            The polynomial basis used to generate the moment matrix.
+            If :const:`None`, the default value of :class:`PolynomialBasis <cristal.commons.polynomial_basis.PolynomialBasis>`,
+            by default :const:`None`.
         storage : Storage | None
-            The storage to use based on memory available. If :const:`None`, the default value of :class:`Storage <cristal.commons.storage.Storage>`, by default :const:`None`.
+            The storage to use based on memory available.
+            If :const:`None`, the default value of :class:`Storage <cristal.commons.storage.Storage>`, by default :const:`None`.
         threshold_scheme : ThresholdScheme | None
-            The threshold scheme to use to predict anomalies based on the scores. If :const:`None`, the default value of :class:`ThresholdScheme <cristal.commons.threshold_scheme.ThresholdScheme>`, by default :const:`None`.
+            The threshold scheme to use to predict anomalies based on the scores.
+            If :const:`None`, the default value of :class:`ThresholdScheme <cristal.commons.threshold_scheme.ThresholdScheme>`,
+            by default :const:`None`.
         distance : Distance | None
-            The distance class to use. If :const:`None`, the default value of :class:`Distance <cristal.commons.distance.Distance>`, by default :const:`None`.
+            The distance class to use.
+            If :const:`None`, the default value of :class:`Distance <cristal.commons.distance.Distance>`, by default :const:`None`.
         solver : Solver | None
-            The solver class to use. If :const:`None`, the default value of :class:`Solver <cristal.commons.solver.Solver>`, by default :const:`None`.
+            The solver class to use.
+            If :const:`None`, the default value of :class:`Solver <cristal.commons.solver.Solver>`, by default :const:`None`.
         """
         if isinstance(distance, str):
             self.distance: Distance = Distance(metric=distance)

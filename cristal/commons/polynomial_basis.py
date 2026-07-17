@@ -7,18 +7,37 @@ from ..types import IMPLEMENTED_POLYNOMIAL_BASIS, ArrayLike, DTypeLike
 from .base_commons import BaseCommons
 
 
+# pylint: disable=unused-variable
 class PolynomialBasis(BaseCommons, Generic[ArrayLike, DTypeLike]):
     """Class to generate vandermonde matrices for either 1D or nD data with the given :attr:`basis`.
     Also contains helper functions related to the basis.
+
+    Parameters
+    ----------
+    basis : IMPLEMENTED_POLYNOMIAL_BASIS, optional
+        The polynomial basis to use, by default "chebyshev".
+    normalize : bool, optional
+        If :const:`True`, in 1D with :const:`chebyshev` basis, normalize the euclidean distances in :math:`[-1, 1]`
+        with :math:`X' = \\frac{X}{2d} - 1`, by default True.
 
     Attributes
     ----------
     basis : :class:`IMPLEMENTED_POLYNOMIAL_BASIS <cristal.types.IMPLEMENTED_POLYNOMIAL_BASIS>`
         The polynomial basis to use.
     normalize : bool
-        If :const:`True`, in 1D with :const:`chebyshev` basis, normalize the euclidean distances in :math:`[-1, 1]` with :math:`X' = \\frac{X}{2d} - 1`.
+        If :const:`True`, in 1D with :const:`chebyshev` basis, normalize the euclidean distances in :math:`[-1, 1]`
+        with :math:`X' = \\frac{X}{2d} - 1`.
     backend : :class:`Backend <cristal.backend.base_backend.Backend>`
         The backend to use for the computation.
+
+    Raises
+    ------
+    ValueError
+        If the polynomial :const:`basis` is not valid.
+
+    See Also
+    --------
+    cristal.types.IMPLEMENTED_POLYNOMIAL_BASIS : For more details on how the basis work.
 
     Examples
     --------
@@ -34,7 +53,8 @@ class PolynomialBasis(BaseCommons, Generic[ArrayLike, DTypeLike]):
     >>> ## With 6D points in a matrix X of shape (N_samples_test, d=6)
     >>> pb.vandermonde_nd(X, n=4) # Gives a 2D matrix of shape (N_samples_test, s_d(n)) with s_d(n) = n+d choose n = 210
     >>> ## Helpers
-    >>> pb.generate_multi_indices_combinations(n=4, d=6) # Gives a 2D matrix Alpha of shape (s_d(n)=210, d=6) with Alpha_ij = the coefficient k in P_k(X_j) for the i-th monomials of the basis
+    ### Gives a 2D matrix Alpha of shape (s_d(n)=210, d=6) with Alpha_ij = the coefficient k in P_k(X_j) for the i-th monomials of the basis
+    >>> pb.generate_multi_indices_combinations(n=4, d=6)
     """
 
     requires = ["backend"]
@@ -46,9 +66,10 @@ class PolynomialBasis(BaseCommons, Generic[ArrayLike, DTypeLike]):
         Parameters
         ----------
         basis : IMPLEMENTED_POLYNOMIAL_BASIS, optional
-            The polynomial basis to use, by default "chebyshev"
+            The polynomial basis to use, by default "chebyshev".
         normalize : bool, optional
-            If :const:`True`, in 1D with :const:`chebyshev` basis, normalize the euclidean distances in :math:`[-1, 1]` with :math:`X' = \\frac{X}{2d} - 1`, by default True
+            If :const:`True`, in 1D with :const:`chebyshev` basis, normalize the euclidean distances in :math:`[-1, 1]`
+            with :math:`X' = \\frac{X}{2d} - 1`, by default True.
 
         Raises
         ------
@@ -68,10 +89,14 @@ class PolynomialBasis(BaseCommons, Generic[ArrayLike, DTypeLike]):
         --------
         cristal.types.IMPLEMENTED_POLYNOMIAL_BASIS : For more details on how the basis work.
         """
-        self.normalize = normalize  #: If :const:`True`, in 1D with :const:`chebyshev` basis, normalize the euclidean distances in :math:`[-1, 1]` with :math:`X' = \\frac{X}{2d} - 1`, by default True
+
+        self.normalize = normalize
+        """If :const:`True`, in 1D with :const:`chebyshev` basis, normalize the euclidean distances in :math:`[-1, 1]`
+        with :math:`X' = \\frac{X}{2d} - 1`, by default True."""
 
         # Attributes bound in the configuration __init__
-        self.backend: Backend[ArrayLike, DTypeLike]  #: The backend to use for the computation.
+        self.backend: Backend[ArrayLike, DTypeLike]
+        """The backend to use for the computation."""
 
     def _scale(self, X: ArrayLike, normalize: bool | None, d) -> ArrayLike:
         # If no parameter is passed, takes self.normalize as default value
@@ -106,7 +131,8 @@ class PolynomialBasis(BaseCommons, Generic[ArrayLike, DTypeLike]):
         Examples
         --------
         >>> pb = PolynomialBasis(basis="chebyshev", normalize=True)
-        >>> pb.generate_multi_indices_combinations(n=4, d=6) # Gives a 2D matrix Alpha of shape (s_d(n)=210, d=6) with Alpha_ij = the coefficient k in P_k(X_j) for the i-th monomials of the basis
+        # Gives a 2D matrix Alpha of shape (s_d(n)=210, d=6) with Alpha_ij = the coefficient k in P_k(X_j) for the i-th monomials of the basis
+        >>> pb.generate_multi_indices_combinations(n=4, d=6)
         """
         if self.backend is None:
             raise ValueError("A backend must be bound to the PolynomialBasis class before using it.")
@@ -138,7 +164,8 @@ class PolynomialBasis(BaseCommons, Generic[ArrayLike, DTypeLike]):
         n : int
             The maximum degree of polynomials.
         d : float
-            The dimension of the original data to normalize the points in X if :attr:`normalize` is :const:`True` and :attr:`basis` is :const:`chebyshev`.
+            The dimension of the original data to normalize the points in X
+            if :attr:`normalize` is :const:`True` and :attr:`basis` is :const:`chebyshev`.
         normalize : bool | None, optional
             Wether to normalize the points in X in :math:`[-1, 1]` with :math:`X' = \\frac{X}{2d} - 1` if :attr:`basis` is :const:`chebyshev`.
             If :const:`None`, the attribute :attr:`normalize` of the class is used, by default None.
@@ -264,12 +291,21 @@ class PolynomialBasis(BaseCommons, Generic[ArrayLike, DTypeLike]):
     def make_v(self, n: int, dtype: DTypeLike, z: int = 0, d: None | int = None) -> ArrayLike:
         """Compute the 1D vector v such that :math:`z = v^T G^{-1} v`.
 
+        .. version-changed:: 0.0.3
+            Added parameter :const:`z` to estimate the density of the original measure :math:`\\mu`.
+
         Parameters
         ----------
         n : int
             The maximum degree of polynomials.
         dtype : DTypeLike
             The data type of the returned ArrayLike.
+        z : int >= 0, optional
+            The point on which to make v, by default 0.
+            For small z, the :class:`UCF <cristal.core.detectors.univariate.UCF>` gives an approximation of the density of :math:`\\mu`.
+        d : None | int, optional
+            The dimension of the original data to normalize :attr:`z` if :attr:`basis` is :const:`chebyshev`.
+
 
         Returns
         -------
@@ -288,7 +324,8 @@ class PolynomialBasis(BaseCommons, Generic[ArrayLike, DTypeLike]):
         Examples
         --------
         >>> pb = PolynomialBasis(basis="chebyshev", normalize=True)
-        >>> pb.make_v(n=4, dtype=int) # Gives a 1D vector of shape (n+1=5,) which contains the coefficients based on the basis such that z = v^T G^-1 v
+        # Gives a 1D vector of shape (n+1=5,) which contains the coefficients based on the basis such that z = v^T G^-1 v
+        >>> pb.make_v(n=4, dtype=int)
         """
         if self.backend is None:
             raise ValueError("A backend must be bound to the PolynomialBasis class before using it.")

@@ -8,12 +8,63 @@ from .base_detector import BaseCGDetector, BaseDetector
 
 
 class UCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
-    """Class to compute our Univariate version of the Christoffel function based outlier detection algorithm.
+    """Univariate Christoffel Function detector.
+
+    This detector computes anomaly scores using the univariate Christoffel function approach.
+    Unlike the dynamical approach which computes the full moment matrix, the univariate
+    approach computes distances from each test point to all training points,
+    then constructing the moment matrix from all these 1D distances.
+
+    The univariate Christoffel function for a point :math:`x` with respect to training data
+    :math:`X_{train}` is computed as:
+
+    .. math::
+        \\Lambda_n^{\\nu_x}(z)^{-1} = \\phi(z)^T G(x)^{-1} \\phi(z)
+
+    where:
+        - :math:`\\phi(z)` is the polynomial basis vector evaluated at point :math:`z`
+        - :math:`G(x)` is the Gram matrix computed from distances between :math:`x` and training points
+        - :math:`\\nu_x` is the empirical measure based on distances from :math:`x` to training data
+
+    with
+
+    .. math::
+        \\Lambda_n^{\\nu_x}(0)^{-1} \\leq \\Lambda_{2n}^{\\mu}(x)^{-1}
+
+
+    .. version-changed:: 0.0.3
+        Added parameter :const:`z` to estimate the density of the original measure :math:`\\mu`.
+
+    Parameters
+    ----------
+    n : int | Literal["auto"]
+        The degree of the CF. If :const:`auto`, set to :math:`N^{1 / (2+intrinsic\\_dim)}` during :func:`fit`.
+    config : StaticDetectorConfig[ArrayLike, DTypeLike], optional
+        The configuration of the model, by default StaticDetectorConfig().
+    z : int, optional
+        The value on which to evaluate the univariate CF :math:`\\Lambda^{\\nu_{x}}_{n}(z)^{-1}`, by default 0.
 
     Attributes
     ----------
-    X_train: ArrayLike | None
+    n : int | Literal["auto"]
+        The degree of the CF. If :const:`auto`, set during :func:`fit`.
+    config : StaticDetectorConfig[ArrayLike, DTypeLike]
+        The configuration of the model.
+    z : int
+        The value on which to evaluate the univariate CF :math:`\\Lambda^{\\nu_{x}}_{n}(z)^{-1}`.
+    X_train : ArrayLike | None
         The training data of shape (N_samples_train, d), set during :func:`fit`.
+    N : int | None
+        The number of training samples, set during :func:`fit`.
+    d : int | None
+        The dimension of training data, set during :func:`fit`.
+    threshold : float | None
+        The threshold for anomaly detection, set during :func:`fit`.
+
+    Raises
+    ------
+    ValueError
+        If :attr:`z` is negative.
 
     See Also
     --------
@@ -28,6 +79,9 @@ class UCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
         """Class constructor.
         Define the attributes.
 
+        .. version-changed:: 0.0.3
+            Added parameter :const:`z` to estimate the density of the original measure :math:`\\mu`.
+
         Parameters
         ----------
         n : int | Literal["auto"]
@@ -36,15 +90,18 @@ class UCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
             The configuration of the model, by default StaticDetectorConfig().
         z : int, optional
             The value on which to evaluate the univariate CF :math:`\\Lambda^{\\nu_{x}}_{n}(z)`, by default 0.
+
         """
         if z < 0:
             raise ValueError(f"z must be >= 0. Got {z}.")
         super().__init__(n, config)
         self.intrinsic_dim = 1
         self.z = z
+        """The value on which to evaluate the univariate CF :math:`\\Lambda^{\\nu_{x}}_{n}(z)^{-1}`."""
 
         # Variables defined during fitting specific to UCF
-        self.X_train: ArrayLike | None = None  #: The training data of shape (N_samples_train, d).
+        self.X_train: ArrayLike | None = None
+        """The training data of shape (N_samples_train, d)."""
 
     def _compute_scores(self, component_support: ArrayLike, component_X: ArrayLike) -> ArrayLike:
         """Compute the scores for each sample with the formula :math:`\\phi(0)^T G^{-1}(x) \\phi(0)`.
@@ -82,7 +139,8 @@ class UCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
         Returns
         -------
         tuple[ArrayLike, ArrayLike]
-            :math:`G` of shape (N_samples_test, n+1, n+1) or :math:`V` of shape (N_samples_test, N_samples_train, n+1) depending on :attr:`solver`, :math:`\\phi(0)` of shape (N_samples_test, n+1, 1).
+            :math:`G` of shape (N_samples_test, n+1, n+1) or :math:`V` of shape (N_samples_test, N_samples_train, n+1) depending on :attr:`solver`,
+            :math:`\\phi(0)` of shape (N_samples_test, n+1, 1).
 
         Raises
         ------
@@ -114,7 +172,7 @@ class UCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
         else:
             G = self.config.backend.zeros((N_test, self.n + 1, self.n + 1))
             for X_batch in self.config.storage(self.X_train):
-                # Compute the distances between all points in X and in X_batch
+                # Compute the distances between all points in X and in X_batch (train)
                 D = self.config.distance(X, X_batch)
                 # Compute the polynomial basis v(x) for each distance in D
                 V = self.config.polynomial_basis.vandermonde_1d(D, self.n, self.d)
@@ -143,7 +201,9 @@ class UCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
         Returns
         -------
         tuple[ArrayLike, ArrayLike]
-            :math:`G` of shape (N_samples_test, n_crop+1, n_crop+1) or :math:`V` of shape (N_samples_test, N_samples_train, n_crop+1) depending on :attr:`solver`, :math:`\\phi(0)` of shape (N_samples_test, n_crop+1, 1).
+            :math:`G` of shape (N_samples_test, n_crop+1, n_crop+1)
+            or :math:`V` of shape (N_samples_test, N_samples_train, n_crop+1) depending on :attr:`solver`,
+            :math:`\\phi(0)` of shape (N_samples_test, n_crop+1, 1).
 
         Raises
         ------
@@ -221,35 +281,90 @@ class UCF(BaseDetector[ArrayLike, DTypeLike, StaticDetectorConfig]):
         return self.N is not None and self.d is not None and self.X_train is not None and self.threshold is not None and isinstance(self.n, int)
 
 
+# pylint: disable=unused-variable
 class UCG(BaseCGDetector):
-    """Class to compute our Univariate version of the Christoffel function based outlier detection scores, and predictions based on the growth of scores as the degree :attr:`n` increases.
+    """Class to compute our Univariate version of the Christoffel function based outlier detection scores,
+    and predictions based on the growth of scores as the degree :attr:`n` increases.
+
+    .. version-changed:: 0.0.3
+        Added parameter :const:`z` to estimate the density of the original measure :math:`\\mu`.
+
+    Parameters
+    ----------
+    n_list : list[int]
+        The list of degrees on which to evaluate the model.
+    config : StaticDetectorConfig[ArrayLike, DTypeLike]
+        The configuration of the model.
+    z : int
+        The value on which to evaluate the univariate CF :math:`\\Lambda^{\\nu_{x}}_{n}(z)^{-1}`.
 
     See Also
     --------
     UCF, cristal.core.detectors.base_detector.BaseDetector : For more attributes.
     """
 
-    def __init__(self, n_list: list[int], config: StaticDetectorConfig = StaticDetectorConfig(), z: int = 0, *args, **kwargs):
-        super().__init__(UCF, n=n_list, config=config, z=z, *args, **kwargs)
+    def __init__(self, n_list: list[int], config: StaticDetectorConfig = StaticDetectorConfig(), z: int = 0, **kwargs):
+        super().__init__(UCF, n=n_list, config=config, z=z, **kwargs)
 
 
 class MTSUCF(UCF):
-    """Class to compute our Univariate version of the Christoffel function based outlier detection algorithm for multivariate time series.
-    It extends :class:`UCF` to 3D input data.
+    """Multivariate Time Series Univariate Christoffel Function detector.
+
+    This detector extends :class:`UCF` to handle multivariate time series data with
+    3D input shape (N_windows, window_size, d). It applies the univariate Christoffel
+    function approach to each time series window by computing distances across all
+    time steps and dimensions.
+
+    For multivariate time series, the detector:
+    1. Treats each window as a sample
+    2. Computes distances from each test window to all training windows
+    3. Sums distances across all time steps and dimensions
+    4. Applies the univariate Christoffel function to these aggregated distances
+
+    .. version-added:: 0.0.2
+
+    .. version-changed:: 0.0.3
+        Added parameter :const:`z` to estimate the density of the original measure :math:`\\mu`.
+
+    Parameters
+    ----------
+    n : int | Literal["auto"]
+        The degree of the Christoffel function polynomial. If :const:`auto`, automatically
+        set to :math:`N^{1/(2+1)} = \\sqrt{N}` during fitting (using intrinsic_dim=1). By default :const:`auto`.
+    config : StaticDetectorConfig[ArrayLike, DTypeLike], optional
+        The configuration object containing backend, solver, distance, preprocessing, etc. By default :class:`StaticDetectorConfig`.
+    z : int, optional
+        The value at which to evaluate the univariate Christoffel function :math:`\\Lambda^{\\nu_{x}}_{n}(z)^{-1}`. By default 0.
 
     Attributes
     ----------
-    X_train: ArrayLike | None
+    n : int | Literal["auto"]
+        The degree of the CF. If :const:`auto`, set during :func:`fit`.
+    config : StaticDetectorConfig[ArrayLike, DTypeLike]
+        The configuration of the model.
+    z : int
+        The evaluation point for the univariate CF.
+    X_train : ArrayLike | None
         The training data of shape (N_windows, window_size, d), set during :func:`fit`.
+    N : int | None
+        The number of training windows, set during :func:`fit`.
+    window_size : int | None
+        The number of time steps in each window, set during :func:`fit`.
+    d : int | None
+        The number of dimensions/variables in the time series, set during :func:`fit`.
+    threshold : float | None
+        The threshold for anomaly detection, set during :func:`fit`.
 
     See Also
     --------
-    UCF, cristal.core.detectors.base_detector.BaseDetector : For more attributes.
-
-    Examples
-    --------
-    See :doc:`/examples` or :doc:`/user_guide`.
+    UCF : Base Univariate Christoffel Function detector (for 2D data)
+    cristal.core.detectors.base_detector.BaseDetector : Base class with common detector functionality
     """
+
+    def __init__(self, n: int | Literal["auto"], config: StaticDetectorConfig = StaticDetectorConfig(), z: int = 0):
+        super().__init__(n, config, z)
+        self.window_size: int | None = None
+        """The number of time steps in each window, set during :func:`fit`."""
 
     def _preprocess_test_data(self, X: ArrayLike) -> ArrayLike:
         """Transform the data to the ArrayLike type, then preprocess it.
@@ -277,6 +392,12 @@ class MTSUCF(UCF):
 
             If the number of paramters of the testing data `d` is not the same as the one of the training data :attr:`d`.
         """
+        # Preprocess the data
+        if not self.config.backend.is_array_like(X):
+            X = self.config.backend.to_array_like(X)
+        if self.config.preprocessing is not None:
+            X = self.config.preprocessing.transform(X)  # type: ignore
+
         if X.ndim != 3:
             raise ValueError(f"X must be a 3D ArrayLike of shape (N_samples_test, window_size={self.window_size}, d={self.d}). Got {X.shape}.")
         if not self.is_fitted():
@@ -289,12 +410,6 @@ class MTSUCF(UCF):
         d = X.shape[2]
         if d != self.d:
             raise ValueError(f"Dimension mismatch between training ({self.d}) and test ({d}).")
-
-        # Preprocess the data
-        if not self.config.backend.is_array_like(X):
-            X = self.config.backend.to_array_like(X)
-        if self.config.preprocessing is not None:
-            X = self.config.preprocessing.transform(X)  # type: ignore
 
         return X
 
@@ -309,7 +424,9 @@ class MTSUCF(UCF):
         Returns
         -------
         tuple[ArrayLike, ArrayLike]
-            :math:`G` of shape (N_samples_test, n+1, n+1) or :math:`V` of shape (N_samples_test, N_samples_train, n+1) depending on :attr:`solver`, :math:`\\phi(0)` of shape (N_samples_test, n+1, 1).
+            :math:`G` of shape (N_samples_test, n+1, n+1)
+            or :math:`V` of shape (N_samples_test, N_samples_train, n+1) depending on :attr:`solver`,
+            :math:`\\phi(0)` of shape (N_samples_test, n+1, 1).
 
         Raises
         ------
@@ -343,7 +460,7 @@ class MTSUCF(UCF):
         else:
             G = self.config.backend.zeros((N_test, self.n + 1, self.n + 1))
             for X_batch in self.config.storage(self.X_train):
-                # Compute the distances between all points in X and in X_batch
+                # Compute the distances between all points in X and in X_batch (train)
                 D = self.config.backend.zeros((N_test, len(X_batch)))
                 for idx_signal in range(X.shape[2]):
                     D += self.config.distance(X[:, :, idx_signal], X_batch[:, :, idx_signal])
@@ -377,17 +494,17 @@ class MTSUCF(UCF):
         ValueError
             If :attr:`X` is not a 3D ArrayLike.
         """
+        # Preprocess the data
+        if not self.config.backend.is_array_like(X):
+            X = self.config.backend.to_array_like(X)
+        if self.config.preprocessing is not None:
+            X = self.config.preprocessing.fit_transform(X)  # type: ignore
+
         if X.ndim != 3:
             raise ValueError(f"X must be a 3D ArrayLike. Got {X.shape}.")
 
         # Define The number of training data and the diension of training data
         N, window_size, d = X.shape
-
-        # Preprocess the data
-        if self.config.preprocessing is not None:
-            X = self.config.preprocessing.fit_transform(X)  # type: ignore
-        if not self.config.backend.is_array_like(X):
-            X = self.config.backend.to_array_like(X)
 
         # Save the information on training data
         self.N = cast(int, N)
@@ -406,12 +523,27 @@ class MTSUCF(UCF):
 
 
 class MTSUCG(BaseCGDetector):
-    """Class to compute our Univariate version of the Christoffel function based outlier detection scores for multivariate time series, and predictions based on the growth of scores as the degree :attr:`n` increases.
+    """Class to compute our Univariate version of the Christoffel function based outlier detection scores for multivariate time series,
+     and predictions based on the growth of scores as the degree :attr:`n` increases.
+
+    .. version-added:: 0.0.2
+
+    .. version-changed:: 0.0.3
+        Added parameter :const:`z` to estimate the density of the original measure :math:`\\mu`.
+
+    Parameters
+    ----------
+    n_list : list[int]
+         The list of degrees on which to evaluate the model.
+    config : StaticDetectorConfig[ArrayLike, DTypeLike], optional
+        The configuration object containing backend, solver, distance, preprocessing, etc. By default :class:`StaticDetectorConfig`.
+    z : int, optional
+        The value at which to evaluate the univariate Christoffel function :math:`\\Lambda^{\\nu_{x}}_{n}(z)^{-1}`. By default 0.
 
     See Also
     --------
     MTSUCF, cristal.core.detectors.base_detector.BaseDetector : For more attributes.
     """
 
-    def __init__(self, n_list: list[int], config: StaticDetectorConfig = StaticDetectorConfig(), z: int = 0, *args, **kwargs):
-        super().__init__(MTSUCF, n=n_list, config=config, z=z, *args, **kwargs)
+    def __init__(self, n_list: list[int], config: StaticDetectorConfig = StaticDetectorConfig(), z: int = 0, **kwargs):
+        super().__init__(MTSUCF, n=n_list, config=config, z=z, **kwargs)

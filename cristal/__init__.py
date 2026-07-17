@@ -18,6 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import logging
 
+# pylint: disable=unused-variable
 from .__version__ import __author__, __date__, __license__, __version__
 from .backend import *
 from .commons import *
@@ -34,4 +35,4 @@ formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(messag
 console_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
 
-logger.info(f"CRISTAL v{__version__} (released: {__date__})\nCopyright (C) 2026 Florian Grivet")
+logger.info("CRISTAL v%s (released: %s)\nCopyright (C) 2026 Florian Grivet", __version__, __date__)

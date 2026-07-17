@@ -11,16 +11,43 @@ from .base_detector import BaseCGDetector, BaseDetector
 
 
 class DyCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
-    """Class to compute the original Christoffel function based outlier detection scores and predictions, adapted from :cite:t:`ducharlet2025leveraging`.
+    """Dynamical Christoffel Function detector.
+
+    This detector computes anomaly scores based on the Christoffel function using
+    the full moment matrix. It is particularly effective for low-dimensional data
+    with many samples, as adapted from :cite:t:`ducharlet2025leveraging`.
+
+    The Christoffel function for a point :math:`x` is computed as:
+
+    .. math::
+        \\Lambda_n(x)^{-1} = v(x)^T M^{-1} v(x)
+
+    where:
+        - :math:`v(x)` is the vector of polynomial basis functions evaluated at :math:`x`,
+        - :math:`M` is the moment matrix.
+
+    Parameters
+    ----------
+    n : int | Literal["auto"], optional
+        The degree of the CF. If :const:`auto`, set to :math:`N^{1 / (2+intrinsic\\_dim)}` during fitting, by default :const:`auto`.
+    config : DynamicDetectorConfig[ArrayLike, DTypeLike], optional
+        The configuration of the model, by default DynamicDetectorConfig().
+    matrix_size_limit : int | None, optional
+        The maximum size of the moment matrix that can be calculated without raising an error in order to avoid OOM or timeout errors.
+        If :const:`None`, try to calculate regardless of the size of the matrix, by default None.
 
     Attributes
     ----------
     matrix_size_limit : int | None
-        The maximum size of the moment matrix that can be calculated without raising an error in order to avoid OOM or timeout errors. If :const:`None`, try to calculate regardless of the size of the matrix.
+        The maximum size of the moment matrix that can be calculated without
+        raising an error in order to avoid OOM or timeout errors. If :const:`None`,
+        try to calculate regardless of the size of the matrix.
     M : ArrayLike | None
-        The moment matrix of size :math:`s_d(n) = \\begin{pmatrix} n+d \\\\ n \\end{pmatrix}` calculated during :func:`fit`. :const:`None` before fitting.
+        The moment matrix of size :math:`s_d(n) = \\binom{n+d}{n}` calculated
+        during :func:`fit`. :const:`None` before fitting.
     M_inv : ArrayLike | None
-        The inverse of the moment matrix of size :math:`s_d(n) = \\begin{pmatrix} n+d \\\\ n \\end{pmatrix}` calculated during :func:`fit`. :const:`None` before fitting.
+        The inverse of the moment matrix of size :math:`s_d(n) = \\binom{n+d}{n}`
+        calculated during :func:`fit`. :const:`None` before fitting.
 
     See Also
     --------
@@ -47,17 +74,21 @@ class DyCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
         config : DynamicDetectorConfig[ArrayLike, DTypeLike], optional
             The configuration of the model, by default DynamicDetectorConfig().
         matrix_size_limit : int | None, optional
-            The maximum size of the moment matrix that can be calculated without raising an error in order to avoid OOM or timeout errors. If :const:`None`, try to calculate regardless of the size of the matrix, by default None.
+            The maximum size of the moment matrix that can be calculated without raising an error in order to avoid OOM or timeout errors.
+            If :const:`None`, try to calculate regardless of the size of the matrix, by default None.
         """
         self.matrix_size_limit = matrix_size_limit
-        """The maximum size of the moment matrix that can be calculated without raising an error in order to avoid OOM or timeout errors. If :const:`None`, try to calculate regardless of the size of the matrix."""
+        """The maximum size of the moment matrix that can be calculated without raising an error in order to avoid OOM or timeout errors.
+        If :const:`None`, try to calculate regardless of the size of the matrix."""
         super().__init__(n, config)
 
         # Variables defined during fitting specific to DyCF
         self.M: ArrayLike | None = None
-        """The moment matrix of size :math:`s_d(n) = \\begin{pmatrix} n+d \\\\ n \\end{pmatrix}` calculated during :func:`fit`. :const:`None` before fitting."""
+        """The moment matrix of size :math:`s_d(n) = \\begin{pmatrix} n+d \\\\ n \\end{pmatrix}` calculated during :func:`fit`.
+        :const:`None` before fitting."""
         self.M_inv: ArrayLike | None = None
-        """The inverse of the moment matrix of size :math:`s_d(n) = \\begin{pmatrix} n+d \\\\ n \\end{pmatrix}` calculated during :func:`fit`. :const:`None` before fitting."""
+        """The inverse of the moment matrix of size :math:`s_d(n) = \\begin{pmatrix} n+d \\\\ n \\end{pmatrix}` calculated during :func:`fit`.
+        :const:`None` before fitting."""
 
     def _compute_scores(self, component_support: ArrayLike, component_X: ArrayLike) -> ArrayLike:
         """Compute the scores for each sample with the formula :math:`v(x) M^{-1} v(x)^T`.
@@ -87,7 +118,8 @@ class DyCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
         Returns
         -------
         tuple[ArrayLike, ArrayLike]
-            The inverse moment matrix :math:`M^{-1}` of shape (s_d(n), s_d(n)), The polynomial basis of each sample :math:`v(x)` of shape (N_samples_test, s_d(n)).
+            The inverse moment matrix :math:`M^{-1}` of shape (s_d(n), s_d(n)),
+            The polynomial basis of each sample :math:`v(x)` of shape (N_samples_test, s_d(n)).
 
         Raises
         ------
@@ -121,7 +153,8 @@ class DyCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
         Returns
         -------
         tuple[ArrayLike, ArrayLike]
-            The cropped inverse moment matrix :math:`M^{-1}` of shape (s_d(n_crop), s_d(n_crop)), The cropped polynomial basis of each sample :math:`v(x)` of shape (N_samples_test, s_d(n_crop)).
+            The cropped inverse moment matrix :math:`M^{-1}` of shape (s_d(n_crop), s_d(n_crop)),
+            The cropped polynomial basis of each sample :math:`v(x)` of shape (N_samples_test, s_d(n_crop)).
 
         Raises
         ------
@@ -190,13 +223,14 @@ class DyCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
 
         M = self.config.backend.zeros((matrix_size, matrix_size))
         for X_batch in self.config.storage(X):
+            preprocessed_X_batch = X_batch
             # Preprocess the data
+            if not self.config.backend.is_array_like(preprocessed_X_batch):
+                preprocessed_X_batch = self.config.backend.to_array_like(preprocessed_X_batch)
             if self.config.preprocessing is not None:
-                X_batch = self.config.preprocessing.fit_transform(X_batch)  # type: ignore
-            if not self.config.backend.is_array_like(X_batch):
-                X_batch = self.config.backend.to_array_like(X_batch)
+                preprocessed_X_batch = self.config.preprocessing.fit_transform(preprocessed_X_batch)  # type: ignore
             # Compute the moment matrix
-            V = self.config.polynomial_basis.vandermonde_nd(X_batch, self.n)
+            V = self.config.polynomial_basis.vandermonde_nd(preprocessed_X_batch, self.n)
             M += V.T @ V
         M = (M + M.T) / (2 * N)  # Ensure symmetry of M and normalize by N
         self.M = cast(ArrayLike, M)
@@ -237,14 +271,23 @@ class DyCF(BaseDetector[ArrayLike, DTypeLike, DynamicDetectorConfig]):
     def load_model(self): ...
 
 
+# pylint: disable=unused-variable
 class DyCG(BaseCGDetector):
-    """Class to compute the original Christoffel function based outlier detection scores, and predictions based on the growth of scores as the degree :attr:`n` increases, adapted from :cite:t:`ducharlet2025leveraging`.
-    The scoring function is modified from :cite:p:`ducharlet2025leveraging` to be the same as all :class:`BaseCGDetector <cristal.core.detectors.base_detector.BaseCGDetector>` classes.
+    """Class to compute the original Christoffel function based outlier detection scores,
+    and predictions based on the growth of scores as the degree :attr:`n` increases, adapted from :cite:t:`ducharlet2025leveraging`.
+    To obtain the scoring function from :cite:p:`ducharlet2025leveraging`, use :func:`score_samples` with :attr:`method=mean`.
+
+    Parameters
+    ----------
+    n_list : list[int]
+        The list of degrees on which to evaluate the model.
+    config : DynamicDetectorConfig[ArrayLike, DTypeLike], optional
+        The configuration of the model, by default DynamicDetectorConfig().
 
     See Also
     --------
     DyCF, cristal.core.detectors.base_detector.BaseDetector : For more attributes.
     """
 
-    def __init__(self, n_list: list[int], config: DynamicDetectorConfig = DynamicDetectorConfig(), *args, **kwargs):
-        super().__init__(DyCF, n=n_list, config=config, *args, **kwargs)
+    def __init__(self, n_list: list[int], config: DynamicDetectorConfig = DynamicDetectorConfig(), **kwargs):
+        super().__init__(DyCF, n=n_list, config=config, **kwargs)
