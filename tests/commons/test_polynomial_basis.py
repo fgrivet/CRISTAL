@@ -118,12 +118,12 @@ class TestPolynomialBasis(unittest.TestCase):
         # Without normalization
         result_cheb = cheb_basis.vandermonde_1d(X, n, 5.0, normalize=False)
         desired_result_cheb = self.vandermonde_1d(X, n, self.chebyshev)
-        np.testing.assert_allclose(result_cheb, desired_result_cheb, 12, err_msg="Chebyshev basis")
+        np.testing.assert_allclose(result_cheb, desired_result_cheb, atol=1e-7, err_msg="Chebyshev basis")
 
         # With normalization (by default None so True)
         result_cheb = cheb_basis.vandermonde_1d(X, n, 2.0)
         desired_result_cheb = self.vandermonde_1d(X / 4 - 1, n, self.chebyshev)
-        np.testing.assert_allclose(result_cheb, desired_result_cheb, 12, err_msg="Chebyshev basis normalized")
+        np.testing.assert_allclose(result_cheb, desired_result_cheb, atol=1e-7, err_msg="Chebyshev basis normalized")
 
         # Test invalid values
         # Wrong X shape
@@ -159,7 +159,7 @@ class TestPolynomialBasis(unittest.TestCase):
 
         result_cheb = cheb_basis.vandermonde_nd(X, n)
         desired_result_cheb = self.vandermonde_nd(X, n, self.chebyshev, comb)
-        np.testing.assert_allclose(result_cheb, desired_result_cheb, 12, err_msg="Chebyshev basis")
+        np.testing.assert_allclose(result_cheb, desired_result_cheb, atol=1e-7, err_msg="Chebyshev basis")
 
         # Test invalid values
         # Wrong X shape
