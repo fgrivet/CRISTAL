@@ -24,6 +24,8 @@ Detailed reference
 
 .. automodule:: cristal.evaluation.data
    :members:
+   :member-order: groupwise
+   :inherited-members:
    :show-inheritance:
-   :special-members: __init__, __call__
+   :special-members: __call__
    :private-members: _compute_scores

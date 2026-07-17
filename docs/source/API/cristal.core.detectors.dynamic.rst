@@ -15,15 +15,17 @@ Classes
    * - Name
      - Description
    * - :class:`DyCF <cristal.core.detectors.dynamic.DyCF>`
-     - Class to compute the original Christoffel function based outlier detection scores and predictions, adapted from :cite:t:`ducharlet2025leveraging`.
+     - Dynamical Christoffel Function detector.
    * - :class:`DyCG <cristal.core.detectors.dynamic.DyCG>`
-     - Class to compute the original Christoffel function based outlier detection scores, and predictions based on the growth of scores as the degree :attr:`n` increases, adapted from :cite:t:`ducharlet2025leveraging`.
+     - Class to compute the original Christoffel function based outlier detection scores,
 
 Detailed reference
 ------------------
 
 .. automodule:: cristal.core.detectors.dynamic
    :members:
+   :member-order: groupwise
+   :inherited-members:
    :show-inheritance:
-   :special-members: __init__, __call__
+   :special-members: __call__
    :private-members: _compute_scores

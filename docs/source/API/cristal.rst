@@ -24,7 +24,7 @@ Submodules / Subpackages
    * - :mod:`cristal.evaluation`
      - Contains various evaluation metrics and data generators.
    * - :mod:`cristal.preprocessing`
-     - TODO
+     - Contains the preprocessing classes to use before applying the detectors.
    * - :mod:`cristal.types`
      - Contains custom types and implemented options for the detectors.
 

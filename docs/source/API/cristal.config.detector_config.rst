@@ -17,9 +17,9 @@ Classes
    * - :class:`DetectorConfig <cristal.config.detector_config.DetectorConfig>`
      - Class to store the backend and commons classes for all detectors.
    * - :class:`DynamicDetectorConfig <cristal.config.detector_config.DynamicDetectorConfig>`
-     - Class to store the backend and commons classes for dynamic detectors: :class:`DyCF <cristal.core.detectors.dynamic.DyCF>`, :class:`DyCG <cristal.core.detectors.dynamic.DyCG>`, :class:`KernelCF <cristal.core.detectors.kernel.KernelCF>`, :class:`KernelCG <cristal.core.detectors.kernel.KernelCG>`.
+     - Class to store the backend and commons classes for dynamic detectors:
    * - :class:`StaticDetectorConfig <cristal.config.detector_config.StaticDetectorConfig>`
-     - Class to store the backend and commons classes for static detectors: :class:`UCF <cristal.core.detectors.univariate.UCF>`, :class:`UCG <cristal.core.detectors.univariate.UCG>`, :class:`NeedleCF <cristal.core.detectors.needle.NeedleCF>`, :class:`NeedleCG <cristal.core.detectors.needle.NeedleCG>`.
+     - Class to store the backend and commons classes for static detectors:
 
 Variables / Constants
 ---------------------
@@ -32,6 +32,8 @@ Variables / Constants
      - Description
    * - :const:`ConfigType <cristal.config.detector_config.ConfigType>`
      - The DetectorConfig type.
+   * - :const:`TORCH_AVAILABLE <cristal.config.detector_config.TORCH_AVAILABLE>`
+     - bool(x) -> bool
 
 Detailed reference
 ------------------
@@ -46,7 +48,9 @@ Detailed reference
 
 .. automodule:: cristal.config.detector_config
    :members:
+   :member-order: groupwise
+   :inherited-members:
    :show-inheritance:
-   :special-members: __init__, __call__
+   :special-members: __call__
    :private-members: _compute_scores
    :exclude-members: ConfigType

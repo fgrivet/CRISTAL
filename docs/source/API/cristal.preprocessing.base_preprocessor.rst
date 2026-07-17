@@ -15,13 +15,15 @@ Classes
    * - Name
      - Description
    * - :class:`BasePreprocessor <cristal.preprocessing.base_preprocessor.BasePreprocessor>`
-     - —
+     - Abstract base class for all preprocessors.
 
 Detailed reference
 ------------------
 
 .. automodule:: cristal.preprocessing.base_preprocessor
    :members:
+   :member-order: groupwise
+   :inherited-members:
    :show-inheritance:
-   :special-members: __init__, __call__
+   :special-members: __call__
    :private-members: _compute_scores

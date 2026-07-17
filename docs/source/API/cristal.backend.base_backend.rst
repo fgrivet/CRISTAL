@@ -15,13 +15,15 @@ Classes
    * - Name
      - Description
    * - :class:`Backend <cristal.backend.base_backend.Backend>`
-     - Base class for all backends. Contains all methods that a Backend should implementer in order to be used in CRISTAL.
+     - Base class for all backends. Contains all methods that a Backend should implement in order to be used in CRISTAL.
 
 Detailed reference
 ------------------
 
 .. automodule:: cristal.backend.base_backend
    :members:
+   :member-order: groupwise
+   :inherited-members:
    :show-inheritance:
-   :special-members: __init__, __call__
+   :special-members: __call__
    :private-members: _compute_scores

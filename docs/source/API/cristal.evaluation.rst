@@ -30,7 +30,7 @@ Submodules / Subpackages
    * - :mod:`cristal.evaluation.data`
      - Contains functions to generate distributions for testing CRISTAL detectors.
    * - :mod:`cristal.evaluation.metric`
-     - TODO
+     - Evaluation metrics for anomaly detection.
 
 .. toctree::
    :hidden:

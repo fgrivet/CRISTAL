@@ -15,9 +15,9 @@ Variables / Constants
    * - Name
      - Description
    * - :const:`ArrayLike <cristal.types.ArrayLike>`
-     - The type of the main manipulated object.
+     - TypeVar(ndarray, Tensor)
    * - :const:`DTypeLike <cristal.types.DTypeLike>`
-     - The data type of the main manipulated object.
+     - TypeVar(DTypeLike, dtype)
    * - :const:`IMPLEMENTED_BACKEND <cristal.types.IMPLEMENTED_BACKEND>`
      - The implemented backends.
    * - :const:`IMPLEMENTED_DISTANCES <cristal.types.IMPLEMENTED_DISTANCES>`
@@ -34,6 +34,8 @@ Variables / Constants
      - The implemented storage methods.
    * - :const:`IMPLEMENTED_THRESHOLD_SCHEMES <cristal.types.IMPLEMENTED_THRESHOLD_SCHEMES>`
      - The implemented threshold schemes.
+   * - :const:`TORCH_AVAILABLE <cristal.types.TORCH_AVAILABLE>`
+     - bool(x) -> bool
 
 Detailed reference
 ------------------
@@ -42,21 +44,19 @@ Detailed reference
    :type: TypeVar
    :canonical: cristal.types.ArrayLike
 
-   The type of the main manipulated object.
-
    Constrained to ``ndarray``, ``Tensor``.
 
 .. py:data:: DTypeLike
    :type: TypeVar
    :canonical: cristal.types.DTypeLike
 
-   The data type of the main manipulated object.
-
    Constrained to ``DTypeLike``, ``dtype``.
 
 .. automodule:: cristal.types
    :members:
+   :member-order: groupwise
+   :inherited-members:
    :show-inheritance:
-   :special-members: __init__, __call__
+   :special-members: __call__
    :private-members: _compute_scores
    :exclude-members: ArrayLike, DTypeLike

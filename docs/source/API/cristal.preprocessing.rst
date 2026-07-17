@@ -14,15 +14,17 @@ Submodules / Subpackages
    * - Module
      - Description
    * - :mod:`cristal.preprocessing.base_preprocessor`
-     - —
+     - Base class for all preprocessors.
    * - :mod:`cristal.preprocessing.decomposition`
      - —
    * - :mod:`cristal.preprocessing.models`
      - —
    * - :mod:`cristal.preprocessing.reduction`
      - —
+   * - :mod:`cristal.preprocessing.scalers`
+     - Scalers for CRISTAL detectors.
    * - :mod:`cristal.preprocessing.windowing`
-     - —
+     - Windowing preprocessing for CRISTAL detectors.
 
 .. toctree::
    :hidden:
@@ -31,4 +33,5 @@ Submodules / Subpackages
    cristal.preprocessing.decomposition
    cristal.preprocessing.models
    cristal.preprocessing.reduction
+   cristal.preprocessing.scalers
    cristal.preprocessing.windowing

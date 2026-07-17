@@ -1,7 +1,7 @@
-cristal.commons.threshold\_scheme
-=================================
+cristal.preprocessing.scalers.minmax
+====================================
 
-.. automodule:: cristal.commons.threshold_scheme
+.. automodule:: cristal.preprocessing.scalers.minmax
    :no-members:
    :no-index:
 
@@ -14,13 +14,13 @@ Classes
 
    * - Name
      - Description
-   * - :class:`ThresholdScheme <cristal.commons.threshold_scheme.ThresholdScheme>`
-     - Class to compute a threshold based on data properties.
+   * - :class:`MinMaxScaler <cristal.preprocessing.scalers.minmax.MinMaxScaler>`
+     - Scale features to a given range.
 
 Detailed reference
 ------------------
 
-.. automodule:: cristal.commons.threshold_scheme
+.. automodule:: cristal.preprocessing.scalers.minmax
    :members:
    :member-order: groupwise
    :inherited-members:

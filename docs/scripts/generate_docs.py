@@ -2,16 +2,17 @@
 Automatic generation of .rst files for Sphinx.
 
 Usage:
-    python generate_docs.py <package_name> <output_folder> <examples_folder> <examples_output>
+    python scripts/generate_docs.py <package_name> <output_folder> <examples_folder> <examples_output>
 
 Example:
-    python generate_docs.py cristal source/API ../examples source/examples.rst
+    python scripts/generate_docs.py cristal source/API ../examples source/examples.rst
 
 Generated structure:
     - Package/subpackage → list-table of members + toctree (without displaying the contents)
     - Leaf module → automodule with :members: (full contents)
 """
 
+import ast
 import importlib
 import inspect
 import json
@@ -73,9 +74,6 @@ def get_inline_comment(module, name: str) -> str:
     pattern = rf"^\s*{re.escape(name)}\s*[=:][^#\n]*#:\s*(.+)$"
     match = re.search(pattern, source, re.MULTILINE)
     return match.group(1).strip() if match else ""
-
-
-import ast
 
 
 def get_attribute_docstring(module, name: str) -> str:
@@ -219,7 +217,7 @@ def make_package_rst(pkg_name: str, module, submodule_names: list[str]) -> str:
                 desc = get_first_doc_line(sub)
             except Exception:
                 desc = "—"
-            short = fullname.split(".")[-1].replace("_", r"\_")
+            # short = fullname.split(".")[-1].replace("_", r"\_")
             lines.append(f"   * - :mod:`{fullname}`")
             lines.append(f"     - {desc}")
         lines.append("")
@@ -245,11 +243,12 @@ def make_module_rst(mod_name: str) -> str:
     """
     title = mod_name.replace("_", r"\_")
     lines = [underline(title), ""]
-    special_members = "__init__, __call__"
+    special_members = "__call__"
 
     try:
         module = importlib.import_module(mod_name)
-    except Exception:
+    except Exception as exc:
+        print(f"[ERROR] While importing '{mod_name}'. Generating a minimal stub. Traceback: {exc}.")
         # In case of import failure, a minimal stub is generated
         lines += [
             f".. automodule:: {mod_name}",
@@ -340,7 +339,7 @@ def make_module_rst(mod_name: str) -> str:
 
         lines += [
             f".. py:data:: {name}",
-            f"   :type: TypeVar",
+            "   :type: TypeVar",
             f"   :canonical: {mod_name}.{name}",
             "",
         ]
@@ -359,6 +358,8 @@ def make_module_rst(mod_name: str) -> str:
     lines += [
         f".. automodule:: {mod_name}",
         "   :members:",
+        "   :member-order: groupwise",
+        "   :inherited-members:",
         "   :show-inheritance:",
         f"   :special-members: {special_members}",
         "   :private-members: _compute_scores",

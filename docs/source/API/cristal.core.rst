@@ -13,22 +13,26 @@ Classes
 
    * - Class
      - Description
+   * - :class:`cristal.core.MTSUCF <cristal.core.detectors.univariate.MTSUCF>`
+     - Multivariate Time Series Univariate Christoffel Function detector.
+   * - :class:`cristal.core.MTSUCG <cristal.core.detectors.univariate.MTSUCG>`
+     - Class to compute our Univariate version of the Christoffel function based outlier detection scores for multivariate time series,
    * - :class:`cristal.core.UCF <cristal.core.detectors.univariate.UCF>`
-     - Class to compute our Univariate version of the Christoffel function based outlier detection algorithm.
+     - Univariate Christoffel Function detector.
    * - :class:`cristal.core.UCG <cristal.core.detectors.univariate.UCG>`
-     - Class to compute our Univariate version of the Christoffel function based outlier detection scores, and predictions based on the growth of scores as the degree :attr:`n` increases.
+     - Class to compute our Univariate version of the Christoffel function based outlier detection scores,
    * - :class:`cristal.core.DyCF <cristal.core.detectors.dynamic.DyCF>`
-     - Class to compute the original Christoffel function based outlier detection scores and predictions, adapted from :cite:t:`ducharlet2025leveraging`.
+     - Dynamical Christoffel Function detector.
    * - :class:`cristal.core.DyCG <cristal.core.detectors.dynamic.DyCG>`
-     - Class to compute the original Christoffel function based outlier detection scores, and predictions based on the growth of scores as the degree :attr:`n` increases, adapted from :cite:t:`ducharlet2025leveraging`.
+     - Class to compute the original Christoffel function based outlier detection scores,
    * - :class:`cristal.core.KernelCF <cristal.core.detectors.kernel.KernelCF>`
-     - Class to compute the kernel version of the Christoffel function based outlier detection scores and predictions, adapted from :cite:t:`askari2018kernel`.
+     - Kernel-based Christoffel Function detector.
    * - :class:`cristal.core.KernelCG <cristal.core.detectors.kernel.KernelCG>`
-     - Class to compute the kernel version of the Christoffel function based outlier detection scores, and predictions based on the growth of scores as the degree :attr:`n` increases, adapted from :cite:t:`askari2018kernel`.
+     - Class to compute the kernel version of the Christoffel function based outlier detection scores,
    * - :class:`cristal.core.NeedleCF <cristal.core.detectors.needle.NeedleCF>`
      - Base class for the detectors.
    * - :class:`cristal.core.NeedleCG <cristal.core.detectors.needle.NeedleCG>`
-     - An extension of the :class:`BaseDetector <cristal.core.detectors.base_detector.BaseDetector>` class to detect anomalies based on the growth of the socres as the degree :attr:`n` increases.
+     - An extension of the :class:`BaseDetector <cristal.core.detectors.base_detector.BaseDetector>` class
 
 Submodules / Subpackages
 -----------------------------

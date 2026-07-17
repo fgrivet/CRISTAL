@@ -42,3 +42,45 @@ div.cell_output td {
   border: 1px solid #ddd !important;
   padding: 8px !important;
 }
+
+.fix-badge {
+  background-color: RGBA(
+    var(--bs-danger-rgb),
+    var(--bs-bg-opacity, 1)
+  ) !important;
+  color: #fff !important;
+}
+
+.change-badge {
+  background-color: RGBA(
+    var(--bs-warning-rgb),
+    var(--bs-bg-opacity, 1)
+  ) !important;
+  color: #000 !important;
+}
+
+.add-badge {
+  background-color: RGBA(
+    var(--bs-info-rgb),
+    var(--bs-bg-opacity, 1)
+  ) !important;
+  color: #000 !important;
+}
+
+.improve-badge {
+  background-color: RGBA(
+    var(--bs-success-rgb),
+    var(--bs-bg-opacity, 1)
+  ) !important;
+  color: #fff !important;
+}
+
+.badge-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3%;
+}
+a.badge-link {
+  text-decoration: none;
+}
